@@ -1,11 +1,12 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
+import { IsAuthenticatedGuard } from '../services/auth/isAuthenticatedGuard';
 import { MainComponent } from './main/main.component';
 
 
 const routes: Routes = [
-  {path: '', component: MainComponent},
-];
+  {path: '', component: MainComponent, canActivate: [IsAuthenticatedGuard]},
+]; 
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
