@@ -1,13 +1,13 @@
 <div class="login-container">
     <div class="container">
-        <form [formGroup]="form" autocomplete="off" >
+        <form (ngSubmit)="onSubmit()"  [formGroup]="form" autocomplete="off" >
             <div class="row justify-content-center">
                 <div class="col-md-6">
                     <div class="login-card mt-4">
                         <div class="card-body">
-                            <img src="assets/img/logo.png" alt="" class="logo">
+                            <img src="assets/img/logo.png" alt="logo" class="logo">
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="nickInput" name="username" placeholder="exampleUser" formControlName="username"/>
+                                <input type="text" class="form-control" id="nickInput" name="username" placeholder="exampleUser" formControlName="nick"/>
                                 <label for="nickInput">Nick</label>
                             </div>
 
@@ -17,7 +17,7 @@
                                     <label for="nameInput">Name</label>
                                 </div>
                                 <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" id="lastNameInput" name="lastname" placeholder="exampleUser" formControlName="lastname"/>
+                                    <input type="text" class="form-control" id="lastNameInput" name="lastname" placeholder="exampleUser" formControlName="last_name"/>
                                     <label for="lastNameInput">Last Name</label>
                                 </div>
                             </div>
@@ -39,7 +39,7 @@
                             </div>
 
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="collegeInput" name="college" placeholder="Ilerna" formControlName="college"/>
+                                <input type="text" class="form-control" id="collegeInput" name="college" placeholder="Ilerna"/>
                                 <label for="collegeInput">College</label>
                             </div>
                         

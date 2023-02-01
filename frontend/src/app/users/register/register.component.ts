@@ -11,7 +11,9 @@ import { AuthService } from 'src/app/services/auth.service';
 export class RegisterComponent {
   error = '';
   form = new FormGroup({
-    username: new FormControl(null, Validators.required),
+    nick: new FormControl(null, Validators.required),
+    name: new FormControl(null, Validators.required),
+    last_name: new FormControl(null, Validators.required),
     email: new FormControl(null, Validators.required),
     password: new FormControl(null, Validators.required),
     cpassword: new FormControl(null, Validators.required),
@@ -19,26 +21,18 @@ export class RegisterComponent {
 
   constructor(private authService: AuthService, private router: Router) { }
 
-  submitForm() {
+  onSubmit() {
     if (this.form.invalid) {
       return;
     }
 
-    /*if(this.validatePasswords(this.form)) {
-      this.authService
-        .register(String(this.form.get('username')?.value),String(this.form.get('email')?.value), String(this.form.get('password')?.value))
-        .subscribe(
-          result => {
-            this.router.navigate(['/manager']);
-          },
-          error => {
-            console.log(error.error.message);
-            this.error = error.error.message;
-          }
-        );
+    if(this.validatePasswords(this.form)) {
+      if(this.authService.register(String(this.form.get('nick')?.value), String(this.form.get('name')?.value), String(this.form.get('last_name')?.value), String(this.form.get('email')?.value), String(this.form.get('password')?.value), String(this.form.get('cpassword')?.value))) {
+        this.router.navigate(["/manager"]);
+      }
     } else {
       this.error = 'passwords';
-    }*/
+    }
   }
 
   validatePasswords(control: AbstractControl) {

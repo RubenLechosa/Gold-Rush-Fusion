@@ -26,14 +26,12 @@ export class AuthService {
   }
 
   register(nick: string, name: string, last_name: string, email: string, password: string, password_confirmation: string) {
-      return this.frameworkService.register(nick, name, last_name, email, password, password_confirmation).pipe(
-        tap((response: any) => {
-          this._isLoggedIn.next(true);
-
-          localStorage.setItem('id', response.id_user);
-          localStorage.setItem('token', response.accessToken);
-        })
-      );
+      return this.frameworkService.register(nick, name, last_name, email, password, password_confirmation).subscribe((response: any) => {
+          console.log(response);
+          if(response.status == 200 && this.login(email, password)) {
+            this._isLoggedIn.next(true);
+          }
+        });
   }
 
   logout() {
