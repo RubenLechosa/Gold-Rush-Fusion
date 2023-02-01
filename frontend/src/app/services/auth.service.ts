@@ -12,17 +12,17 @@ export class AuthService {
   isLoggedIn = this._isLoggedIn.asObservable();
 
   constructor(private frameworkService: FrameworkService, private router : Router) {
-    const token = localStorage.getItem('auth_token');
+    const token = localStorage.getItem('token');
     this._isLoggedIn.next(!!token);
   }
 
-  login(username: string, password: string) {
-    return this.frameworkService.login(username, password).pipe(
+  login(email: string, password: string) {
+    return this.frameworkService.login(email, password).pipe(
       tap((response: any) => {
         this._isLoggedIn.next(true);
 
         localStorage.setItem('id', response.id);
-        localStorage.setItem('auth_token', response.accessToken);
+        localStorage.setItem('token', response.accessToken);
       })
     );
   }
@@ -32,8 +32,8 @@ export class AuthService {
         tap((response: any) => {
           this._isLoggedIn.next(true);
 
-          localStorage.setItem('id', response._id);
-          localStorage.setItem('auth_token', response.accessToken);
+          localStorage.setItem('id', response.id);
+          localStorage.setItem('token', response.accessToken);
         })
       );
   }

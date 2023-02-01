@@ -29,8 +29,7 @@ export class RegisterComponent {
         .register(String(this.form.get('username')?.value),String(this.form.get('email')?.value), String(this.form.get('password')?.value))
         .subscribe(
           result => {
-            console.log(result);
-            this.router.navigate(['/register']);
+            this.router.navigate(['/manager']);
           },
           error => {
             console.log(error.error.message);

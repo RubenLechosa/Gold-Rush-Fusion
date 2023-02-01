@@ -17,8 +17,8 @@ export class FrameworkService {
 
   constructor(private http: HttpClient) { }
 
-  login(username: string, password: string) {
-    return this.http.post(`${baseUrl}/user/login`, { username, password }, {headers: header});
+  login(email: string, password: string) {
+    return this.http.post(`${baseUrl}/user/login`, { email, password }, {headers: header});
   }
 
   register(username: string, email: string, password: string) {

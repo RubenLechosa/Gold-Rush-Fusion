@@ -1,1 +1,38 @@
-<p>login works!</p>
+<div class="login-container">
+    <div class="container">
+        <form (ngSubmit)="onSubmit()" [formGroup]="form" autocomplete="off" >
+            <div class="row">
+                <div class="col-md-3"></div>
+                <div class="col-md-6">
+                    <div class="card login-card mt-4">
+                        <div class="card-body">
+                            <div class="form-floating mb-3">
+                                <input type="email" class="form-control" id="emailInput" name="email" placeholder="name@example.com" formControlName="email"/>
+                                <label for="emailInput">Email</label>
+                            </div>
+
+                            <div class="form-floating mb-3">
+                                <input type="password" class="form-control" id="passwordInput" placeholder="Password" formControlName="password"/>
+                                <label for="passwordInput">Password</label>
+                            </div>
+
+                            <div class="alert alert-danger" *ngIf="error == 'email'">
+                                A user with that email already exists
+                            </div>
+
+                            
+                            <div class="alert alert-danger" *ngIf="error == 'username'">
+                                A user with that username already exists
+                            </div>
+
+                            <button type="submit" class="btn btn-login w-100 mt-1">Login</button>
+                            <p class="text-center mt-2">No tienes cuenta sapo? <a href="/register">Access here</a></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3"></div>
+            </div>
+        </form>
+    </div>
+
+</div>

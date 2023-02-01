@@ -10,7 +10,7 @@ const routes: Routes = [
   {path: 'manager', loadChildren: () => import('./manager/manager.module').then((m) => m.ManagerModule), canActivate: [IsAuthenticatedGuard]},
   {path: 'login',  component: LoginComponent},
   {path: 'register',  component: RegisterComponent},
-  {path: '**', component: NotfoundPageComponent}
+  {path: '**', redirectTo: '/manager', pathMatch: 'full'}
 ];
 
 @NgModule({
