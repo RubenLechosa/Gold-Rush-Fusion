@@ -16,7 +16,7 @@ class Popers extends Model
         'current_exp',
         'stats',
         'abilities',
-        'enum',
+        'element',
     ];
 
 }
