@@ -1,1 +1,22 @@
-/* You can add global styles to this file, and also import other style files */
+/* Fuentes Principales */
+@import url('https://fonts.cdnfonts.com/css/helsinki');
+@import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
+
+/*Variables de colores*/
+:root {
+    --purple: #351f41;
+    --yellow: #FFB544;
+    --white: #fff;
+    --black: #000;
+  }
+
+body{
+    margin: 0px;
+}
+
+/*Login y registro*/
+
+
+
+/*End Login y registro*/
+

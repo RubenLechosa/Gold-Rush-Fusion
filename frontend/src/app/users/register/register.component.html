@@ -1,35 +1,48 @@
 <div class="login-container">
     <div class="container">
         <form [formGroup]="form" autocomplete="off" >
-            <div class="row">
-                <div class="col-md-3"></div>
+            <div class="row justify-content-center">
                 <div class="col-md-6">
-                    <div class="card login-card mt-4">
-                        <div class="text-center container">
-                            <img src="assets/img/Logo.png" alt="" width="600" class="img-fluid">
-                        </div>
-
+                    <div class="login-card mt-4">
                         <div class="card-body">
+                            <img src="assets/img/logo.png" alt="" class="logo">
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="nameInput" name="username" placeholder="exampleUser" formControlName="username"/>
-                                <label for="nameInput">Username</label>
+                                <input type="text" class="form-control" id="nickInput" name="username" placeholder="exampleUser" formControlName="username"/>
+                                <label for="nickInput">Nick</label>
+                            </div>
+
+                            <div class="dosInputs">
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" id="nameInput" name="name" placeholder="name" formControlName="name"/>
+                                    <label for="nameInput">Name</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" id="lastNameInput" name="lastname" placeholder="exampleUser" formControlName="lastname"/>
+                                    <label for="lastNameInput">Last Name</label>
+                                </div>
                             </div>
 
                             <div class="form-floating mb-3">
                                 <input type="email" class="form-control" id="emailInput" name="email" placeholder="name@example.com" formControlName="email"/>
                                 <label for="emailInput">Email</label>
                             </div>
-
-                            <div class="form-floating mb-3">
-                                <input type="password" class="form-control" id="passwordInput" placeholder="Password" formControlName="password"/>
-                                <label for="passwordInput">Password</label>
+                            
+                            <div class="dosInputs">
+                                <div class="form-floating mb-3">
+                                    <input type="password" class="form-control" id="passwordInput" placeholder="Password" formControlName="password"/>
+                                    <label for="passwordInput">Password</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="password" class="form-control" id="cpasswordInput" placeholder="Confirm Password" formControlName="cpassword"/>
+                                    <label for="cpasswordInput">Confirm Password</label>
+                                </div>
                             </div>
 
                             <div class="form-floating mb-3">
-                                <input type="password" class="form-control" id="cpasswordInput" placeholder="Confirm Password" formControlName="cpassword"/>
-                                <label for="cpasswordInput">Confirm Password</label>
+                                <input type="text" class="form-control" id="collegeInput" name="college" placeholder="Ilerna" formControlName="college"/>
+                                <label for="collegeInput">College</label>
                             </div>
-
+                        
                             <div class="alert alert-danger" *ngIf="error == 'passwords'">
                                 Passwords do not match.
                             </div>
@@ -43,12 +56,11 @@
                                 A user with that username already exists
                             </div>
 
-                            <button type="submit" class="btn btn-login w-100 mt-1">Register Account</button>
+                            <button type="submit" class="btn btn-login w-100 mt-1">Create Account</button>
                             <p class="text-center mt-2">Already have an account? <a href="/login">Access here</a></p>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3"></div>
             </div>
         </form>
     </div>
