@@ -17,22 +17,20 @@ export class AuthService {
   }
 
   login(email: string, password: string) {
-    return this.frameworkService.login(email, password).pipe(
-      tap((response: any) => {
+    return this.frameworkService.login(email, password).subscribe((response: any) => {
         this._isLoggedIn.next(true);
 
-        localStorage.setItem('id', response.id);
-        localStorage.setItem('token', response.accessToken);
-      })
-    );
+        localStorage.setItem('id', response.id_user);
+        localStorage.setItem('token', response.access_token);
+      });
   }
 
-  register(username: string, email: string, password: string) {
-      return this.frameworkService.register(username, email, password).pipe(
+  register(nick: string, name: string, last_name: string, email: string, password: string, password_confirmation: string) {
+      return this.frameworkService.register(nick, name, last_name, email, password, password_confirmation).pipe(
         tap((response: any) => {
           this._isLoggedIn.next(true);
 
-          localStorage.setItem('id', response.id);
+          localStorage.setItem('id', response.id_user);
           localStorage.setItem('token', response.accessToken);
         })
       );

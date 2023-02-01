@@ -13,19 +13,28 @@ class UserController extends Controller
     //Esta funcion introduce un nuevo usuario a la BD
     public function register(Request $request) {
         $request->validate([
+            'nick'  => 'required',
             'name' => 'required',
+            'last_name' => 'required',
             'email' => 'required|email|unique:users',
-            'password' => 'required',
-            'role' => 'required'
+            'password' => 'required|confirmed'
         ]);
+
         $user = new User();
+        $user->nick = $request->nick;
         $user->name = $request->name;
+        $user->last_name = $request->last_name;
         $user->email = $request->email;
+        $user->role = 'college_manager';
+        $user->inventory = "{}";
         $user->password = Hash::make($request->password);
         $user->save();
+
+
         return response()->json([
-            "status" => 1,
+            "status" => 200,
             "msg" => "¡Registro de usuario exitoso!",
+            "id_user" => $user->id
         ]);
     }
 
@@ -35,28 +44,28 @@ class UserController extends Controller
             "email" => "required|email",
             "password" => "required"
         ]);
+
         $user = User::where("email", "=", $request->email)->first();
-        if( isset($user->id) ){
+        if(isset($user->id)){
             if(Hash::check($request->password, $user->password)){
-                //creamos el token
                 $token = $user->createToken("auth_token")->plainTextToken;
-                //si está todo ok
+
                 return response()->json([
-                    "status" => 1,
-                    "msg" => "¡Usuario logueado exitosamente!",
+                    "status" => 200,
+                    "id_user" => $user->id,
                     "access_token" => $token
                 ]);
             }else{
                 return response()->json([
-                    "status" => 0,
+                    "status" => 401,
                     "msg" => "La password es incorrecta",
-                ], 404);
+                ]);
             }
         }else{
             return response()->json([
-                "status" => 0,
+                "status" => 401,
                 "msg" => "Usuario no registrado",
-            ], 404);
+            ]);
         }
     }
     //Esta funcion muestra el perfil del usuario

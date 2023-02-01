@@ -24,7 +24,7 @@ export class RegisterComponent {
       return;
     }
 
-    if(this.validatePasswords(this.form)) {
+    /*if(this.validatePasswords(this.form)) {
       this.authService
         .register(String(this.form.get('username')?.value),String(this.form.get('email')?.value), String(this.form.get('password')?.value))
         .subscribe(
@@ -38,7 +38,7 @@ export class RegisterComponent {
         );
     } else {
       this.error = 'passwords';
-    }
+    }*/
   }
 
   validatePasswords(control: AbstractControl) {

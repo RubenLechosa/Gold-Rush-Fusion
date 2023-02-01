@@ -18,10 +18,10 @@ export class FrameworkService {
   constructor(private http: HttpClient) { }
 
   login(email: string, password: string) {
-    return this.http.post(`${baseUrl}/user/login`, { email, password }, {headers: header});
+    return this.http.post(`${baseUrl}/login`, { email, password }, {headers: header});
   }
 
-  register(username: string, email: string, password: string) {
-    return this.http.post(`${baseUrl}/user/register`, { username, email, password }, {headers: header});
+  register(nick: string, name: string, last_name: string, email: string, password: string, password_confirmation: string) {
+    return this.http.post(`${baseUrl}/register`, { nick, name, last_name, email, password, password_confirmation }, {headers: header});
   }
 }
