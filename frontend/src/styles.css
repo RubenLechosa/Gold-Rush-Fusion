@@ -4,14 +4,20 @@
 
 /*Variables de colores*/
 :root {
-    --purple: #351f41;
-    --yellow: #FFB544;
-    --white: #fff;
-    --black: #000;
-  }
+  --purple: #351f41;
+  --yellow: #FFB544;
+  --white: #fff;
+  --black: #000;
+}
 
-html, body { height: 100%; }
-body { margin: 0; }
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+}
 
 /*Login y registro*/
 .login-container {
@@ -22,19 +28,18 @@ body { margin: 0; }
 }
 
 .login-card {
-display: flex;
-align-items: center;
-justify-content: center;
-margin-top: 5rem !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1rem !important;
 }
 
 .card-body {
-  border-radius: 47px;
+  border-radius: 50px;
   height: auto;
-  width: 500px;
   display: flex;
   flex-direction: column;
-  padding: 30px;
+  padding: 20px;
   background-color: var(--yellow);
   align-items: center;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
@@ -84,41 +89,45 @@ margin-top: 5rem !important;
   transform: scale(1.05);
   will-change: transform;
 }
+
 /* END Boton Login*/
 
-.text-center{
-    font-family: 'Rubik', sans-serif;
-    font-weight: bold;
+.text-center {
+  font-family: 'Rubik', sans-serif;
+  font-weight: bold;
 }
 
-.form-floating label{
-    font-family: 'Helsinki', sans-serif;
-    color: var(--white);
+.form-floating label {
+  font-family: 'Helsinki', sans-serif;
+  color: var(--white);
 }
 
-.form-floating input{
-    font-family: 'Rubik', sans-serif;
-    border-radius: 15px;
-    border: 2px solid transparent;
-    color: var(--white);
-    padding-left: 10px;
-    background-image: linear-gradient(#AF0AEB, #73009C);
+.form-floating input {
+  font-family: 'Rubik', sans-serif;
+  border-radius: 15px;
+  border: 2px solid transparent;
+  color: var(--white);
+  padding-left: 10px;
+  background-image: linear-gradient(#AF0AEB, #73009C);
 }
 
-.form-floating{
-    display: flex;
-    flex-direction: column;
-    width: 100%;
+.form-floating {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
-.logo{
-    width: 300px;
+.logo {
+  width: 270px;
 }
 
 .form-control:focus {
-    border-color: var(--purple);
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px #351f41;
+  border-color: var(--purple);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px #351f41;
+}
+
+.form-floating input:focus {
+  color: var(--white);
 }
 
 /*End Login y registro*/
-
