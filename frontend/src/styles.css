@@ -25,13 +25,12 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   min-height: 100%;
+  display: flex;
 }
 
 .login-card {
-  display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 1rem !important;
 }
 
 .card-body {
@@ -122,8 +121,8 @@ body {
 }
 
 .form-control:focus {
-  border-color: var(--purple);
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px #351f41;
+  border-color: #AF0AEB !important;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px #AF0AEB;
 }
 
 .form-floating input:focus {
