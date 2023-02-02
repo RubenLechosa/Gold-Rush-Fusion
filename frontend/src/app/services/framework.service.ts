@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
 
 const baseUrl = 'http://localhost:8000/api';
 const header = new HttpHeaders({
@@ -17,11 +16,20 @@ export class FrameworkService {
 
   constructor(private http: HttpClient) { }
 
-  login(email: string, password: string) {
-    return this.http.post(`${baseUrl}/login`, { email, password }, {headers: header});
+  get(url: string, body: any) {
+    return this.http.get(`${baseUrl}/${url}`, body);
   }
 
-  register(nick: string, name: string, last_name: string, email: string, password: string, password_confirmation: string) {
-    return this.http.post(`${baseUrl}/register`, { nick, name, last_name, email, password, password_confirmation }, {headers: header});
+  post(url: string, body: any) {
+    return this.http.post(`${baseUrl}/${url}`, body, {headers: header});
   }
+  
+
+  /*login(email: string, password: string) {
+    return this.http.post(`${baseUrl}/${url}`, { email, password }, {headers: header});
+  }
+
+  register(nick: string, name: string, last_name: string, email: string, college: string, password: string, password_confirmation: string) {
+    return this.http.post(`${baseUrl}/register`, { nick, name, last_name, email, college, password, password_confirmation }, {headers: header});
+  }*/
 }

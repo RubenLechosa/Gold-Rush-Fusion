@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Colleges;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -13,10 +14,11 @@ class UserController extends Controller
     //Esta funcion introduce un nuevo usuario a la BD
     public function register(Request $request) {
         $request->validate([
-            'nick'  => 'required',
+            'nick'  => 'required|unique:users',
             'name' => 'required',
             'last_name' => 'required',
             'email' => 'required|email|unique:users',
+            'college'=> 'required',
             'password' => 'required|confirmed'
         ]);
 
@@ -28,13 +30,24 @@ class UserController extends Controller
         $user->role = 'college_manager';
         $user->inventory = "{}";
         $user->password = Hash::make($request->password);
-        $user->save();
-
+        
+        if($user->save()) {
+            $college = new Colleges();
+            $college->name = $request->college;
+            $college->logo = '/assets/img/default_logo_college.png';
+            
+            if($college->save()) {
+                return response()->json([
+                    "status" => 200,
+                    "msg" => "¡Registro de usuario exitoso!",
+                    "id_user" => $user->id
+                ]);
+            }
+        }
 
         return response()->json([
-            "status" => 200,
-            "msg" => "¡Registro de usuario exitoso!",
-            "id_user" => $user->id
+            "status" => 400,
+            "msg" => "¡Registro Fallido!"
         ]);
     }
 
@@ -69,11 +82,19 @@ class UserController extends Controller
         }
     }
     //Esta funcion muestra el perfil del usuario
-    public function userProfile() {
+    public function userProfile(Request $request) {
+        $user = User::where("id", "=", $request->id_user)->first();
+
+        if($user) {
+            return response()->json([
+                "status" => 200,
+                "data" => $user
+            ]);
+        }
+
         return response()->json([
-            "status" => 1,
-            "msg" => "Acerca del perfil de usuario",
-            "data" => auth()->user()
+            "status" => 400,
+            "msg" => "No user data"
         ]);
     }
     //Esta funcion cierra la sesion el usuario

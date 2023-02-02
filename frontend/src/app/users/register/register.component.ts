@@ -15,6 +15,7 @@ export class RegisterComponent {
     name: new FormControl(null, Validators.required),
     last_name: new FormControl(null, Validators.required),
     email: new FormControl(null, Validators.required),
+    college: new FormControl(null, Validators.required),
     password: new FormControl(null, Validators.required),
     cpassword: new FormControl(null, Validators.required),
   });
@@ -27,7 +28,7 @@ export class RegisterComponent {
     }
 
     if(this.validatePasswords(this.form)) {
-      if(this.authService.register(String(this.form.get('nick')?.value), String(this.form.get('name')?.value), String(this.form.get('last_name')?.value), String(this.form.get('email')?.value), String(this.form.get('password')?.value), String(this.form.get('cpassword')?.value))) {
+      if(this.authService.register(String(this.form.get('nick')?.value), String(this.form.get('name')?.value), String(this.form.get('last_name')?.value), String(this.form.get('email')?.value), String(this.form.get('college')?.value), String(this.form.get('password')?.value), String(this.form.get('cpassword')?.value))) {
         this.router.navigate(["/manager"]);
       }
     } else {
