@@ -1,0 +1,17 @@
+<app-loader *ngIf="!dataLoaded"></app-loader>
+
+<main *ngIf="dataLoaded | async">
+    <app-navbar [user_details]="user_data"></app-navbar>
+
+    <div class="main">
+        <div class="container">
+            <h1>Edit @{{user_data.nick}}</h1>
+            <img src="{{user_data.profile_img}}" width="150" alt="profile image" class="rounded-circle">
+            <input type="text" ngModel="{{user_data.name}}" class="form-control">
+            <input type="text" ngModel="{{user_data.last_name}}" class="form-control">
+            <input type="text" ngModel="{{user_data.email}}" class="form-control">
+            <a class="btn btn-danger" href="/manager">Cancel</a>
+            <button class="btn btn-primary">Save</button>
+        </div>
+    </div>
+</main>

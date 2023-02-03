@@ -22,6 +22,8 @@ export class AuthService {
 
         localStorage.setItem('id', response.id_user);
         localStorage.setItem('token', response.access_token);
+
+        this.router.navigate(['/manager']);
       });
   }
 
@@ -30,13 +32,16 @@ export class AuthService {
 
           if(response.status == 200 && this.login(email, password)) {
             this._isLoggedIn.next(true);
+
+            this.router.navigate(['/manager']);
           }
         });
   }
 
   logout() {
+    this._isLoggedIn.next(false);
     localStorage.removeItem("id");
-    localStorage.removeItem("auth_token");
+    localStorage.removeItem("token");
     this.router.navigate(['/login']);
   }
 }
