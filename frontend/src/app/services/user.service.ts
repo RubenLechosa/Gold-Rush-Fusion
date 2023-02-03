@@ -21,4 +21,8 @@ export class UserService {
   getUserDetails(id_user: string) {
     return this.frameworkService.post('users/get-user', { id_user });
   }
+
+  getCourses(id_user: string) {
+    return this.frameworkService.post('users/get-courses', { id_user });
+  }
 }

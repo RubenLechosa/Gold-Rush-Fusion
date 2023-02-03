@@ -12,9 +12,8 @@ import { UserService } from 'src/app/services/user.service';
 export class MainComponent implements OnInit {
   dataLoaded!: Promise<boolean>;
   user_data: any;
+  courses: any;
 
-  // this.userService.getUser(Number(localStorage.getItem('id')));
-  
   constructor(private authService: AuthService, private userService: UserService, private collegeService: CollegeService, private router: Router) { }
 
   ngOnInit(): void {
@@ -22,7 +21,15 @@ export class MainComponent implements OnInit {
       if(response.status == 200 && response.data) {
         this.user_data = response.data;
 
-        this.dataLoaded = Promise.resolve(true);
+        this.userService.getCourses(String(localStorage.getItem('id'))).subscribe((courses: any) => {
+          if(courses.status == 200) {
+            this.user_data.courses = courses.data;
+
+            this.dataLoaded = Promise.resolve(true);
+          } else {
+            this.authService.logout();
+          }
+        });
       } else {
         this.authService.logout();
       }

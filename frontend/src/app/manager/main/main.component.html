@@ -8,7 +8,12 @@
         <div class="container">
             <div class="row">
                 <h1>Bienvenido a {{user_data.college_name}}</h1>
-                <p>El lechosa tiene cara de follar culos</p>  
+                <div class="card" *ngFor="let course of user_data.courses" style="width: 12rem;">
+                    <div class="card-header">
+                        {{course.course_name}}
+                        Teacher: {{course.name}}
+                    </div>
+                </div>
             </div>  
         </div>
     </div>

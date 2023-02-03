@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Colleges;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -19,7 +20,7 @@ class UserController extends Controller
             'last_name' => 'required',
             'email' => 'required|email|unique:users',
             'college'=> 'required',
-            'password' => 'required|confirmed'
+            'password' => 'required|confirmed|min:6'
         ]);
 
         $user = new User();
@@ -82,6 +83,56 @@ class UserController extends Controller
             ]);
         }
     }
+
+    public function update(Request $request) {
+        $request->validate([
+            'id_user' => 'required',
+        ]);
+        
+        $set_clause_parts = [];
+        foreach($request->all() as $key => $value) {
+            if($key != "id_user") {
+                $set_clause_parts[] = "{$key}='{$value}'";
+            }
+        }
+                
+        $set_clause = implode(', ', $set_clause_parts);
+        $rows_affected = DB::update('UPDATE users SET '.$set_clause.' where id = ?', [$request->id_user]);
+
+        if($rows_affected > 0) {
+            return response()->json([
+                "status" => 200,
+                "msg"   => "Se ha actualizado con exito",
+            ]);
+        }
+
+        return response()->json([
+            "status" => 300,
+            "msg"   => "No se ha encontrado el profesor para actualizar",
+        ]);
+    }
+
+        // Delete specific product
+        public function delete(Request $request) {
+            $request->validate([
+                'id_user' => 'required'
+            ]);
+    
+            $rows_affected = DB::delete('delete from users WHERE id = ?', [$request->id_user]);
+    
+            if($rows_affected > 0) {
+                return response()->json([
+                    "status" => 200,
+                    "msg"   => "Se ha borrado con exito",
+                ]);
+            }
+    
+            return response()->json([
+                "status" => 300,
+                "msg"   => "No se ha encontrado el producto para borrar",
+            ]);
+        }
+
     //Esta funcion muestra el perfil del usuario
     public function getDetails(Request $request) {
         $request->validate([
