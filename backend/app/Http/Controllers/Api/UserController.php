@@ -85,21 +85,21 @@ class UserController extends Controller
     }
 
     public function update(Request $request) {
-        $user = $request->user();
-
         $request->validate([
-            'id_teacher' => 'required'
+            'id_user' => 'required',
+            "name",
+            "img"
         ]);
         
         $set_clause_parts = [];
         foreach($request->all() as $key => $value) {
-            if($key != "id_teacher") {
+            if($key != "id_user") {
                 $set_clause_parts[] = "{$key}='{$value}'";
             }
         }
                 
         $set_clause = implode(', ', $set_clause_parts);
-        $rows_affected = DB::update('UPDATE teachers SET '.$set_clause.' where id_teacher = ?', [$request->id_teacher]);
+        $rows_affected = DB::update('UPDATE users SET '.$set_clause.' where id = ?', [$request->id_user]);
 
         if($rows_affected > 0) {
             return response()->json([
@@ -113,6 +113,28 @@ class UserController extends Controller
             "msg"   => "No se ha encontrado el profesor para actualizar",
         ]);
     }
+
+        // Delete specific product
+        public function delete(Request $request) {
+            $request->validate([
+                'id_product' => 'required'
+            ]);
+    
+            $rows_affected = DB::delete('delete from products WHERE id = ' . $request->id_product);
+    
+            if($rows_affected > 0) {
+                return response()->json([
+                    "status" => 200,
+                    "msg"   => "Se ha borrado con exito",
+                ]);
+            }
+    
+            return response()->json([
+                "status" => 300,
+                "msg"   => "No se ha encontrado el producto para borrar",
+            ]);
+        }
+        
     //Esta funcion muestra el perfil del usuario
     public function getDetails(Request $request) {
         $request->validate([
