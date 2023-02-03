@@ -7,7 +7,6 @@ import { FrameworkService } from './framework.service';
   providedIn: 'root'
 })
 export class UserService {
-  user_details: any;
 
   constructor(private frameworkService: FrameworkService, private router : Router) { }
 

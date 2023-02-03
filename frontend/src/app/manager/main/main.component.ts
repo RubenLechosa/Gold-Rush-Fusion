@@ -12,7 +12,7 @@ import { UserService } from 'src/app/services/user.service';
 export class MainComponent implements OnInit {
   dataLoaded!: Promise<boolean>;
   user_data: any;
-  college_data: any;
+
   // this.userService.getUser(Number(localStorage.getItem('id')));
   
   constructor(private authService: AuthService, private userService: UserService, private collegeService: CollegeService, private router: Router) { }
@@ -22,14 +22,7 @@ export class MainComponent implements OnInit {
       if(response.status == 200 && response.data) {
         this.user_data = response.data;
 
-        this.collegeService.getCollegeDetails(String(response.data.id_college)).subscribe((response: any) => {
-          if(response.status == 200) {
-            this.college_data = response.data;
-            this.dataLoaded = Promise.resolve(true);
-          } else {
-            this.authService.logout();
-          }
-        });
+        this.dataLoaded = Promise.resolve(true);
       } else {
         this.authService.logout();
       }

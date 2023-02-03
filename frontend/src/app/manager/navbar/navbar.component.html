@@ -18,7 +18,7 @@
             </ul>
 
             <span class="navbar-text">
-                <span class="me-3">@{{user_details.nick}}</span>
+                <a href="/manager/user/{{user_details.id}}"><span class="me-3">@{{user_details.nick}}</span></a>
                 <button (click)="logout()" class="btn btn-primary">Logout</button>
             </span>
         </div>

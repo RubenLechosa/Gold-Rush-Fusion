@@ -88,7 +88,7 @@ class UserController extends Controller
             "id_user" => "required"
         ]);
 
-        $user = User::where("id", "=", $request->id_user)->first();
+        $user = User::where("id", "=", $request->id_user)->leftJoin('colleges', 'users.id_college', '=', 'colleges.id_college')->first();
 
         if($user) {
             return response()->json([
