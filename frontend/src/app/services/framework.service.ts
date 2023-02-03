@@ -23,13 +23,4 @@ export class FrameworkService {
   post(url: string, body: any) {
     return this.http.post(`${baseUrl}/${url}`, body, {headers: header});
   }
-  
-
-  /*login(email: string, password: string) {
-    return this.http.post(`${baseUrl}/${url}`, { email, password }, {headers: header});
-  }
-
-  register(nick: string, name: string, last_name: string, email: string, college: string, password: string, password_confirmation: string) {
-    return this.http.post(`${baseUrl}/register`, { nick, name, last_name, email, college, password, password_confirmation }, {headers: header});
-  }*/
 }

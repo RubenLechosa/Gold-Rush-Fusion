@@ -30,19 +30,20 @@ class UserController extends Controller
         $user->role = 'college_manager';
         $user->inventory = "{}";
         $user->password = Hash::make($request->password);
+
+        $college = new Colleges();
+        $college->name = $request->college;
+        $college->logo = '/assets/img/default_logo_college.png';
+        $college->save();
+
+        $user->id_college = $college->id;
         
         if($user->save()) {
-            $college = new Colleges();
-            $college->name = $request->college;
-            $college->logo = '/assets/img/default_logo_college.png';
-            
-            if($college->save()) {
-                return response()->json([
-                    "status" => 200,
-                    "msg" => "¡Registro de usuario exitoso!",
-                    "id_user" => $user->id
-                ]);
-            }
+            return response()->json([
+                "status" => 200,
+                "msg" => "¡Registro de usuario exitoso!",
+                "id_user" => $user->id
+            ]);
         }
 
         return response()->json([
@@ -82,7 +83,11 @@ class UserController extends Controller
         }
     }
     //Esta funcion muestra el perfil del usuario
-    public function userProfile(Request $request) {
+    public function getDetails(Request $request) {
+        $request->validate([
+            "id_user" => "required"
+        ]);
+
         $user = User::where("id", "=", $request->id_user)->first();
 
         if($user) {

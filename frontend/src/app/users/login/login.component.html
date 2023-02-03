@@ -7,11 +7,11 @@
                         <div class="card-body">
                             <img class="logo" src="/assets/img/logo.png" alt="Logo">
                             <div class="form-floating mb-3">
-                                <input type="email" class="form-control" id="emailInput" name="email" placeholder="name@example.com" formControlName="email"/>
+                                <input type="email" class="form-control" id="emailInput" name="email" placeholder="name@example.com" formControlName="email" ngModel="alex@duki.com"/>
                                 <label for="emailInput">Email</label>
                             </div>
                             <div class="form-floating mb-3">
-                                <input type="password" class="form-control" id="passwordInput" placeholder="password" formControlName="password"/>
+                                <input type="password" class="form-control" id="passwordInput" placeholder="password" formControlName="password" ngModel="chuclador"/>
                                 <label for="passwordInput">Password</label>
                             </div>
                             <div class="alert alert-danger" *ngIf="error == 'email'">

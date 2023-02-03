@@ -1,1 +1,14 @@
-<p>User: {{user_data}}</p>
+<app-loader *ngIf="!dataLoaded"></app-loader>
+
+<main *ngIf="dataLoaded | async">
+    <app-navbar [user_details]="user_data"></app-navbar>
+
+    <div class="main">
+        <div class="container">
+            <div class="row">
+                <h1>Bienvenido a {{college_data.name}}</h1>
+                <p>El lechosa tiene cara de follar culos</p>  
+            </div>  
+        </div>
+    </div>
+</main>

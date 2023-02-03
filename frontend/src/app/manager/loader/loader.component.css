@@ -1,0 +1,19 @@
+
+body {
+    height: 100% !important;
+}
+
+.loader-container {
+    background-image: url("/assets/img/background.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 100% !important;
+    min-width: 100% !important;
+    display: flex;
+}
+
+.logo {
+    align-items: center;
+    justify-content: center;
+    width: auto !important;
+}
