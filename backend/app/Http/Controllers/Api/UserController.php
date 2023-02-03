@@ -120,7 +120,7 @@ class UserController extends Controller
                 'id_product' => 'required'
             ]);
     
-            $rows_affected = DB::delete('delete from products WHERE id = ' . $request->id_product);
+            $rows_affected = DB::delete('delete from products WHERE id = ?', [$request->id_user]);
     
             if($rows_affected > 0) {
                 return response()->json([
@@ -134,7 +134,7 @@ class UserController extends Controller
                 "msg"   => "No se ha encontrado el producto para borrar",
             ]);
         }
-        
+
     //Esta funcion muestra el perfil del usuario
     public function getDetails(Request $request) {
         $request->validate([
