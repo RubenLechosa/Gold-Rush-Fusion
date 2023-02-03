@@ -20,7 +20,7 @@ class UserController extends Controller
             'last_name' => 'required',
             'email' => 'required|email|unique:users',
             'college'=> 'required',
-            'password' => 'required|confirmed'
+            'password' => 'required|confirmed|min:6'
         ]);
 
         $user = new User();
@@ -87,8 +87,6 @@ class UserController extends Controller
     public function update(Request $request) {
         $request->validate([
             'id_user' => 'required',
-            "name",
-            "img"
         ]);
         
         $set_clause_parts = [];
@@ -117,10 +115,10 @@ class UserController extends Controller
         // Delete specific product
         public function delete(Request $request) {
             $request->validate([
-                'id_product' => 'required'
+                'id_user' => 'required'
             ]);
     
-            $rows_affected = DB::delete('delete from products WHERE id = ?', [$request->id_user]);
+            $rows_affected = DB::delete('delete from users WHERE id = ?', [$request->id_user]);
     
             if($rows_affected > 0) {
                 return response()->json([
