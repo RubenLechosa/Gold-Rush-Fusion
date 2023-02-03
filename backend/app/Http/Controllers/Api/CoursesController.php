@@ -18,7 +18,7 @@ class CoursesController extends Controller
             "id_college" => "required"
         ]);
 
-        if($college = Courses::where("id_college", "=", $request->id_college)->first()) {
+        if($college = Courses::where("id_course", "=", $request->id_college)) {
             return response()->json([
                 "status" => 200,
                 "data" => $college
@@ -41,7 +41,7 @@ class CoursesController extends Controller
             $courses = array();
 
             foreach (json_decode($user->courses, true) as $id_course) {
-                $courses[] = Courses::where("id", "=", $id_course)->first();
+                $courses[] = Courses::where("id_course", "=", $id_course)->leftJoin('users', 'courses.id_teacher', '=', 'users.id')->first();
             }
             
             return response()->json([
