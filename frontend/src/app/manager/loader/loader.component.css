@@ -15,7 +15,7 @@ body {
 .logoLoader {
     align-items: center;
     justify-content: center;
-    width: 500px;
+    width: 40%;
     animation: logo 1s ease-in-out 0s infinite alternate-reverse none;
 }
 
