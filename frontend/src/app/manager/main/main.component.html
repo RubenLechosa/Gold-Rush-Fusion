@@ -7,7 +7,12 @@
         <div class="container">
             <div class="row">
                 <h1>Bienvenido a {{user_data.college_name}}</h1>
-                <div class="card" *ngFor="let course of user_data.courses" style="width: 12rem;">
+                <a class="card me-4" style="width: 12rem;" href="/manager/add-course" *ngIf="user_data.role == 'college_manager'">
+                    <div class="card-header">
+                        Add Course
+                    </div>
+                </a>
+                <div class="card me-4" *ngFor="let course of user_data.courses" style="width: 12rem;">
                     <div class="card-header">
                         {{course.course_name}}
                         Teacher: {{course.name}}
