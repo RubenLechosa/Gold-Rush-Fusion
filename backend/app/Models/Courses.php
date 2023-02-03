@@ -13,6 +13,7 @@ class Courses extends Model
         'name',
         'id_teacher',
         'id_college',
+        'img',
         'shop',
     ];
 

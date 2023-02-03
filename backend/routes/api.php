@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\CollegeController;
+use App\Http\Controllers\Api\CoursesController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -19,7 +20,8 @@ use Illuminate\Support\Facades\Route;
 Route::post('register', [UserController::class, 'register']);
 Route::post('login', [UserController::class, 'login']);
 Route::post('users/get-user', [UserController::class, 'getDetails']);
-Route::post('college/get-college', [CollegeController::class, 'getDetails']);
+Route::post('users/get-courses', [CoursesController::class, 'getAllCoursesByUser']);
+Route::post('college/get-college', [CollegeController::class, 'getAllCoursesByUser']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
