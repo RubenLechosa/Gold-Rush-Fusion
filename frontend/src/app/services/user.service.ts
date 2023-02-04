@@ -25,4 +25,8 @@ export class UserService {
   getCourses(id_user: string) {
     return this.frameworkService.post('users/get-courses', { id_user });
   }
+
+  editUser(id_user: number, name: string, last_name: string, nick: string, email: string, role: string, birth_date: string) {
+    return this.frameworkService.post('users/edit-user', { id_user, name, last_name, nick, email, role, birth_date});
+  }
 }
