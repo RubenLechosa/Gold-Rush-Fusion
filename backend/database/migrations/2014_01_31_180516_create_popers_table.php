@@ -13,10 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('colleges', function (Blueprint $table) {
+        Schema::create('popers', function (Blueprint $table) {
             $table->id();
-            $table->string("name");
-            $table->string("logo");
+            $table->string("poper_name");
+            $table->text("skin");
+            $table->integer("level");
+            $table->integer("current_exp");
+            $table->text("stats");
+            $table->text("abilities");
+            $table->enum('element',["wild","ember","water","psyco","smog","brawny"]);
             $table->timestamps();
         });
     }
@@ -28,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('colleges');
+        Schema::dropIfExists('popers');
     }
 };

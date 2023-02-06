@@ -13,16 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('popers', function (Blueprint $table) {
+        Schema::create('colleges', function (Blueprint $table) {
+
             $table->id();
-            $table->string("name");
-            $table->text("skin");
-            $table->integer("level");
-            $table->integer("current_exp");
-            $table->text("stats");
-            $table->text("abilities");
-            $table->enum('element',["wild","ember","water","psyco","smog","brawny"]);
+            $table->string("college_name");
+            $table->string("logo")->default("null");
             $table->timestamps();
+
         });
     }
 
@@ -33,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('popers');
+        Schema::dropIfExists('colleges');
     }
 };

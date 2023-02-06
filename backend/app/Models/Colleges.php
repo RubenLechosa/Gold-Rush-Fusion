@@ -11,7 +11,7 @@ class Colleges extends Model
     protected $primaryKey = 'id_college';
 
     protected $fillable = [
-        'name',
+        'college_name',
         'logo',
     ];
 
