@@ -10,7 +10,7 @@ class Popers extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name',
+        'poper_name',
         'skin',
         'level',
         'current_exp',

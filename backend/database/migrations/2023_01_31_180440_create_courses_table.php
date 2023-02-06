@@ -14,14 +14,17 @@ return new class extends Migration
     public function up()
     {
         Schema::create('courses', function (Blueprint $table) {
-            $table->id();
+
+            $table->increments("id_course")->unique();
             $table->string("course_name");
-            $table->integer("id_teacher");
-            $table->integer("id_college");
-            $table->string("img");
+            $table->unsignedBigInteger("id_teacher");
+            $table->unsignedBigInteger("id_college");
+            $table->string("img")->default("null");
             $table->text("shop");
             $table->timestamps();
+            $table->foreign('id_college')->references('id')->on('colleges');
         });
+        
     }
 
     /**

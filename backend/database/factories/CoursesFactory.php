@@ -1,6 +1,7 @@
 <?php
 
 namespace Database\Factories;
+use Illuminate\Support\Facades\DB;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -16,8 +17,16 @@ class CoursesFactory extends Factory
      */
     public function definition()
     {
+        $idsTeacher = DB::table('users')->pluck('id');
+        $idsCollege = DB::table('colleges')->pluck('id');
+
+
         return [
-            //
+            'course_name' => fake()->firstName(),
+            'id_teacher' => fake()->randomElement($idsTeacher),
+            'id_college' => fake()->randomElement($idsCollege),
+            'shop' => "{}",
+
         ];
     }
 }

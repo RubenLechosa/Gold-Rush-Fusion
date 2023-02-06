@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
  */
-class CollegeFactory extends Factory
+class CollegesFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,7 +17,8 @@ class CollegeFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'college_name' => fake()->firstName()
+
         ];
     }
 }

@@ -11,11 +11,11 @@ class Courses extends Model
     protected $primaryKey = 'id_courses';
 
     protected $fillable = [
-        'name',
+        'course_name',
         'id_teacher',
         'id_college',
-        'img',
         'shop',
+        'img',
     ];
 
 }
