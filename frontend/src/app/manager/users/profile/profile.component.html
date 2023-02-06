@@ -3,16 +3,64 @@
 <main *ngIf="dataLoaded | async">
     <app-navbar [user_details]="user_data"></app-navbar>
 
-    <div class="main">
-        <div class="container">
-            <h1>Profile @{{user_data.nick}}</h1>
-            <img src="{{user_data.profile_img}}" width="150" alt="profile image" class="rounded-circle">
-            <p>Name: {{user_data.name}}</p>
-            <p>Lastname: {{user_data.last_name}}</p>
-            <p>email: {{user_data.email}}</p>
-            <p>College: {{user_data.college_name}}</p>
+    <div class="main container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="userData column">
+                    <img class="imgRounded" src="{{user_data.profile_img}}" alt="Profile image">
+                    <div class="userTxt">
+                        <p><span class="bold">Nick:</span> {{user_data.nick}}</p>
+                        <span>{{user_data.role}}</span>
+                    </div>
+                </div>
+                <div class="courses">
+                    <table>
+                        <tr>
+                            <td class="bold"><i class="fa-solid fa-globe"></i></td>
+                            <td>1. {{user_data.courses}}</td>
+                            <td>16 alumnos</td>
+                        </tr>
+                        <tr>
+                            <td class="bold"><i class="fa-solid fa-globe"></i></td>
+                            <td>2. {{user_data.courses}}</td>
+                            <td>18 alumnos</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="col-md-6 align-self-center">
+                <div class="userInfo">
+                    <h2>User Info</h2>
+                    <table>
+                        <tr>
+                            <td class="bold">Name:</td>
+                            <td>{{user_data.name}}</td>
+                        </tr>
+                        <tr>
+                            <td class="bold">Last Name:</td>
+                            <td>{{user_data.last_name}}</td>
+                        </tr>
+                        <tr>
+                            <td class="bold">Email:</td>
+                            <td>{{user_data.email}}</td>
+                        </tr>
+                        <tr>
+                            <td class="bold">College:</td>
+                            <td>{{user_data.college_name}}</td>
+                        </tr>
+                    </table>
+                    <div class="btnSpace">
+                        <a href="#" class="btn-primary" type="button">Change Password</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+            
+        <!--
 
             <a class="btn btn-secondary" *ngIf="id_profile == user_data.id" href="/manager/user/edit/{{id_profile}}">Edit profile</a>
-        </div>
+
+            --> 
+        
     </div>
 </main>

@@ -1,0 +1,82 @@
+.imgNick{
+    display: flex;
+    flex-direction: column;
+
+}
+
+.imgRounded{
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.userData{
+    padding: 2rem;
+}
+
+.userInfo{
+    padding: 3rem;
+}
+
+.userData p,  .userData span, .userInfo table tr td{
+    font-family: 'Rubik', sans-serif;
+    color: var(--white);
+    font-size: 20px;
+}
+
+.userInfo table tr td{
+    width: 120px;
+}
+
+.userData span{
+    font-size: 18px;
+}
+
+.userData p{
+    margin: 0px;
+}
+
+.userData{
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.userInfo h2{
+    font-family: 'Helsinki', sans-serif;
+    color: var(--white);
+}
+
+.userTxt{
+    margin-top: 1rem;
+}
+
+.bold{
+    font-weight: bold;
+}
+
+
+.userInfo .btn-primary {
+    border-radius: 5px;
+    display: block;
+    text-align: center;
+    justify-content: center ;
+    font-family: 'Helsinki', sans-serif;
+    background-color: var(--red);
+    transition: 500ms;
+    color: var(--white);
+}
+
+.userInfo .btn-primary:hover {
+    background-color: var(--red);
+    box-shadow: rgba(255, 0, 0, 0.35) 0px 5px 15px;;
+}
+
+.btnSpace{
+    margin-top: 20px;
+    width: 200px;
+}
+
+
+
+
