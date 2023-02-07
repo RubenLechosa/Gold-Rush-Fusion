@@ -30,10 +30,11 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->role = 'college_manager';
         $user->inventory = "{}";
+        $user->courses = "{}";
         $user->password = Hash::make($request->password);
 
         $college = new Colleges();
-        $college->name = $request->college;
+        $college->college_name = $request->college;
         $college->logo = '/assets/img/default_logo_college.png';
         $college->save();
 
@@ -43,7 +44,7 @@ class UserController extends Controller
             return response()->json([
                 "status" => 200,
                 "msg" => "¡Registro de usuario exitoso!",
-                "id_user" => $user->id
+                "id_user" => $user->id_user
             ]);
         }
 
@@ -61,14 +62,13 @@ class UserController extends Controller
         ]);
 
         $user = User::where("email", "=", $request->email)->first();
-        if(isset($user->id)){
+        if(isset($user->id_user)){
             if(Hash::check($request->password, $user->password)){
-                $token = $user->createToken("auth_token")->plainTextToken;
 
                 return response()->json([
                     "status" => 200,
-                    "id_user" => $user->id,
-                    "access_token" => $token
+                    "id_user" => $user->id_user,
+                    "access_token" => "logged"
                 ]);
             }else{
                 return response()->json([
@@ -97,7 +97,7 @@ class UserController extends Controller
         }
                 
         $set_clause = implode(', ', $set_clause_parts);
-        $rows_affected = DB::update('UPDATE users SET '.$set_clause.' where id = ?', [$request->id_user]);
+        $rows_affected = DB::update('UPDATE users SET '.$set_clause.' where id_user = ?', [$request->id_user]);
 
         if($rows_affected > 0) {
             return response()->json([
@@ -118,7 +118,7 @@ class UserController extends Controller
                 'id_user' => 'required'
             ]);
     
-            $rows_affected = DB::delete('delete from users WHERE id = ?', [$request->id_user]);
+            $rows_affected = DB::delete('delete from users WHERE id_user = ?', [$request->id_user]);
     
             if($rows_affected > 0) {
                 return response()->json([
@@ -139,7 +139,7 @@ class UserController extends Controller
             "id_user" => "required"
         ]);
 
-        $user = User::where("id", "=", $request->id_user)->leftJoin('colleges', 'users.id_college', '=', 'colleges.id_college')->first();
+        $user = User::where("id_user", "=", $request->id_user)->leftJoin('colleges', 'users.id_college', '=', 'colleges.id_college')->first();
 
         if($user) {
             return response()->json([

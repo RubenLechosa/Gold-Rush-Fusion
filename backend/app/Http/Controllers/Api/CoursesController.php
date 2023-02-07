@@ -38,11 +38,11 @@ class CoursesController extends Controller
             "id_user" => "required"
         ]);
     
-        if($user = User::where("id", "=", $request->id_user)->first()) {
+        if($user = User::where("id_user", "=", $request->id_user)->first()) {
             $courses = array();
 
             foreach (json_decode($user->courses, true) as $id_course) {
-                $courses[] = Courses::where("id_course", "=", $id_course)->leftJoin('users', 'courses.id_teacher', '=', 'users.id')->first();
+                $courses[] = Courses::where("id_course", "=", $id_course)->leftJoin('users', 'courses.id_teacher', '=', 'users.id_user')->first();
             }
             
             return response()->json([
@@ -62,7 +62,7 @@ class CoursesController extends Controller
             "id_course" => "required"
         ]);
 
-        if($courses = Courses::where("id", "=", $request->id_course)->first()) {
+        if($courses = Courses::where("id_course", "=", $request->id_course)->first()) {
             return response()->json([
                 "status" => 200,
                 "data" => $courses
