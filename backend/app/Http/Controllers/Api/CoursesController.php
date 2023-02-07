@@ -41,10 +41,14 @@ class CoursesController extends Controller
         if($user = User::where("id_user", "=", $request->id_user)->first()) {
             $courses = array();
 
-            foreach (json_decode($user->courses, true) as $id_course) {
-                $courses[] = Courses::where("id_course", "=", $id_course)->leftJoin('users', 'courses.id_teacher', '=', 'users.id_user')->first();
+            if($user->role = "college_manager") {
+                $courses = Courses::where("courses.id_college", "=", $user->id_college)->leftJoin('users', 'courses.id_teacher', '=', 'users.id_user')->get();
+            } else {
+                foreach (json_decode($user->courses, true) as $id_course) {
+                    $courses[] = Courses::where("id_course", "=", $id_course)->leftJoin('users', 'courses.id_teacher', '=', 'users.id_user')->first();
+                }    
             }
-            
+
             return response()->json([
                 "status" => 200,
                 "data" => $courses
@@ -75,34 +79,26 @@ class CoursesController extends Controller
         ]);
     }
 
-
-
-
-
     public function createCourses(Request $request) {
         $request->validate([
             'course_name'  => 'required|min:4|max:20',
             'id_teacher' => 'required',
             'id_college' => 'required',
-            'img' => 'required',
-            'shop' => 'required'
+            'img' => ''
         ]);
 
         $courses = new Courses();
         $courses->course_name = $request->course_name;
         $courses->id_teacher = $request->id_teacher;
         $courses->id_college = $request->id_college;
-        $courses->img = $request->img;
-        $courses->shop = $request->shop;
-
- 
-
+        $courses->img = ($request->img ? $request->img : null);
+        $courses->shop = "{}";
 
         if($courses->save()) {
             return response()->json([
                 "status" => 200,
                 "msg" => "¡Course creado con exito!",
-                "id_course" => $courses->id
+                "id_course" => $courses->id_course
             ]);
         }
 
@@ -114,7 +110,7 @@ class CoursesController extends Controller
 
 
 
-    public function editCourses(Request $request) {
+    public function editCourse(Request $request) {
         $request->validate([
             'id_course' => 'required',
         ]);
@@ -127,7 +123,7 @@ class CoursesController extends Controller
         }
                 
         $set_clause = implode(', ', $set_clause_parts);
-        $rows_affected = DB::update('UPDATE courses SET '.$set_clause.' where id = ?', [$request->id_course]);
+        $rows_affected = DB::update('UPDATE courses SET '.$set_clause.' where id_course = ?', [$request->id_course]);
 
         if($rows_affected > 0) {
             return response()->json([

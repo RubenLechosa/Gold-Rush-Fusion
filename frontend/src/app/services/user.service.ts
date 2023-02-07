@@ -30,6 +30,10 @@ export class UserService {
     return this.frameworkService.post('users/get-users-college', { id_college });
   }
 
+  getTeachersByCollege(id_college: string) {
+    return this.frameworkService.post('users/get-teachers-college', { id_college });
+  }
+
   editUser(id_user: number, name: string, last_name: string, nick: string, email: string, role: string, birth_date: string) {
     return this.frameworkService.post('users/edit-user', { id_user, name, last_name, nick, email, role, birth_date});
   }

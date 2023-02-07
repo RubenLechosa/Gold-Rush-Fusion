@@ -8,17 +8,17 @@
         <div class="container">
             <div class="row">
                 <h1>Bienvenido a {{user_data.college_name}}</h1>
-                <a class="card me-4" style="width: 12rem;" href="/manager/college/edit/0" *ngIf="user_data.role == 'college_manager'">
+                <a class="card me-4" style="width: 12rem;" href="/manager/course/edit/0" *ngIf="user_data.role == 'college_manager'">
                     <div class="card-header">
                         Add Course
                     </div>
                 </a>
-                <div class="card me-4" *ngFor="let course of user_data.courses" style="width: 12rem;">
+                <a class="card me-4 text-black" *ngFor="let course of user_data.courses" style="width: 12rem;" href="/manager/course/edit/{{course.id_course}}">
                     <div class="card-header">
                         {{course.course_name}}
                         Teacher: {{course.name}}
                     </div>
-                </div>
+                </a>
             </div>  
         </div>
     </div>
