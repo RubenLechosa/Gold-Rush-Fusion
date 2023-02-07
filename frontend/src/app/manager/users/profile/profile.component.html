@@ -12,20 +12,18 @@
                         <p><span class="bold">Nick:</span> {{user_data.nick}}</p>
                         <span>{{user_data.role}}</span>
                     </div>
-                </div>
-                <div class="courses">
-                    <table>
-                        <tr>
-                            <td class="bold"><i class="fa-solid fa-globe"></i></td>
-                            <td>1. {{user_data.courses}}</td>
-                            <td>16 alumnos</td>
-                        </tr>
-                        <tr>
-                            <td class="bold"><i class="fa-solid fa-globe"></i></td>
-                            <td>2. {{user_data.courses}}</td>
-                            <td>18 alumnos</td>
-                        </tr>
-                    </table>
+                    <div class="courses">
+                        <table>
+                            <tr>
+                                <td><i class="fa-solid fa-globe"></i> 1. {{user_data.courses}}</td>
+                                <td><span>16 alumnos</span></td>
+                            </tr>
+                            <tr>
+                                <td><i class="fa-solid fa-globe"></i> 2. {{user_data.courses}}</td>
+                                <td><span>18 alumnos</span></td>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
             </div>
             <div class="col-md-6 align-self-center">
@@ -54,13 +52,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-            
-        <!--
-
-            <a class="btn btn-secondary" *ngIf="id_profile == user_data.id" href="/manager/user/edit/{{id_profile}}">Edit profile</a>
-
-            --> 
-        
+        </div>      
     </div>
 </main>

@@ -19,7 +19,7 @@
     padding: 3rem;
 }
 
-.userData p,  .userData span, .userInfo table tr td{
+.userData p,  .userData span, .userInfo table tr td, .courses{
     font-family: 'Rubik', sans-serif;
     color: var(--white);
     font-size: 20px;
@@ -76,6 +76,18 @@
     margin-top: 20px;
     width: 200px;
 }
+
+.courses{
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+
+
+
+
 
 
 
