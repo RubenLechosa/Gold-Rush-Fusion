@@ -50,6 +50,7 @@ class PopersController extends Controller
         $poper->current_exp = $request->current_exp;
         $poper->stats = $request->stats;
         $poper->abilities = $request->abilities;
+        $poper->element = $request->element;
 
         
         if($poper->save()) {

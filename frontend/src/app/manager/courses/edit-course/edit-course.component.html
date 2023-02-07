@@ -1,0 +1,23 @@
+<app-loader *ngIf="!dataLoaded"></app-loader>
+
+<main *ngIf="dataLoaded | async">
+    <app-navbar [user_details]="user_data"></app-navbar>
+
+    <div class="main">
+        <div class="container">
+            <h1 class="text-white">Edit @{{user_data.nick}}</h1>
+            
+            <form (ngSubmit)="onSubmit()" [formGroup]="form">
+                <input type="text" ngModel="{{course_data.course_name}}" formControlName="course_name" class="form-control mb-3">
+                <input type="text" ngModel="{{course_data.img}}" formControlName="img" class="form-control mb-3">
+                <select ngModel="{{course_data.id_teacher}}" formControlName="id_teacher" class="form-select mb-3">
+                    <option value="student">Student</option>
+                    <option value="teacher">Teacher</option>
+                    <option value="college_manager">College Manager</option>
+                </select>
+                <a class="btn btn-danger me-3 text-white" href="/manager">Cancel</a>
+                <button class="btn btn-primary" type="submit">Save</button>
+            </form>
+        </div>
+    </div>
+</main>

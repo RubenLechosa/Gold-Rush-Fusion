@@ -22,9 +22,11 @@ Route::post('login', [UserController::class, 'login']);
 
 Route::post('users/get-user', [UserController::class, 'getDetails']);
 Route::post('users/edit-user', [UserController::class, 'update']);
+Route::post('users/get-users-college', [CollegeController::class, 'getAllUsersByCollege']);
 
 // Courses
 Route::post('users/get-courses', [CoursesController::class, 'getAllCoursesByUser']);
+Route::post('course/get-details', [CoursesController::class, 'getDetailsCourse']);
 
 // College
 Route::post('college/get-college', [CollegeController::class, 'getAllCoursesByUser']);

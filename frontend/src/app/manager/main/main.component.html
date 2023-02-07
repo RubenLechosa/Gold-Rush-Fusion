@@ -8,7 +8,7 @@
         <div class="container">
             <div class="row">
                 <h1>Bienvenido a {{user_data.college_name}}</h1>
-                <a class="card me-4" style="width: 12rem;" href="/manager/add-course" *ngIf="user_data.role == 'college_manager'">
+                <a class="card me-4" style="width: 12rem;" href="/manager/college/edit/0" *ngIf="user_data.role == 'college_manager'">
                     <div class="card-header">
                         Add Course
                     </div>

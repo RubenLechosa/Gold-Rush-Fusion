@@ -153,6 +153,27 @@ class UserController extends Controller
             "msg" => "No user data"
         ]);
     }
+
+    public function getAllUsersByCollege(Request $request) {
+        $request->validate([
+            "id_college" => "required"
+        ]);
+
+        $user = User::where("id_college", "=", $request->id_college);
+
+        if($user) {
+            return response()->json([
+                "status" => 200,
+                "data" => $user
+            ]);
+        }
+
+        return response()->json([
+            "status" => 400,
+            "msg" => "No user data"
+        ]);
+    }
+    
     //Esta funcion cierra la sesion el usuario
     public function logout() {
         Auth::user()->tokens->each(function($token, $key) {

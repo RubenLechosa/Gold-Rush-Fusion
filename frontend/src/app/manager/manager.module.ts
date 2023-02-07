@@ -8,6 +8,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { LoaderComponent } from './loader/loader.component';
 import { ProfileComponent } from './users/profile/profile.component';
 import { EditUserComponent } from './users/edit-user/edit-user.component';
+import { EditCourseComponent } from './courses/edit-course/edit-course.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { EditUserComponent } from './users/edit-user/edit-user.component';
     NavbarComponent,
     LoaderComponent,
     ProfileComponent,
-    EditUserComponent
+    EditUserComponent,
+    EditCourseComponent
   ],
   imports: [
     CommonModule,
