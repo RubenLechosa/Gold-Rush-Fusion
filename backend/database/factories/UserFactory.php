@@ -18,8 +18,8 @@ class UserFactory extends Factory
      */
     public function definition()
     {
-        $idsCollege = DB::table('colleges')->pluck('id');
-        $idsPopers = DB::table('popers')->pluck('id');
+        $idsCollege = DB::table('colleges')->pluck('id_college');
+        $idsPopers = DB::table('popers')->pluck('id_poper');
 
         return [
             'name' => fake()->firstName(),

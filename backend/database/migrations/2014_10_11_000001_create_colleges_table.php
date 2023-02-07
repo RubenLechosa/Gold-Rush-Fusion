@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('colleges', function (Blueprint $table) {
 
-            $table->id();
+            $table->id('id_college');
             $table->string("college_name");
             $table->string("logo")->default("null");
             $table->timestamps();

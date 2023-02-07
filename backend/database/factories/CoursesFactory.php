@@ -17,8 +17,8 @@ class CoursesFactory extends Factory
      */
     public function definition()
     {
-        $idsTeacher = DB::table('users')->pluck('id');
-        $idsCollege = DB::table('colleges')->pluck('id');
+        $idsTeacher = DB::table('users')->pluck('id_user');
+        $idsCollege = DB::table('colleges')->pluck('id_college');
 
 
         return [

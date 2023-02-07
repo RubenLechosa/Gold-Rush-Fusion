@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('popers', function (Blueprint $table) {
-            $table->id();
+            $table->id('id_poper');
             $table->string("poper_name");
             $table->text("skin");
             $table->integer("level");

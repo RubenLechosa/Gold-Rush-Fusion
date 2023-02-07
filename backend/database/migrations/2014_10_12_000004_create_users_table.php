@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->id();
+            $table->id('id_user');
             $table->string("name");
             $table->string("last_name");
             $table->string("nick")->unique();
@@ -32,8 +32,8 @@ return new class extends Migration
             $table->boolean("force_change_pass")->default(false);
             $table->rememberToken();
             $table->timestamps();
-            $table->foreign('id_college')->references('id')->on('colleges');
-            $table->foreign('id_poper')->references('id')->on('popers');
+            $table->foreign('id_college')->references('id_college')->on('colleges');
+            $table->foreign('id_poper')->references('id_poper')->on('popers');
 
 
         });
