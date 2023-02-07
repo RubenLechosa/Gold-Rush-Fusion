@@ -20,16 +20,31 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
-        Colleges::factory()->count(10)->create(); 
+        Colleges::factory()->count(10)->create();
+        Popers::factory()->count(10)->create();
+
+        \App\Models\User::factory()->create([
+            'name' => 'Myke',
+            'email' => 'test@duki.com',
+            'last_name' => 'Towers',
+            'nick'=> 'MykeTowers69',
+            'email_verified_at' => now(),
+            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'remember_token' => 'gsknxgwkdj',
+            'role'=> 'admin',
+            'pepas'=>fake()-> randomNumber(),
+            'id_college' => 1,
+            'courses' => "{}",
+            'id_poper' => 1,
+            'inventory' => "{}",
+            'birth_date'=>fake()->date(),
+            'force_change_pass' =>fake()->boolean()
+        ]);
+
         User::factory()->count(10)->create(); 
         Courses::factory()->count(10)->create(); 
-        Popers::factory()->count(10)->create(); 
+         
         
         
     }
