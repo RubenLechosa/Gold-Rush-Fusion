@@ -3,55 +3,81 @@
 <main *ngIf="dataLoaded | async">
     <app-navbar [user_details]="user_data"></app-navbar>
 
-    <div class="main container">
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <div class="userData column">
-                    <img class="imgRounded" src="{{user_data.profile_img}}" alt="Profile image">
-                    <div class="userTxt">
-                        <p><span class="bold">Nick:</span> {{user_data.nick}}</p>
-                        <span>{{user_data.role}}</span>
+        <div class="main container card">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="userData column">
+                        <img class="imgRounded" src="{{user_data.profile_img}}" alt="Profile image">
+                        <img class="img2" src="/assets/img/popers/poper1.png" alt="Profile image">
+                        <div class="userTxt">
+                            <p><span class="bold">Nick:</span> {{user_data.nick}}</p>
+                            <span>{{user_data.role}}</span>
+                        </div>
+                        <div class="courses">
+                            <table>
+                                <tr>
+                                    <td><i class="fa-solid fa-globe"></i> 1. {{user_data.courses}}</td>
+                                    <td><span>16 alumnos</span></td>
+                                </tr>
+                                <tr>
+                                    <td><i class="fa-solid fa-globe"></i> 2. {{user_data.courses}}</td>
+                                    <td><span>18 alumnos</span></td>
+                                </tr>
+                            </table>
+                        </div>
                     </div>
-                    <div class="courses">
+                </div>
+                <div class="col-md-6 align-self-center">
+                    <div class="userInfo">
+                        <h2><i class="fa-solid fa-user"></i> User Info</h2>
                         <table>
                             <tr>
-                                <td><i class="fa-solid fa-globe"></i> 1. {{user_data.courses}}</td>
-                                <td><span>16 alumnos</span></td>
+                                <td class="bold">Name:</td>
+                                <td>{{user_data.name}}</td>
                             </tr>
                             <tr>
-                                <td><i class="fa-solid fa-globe"></i> 2. {{user_data.courses}}</td>
-                                <td><span>18 alumnos</span></td>
+                                <td class="bold">Last Name:</td>
+                                <td>{{user_data.last_name}}</td>
+                            </tr>
+                            <tr>
+                                <td class="bold">Email:</td>
+                                <td>{{user_data.email}}</td>
+                            </tr>
+                            <tr>
+                                <td class="bold">College:</td>
+                                <td>{{user_data.college_name}}</td>
+                            </tr>
+                        </table>
+                        <div class="btnSpace">
+                            <a href="#" class="btn-primary" type="button">Change Password</a>
+                        </div>
+                    </div>
+                    <div class="userInfo">
+                        <h2><i class="fa-solid fa-paw"></i> Poper Info</h2>
+                        <table>
+                            <tr>
+                                <td class="bold">Name:</td>
+                                <td>{{user_data.name}}</td>
+                            </tr>
+                            <tr>
+                                <td class="bold">Level:</td>
+                                <td>6</td>
+                            </tr>
+                            <tr>
+                                <td class="bold">Current XP:</td>
+                                <td>
+                                    <div class="progress">
+                                        <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" style="width: 50%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">50%</div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="bold">Element:</td>
+                                <td>Brawny</td>
                             </tr>
                         </table>
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 align-self-center">
-                <div class="userInfo">
-                    <h2>User Info</h2>
-                    <table>
-                        <tr>
-                            <td class="bold">Name:</td>
-                            <td>{{user_data.name}}</td>
-                        </tr>
-                        <tr>
-                            <td class="bold">Last Name:</td>
-                            <td>{{user_data.last_name}}</td>
-                        </tr>
-                        <tr>
-                            <td class="bold">Email:</td>
-                            <td>{{user_data.email}}</td>
-                        </tr>
-                        <tr>
-                            <td class="bold">College:</td>
-                            <td>{{user_data.college_name}}</td>
-                        </tr>
-                    </table>
-                    <div class="btnSpace">
-                        <a href="#" class="btn-primary" type="button">Change Password</a>
-                    </div>
-                </div>
-            </div>
-        </div>      
-    </div>
+        </div>
 </main>

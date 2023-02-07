@@ -4,24 +4,17 @@
 
 }
 
-.imgRounded{
-    width: 250px;
-    height: 250px;
-    border-radius: 50%;
-    object-fit: cover;
-}
-
 .userData{
     padding: 2rem;
 }
 
 .userInfo{
-    padding: 3rem;
+    padding: 1rem;
 }
 
 .userData p,  .userData span, .userInfo table tr td, .courses{
     font-family: 'Rubik', sans-serif;
-    color: var(--white);
+    color: var(--black);
     font-size: 20px;
 }
 
@@ -44,7 +37,7 @@
 
 .userInfo h2{
     font-family: 'Helsinki', sans-serif;
-    color: var(--white);
+    color: var(--black);
 }
 
 .userTxt{
@@ -55,6 +48,28 @@
     font-weight: bold;
 }
 
+.userData {
+    position: relative;
+    top: 0;
+    left: 0;
+}
+
+.imgRounded{
+    position: relative;
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    object-fit: cover;
+    top: 0;
+    left: 0;
+}
+
+.userData .img2{
+    position: absolute;
+    top: 175px;
+    left: 260px;
+    height: 120px;
+}
 
 .userInfo .btn-primary {
     border-radius: 5px;
@@ -64,7 +79,7 @@
     font-family: 'Helsinki', sans-serif;
     background-color: var(--red);
     transition: 500ms;
-    color: var(--white);
+    color: var(--black);
 }
 
 .userInfo .btn-primary:hover {
@@ -82,6 +97,25 @@
     display: flex;
     justify-content: center;
     margin-top: 1rem;
+}
+
+.card{
+    background-color: #EBEDF1;
+    margin-top: 4rem;
+    max-width: 1000px;
+    border-radius: 20px;
+    z-index: -1;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+.progress{
+    width: 200px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    background-color: #eee;
+}
+
+.bg-success{
+    background-color: var(--purple) !important;
 }
 
 
