@@ -10,6 +10,7 @@ const routes: Routes = [
   {path: 'manager', loadChildren: () => import('./manager/manager.module').then((m) => m.ManagerModule), canActivate: [IsAuthenticatedGuard]},
   {path: 'login',  component: LoginComponent},
   {path: 'register',  component: RegisterComponent},
+  {path: '404',  component: NotfoundPageComponent}, //temporal
   {path: '**', redirectTo: '/manager', pathMatch: 'full'}
 ];
 
