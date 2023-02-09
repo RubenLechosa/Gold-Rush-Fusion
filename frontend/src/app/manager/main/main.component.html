@@ -7,19 +7,26 @@
     <div class="main">
         <div class="container">
             <div class="row">
-                <h1>Bienvenido a {{user_data.college_name}}</h1>
-                <a class="card me-4" style="width: 12rem;" href="/manager/course/edit/0" *ngIf="user_data.role == 'college_manager'">
-                    <div class="card-header">
-                        Add Course
+                <h1>Bienvenido/a a {{user_data.college_name}}</h1>              
+                <div *ngFor="let course of user_data.courses" class="card">
+                    <div class="imgCurso">   
+                        <img src="/assets/img/background.png" class="card-img-top" alt="Imagen del Curso">
                     </div>
-                </a>
-                <a class="card me-4 text-black" *ngFor="let course of user_data.courses" style="width: 12rem;" href="/manager/course/edit/{{course.id_course}}">
-                    <div class="card-header">
-                        {{course.course_name}}
-                        Teacher: {{course.name}}
+                    <div class="card-body">
+                        <a href="#" class="btn-card-a">
+                            <h5>{{course.course_name}}</h5>
+                            <p><span>Teacher: </span>{{course.name}}</p> 
+                        </a>
                     </div>
-                </a>
+                    <div class="boton">
+                        <a class="btn btn-login" href="/manager/course/edit/{{course.id_course}}">Edit</a>
+                    </div>
+                </div>
+                <div class="addCourse">
+                    <a class="btn btn-login" href="/manager/course/edit/0" *ngIf="user_data.role == 'college_manager'">Add Course</a>
+                </div>  
             </div>  
         </div>
     </div>
+    <br>
 </main>

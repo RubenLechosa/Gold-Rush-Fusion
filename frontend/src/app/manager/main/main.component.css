@@ -1,0 +1,57 @@
+h1{
+    color: var(--white);
+    font-family: 'Rubik', sans-serif;
+    margin-top: 1rem;
+}
+
+.row{
+    margin-bottom: 5rem !important;
+}
+
+.boton a{
+    width: 100%;
+    border: 0px !important;  
+}
+
+.boton .btn-login{
+    border-radius: 5px;
+}
+
+.addCourse .btn-login{
+    border: 1px solid var(--yellow);
+    color: var(--yellow);
+}
+
+.addCourse .btn-login:hover{
+    border: 1px solid transparent;
+}
+
+.imgCurso{
+    width: 100% !important;
+}
+
+.btn-card-a h5, .btn-card-a p, .btn-card-a p span{
+    transition: 500ms;
+    margin: 0px;
+    padding: 0px;
+}
+
+.btn-card-a:hover{
+    color: var(--purple);
+}
+
+.card{
+    padding: 0px;
+    margin-left: 20px;
+    margin-top: 2rem;
+    width: 15rem;
+    --bs-card-border-width: 0px !important;
+}
+
+.addCourse{
+
+}
+
+.card-body p span{
+    font-weight: bold;
+}
