@@ -1,0 +1,9 @@
+input::-webkit-file-upload-button{
+    color: var(--white);
+    font-weight: bold;
+    background-color: transparent !important;
+}
+
+.title h1{
+    font-family: 'Helsinki', sans-serif;
+}

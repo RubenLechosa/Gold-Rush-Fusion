@@ -10,7 +10,7 @@
                 <h1>Bienvenido/a a {{user_data.college_name}}</h1>              
                 <div *ngFor="let course of user_data.courses" class="card">
                     <div class="imgCurso">   
-                        <img src="/assets/img/background.png" class="card-img-top" alt="Imagen del Curso">
+                        <img src="{{course.img}}" class="card-img-top" alt="Imagen del Curso">
                     </div>
                     <div class="card-body">
                         <a href="#" class="btn-card-a">
