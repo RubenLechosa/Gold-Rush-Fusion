@@ -20,4 +20,8 @@ export class CourseService {
   getDetails(id_course: string) {
     return this.frameworkService.post('course/get-details', { id_course });
   }
+
+  getAllUsersByCourse(id_course: string) {
+    return this.frameworkService.post('course/get-users', { id_course });
+  }
 }
