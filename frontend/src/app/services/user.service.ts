@@ -47,6 +47,10 @@ export class UserService {
   }
 
   addGems(id_user: number, pepas: number, action: string = "sum") {
-    return this.frameworkService.post('users/modify-gems', { id_user, pepas, action});
+    return this.frameworkService.post('users/modify-gems', { id_user, pepas, action });
+  }
+
+  joinCourseFromCode(id_user: number, code: string) {
+    return this.frameworkService.post('users/join-course', { id_user, code });
   }
 }

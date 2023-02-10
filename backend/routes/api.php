@@ -30,10 +30,12 @@ Route::post('users/remove-course', [UserController::class, 'removeCourseToUser']
 
 // Courses
 Route::post('users/get-courses', [CoursesController::class, 'getAllCoursesByUser']);
+Route::post('users/join-course', [UserController::class, 'joinCourseByCode']);
 Route::post('course/create-course', [CoursesController::class, 'createCourses']);
 Route::post('course/save-course', [CoursesController::class, 'editCourse']);
 Route::post('course/get-details', [CoursesController::class, 'getDetailsCourse']);
 Route::post('course/get-users', [UserController::class, 'getAllUsersByCourse']);
+Route::post('course/get-ranking', [CoursesController::class, 'getRanking']);
 
 // College
 Route::post('college/get-college', [CollegeController::class, 'getAllCoursesByUser']);

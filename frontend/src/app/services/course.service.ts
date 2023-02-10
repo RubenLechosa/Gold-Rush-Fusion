@@ -24,4 +24,8 @@ export class CourseService {
   getAllUsersByCourse(id_course: string) {
     return this.frameworkService.post('course/get-users', { id_course });
   }
+
+  getRanking(id_course: string) {
+    return this.frameworkService.post('course/get-ranking', { id_course });
+  }
 }

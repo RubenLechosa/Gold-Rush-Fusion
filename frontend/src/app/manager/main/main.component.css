@@ -52,3 +52,6 @@ h1{
     font-weight: bold;
 }
 
+.card-img-top{
+    height: 140px;
+}

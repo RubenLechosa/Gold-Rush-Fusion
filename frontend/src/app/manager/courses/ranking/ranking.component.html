@@ -1,1 +1,26 @@
-<p>ranking works!</p>
+
+<app-loader *ngIf="!dataLoaded"></app-loader>
+
+<main *ngIf="dataLoaded | async">
+    <app-navbar [user_details]="user_data"></app-navbar>
+
+    <div class="main">
+        <div class="container">
+            <div class="row">
+                <a class="btn btn-primary w-25" href="/manager/course/{{id_course}}">Atras</a>
+                <h1>Ranking Mami</h1>   
+                <button (click)="changeType()" class="btn btn-primary">CHANGE to grafic</button>  
+                <div *ngIf="ranking_list">
+                    <ol>
+                        <li *ngFor="let user of ranking" class="text-white">@{{user.nick}} - {{user.pepas}}</li>
+                    </ol>
+                </div>         
+
+                <div *ngIf="!ranking_list">
+                    Grafico
+                </div>  
+            </div>  
+        </div>
+    </div>
+    <br>
+</main>

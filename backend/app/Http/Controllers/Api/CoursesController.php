@@ -84,6 +84,25 @@ class CoursesController extends Controller
         ]);
     }
 
+    
+    public function getRanking(Request $request) {
+        $request->validate([
+            "id_course" => "required"
+        ]);
+
+        if($users = User::whereJsonContains('courses', $request->id_course)->orderBy('pepas', 'desc')->get()) {
+            return response()->json([
+                "status" => 200,
+                "data" => $users
+            ]);
+        }
+
+        return response()->json([
+            "status" => 400,
+            "msg" => "No ranking data"
+        ]);
+    }
+
     public function createCourses(Request $request) {
         $request->validate([
             'course_name'  => 'required|min:4|max:20',

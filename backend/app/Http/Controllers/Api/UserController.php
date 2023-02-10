@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\Colleges;
+use App\Models\Courses;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -294,6 +295,33 @@ class UserController extends Controller
                 "status" => 200,
                 "msg"   => "Se ha actualizado con exito",
             ]);
+        }
+
+        return response()->json([
+            "status" => 400,
+            "msg" => "No user data"
+        ]);
+    }
+
+    public function joinCourseByCode(Request $request) {
+        $request->validate([
+            "id_user" => "required",
+            "code" => "required"
+        ]);
+
+        $user = User::where("id_user", "=", $request->id_user)->first();
+        if($course = Courses::where("code", "=", $request->code)->first()) {
+            $json = json_decode($user->courses, true);
+            $json_encoded = json_encode(array_merge(array($course->id_course), $json));
+    
+            $rows_affected = DB::update("UPDATE users SET courses='".$json_encoded."' where id_user = ?", [$request->id_user]);
+    
+            if($rows_affected > 0) {
+                return response()->json([
+                    "status" => 200,
+                    "msg"   => "Se ha actualizado con exito",
+                ]);
+            }
         }
 
         return response()->json([
