@@ -7,3 +7,20 @@ input::-webkit-file-upload-button{
 .title h1{
     font-family: 'Helsinki', sans-serif;
 }
+
+.form-floating select{
+    font-family: 'Rubik', sans-serif;
+    border-radius: 15px;
+    border: 2px solid transparent;
+    color: var(--white);
+    padding-left: 10px;
+    background-color: #9105C4;
+}
+
+.form-select{
+    --bs-form-select-bg-img: url(/assets/img/down.png) !important;
+}
+
+.buttons{
+    width: 100%;
+}

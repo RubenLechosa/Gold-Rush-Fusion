@@ -27,6 +27,27 @@ body {
   background-image: url(./assets/img/backgroundCake.png);
 }
 
+/* ===== Scrollbar CSS ===== */
+  /* Firefox */
+  * {
+    scrollbar-width: auto;
+    scrollbar-color: #501D89 #ffffff;
+  }
+
+  /* Chrome, Edge, and Safari */
+  *::-webkit-scrollbar {
+    width: 16px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: #eee;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: #501D89;
+    border-radius: 10px;
+  }
+
 
 ul {
   list-style: none;
@@ -111,6 +132,52 @@ a:active {
 }
 
 /* END Boton Login*/
+
+
+/* Boton Exit*/
+.btn-exit {
+  width: 100%;
+  border-radius: 15px;
+  height: 40px;
+  margin-top: 10px;
+  font-family: 'Helsinki', sans-serif;
+  font-size: large;
+  color: var(--red) !important;
+  background-color: transparent;
+  border: 2px solid var(--red);
+  transition: .3s transform ease-in-out;
+  will-change: transform;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.btn-exit::after {
+  background-color: var(--red);
+  content: '';
+  display: block;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform: translate(-100%, 0) rotate(10deg);
+  transform-origin: top left;
+  transition: .3s transform ease-out;
+  will-change: transform;
+  z-index: -1;
+}
+
+.btn-exit:hover::after {
+  transform: translate(0, 0);
+}
+
+.btn-exit:hover {
+  color: var(--white) !important;
+  background-color: var(--red);
+  border: 2px solid transparent;
+  transform: scale(1.05);
+  will-change: transform;
+}
 
 .text-center {
   font-family: 'Rubik', sans-serif;
