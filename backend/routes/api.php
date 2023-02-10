@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\CollegeController;
 use App\Http\Controllers\Api\CoursesController;
+use App\Http\Controllers\Api\PopersController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -37,6 +38,8 @@ Route::post('course/get-details', [CoursesController::class, 'getDetailsCourse']
 Route::post('course/get-users', [UserController::class, 'getAllUsersByCourse']);
 Route::post('course/get-ranking', [CoursesController::class, 'getRanking']);
 
+// Popers
+Route::post('popers/create-poper', [PopersController::class, 'createPoper']);
 // College
 Route::post('college/get-college', [CollegeController::class, 'getAllCoursesByUser']);
 

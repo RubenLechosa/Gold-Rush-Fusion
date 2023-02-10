@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Popers;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -34,32 +35,33 @@ class PopersController extends Controller
 
     public function createPoper(Request $request) {
         $request->validate([
-            'name'  => 'required|min:4|max:20',
+            'poper_name'  => 'required|min:4|max:20',
             'skin' => 'required',
-            'level' => 'required',
-            'current_exp' => 'required',
             'stats'=> 'required',
-            'stats_base'=>'required',
-            'abilities' => 'required',
             'element' => 'required'
         ]);
 
         $poper = new Popers();
-        $poper->name = $request->name;
+        $poper->poper_name = $request->poper_name;
         $poper->skin = $request->skin;
-        $poper->level = $request->level;
-        $poper->current_exp = $request->current_exp;
+        $poper->level = 1;
+        $poper->current_exp = 0;
         $poper->stats = $request->stats;
-        $poper->abilities = $request->abilities;
+        $poper->stats_base = '{"health": "200", "strength": "50"}';
+        $poper->abilities = '{}';
         $poper->element = $request->element;
-
         
         if($poper->save()) {
-            return response()->json([
-                "status" => 200,
-                "msg" => "¡Poper creado con exito!",
-                "id_poper" => $poper->id
-            ]);
+            $user = User::where("id_user", "=", $request->id_user)->first();
+            $user->id_poper = $poper->id;
+
+            if($user->save()) {
+                return response()->json([
+                    "status" => 200,
+                    "msg" => "¡Poper creado con exito!",
+                    "id_poper" => $poper->id
+                ]);
+            }
         }
 
         return response()->json([

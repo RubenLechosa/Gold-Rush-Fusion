@@ -15,6 +15,7 @@ export class MainComponent implements OnInit {
   dataLoaded!: Promise<boolean>;
   user_data: any;
   courses: any;
+  hasPoper: boolean = false;
 
   form = new FormGroup({
     code: new FormControl(null, Validators.required)
@@ -27,7 +28,12 @@ export class MainComponent implements OnInit {
       if(response.status == 200 && response.data) {
         this.user_data = response.data;
 
-        this.reloadCourses();
+        if(this.user_data.id_poper) {
+          this.hasPoper = true;
+          this.dataLoaded = Promise.resolve(true);
+        } else {
+          this.reloadCourses();
+        }
       } else {
         this.authService.logout();
       }

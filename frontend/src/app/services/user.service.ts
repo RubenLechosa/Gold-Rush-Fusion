@@ -8,7 +8,7 @@ import { FrameworkService } from './framework.service';
 })
 export class UserService {
 
-  constructor(private frameworkService: FrameworkService, private router : Router) { }
+  constructor(private frameworkService: FrameworkService) { }
 
   login(email: string, password: string) {
     return this.frameworkService.post('login', { email, password });
