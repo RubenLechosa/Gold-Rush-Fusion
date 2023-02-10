@@ -41,4 +41,12 @@ export class UserService {
   addCourse(id_course: string, id_user: string) {
     return this.frameworkService.post('users/add-course', { id_user, id_course });
   }
+
+  removeCourse(id_course: string, id_user: string) {
+    return this.frameworkService.post('users/remove-course', { id_user, id_course });
+  }
+
+  addGems(id_user: number, pepas: number, action: string = "sum") {
+    return this.frameworkService.post('users/modify-gems', { id_user, pepas, action});
+  }
 }

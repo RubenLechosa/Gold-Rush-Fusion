@@ -22,9 +22,11 @@ Route::post('login', [UserController::class, 'login']);
 
 Route::post('users/get-user', [UserController::class, 'getDetails']);
 Route::post('users/edit-user', [UserController::class, 'update']);
+Route::post('users/modify-gems', [UserController::class, 'modifyGems']);
 Route::post('users/get-users-college', [UserController::class, 'getAllUsersByCollege']);
 Route::post('users/get-teachers-college', [UserController::class, 'getAllTeachersByCollege']);
 Route::post('users/add-course', [UserController::class, 'addCourseToUser']);
+Route::post('users/remove-course', [UserController::class, 'removeCourseToUser']);
 
 // Courses
 Route::post('users/get-courses', [CoursesController::class, 'getAllCoursesByUser']);

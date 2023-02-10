@@ -238,4 +238,67 @@ class UserController extends Controller
             "msg" => "No user data"
         ]);
     }
+
+    public function removeCourseToUser(Request $request) {
+        $request->validate([
+            "id_course" => "required",
+            "id_user" => "required"
+        ]);
+
+        $user = User::where("id_user", "=", $request->id_user)->first();
+        $json = json_decode($user->courses, true);
+        if (in_array($request->id_course, $json)) {
+            unset($json[array_search($request->id_course ,$json)]);
+        }
+
+        $json_encoded = json_encode($json);
+        $rows_affected = DB::update("UPDATE users SET courses='".$json_encoded."' where id_user = ?", [$request->id_user]);
+
+        if($rows_affected > 0) {
+            return response()->json([
+                "status" => 200,
+                "msg"   => "Se ha actualizado con exito",
+            ]);
+        }
+
+        return response()->json([
+            "status" => 400,
+            "msg" => "No user data"
+        ]);
+    }
+
+    public function modifyGems(Request $request) {
+        $request->validate([
+            "id_user" => "required",
+            "pepas" => "required",
+            "action"=> "required"
+        ]);
+
+        $user = User::where("id_user", "=", $request->id_user)->first();
+        if($request->action == "sum") {
+            $pepas = $user->pepas + $request->pepas;
+        } else if($request->action == "res") {
+            $pepas = $user->pepas - $request->pepas;
+        } else {
+            $pepas = $request->pepas;
+        }
+
+        if($pepas < 0) {
+            $pepas = 0;
+        }
+
+        $rows_affected = DB::update("UPDATE users SET pepas='".$pepas."' where id_user = ?", [$request->id_user]);
+
+        if($rows_affected > 0) {
+            return response()->json([
+                "status" => 200,
+                "msg"   => "Se ha actualizado con exito",
+            ]);
+        }
+
+        return response()->json([
+            "status" => 400,
+            "msg" => "No user data"
+        ]);
+    }
 }

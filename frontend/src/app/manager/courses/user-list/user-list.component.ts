@@ -12,14 +12,22 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class UserListComponent {
   @ViewChild('closebutton') closebutton!:any;
+  @ViewChild('closeGemsButton') closeGemsButton!:any;
+  
   id_course!: number;
   dataLoaded!: Promise<boolean>;
   user_data: any;
   user_list: any;
   all_users: any;
+  editingUser!: number;
 
   form = new FormGroup({
     id_student: new FormControl(null, Validators.required)
+  });
+
+  formGems = new FormGroup({
+    gems: new FormControl(null, Validators.required),
+    action: new FormControl(null, Validators.required)
   });
   
   constructor(private authService: AuthService, private userService: UserService,  private courseService: CourseService, private route: ActivatedRoute) { }
@@ -64,7 +72,29 @@ export class UserListComponent {
     this.userService.addCourse(String(this.id_course), String(this.form.get("id_student")?.value)).subscribe((result: any) => {
       if(result.status == 200) {
         this.reloadUsers();
+        this.form.reset();
         this.closebutton.nativeElement.click();
+      }
+    });
+  }
+
+  submitRemoveStudent(id_user: string) {
+    this.userService.removeCourse(String(this.id_course), String(id_user)).subscribe((result: any) => {
+      if(result.status == 200) {
+        this.reloadUsers();
+      }
+    });
+  }
+
+  submitAddGems() {
+    if(this.formGems.invalid) {
+      return;
+    }
+
+    this.userService.addGems(this.editingUser, Number(this.formGems.get("gems")?.value), String(this.formGems.get("action")?.value)).subscribe((result: any) => {
+      if(result.status == 200) {
+        this.reloadUsers();
+        this.closeGemsButton.nativeElement.click();
       }
     });
   }
