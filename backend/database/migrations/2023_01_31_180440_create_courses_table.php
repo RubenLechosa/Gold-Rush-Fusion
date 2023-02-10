@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('courses', function (Blueprint $table) {
 
             $table->increments("id_course")->unique();
+            $table->string('code')->unique();
             $table->string("course_name");
             $table->unsignedBigInteger("id_teacher");
             $table->unsignedBigInteger("id_college");

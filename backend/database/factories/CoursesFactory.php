@@ -26,6 +26,7 @@ class CoursesFactory extends Factory
             'id_teacher' => fake()->randomElement($idsTeacher),
             'id_college' => fake()->randomElement($idsCollege),
             'shop' => "{}",
+            'code'=>fake()->unique()->Str::random(5),
 
         ];
     }
