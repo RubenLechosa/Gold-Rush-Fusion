@@ -154,17 +154,37 @@ class UserController extends Controller
         ]);
     }
 
+    public function getAllUsersByCourse(Request $request) {
+        $request->validate([
+            "id_course" => "required"
+        ]);
+
+        $users = User::whereJsonContains('courses', $request->id_course)->leftJoin('colleges', 'users.id_college', '=', 'colleges.id_college')->get();
+
+        if($users) {
+            return response()->json([
+                "status" => 200,
+                "data" => $users
+            ]);
+        }
+
+        return response()->json([
+            "status" => 400,
+            "msg" => "No users data"
+        ]);
+    }
+
     public function getAllUsersByCollege(Request $request) {
         $request->validate([
             "id_college" => "required"
         ]);
 
-        $user = User::where("id_college", "=", $request->id_college)->get();
+        $users = User::where("id_college", "=", $request->id_college)->get();
 
-        if($user) {
+        if($users) {
             return response()->json([
                 "status" => 200,
-                "data" => $user
+                "data" => $users
             ]);
         }
 
@@ -194,14 +214,28 @@ class UserController extends Controller
         ]);
     }
 
-    //Esta funcion cierra la sesion el usuario
-    public function logout() {
-        Auth::user()->tokens->each(function($token, $key) {
-            $token->delete();
-        });
+    public function addCourseToUser(Request $request) {
+        $request->validate([
+            "id_course" => "required",
+            "id_user" => "required"
+        ]);
+
+        $user = User::where("id_user", "=", $request->id_user)->first();
+        $json = json_decode($user->courses, true);
+        $json_encoded = json_encode(array_merge(array($request->id_course), $json));
+
+        $rows_affected = DB::update("UPDATE users SET courses='".$json_encoded."' where id_user = ?", [$request->id_user]);
+
+        if($rows_affected > 0) {
+            return response()->json([
+                "status" => 200,
+                "msg"   => "Se ha actualizado con exito",
+            ]);
+        }
+
         return response()->json([
-            "status" => 1,
-            "msg" => "Cierre de Sesión",
+            "status" => 400,
+            "msg" => "No user data"
         ]);
     }
 }

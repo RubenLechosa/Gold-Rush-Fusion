@@ -14,7 +14,7 @@ export class MainComponent implements OnInit {
   user_data: any;
   courses: any;
 
-  constructor(private authService: AuthService, private userService: UserService, private collegeService: CollegeService, private router: Router) { }
+  constructor(private authService: AuthService, private userService: UserService, private router: Router) { }
 
   ngOnInit(): void {
     this.userService.getUserDetails(String(localStorage.getItem('id'))).subscribe((response: any) => {

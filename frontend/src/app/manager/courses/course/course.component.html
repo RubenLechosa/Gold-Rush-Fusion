@@ -1,0 +1,17 @@
+
+<app-loader *ngIf="!dataLoaded"></app-loader>
+
+<main *ngIf="dataLoaded | async">
+    <app-navbar [user_details]="user_data"></app-navbar>
+
+    <div class="main">
+        <div class="container">
+            <div class="row">
+                <h1>CHUPALA PUTA</h1>   
+                
+                <a href="/manager/course/{{id_course}}/users" class="btn btn-primary">User_List</a>
+            </div>  
+        </div>
+    </div>
+    <br>
+</main>

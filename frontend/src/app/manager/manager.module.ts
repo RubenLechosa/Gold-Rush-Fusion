@@ -9,6 +9,10 @@ import { LoaderComponent } from './loader/loader.component';
 import { ProfileComponent } from './users/profile/profile.component';
 import { EditUserComponent } from './users/edit-user/edit-user.component';
 import { EditCourseComponent } from './courses/edit-course/edit-course.component';
+import { CourseComponent } from './courses/course/course.component';
+import { UserListComponent } from './courses/user-list/user-list.component';
+import { RankingComponent } from './courses/ranking/ranking.component';
+import { ShopComponent } from './courses/shop/shop.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +21,11 @@ import { EditCourseComponent } from './courses/edit-course/edit-course.component
     LoaderComponent,
     ProfileComponent,
     EditUserComponent,
-    EditCourseComponent
+    EditCourseComponent,
+    CourseComponent,
+    UserListComponent,
+    RankingComponent,
+    ShopComponent
   ],
   imports: [
     CommonModule,
