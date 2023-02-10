@@ -39,6 +39,7 @@ class PopersController extends Controller
             'level' => 'required',
             'current_exp' => 'required',
             'stats'=> 'required',
+            'stats_base'=>'required',
             'abilities' => 'required',
             'element' => 'required'
         ]);

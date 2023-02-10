@@ -20,6 +20,7 @@ return new class extends Migration
             $table->integer("level");
             $table->integer("current_exp");
             $table->text("stats");
+            $table->text("stats_base");
             $table->text("abilities");
             $table->enum('element',["wild","ember","water","psyco","smog","brawny"]);
             $table->timestamps();

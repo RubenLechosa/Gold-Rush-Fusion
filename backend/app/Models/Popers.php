@@ -15,6 +15,7 @@ class Popers extends Model
         'level',
         'current_exp',
         'stats',
+        'stats_base',
         'abilities',
         'element',
     ];

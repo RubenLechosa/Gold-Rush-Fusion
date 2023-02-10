@@ -20,10 +20,12 @@ class PopersFactory extends Factory
             'poper_name' => fake()->firstName(),
             'skin'=>"{}",
             'stats'=>"{}",
+            'stats_base' => '{}',
             'abilities'=>"{}",
             'element'=>fake()->randomElement(['wild','ember','water','psyco','smog','brawny']),
             'level'=>fake()-> randomNumber(),
             'current_exp'=>fake()->randomNumber()
+
 
         ];
     }
