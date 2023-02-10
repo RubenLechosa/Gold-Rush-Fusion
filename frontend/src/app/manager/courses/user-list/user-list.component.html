@@ -7,12 +7,17 @@
     <div class="main mt-3">
         <div class="container">
             <div class="row">
-                <a class="btn btn-primary w-25" href="/manager/course/{{id_course}}">Atras</a>
-                <h1>USER LIST</h1>   
-
                 <div class="addCourse mb-4">
-                    <button class="btn btn-login" type="button" data-bs-toggle="modal" data-bs-target="#addStudent" *ngIf="user_data.role == 'college_manager' ||  user_data.role == 'admin'"><i class="fa-solid fa-plus me-2"></i> Add Student</button>
-                </div>  
+                    <div class="titleFlex">
+                        <a href="/manager/course/{{user_data.id_course}}"><i class="fa-solid fa-angle-left fa-2xl"></i></a> 
+                        <h1>User list</h1>
+                    </div>
+                    <div class="boton">
+                        <button class="btn btn-login" type="button" data-bs-toggle="modal" data-bs-target="#addStudent" ><i class="fa-solid fa-plus me-2"></i> Add Student</button>
+                    </div>
+                    
+                </div> 
+                
 
                 <div class="card mb-3" *ngFor="let user of user_list">
                     <div class="card-body">
@@ -30,18 +35,19 @@
                         </div>
                     </div>
                 </div>
+                
             </div>  
         </div>
     </div>
     <br>
 </main>
 
-  <!-- Modal -->
+<!-- Modal -->
 <div class="modal fade" id="addStudent" tabindex="-1" aria-labelledby="addStudentLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="addStudentLabel">Add Student</h1>
+                <h1 class="modal-title fs-5" id="addStudentLabel"><i class="fa-solid fa-user-plus"></i> Add Student</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form (ngSubmit)="submitAddStudent()" [formGroup]="form">
@@ -55,8 +61,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" #closebutton data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-primary"><i class="fa-solid fa-plus me-1"></i> Add User</button>
+                    <button type="submit" class="btn btn-login"><i class="fa-solid fa-plus me-1"></i> Add User</button>
+                    <button type="button" class="btn btn-exit" #closebutton data-bs-dismiss="modal"><i class="fa-solid fa-xmark me-1"></i> Cancel</button>
                 </div>
             </form>
         </div>
@@ -67,25 +73,28 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="addStudentLabel">Add Gems</h1>
+                <h1 class="modal-title fs-5" id="addStudentLabel"><i class="fa-regular fa-gem"></i> Add Gems</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form (ngSubmit)="submitAddGems()" [formGroup]="formGems">
                 <div class="card-body p-3">
-                    <label for="action">Action</label>
-                    <select formControlName="action" class="form-select mb-3">
-                        <option value="" [selected]="true">Choose one...</option>
-                        <option value="sum">Sumar</option>
-                        <option value="res">Restar</option>
-                        <option value="set">Set</option>
-                    </select>
-                    <label for="gems">Gem Num</label>
-                    <input type="number" class="form-control" formControlName="gems" min="1" value="1">
+                    <div class="form-floating text-black">
+                        <select formControlName="action" class="form-select mb-3">
+                            <option value="" [selected]="true">Choose one...</option>
+                            <option value="sum">Sumar</option>
+                            <option value="res">Restar</option>
+                            <option value="set">Set</option>
+                        </select>
+                        <label for="action">Action</label>
+                    </div>
+                    <div class="form-floating text-black">
+                        <input id="gems" type="number" class="form-control" formControlName="gems" min="1" value="1">
+                        <label for="gems">Gem Num</label>
+                    </div>
                 </div>
-
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" #closeGemsButton data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-primary"><i class="fa-solid fa-plus me-1"></i> Add Gems</button>
+                    <button type="submit" class="btn btn-login"><i class="fa-solid fa-plus me-1"></i> Add Gems</button>
+                    <button type="button" class="btn btn-exit" #closeGemsButton data-bs-dismiss="modal"><i class="fa-solid fa-xmark me-1"> </i>Cancel</button>
                 </div>
             </form>
         </div>
