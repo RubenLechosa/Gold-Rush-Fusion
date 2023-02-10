@@ -16,6 +16,7 @@ class Courses extends Model
         'id_college',
         'shop',
         'img',
+        'code',
     ];
 
 }

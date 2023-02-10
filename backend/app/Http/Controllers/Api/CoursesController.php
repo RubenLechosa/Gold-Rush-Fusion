@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class CoursesController extends Controller
 {
@@ -89,6 +90,7 @@ class CoursesController extends Controller
             'id_teacher' => 'required',
             'id_college' => 'required',
             'img' => ''
+
         ]);
 
         $courses = new Courses();
@@ -97,6 +99,9 @@ class CoursesController extends Controller
         $courses->id_college = $request->id_college;
         $courses->img = ($request->img ? $request->img : null);
         $courses->shop = "{}";
+        $courses->code = Str::random(4);
+
+
 
         if($courses->save()) {
             return response()->json([
