@@ -25,6 +25,8 @@ export class ProfileComponent implements OnInit {
     this.userService.getUserDetails(String(this.id_profile)).subscribe((response: any) => {
       if(response.status == 200 && response.data) {
         this.user_data = response.data;
+        this.user_data.skin = JSON.parse(this.user_data.skin);
+        this.user_data.stats_base = JSON.parse(this.user_data.stats_base);
 
         this.userService.getCourses(String(localStorage.getItem('id'))).subscribe((courses: any) => {
           if(courses.status == 200) {

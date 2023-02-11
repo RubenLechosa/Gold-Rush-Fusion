@@ -12,6 +12,11 @@
     width: 120px;
 }
 
+.poper-info, .poper-info table tr td {
+    font-size: 20px !important;
+    width: 100% !important;
+}
+
 .userData span{
     font-size: 18px;
 }
@@ -22,7 +27,6 @@
 
 .userData{
     text-align: center;
-    margin-top: 1rem;
 }
 
 .h2{
@@ -77,14 +81,26 @@
     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 
+.card.card-inverted {
+    border-bottom-right-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+    border-top-right-radius: 20px !important;
+    border-top-left-radius: 20px !important;
+}
+
+.card.card-regular {
+    background-color: #cecece;
+    border-bottom-right-radius: 25px !important;
+    border-bottom-left-radius: 25px !important;
+    border-top-right-radius: 25px !important;
+    border-top-left-radius: 25px !important;
+    box-shadow: none;
+}
+
 .progress{
     width: 200px;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
     background-color: #eee;
-}
-
-.bg-success{
-    background-color: var(--purple) !important;
 }
 
 .nav-tabs{
@@ -113,7 +129,7 @@
 }
 
 .label:first-letter {
-    text-transform: uppercase;
+    text-transform: uppercase !important;
 }
 
 .label.label-student {

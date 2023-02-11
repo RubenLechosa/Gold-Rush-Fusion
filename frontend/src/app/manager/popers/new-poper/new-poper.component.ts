@@ -10,9 +10,9 @@ import { PoperService } from 'src/app/services/poper.service';
 })
 export class NewPoperComponent implements OnInit {
   popers = [
-    {name: "Juan", background: "/assets/img/backgrounds/2_background.jpg", img: "/assets/img/popers/poper1.png", element: "Psyco"},
-    {name: "Chemita", background: "/assets/img/backgrounds/1_background.jpg", img: "/assets/img/popers/poper2.png", element: "Wild"},
-    {name: "Rodrigo", background: "/assets/img/backgrounds/3_background.jpg", img: "/assets/img/popers/poper3.png", element: "Water"}
+    {name: "Juan", background: "/assets/img/backgrounds/2_background.jpg", img: "/assets/img/popers/poper1.png", element: "psyco"},
+    {name: "Chemita", background: "/assets/img/backgrounds/1_background.jpg", img: "/assets/img/popers/poper2.png", element: "wild"},
+    {name: "Rodrigo", background: "/assets/img/backgrounds/3_background.jpg", img: "/assets/img/popers/poper3.png", element: "water"}
   ];
 
   form = new FormGroup({
