@@ -14,6 +14,7 @@ import { UserListComponent } from './courses/user-list/user-list.component';
 import { RankingComponent } from './courses/ranking/ranking.component';
 import { ShopComponent } from './courses/shop/shop.component';
 import { NewPoperComponent } from './popers/new-poper/new-poper.component';
+import { RequestsComponent } from './courses/requests/requests.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { NewPoperComponent } from './popers/new-poper/new-poper.component';
     UserListComponent,
     RankingComponent,
     ShopComponent,
-    NewPoperComponent
+    NewPoperComponent,
+    RequestsComponent
   ],
   imports: [
     CommonModule,

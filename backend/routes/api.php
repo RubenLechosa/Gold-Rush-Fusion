@@ -38,6 +38,10 @@ Route::post('course/get-details', [CoursesController::class, 'getDetailsCourse']
 Route::post('course/get-users', [UserController::class, 'getAllUsersByCourse']);
 Route::post('course/get-ranking', [CoursesController::class, 'getRanking']);
 
+//Requests Course
+Route::post('course/get-requests', [CoursesController::class, 'getAllUsersByRequests']);
+Route::post('course/resolve-request', [CoursesController::class, 'resolveRequest']);
+
 // Popers
 Route::post('popers/create-poper', [PopersController::class, 'createPoper']);
 // College

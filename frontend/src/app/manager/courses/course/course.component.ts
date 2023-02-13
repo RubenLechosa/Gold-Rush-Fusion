@@ -29,7 +29,7 @@ export class CourseComponent {
         this.courseService.getDetails(String(this.id_course)).subscribe((courses: any) => {
           if(courses.status == 200) {
             this.course_data = courses.data;
-
+            this.course_data.requests = JSON.parse(this.course_data.requests);
             this.dataLoaded = Promise.resolve(true);
           }
         });

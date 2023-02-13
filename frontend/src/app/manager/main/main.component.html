@@ -17,7 +17,7 @@
                 </div>             
                 <a *ngFor="let course of user_data.courses" class="card text-decoration-none text-black" href="/manager/course/{{course.id_course}}">
                     <div class="imgCurso">   
-                        <img src="{{(course.img != 'null' ? course.img : '/assets/img/defaultCourse.jpg')}}" class="card-img-top" alt="Imagen del Curso">
+                        <img src="{{(course.img != 'null' && course.img != ''  ? course.img : '/assets/img/defaultCourse.jpg')}}" class="card-img-top" alt="Imagen del Curso">
                     </div>
                     <div class="card-body">
                         <h5>{{course.course_name}}</h5>

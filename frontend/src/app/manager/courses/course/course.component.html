@@ -7,10 +7,11 @@
     <div class="main">
         <div class="container">
             <div class="row">
-                <h1>CURSO {{course_data.course_name}}</h1>   
+                <h1 class="text-white">CURSO {{course_data.course_name}} - {{course_data.code}} <button class="btn btn-secondary"><i class="fa-solid fa-arrows-rotate"></i></button></h1>   
                 
                 <a href="/manager/course/{{id_course}}/users" class="btn btn-primary mb-3">User_List</a>
-                <a href="/manager/course/{{id_course}}/ranking" class="btn btn-primary">Ranking</a>
+                <a href="/manager/course/{{id_course}}/ranking" class="btn btn-primary mb-3">Ranking</a>
+                <a href="/manager/course/{{id_course}}/requests" class="btn btn-primary">({{course_data.requests.length}}) Requests</a>
             </div>  
         </div>
     </div>

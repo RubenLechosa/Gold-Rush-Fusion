@@ -116,11 +116,10 @@ class CoursesController extends Controller
         $courses->course_name = $request->course_name;
         $courses->id_teacher = $request->id_teacher;
         $courses->id_college = $request->id_college;
-        $courses->img = ($request->img ? $request->img : null);
+        $courses->img = ($request->img ? $request->img : "");
         $courses->shop = "{}";
-        $courses->code = Str::random(4);
-
-
+        $courses->requests = "[]";
+        $courses->code = Str::random(5);
 
         if($courses->save()) {
             return response()->json([
@@ -166,7 +165,6 @@ class CoursesController extends Controller
         ]);
     }
 
-
     public function deleteCourses(Request $request) {
         $request->validate([
             'id_course' => 'required'
@@ -187,4 +185,59 @@ class CoursesController extends Controller
         ]);
     }
 
+    public function getAllUsersByRequests(Request $request) {
+        $request->validate([
+            "id_course" => "required"
+        ]);
+        $users = array();
+        $course = Courses::where("id_course", "=", $request->id_course)->first();
+
+        foreach (json_decode($course->requests, true) as $id_user) {
+            if($user = User::where("id_user", "=", $id_user)->first()) {
+                $users[] = $user;
+            }
+        }
+
+        return response()->json([
+            "status" => 200,
+            "data" => $users
+        ]);
+    }
+
+    public function resolveRequest(Request $request) {
+        $request->validate([
+            "id_course" => "required",
+            "id_user" => "required",
+            "accepted"    => "required"
+        ]);
+
+        $course = Courses::where("id_course", "=", $request->id_course)->first();
+
+        if($course) {
+            $user_request = json_decode($course->requests, true);
+
+            foreach ($user_request as $idx => $id_user) {
+                if($id_user == $request->id_user) {
+                    unset($user_request[$idx]);
+                }
+            }
+
+            $rows_affected = DB::update("UPDATE courses SET requests='".json_encode($user_request)."' where id_course = ?", [$request->id_course]);
+            
+            if($request->accepted) {
+                $user = User::where("id_user", "=", $request->id_user)->first();
+                $json = json_decode($user->courses, true);
+                $json_encoded = json_encode(array_merge(array($request->id_course), $json));
+
+                $rows_affected = DB::update("UPDATE users SET courses='".$json_encoded."' where id_user = ?", [$request->id_user]);
+            }
+        }
+
+        if($rows_affected > 0) {
+            return response()->json([
+                "status" => 200,
+                "msg"   => "Request solved",
+            ]);
+        }
+    }
 }

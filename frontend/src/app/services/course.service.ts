@@ -25,7 +25,15 @@ export class CourseService {
     return this.frameworkService.post('course/get-users', { id_course });
   }
 
+  getAllRequestsByCourse(id_course: string) {
+    return this.frameworkService.post('course/get-requests', { id_course });
+  }
+  
   getRanking(id_course: string) {
     return this.frameworkService.post('course/get-ranking', { id_course });
+  }
+
+  resolveRequest(id_course: string, id_user: string, accepted: boolean) {
+    return this.frameworkService.post('course/resolve-request', { id_course, id_user, accepted });
   }
 }
