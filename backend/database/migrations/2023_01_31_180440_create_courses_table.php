@@ -22,6 +22,7 @@ return new class extends Migration
             $table->unsignedBigInteger("id_college");
             $table->string("img")->default("null");
             $table->text("shop");
+            $table->text("requests");
             $table->timestamps();
             $table->foreign('id_college')->references('id_college')->on('colleges');
         });

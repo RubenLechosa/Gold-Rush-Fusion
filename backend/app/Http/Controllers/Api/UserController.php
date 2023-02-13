@@ -37,6 +37,8 @@ class UserController extends Controller
         $college = new Colleges();
         $college->college_name = $request->college;
         $college->logo = '/assets/img/default_logo_college.png';
+        $college->shop = '{}';
+        $college->requests = '[]';
         $college->save();
 
         $user->id_college = $college->id;
@@ -309,19 +311,30 @@ class UserController extends Controller
             "code" => "required"
         ]);
 
-        $user = User::where("id_user", "=", $request->id_user)->first();
         if($course = Courses::where("code", "=", $request->code)->first()) {
-            $json = json_decode($user->courses, true);
-            $json_encoded = json_encode(array_merge(array($course->id_course), $json));
-    
-            $rows_affected = DB::update("UPDATE users SET courses='".$json_encoded."' where id_user = ?", [$request->id_user]);
-    
-            if($rows_affected > 0) {
-                return response()->json([
-                    "status" => 200,
-                    "msg"   => "Se ha actualizado con exito",
-                ]);
+            $user = User::where("id_user", "=", $request->id_user)->whereJsonContains('courses', $course->id_course)->first();
+
+            if(!$user) {
+                $json = json_decode($course->requests, true);
+                if(!in_array($request->id_user, $json)) {
+                    $json_encoded = json_encode(array_merge(array(strval($request->id_user)), $json));
+
+                    $rows_affected = DB::update("UPDATE courses SET requests='".$json_encoded."' where id_course = ?", [$course->id_course]);
+        
+                    if($rows_affected > 0) {
+                        return response()->json([
+                            "status" => 200,
+                            "msg"   => "Se ha actualizado con exito",
+                        ]);
+                    }
+                }
             }
+            
+            return response()->json([
+                "status" => 200,
+                "msg"   => "Ya esta en el curso",
+            ]);
+
         }
 
         return response()->json([

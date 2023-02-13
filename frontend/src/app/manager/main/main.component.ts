@@ -30,9 +30,8 @@ export class MainComponent implements OnInit {
 
         if(this.user_data.id_poper) {
           this.hasPoper = true;
-          this.dataLoaded = Promise.resolve(true);
-        } else {
           this.reloadCourses();
+          this.dataLoaded = Promise.resolve(true);
         }
       } else {
         this.authService.logout();
