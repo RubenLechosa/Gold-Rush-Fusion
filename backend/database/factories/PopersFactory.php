@@ -23,8 +23,8 @@ class PopersFactory extends Factory
             'stats_base' => '{}',
             'abilities'=>"{}",
             'element'=>fake()->randomElement(['wild','ember','water','psyco','smog','brawny']),
-            'level'=>fake()-> randomNumber(),
-            'current_exp'=>fake()->randomNumber()
+            'level'=>fake()-> numberBetween(1, 99),
+            'current_exp'=>fake()->numberBetween(0, 1000),
 
 
         ];
