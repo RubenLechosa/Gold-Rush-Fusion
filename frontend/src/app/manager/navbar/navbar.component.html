@@ -1,31 +1,36 @@
 <header class="site-header">
-    <nav>
-        <div class="container navFlex">
-            <div class="logoNav">
-                <a href="/manager">
-                    <img src="./assets/img/logo.png" alt="Logo">
+    <nav class="navbar container navbar-expand-lg">
+        <div class="container-fluid">
+          <a class="navbar-brand logoNav" href="#">
+            <img class="logoNav" src="./assets/img/logo.png" alt="Logo">
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#"><i class="fa-solid fa-folder-open"></i> Courses</a>
+              </li>
+              <li class="nav-item"> 
+                <a class="nav-link" href="#"><i class="fa-solid fa-box"></i> Inventory</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#"><i class="fa-solid fa-trophy"></i> Tournaments</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="./assets/img/prueba.png" class="userImg" alt="Foto User">Ruben
                 </a>
-            </div>
-
-            <div class="elementList">
-                <ul class="link">
-                    <li class="link2"><a href="#home"><i class="fa-solid fa-folder-open"></i>Cursos</a></li>
-                    <li class="link2"><a href="#about"><i class="fa-solid fa-box"></i>Inventario</a></li>
-                    <li class="link2"><a href="#contact"><i class="fa-solid fa-trophy"></i>Torneos</a></li>
-                    <li class="dropdown link2">
-                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle='dropdown'
-                            aria-expanded="false">
-                            <img class="userImg" src="{{user_details.profile_img}}" alt="User">{{user_details.nick}}
-                        </a>
-
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/manager/user/{{user_details.id_user}}"><i class="fa-solid fa-user"></i>Profile</a></li>
-                            <li><a class="dropdown-item" href="#"><i class="fa-solid fa-wrench"></i>Settings</a></li>
-                            <li><a class="dropdown-item btn-exit" (click)="logout()" type="button"><i class="fa-solid fa-right-from-bracket"></i>Exit</a></li>
-                        </ul>
-                    </li>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#"><i class="fa-solid fa-user"></i> Profile</a></li>
+                  <li><a class="dropdown-item" href="#"><i class="fa-solid fa-wrench"></i> Settings</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item navExit" href="#"><i class="fa-solid fa-right-from-bracket"></i> Exit</a></li>
                 </ul>
-            </div>
+              </li>
+            </ul>
+          </div>
         </div>
-    </nav>
+      </nav>
 </header>

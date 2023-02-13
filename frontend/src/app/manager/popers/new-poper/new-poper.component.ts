@@ -78,6 +78,7 @@ export class NewPoperComponent implements OnInit {
 
     this.poperService.createPoper(Number(localStorage.getItem('id')), String(this.form.get('poper_name')?.value), skin, stats, this.actual_poper.element.toLowerCase()).subscribe((response: any) => {
       if(response.status == 200) {
+        console.log(response);
         this.router.navigate(["/manager"]);
       }
     });

@@ -32,6 +32,9 @@ export class MainComponent implements OnInit {
           this.hasPoper = true;
           this.reloadCourses();
           this.dataLoaded = Promise.resolve(true);
+        } else {
+          this.hasPoper = false;
+          this.dataLoaded = Promise.resolve(true);
         }
       } else {
         this.authService.logout();
