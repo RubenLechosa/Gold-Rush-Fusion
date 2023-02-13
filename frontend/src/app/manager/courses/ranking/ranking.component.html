@@ -7,13 +7,34 @@
     <div class="main">
         <div class="container">
             <div class="row">
-                <a class="btn btn-primary w-25" href="/manager/course/{{id_course}}">Atras</a>
-                <h1>Ranking Mami</h1>   
-                <button (click)="changeType()" class="btn btn-primary">CHANGE to grafic</button>  
+                <div class="addCourse mb-4">
+                    <div class="titleFlex">
+                        <a href="/manager/course/{{id_course}}"><i class="fa-solid fa-angle-left fa-2xl"></i></a> 
+                        <h1>Ranking</h1>
+                    </div>
+                    <div class="boton2">
+                        <button *ngIf="ranking_list" (click)="changeType()" class="btn btn-login">CHANGE to grafic</button>  
+                        <button *ngIf="!ranking_list" (click)="changeType()" class="btn btn-login">CHANGE to Table</button>
+                    </div>
+                </div>
+                
                 <div *ngIf="ranking_list">
-                    <ol>
-                        <li *ngFor="let user of ranking" class="text-white">@{{user.nick}} - {{user.pepas}}</li>
-                    </ol>
+                    <table class="table">
+                        <thead>
+                          <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Nick</th>
+                            <th scope="col">Nº de Pepas</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let user of ranking; let i = index">
+                            <th scope="row">{{i+1}}</th>
+                            <td>@{{user.nick}}</td>
+                            <td>{{user.pepas}}</td>
+                          </tr>
+                        </tbody>
+                      </table>
                 </div>         
 
                 <div *ngIf="!ranking_list">

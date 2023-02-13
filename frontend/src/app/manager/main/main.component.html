@@ -7,7 +7,15 @@
     <div class="main">
         <div class="container">
             <div class="row">
-                <h1>Bienvenido/a a {{user_data.college_name}}</h1> 
+                <div class="addCourse mb-4">
+                    <div class="titleFlex">
+                        <h1>Bienvenido/a a {{user_data.college_name}}</h1> 
+                    </div>
+                    <div class="boton2">
+                        <a class="btn btn-login" href="/manager/course/edit/0" *ngIf="user_data.role == 'college_manager' ||  user_data.role == 'admin'"><i class="fa-solid fa-plus me-2"></i> Add Course</a>
+                    </div> 
+                </div>
+                
                 <div class="card" *ngIf="user_data.role == 'student'" type="button" data-bs-toggle="modal" data-bs-target="#enterCode">
                     <div class="card-body">
                         <i class="fa-solid fa-plus"></i>
@@ -26,10 +34,7 @@
                     <div class="boton" *ngIf="user_data.role == 'college_manager' || user_data.role == 'teacher'|| user_data.role == 'admin'">
                         <a class="btn btn-login" href="/manager/course/edit/{{course.id_course}}">Edit</a>
                     </div>
-                </a>
-                <div class="addCourse">
-                    <a class="btn btn-login" href="/manager/course/edit/0" *ngIf="user_data.role == 'college_manager' ||  user_data.role == 'admin'"><i class="fa-solid fa-plus me-2"></i> Add Course</a>
-                </div>  
+                </a> 
             </div>  
         </div>
     </div>

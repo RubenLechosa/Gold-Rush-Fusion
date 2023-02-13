@@ -7,7 +7,10 @@
     <div class="main">
         <div class="container">
             <div class="row">
-                <h1 class="text-white">CURSO {{course_data.course_name}} - {{course_data.code}} <button class="btn btn-secondary"><i class="fa-solid fa-arrows-rotate"></i></button></h1>   
+                <div class="titleFlex">
+                    <a href="/manager"><i class="fa-solid fa-angle-left fa-2xl"></i></a> 
+                    <h1 class="text-white">CURSO {{course_data.course_name}} - {{course_data.code}} <button class="btn btn-secondary"><i class="fa-solid fa-arrows-rotate"></i></button></h1>   
+                </div>
                 
                 <a href="/manager/course/{{id_course}}/users" class="btn btn-primary mb-3">User_List</a>
                 <a href="/manager/course/{{id_course}}/ranking" class="btn btn-primary mb-3">Ranking</a>
