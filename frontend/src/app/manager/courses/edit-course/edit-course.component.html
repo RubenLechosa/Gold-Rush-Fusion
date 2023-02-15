@@ -28,8 +28,8 @@
                     <label for="img">Imagen del Curso</label>
                 </div>
                 <div class="buttons">
-                  <button class="btn btn-login" type="submit" *ngIf="id_course != 0">Save</button>
-                  <button class="btn btn-login" type="submit" *ngIf="id_course == 0">Create</button>
+                  <button class="btn btn-login" type="submit" *ngIf="id_course != 0" [disabled]="alreadySubmit">Save</button>
+                  <button class="btn btn-login" type="submit" *ngIf="id_course == 0" [disabled]="alreadySubmit">Create</button>
                   <a class="btn btn-exit" href="/manager">Cancel</a>
                 </div>
               </div>

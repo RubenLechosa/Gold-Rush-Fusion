@@ -36,4 +36,8 @@ export class CourseService {
   resolveRequest(id_course: string, id_user: string, accepted: boolean) {
     return this.frameworkService.post('course/resolve-request', { id_course, id_user, accepted });
   }
+
+  refreshCode(id_course: string) {
+    return this.frameworkService.post('course/refresh-code', { id_course });
+  }
 }

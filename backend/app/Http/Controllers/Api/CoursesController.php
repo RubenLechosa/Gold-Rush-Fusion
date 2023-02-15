@@ -240,4 +240,31 @@ class CoursesController extends Controller
             ]);
         }
     }
+
+    public function refreshCode(Request $request) {
+        $request->validate([
+            "id_course" => "required"
+        ]);
+        $new_code = false;
+
+        $course = Courses::where("id_course", "=", $request->id_course)->first();
+
+        if($course) {
+            do {
+                $new_code = Str::random(5);
+            } while (!$rows_affected = DB::update("UPDATE courses SET code='".$new_code."' where id_course = ?", [$request->id_course]));
+        }
+
+        if($rows_affected > 0) {
+            return response()->json([
+                "status" => 200,
+                "new_code"  => $new_code
+            ]);
+        }
+
+        return response()->json([
+            "status" => 400,
+            "message"  => "Can't update code"
+        ]);
+    }
 }

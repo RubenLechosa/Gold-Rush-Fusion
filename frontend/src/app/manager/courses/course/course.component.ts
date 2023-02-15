@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { CourseService } from 'src/app/services/course.service';
@@ -15,6 +15,9 @@ export class CourseComponent {
   user_data: any;
   course_data: any;
 
+  code: string = "";
+  refreshDisabled = false;
+
   constructor(private authService: AuthService, private userService: UserService,  private courseService: CourseService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
@@ -30,11 +33,23 @@ export class CourseComponent {
           if(courses.status == 200) {
             this.course_data = courses.data;
             this.course_data.requests = JSON.parse(this.course_data.requests);
+            this.code = this.course_data.code;
+
             this.dataLoaded = Promise.resolve(true);
           }
         });
       } else {
         this.authService.logout();
+      }
+    });
+  }
+
+  refreshCode() {
+    this.refreshDisabled = true;
+    this.courseService.refreshCode(String(this.id_course)).subscribe((result: any) => {
+      if(result.status == 200) {
+        this.code = result.new_code;
+        this.refreshDisabled = false;
       }
     });
   }

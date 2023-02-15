@@ -11,6 +11,7 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./edit-course.component.css']
 })
 export class EditCourseComponent {
+  alreadySubmit: boolean = false;
   id_course!: number;
   dataLoaded!: Promise<boolean>;
   user_data: any;
@@ -18,7 +19,7 @@ export class EditCourseComponent {
   teachers: any;
 
   form = new FormGroup({
-    course_name: new FormControl(null, Validators.compose([Validators.min(3), Validators.required])),
+    course_name: new FormControl(null, Validators.compose([Validators.min(4), Validators.required])),
     id_teacher: new FormControl(null, Validators.required),
     img: new FormControl(null)
   });
@@ -60,20 +61,24 @@ export class EditCourseComponent {
 
   onSubmit() {
     if(this.form.invalid) {
+      this.alreadySubmit = true;
       return;
     }
 
+    this.alreadySubmit = true;
     if(this.id_course != 0) {
       this.courseService.saveCourse(this.id_course, String(this.form.get('course_name')?.value), String(this.form.get('id_teacher')?.value), this.user_data.id_college, String(this.form.get('img')?.value)).subscribe((courses: any) => {
         if(courses.status == 200) {
           this.router.navigate(["/manager"]);
         }
+        this.alreadySubmit = false;
       });
     } else {
       this.courseService.createCourse(String(this.form.get('course_name')?.value), String(this.form.get('id_teacher')?.value), this.user_data.id_college, String(this.form.get('img')?.value)).subscribe((courses: any) => {
         if(courses.status == 200) {
           this.router.navigate(["/manager"]);
         }
+        this.alreadySubmit = false;
       });
     }
   }

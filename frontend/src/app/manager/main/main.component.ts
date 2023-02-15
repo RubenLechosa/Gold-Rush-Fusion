@@ -31,7 +31,6 @@ export class MainComponent implements OnInit {
         if(this.user_data.id_poper) {
           this.hasPoper = true;
           this.reloadCourses();
-          this.dataLoaded = Promise.resolve(true);
         } else {
           this.hasPoper = false;
           this.dataLoaded = Promise.resolve(true);
@@ -46,7 +45,6 @@ export class MainComponent implements OnInit {
     this.userService.getCourses(String(localStorage.getItem('id'))).subscribe((courses: any) => {
       if(courses.status == 200) {
         this.user_data.courses = courses.data;
-
         this.dataLoaded = Promise.resolve(true);
       } else {
         this.authService.logout();
