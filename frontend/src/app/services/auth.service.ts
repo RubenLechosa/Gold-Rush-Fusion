@@ -37,6 +37,12 @@ export class AuthService {
         });
   }
 
+  checkPermissions(role: string, permited_roles: string[] = ["teacher", "college_manager", "admin"], route: string = "/manager") {
+    if (permited_roles.indexOf(role) < 0) {
+      this.router.navigate([route]);
+    }
+  }
+
   logout() {
     this._isLoggedIn.next(false);
     localStorage.removeItem("id");
