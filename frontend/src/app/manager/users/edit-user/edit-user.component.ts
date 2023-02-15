@@ -48,7 +48,7 @@ export class EditUserComponent implements OnInit {
 
     this.userService.editUser(this.id_profile, String(this.form.get('name')?.value), String(this.form.get('last_name')?.value), String(this.form.get('nick')?.value), String(this.form.get('email')?.value), String(this.form.get('role')?.value), String(this.form.get('birth_date')?.value)).subscribe((response: any) => {
       if(response.status == 200) {
-        this.router.navigate(["/manager"]);
+        this.router.navigate(["/manager/user/"+this.user_data.id_user]);
       }
     });
   }
