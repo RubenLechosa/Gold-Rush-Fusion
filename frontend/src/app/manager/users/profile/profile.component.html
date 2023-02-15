@@ -10,6 +10,7 @@
                         <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true"><i class="fa-solid fa-user"></i></button>
                         <button class="nav-link" id="nav-poper-tab" data-bs-toggle="tab" data-bs-target="#nav-poper" type="button" role="tab" aria-controls="nav-profile" aria-selected="false"><i class="fa-solid fa-paw"></i></button>
                         <button class="nav-link" id="nav-badges-tab" data-bs-toggle="tab" data-bs-target="#nav-badges" type="button" role="tab" aria-controls="nav-profile" aria-selected="false"><i class="fa-solid fa-shield"></i></button>
+                        <button class="nav-link" id="nav-inventory-tab" data-bs-toggle="tab" data-bs-target="#nav-inventory" type="button" role="tab" aria-controls="nav-profile" aria-selected="false"><i class="fa-solid fa-box"></i></button>
                     </div>
                 </nav>
                 <div class="card">
@@ -18,10 +19,12 @@
                             <!-- Profile Tab -->
                             <div class="tab-pane fade active show" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                                 <div class="row justify-content-center">
-                                    <div>
-                                        <span class="p-1 ms-5 h2 d-inline-block"><i class="fa-solid fa-user me-2"></i> {{user_data.name}} {{user_data.last_name}}</span> 
-                                        <span class="d-inline-block label label-{{user_data.role}}">{{user_data.role}}</span>
-                                        <button class="btn btn-secondary btn-edit" *ngIf="selfProfile"><i class="fa-solid fa-pen-to-square me-1"></i> Edit Profile</button>
+                                    <div class="flexTitle">
+                                        <div>
+                                            <span class="p-1 ms-5 h2 d-inline-block"><i class="fa-solid fa-user me-2"></i> {{user_data.name}} {{user_data.last_name}}</span> 
+                                            <span class="d-inline-block label label-{{user_data.role}}">{{user_data.role}}</span>
+                                        </div>
+                                        <a href="/manager/user/edit/{{user_data.id_user}}" class="btn btn-login" *ngIf="selfProfile"><i class="fa-solid fa-pen-to-square me-1"></i> Edit Profile</a>
                                     </div>
                                     
                                     <div class="col-md-6">
@@ -135,11 +138,22 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <!--Badges Tab-->
                             <div class="tab-pane fade" id="nav-badges" role="tabpanel" aria-labelledby="nav-badges-tab">
                                 <div class="userInfo">
                                     <h2><i class="fa-solid fa-paw"></i> Badges</h2>
                                 </div>
                             </div>
+                            <!--End Badges Tab-->
+
+                            <!--Inventory Tab-->
+                            <div class="tab-pane fade" id="nav-inventory" role="tabpanel" aria-labelledby="nav-inventory-tab">
+                                <div class="userInfo">
+                                    <h2><i class="fa-solid fa-box"></i> Inventory</h2>
+                                </div>
+                            </div>
+                            <!--End inventory Tab-->
                         </div>
                     </div>
                 </div>

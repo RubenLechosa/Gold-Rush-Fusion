@@ -46,7 +46,7 @@ a:hover{
     color: var(--red);
 }
 
-@media screen and (max-width: 80rem) {
+@media screen and (max-width: 61.6rem) {
     .dropdown-menu {
         text-align: left;
         --bs-dropdown-bg: transparent;
@@ -63,7 +63,6 @@ a:hover{
         margin: 0px;
     }
 }
-
 
 /*ANIMATION TOGLER*/
 

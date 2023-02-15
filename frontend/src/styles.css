@@ -237,3 +237,22 @@ a:active {
   background: linear-gradient(0deg, rgba(3,106,164,1) 0%, rgba(9,166,226,1) 92%);
   color: white;
 }
+
+.form-floating select{
+  font-family: 'Rubik', sans-serif !important; 
+  border-radius: 15px !important;
+  border: 2px solid transparent !important;
+  color: var(--white) !important;
+  padding-left: 10px !important;
+  background-color: #9105C4 !important;
+}
+
+.form-select{
+  --bs-form-select-bg-img: url(/assets/img/down.png) !important;
+}
+
+input::-webkit-file-upload-button{
+  color: var(--white) !important;
+  font-weight: bold !important;
+  background-color: transparent !important;
+}
