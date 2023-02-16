@@ -10,16 +10,16 @@
             <div class="login-card mt-4 ">
               <div class="card-body fondo-amarillo">
                 <div class="title">
-                    <h1 *ngIf="id_college == 0">Create Course</h1>
+                    <h1 *ngIf="id_college == 0">Create College</h1>
                     <h1 *ngIf="id_college != 0">Edit {{college_data.college_name}}</h1>
                 </div>
                 <div class="form-floating mb-3">
                     <input type="text" id="course_name" placeholder="..." ngModel="{{college_data.college_name}}" formControlName="college_name" class="form-control">
-                    <label for="course_name">Nombre del Curso</label>
+                    <label for="course_name">College Name</label>
                 </div>
                 <div class="form-floating mb-3 custom-file">
                     <input type="file" id="img" ngModel="{{college_data.logo}}" formControlName="logo" class="form-control">
-                    <label for="img">Imagen del Curso</label>
+                    <label for="img">College Image</label>
                 </div>
                 <div class="buttons">
                   <button class="btn btn-login" type="submit" *ngIf="id_college != 0" [disabled]="alreadySubmit">Save</button>

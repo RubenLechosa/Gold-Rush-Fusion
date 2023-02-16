@@ -5,6 +5,7 @@ import { CourseComponent } from './courses/course/course.component';
 import { EditCourseComponent } from './courses/edit-course/edit-course.component';
 import { RankingComponent } from './courses/ranking/ranking.component';
 import { RequestsComponent } from './courses/requests/requests.component';
+import { ShopComponent } from './courses/shop/shop.component';
 import { UserListComponent } from './courses/user-list/user-list.component';
 import { MainComponent } from './main/main.component';
 import { EditUserComponent } from './users/edit-user/edit-user.component';
@@ -24,6 +25,7 @@ const routes: Routes = [
   {path: 'course/:id/users', component: UserListComponent},
   {path: 'course/:id/ranking', component: RankingComponent},
   {path: 'course/:id/requests', component: RequestsComponent},
+  {path: 'course/:id/shop', component: ShopComponent},
 
   //College
   {path: 'college/:id/edit', component: EditCollegeComponent},
