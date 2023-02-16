@@ -1,5 +1,6 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
+import { EditCollegeComponent } from './colleges/edit-college/edit-college.component';
 import { CourseComponent } from './courses/course/course.component';
 import { EditCourseComponent } from './courses/edit-course/edit-course.component';
 import { RankingComponent } from './courses/ranking/ranking.component';
@@ -12,13 +13,20 @@ import { ProfileComponent } from './users/profile/profile.component';
 
 const routes: Routes = [
   {path: '', component: MainComponent},
+
+  //Users
   {path: 'user/:id', component: ProfileComponent},
   {path: 'user/edit/:id', component: EditUserComponent},
+
+  // Courses
   {path: 'course/edit/:id', component: EditCourseComponent},
   {path: 'course/:id', component: CourseComponent},
   {path: 'course/:id/users', component: UserListComponent},
   {path: 'course/:id/ranking', component: RankingComponent},
   {path: 'course/:id/requests', component: RequestsComponent},
+
+  //College
+  {path: 'college/:id/edit', component: EditCollegeComponent},
 ]; 
 
 @NgModule({

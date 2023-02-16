@@ -96,3 +96,12 @@ h1 {
         margin: 1rem;
       }
 }
+
+.college-name {
+  color: var(--yellow);
+}
+
+.btn-edit {
+  background-color: var(--yellow);
+  color: black;
+}

@@ -18,7 +18,7 @@ class CollegeController extends Controller
             "id_college" => "required"
         ]);
 
-        if($college = Colleges::where("id", "=", $request->id_college)->first()) {
+        if($college = Colleges::where("id_college", "=", $request->id_college)->first()) {
             return response()->json([
                 "status" => 200,
                 "data" => $college
@@ -57,8 +57,6 @@ class CollegeController extends Controller
         ]);
     }
 
-
-
     public function editCollege(Request $request) {
         $request->validate([
             'id_college' => 'required',
@@ -72,7 +70,7 @@ class CollegeController extends Controller
         }
                 
         $set_clause = implode(', ', $set_clause_parts);
-        $rows_affected = DB::update('UPDATE colleges SET '.$set_clause.' where id = ?', [$request->id_college]);
+        $rows_affected = DB::update('UPDATE colleges SET '.$set_clause.' where id_college = ?', [$request->id_college]);
 
         if($rows_affected > 0) {
             return response()->json([

@@ -15,6 +15,7 @@ import { RankingComponent } from './courses/ranking/ranking.component';
 import { ShopComponent } from './courses/shop/shop.component';
 import { NewPoperComponent } from './popers/new-poper/new-poper.component';
 import { RequestsComponent } from './courses/requests/requests.component';
+import { EditCollegeComponent } from './colleges/edit-college/edit-college.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { RequestsComponent } from './courses/requests/requests.component';
     RankingComponent,
     ShopComponent,
     NewPoperComponent,
-    RequestsComponent
+    RequestsComponent,
+    EditCollegeComponent
   ],
   imports: [
     CommonModule,

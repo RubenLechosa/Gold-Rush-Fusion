@@ -6,10 +6,8 @@
     <div class="main">
         <div class="container">
             <div class="card">
-                <div class="flexTextImg">
-                    <h1 class="text-white">Editing {{user_data.nick}}</h1>
-                    <img src="{{user_data.profile_img}}" width="150" alt="profile image" class="rounded-circle mb-3 mt-3">
-                </div>
+                <h1 class="text-white">Editing {{user_data.nick}}</h1>
+                <img src="{{user_data.profile_img}}" width="125" alt="profile image" class="rounded-circle mb-3 mt-3">
             <form (ngSubmit)="onSubmit()" [formGroup]="form">
                 <div class="form-floating mb-3">
                     <input class="form-control" id="nick" placeholder="..." type="text" formControlName="nick" name="nick" ngModel="{{user_data.nick}}">

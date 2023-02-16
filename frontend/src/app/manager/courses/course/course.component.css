@@ -22,8 +22,25 @@
     transform: scale(1.2);
 }
 
-.btn-secondary{
+.btn-refresh {
     background-color: var(--yellow);
     border: 1px solid transparent;
     color: black;
 }
+
+.btn-refresh:hover {
+    background-color: #f7a72d;
+}
+
+.btn-refresh:hover .first-child {
+    animation: rotation 2s infinite linear;
+}
+
+@keyframes rotation {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(359deg);
+    }
+  }

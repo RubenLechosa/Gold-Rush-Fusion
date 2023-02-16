@@ -145,3 +145,9 @@ a:hover{
 }
 
 /*END ANIMATION TOGLER*/
+
+.static-powered {
+    position: fixed;
+    left: 20px;
+    bottom: 20px;
+}

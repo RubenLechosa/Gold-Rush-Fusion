@@ -46,7 +46,8 @@ Route::post('course/resolve-request', [CoursesController::class, 'resolveRequest
 // Popers
 Route::post('popers/create-poper', [PopersController::class, 'createPoper']);
 // College
-Route::post('college/get-college', [CollegeController::class, 'getAllCoursesByUser']);
+Route::post('college/get-college', [CollegeController::class, 'getDetailsCollege']);
+Route::post('college/save-college', [CollegeController::class, 'editCollege']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

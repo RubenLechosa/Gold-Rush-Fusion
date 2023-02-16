@@ -10,7 +10,7 @@
                         <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true"><i class="fa-solid fa-user"></i></button>
                         <button class="nav-link" id="nav-poper-tab" data-bs-toggle="tab" data-bs-target="#nav-poper" type="button" role="tab" aria-controls="nav-profile" aria-selected="false"><i class="fa-solid fa-paw"></i></button>
                         <button class="nav-link" id="nav-badges-tab" data-bs-toggle="tab" data-bs-target="#nav-badges" type="button" role="tab" aria-controls="nav-profile" aria-selected="false"><i class="fa-solid fa-shield"></i></button>
-                        <button class="nav-link" id="nav-inventory-tab" data-bs-toggle="tab" data-bs-target="#nav-inventory" type="button" role="tab" aria-controls="nav-profile" aria-selected="false"><i class="fa-solid fa-box"></i></button>
+                        <button class="nav-link" id="nav-inventory-tab" data-bs-toggle="tab" data-bs-target="#nav-inventory" type="button" role="tab" aria-controls="nav-profile" aria-selected="false" *ngIf="selfProfile"><i class="fa-solid fa-box"></i></button>
                     </div>
                 </nav>
                 <div class="card">
@@ -148,7 +148,7 @@
                             <!--End Badges Tab-->
 
                             <!--Inventory Tab-->
-                            <div class="tab-pane fade" id="nav-inventory" role="tabpanel" aria-labelledby="nav-inventory-tab">
+                            <div class="tab-pane fade" id="nav-inventory" role="tabpanel" aria-labelledby="nav-inventory-tab" *ngIf="selfProfile">
                                 <div class="userInfo">
                                     <h2><i class="fa-solid fa-box"></i> Inventory</h2>
                                 </div>
