@@ -1,7 +1,7 @@
 <app-loader *ngIf="!dataLoaded"></app-loader>
 
 <main *ngIf="dataLoaded | async">
-    <app-navbar [user_details]="user_data"></app-navbar>
+    <app-navbar [user_details]="self_data"></app-navbar>
     <div class="container mt-4">
         <div class="row mb-4">
             <div class="col-md-9 m-auto">

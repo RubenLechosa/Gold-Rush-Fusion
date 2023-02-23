@@ -12,6 +12,7 @@ import { UserService } from 'src/app/services/user.service';
 export class EditUserComponent implements OnInit {
   dataLoaded!: Promise<boolean>;
   user_data: any;
+  editing_data: any;
   id_profile!: number;
 
   form = new FormGroup({
@@ -30,11 +31,19 @@ export class EditUserComponent implements OnInit {
       this.id_profile = params['id']; // (+) converts string 'id' to a number
     });
 
-    this.userService.getUserDetails(String(this.id_profile)).subscribe((response: any) => {
+    this.userService.getUserDetails(String(localStorage.getItem('id'))).subscribe((response: any) => {
       if(response.status == 200 && response.data) {
         this.user_data = response.data;
-
-        this.dataLoaded = Promise.resolve(true);
+        this.userService.getUserDetails(String(this.id_profile)).subscribe((response: any) => {
+          if(response.status == 200 && response.data) {
+            this.editing_data = response.data;
+            
+            this.authService.checkPermissions(this.user_data.role, ["student", "teacher", "college_manager"], "/manager", this.id_profile, Number(localStorage.getItem('id')));
+            this.dataLoaded = Promise.resolve(true);
+          } else {
+            this.router.navigate(["/manager"]);
+          }
+        });
       } else {
         this.authService.logout();
       }
@@ -48,7 +57,7 @@ export class EditUserComponent implements OnInit {
 
     this.userService.editUser(this.id_profile, String(this.form.get('name')?.value), String(this.form.get('last_name')?.value), String(this.form.get('nick')?.value), String(this.form.get('email')?.value), String(this.form.get('role')?.value), String(this.form.get('birth_date')?.value)).subscribe((response: any) => {
       if(response.status == 200) {
-        this.router.navigate(["/manager/user/"+this.user_data.id_user]);
+        this.router.navigate(["/manager/user/"+this.editing_data.id_user]);
       }
     });
   }

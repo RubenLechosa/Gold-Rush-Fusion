@@ -37,9 +37,15 @@ export class AuthService {
         });
   }
 
-  checkPermissions(role: string, permited_roles: string[] = ["teacher", "college_manager", "admin"], route: string = "/manager") {
-    if (permited_roles.indexOf(role) < 0) {
+  checkPermissions(role: string, permited_roles: string[] = ["teacher", "college_manager"], route: string = "/manager", checkId: number | boolean = false, idtoCheck: number | boolean = false) {
+    if (permited_roles.indexOf(role) < 0 && role != "admin") {
       this.router.navigate([route]);
+    }
+
+    if(checkId && idtoCheck && role == "student") {
+      if(checkId != idtoCheck) {
+        this.router.navigate([route]);
+      }
     }
   }
 
