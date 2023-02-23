@@ -19,7 +19,7 @@ export class EditCourseComponent {
   teachers: any;
 
   form = new FormGroup({
-    course_name: new FormControl(null, Validators.compose([Validators.min(4), Validators.required])),
+    course_name: new FormControl(null, Validators.compose([Validators.minLength(3), Validators.required])),
     id_teacher: new FormControl(null, Validators.required),
     img: new FormControl(null)
   });

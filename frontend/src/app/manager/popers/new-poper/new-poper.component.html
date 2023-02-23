@@ -13,7 +13,10 @@
                     <form [formGroup]="form" (ngSubmit)="onSubmit()">
                         <div class="mb-3">
                             <label for="course_name">Poper Name</label>
-                            <input type="text" id="course_name" formControlName="poper_name" class="form-control">
+                            <input type="text" [ngClass]="(form.controls['poper_name'].invalid && form.controls['poper_name'].touched ? 'is-invalid' : '')" id="course_name" formControlName="poper_name" class="form-control">
+                            <div id="validationRole" class="invalid-feedback">
+                                Must be at least 2 characters
+                            </div>
                         </div>
     
                         <div class="stats">
@@ -32,7 +35,7 @@
                         </div>
     
                         <div class="bottom">
-                            <button class="btn btn-login" [disabled]="points < 0">Create Poper</button>
+                            <button class="btn btn-login" [disabled]="points < 0 || form.invalid">Create Poper</button>
                         </div>
                     </form>
                 </div>

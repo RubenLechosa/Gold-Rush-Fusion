@@ -26,8 +26,8 @@ export class UserListComponent {
   });
 
   formGems = new FormGroup({
-    gems: new FormControl(null, Validators.required),
-    action: new FormControl(null, Validators.required)
+    gems: new FormControl(null, Validators.compose([Validators.required, Validators.min(1)])),
+    action: new FormControl(null, Validators.compose([Validators.required, Validators.pattern("res|sum|set")]))
   });
   
   constructor(private authService: AuthService, private userService: UserService,  private courseService: CourseService, private route: ActivatedRoute) { }

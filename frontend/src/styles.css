@@ -188,7 +188,7 @@ a:active {
 
 .form-floating label {
   font-family: 'Helsinki', sans-serif;
-  color: var(--white);
+  color: var(--white) !important;
 }
 
 .form-floating input {
@@ -198,6 +198,11 @@ a:active {
   color: var(--white);
   padding-left: 10px;
   background-image: linear-gradient(#AF0AEB, #73009C);
+}
+
+.form-floating input.is-invalid {
+  color: black !important;
+  background: linear-gradient(#AF0AEB, #73009C) !important;
 }
 
 .form-floating {

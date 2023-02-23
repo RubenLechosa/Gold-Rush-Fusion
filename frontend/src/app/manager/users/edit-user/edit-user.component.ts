@@ -15,11 +15,11 @@ export class EditUserComponent implements OnInit {
   id_profile!: number;
 
   form = new FormGroup({
-    nick: new FormControl(null, Validators.compose([Validators.min(6), Validators.required])),
-    name: new FormControl(null, Validators.compose([Validators.min(4), Validators.required])),
+    nick: new FormControl(null, Validators.compose([Validators.minLength(6), Validators.required])),
+    name: new FormControl(null, Validators.compose([Validators.minLength(4), Validators.required])),
     last_name: new FormControl(null, Validators.required),
     email: new FormControl(null, Validators.compose([Validators.email, Validators.required])),
-    role: new FormControl(null, Validators.required),
+    role: new FormControl(null, Validators.compose([Validators.required, Validators.pattern("student|college_manager|teacher")])),
     birth_date: new FormControl(null)
   });
 

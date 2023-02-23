@@ -19,7 +19,7 @@ export class EditCollegeComponent {
   college_data: any;
 
   form = new FormGroup({
-    college_name: new FormControl(null, Validators.compose([Validators.min(4), Validators.required])),
+    college_name: new FormControl(null, Validators.compose([Validators.minLength(3), Validators.required])),
     logo: new FormControl(null)
   });
 

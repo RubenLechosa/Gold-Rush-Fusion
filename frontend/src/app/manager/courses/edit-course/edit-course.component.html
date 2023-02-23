@@ -14,22 +14,29 @@
                     <h1 *ngIf="id_course != 0">Edit {{course_data.course_name}}</h1>
                 </div>
                 <div class="form-floating mb-3">
-                    <input type="text" id="course_name" placeholder="..." ngModel="{{course_data.course_name}}" formControlName="course_name" class="form-control">
+                    <input type="text" id="course_name" placeholder="..." ngModel="{{course_data.course_name}}" formControlName="course_name" class="form-control" [ngClass]="(form.controls['course_name'].invalid && form.controls['course_name'].touched ? 'is-invalid' : '')">
                     <label for="course_name">Course Name</label>
+                    <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                      Must be at least 3 characters.
+                    </div>
                 </div>
                 <div class="form-floating mb-3">
-                <select id="select_teacher" class="form-select form-control" ngModel="{{course_data.id_teacher}}" formControlName="id_teacher" required>
+                  <select id="select_teacher" [ngClass]="(form.controls['id_teacher'].invalid && form.controls['id_teacher'].touched ? 'is-invalid' : '')" class="form-select form-control" ngModel="{{course_data.id_teacher}}" formControlName="id_teacher" required>
+                    <option value=""></option>
                     <option value="{{teacher.id_user}}" *ngFor="let teacher of teachers">{{teacher.name}}</option>
-                </select>
-                <label for="select_teacher">Choose a teacher</label>
+                  </select>
+                  <label for="select_teacher">Choose a teacher</label>
+                  <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                    Invalid, Teacher Required.
+                  </div>
                 </div>
                 <div class="form-floating mb-3 custom-file">
                     <input type="file" id="img" ngModel="{{course_data.img}}" formControlName="img" class="form-control">
                     <label for="img">Curse Image</label>
                 </div>
                 <div class="buttons">
-                  <button class="btn btn-login" type="submit" *ngIf="id_course != 0" [disabled]="alreadySubmit">Save</button>
-                  <button class="btn btn-login" type="submit" *ngIf="id_course == 0" [disabled]="alreadySubmit">Create</button>
+                  <button class="btn btn-login" type="submit" *ngIf="id_course != 0" [disabled]="alreadySubmit || form.invalid">Save</button>
+                  <button class="btn btn-login" type="submit" *ngIf="id_course == 0" [disabled]="alreadySubmit || form.invalid">Create</button>
                   <a class="btn btn-exit" href="/manager">Cancel</a>
                 </div>
               </div>

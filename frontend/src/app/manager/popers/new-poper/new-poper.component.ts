@@ -16,7 +16,7 @@ export class NewPoperComponent implements OnInit {
   ];
 
   form = new FormGroup({
-    poper_name: new FormControl<string | null>(null, Validators.compose([Validators.min(2), Validators.required])),
+    poper_name: new FormControl<string | null>(null, Validators.compose([Validators.minLength(2), Validators.required])),
     vitality: new FormControl<number | null>(null, Validators.required),
     velocity: new FormControl<number | null>(null, Validators.required),
     epower: new FormControl<number | null>(null, Validators.required)
