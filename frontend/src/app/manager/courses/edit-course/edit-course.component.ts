@@ -34,7 +34,8 @@ export class EditCourseComponent {
     this.userService.getUserDetails(String(localStorage.getItem('id'))).subscribe((response: any) => {
       if(response.status == 200 && response.data) {
         this.user_data = response.data;
-
+        
+        this.authService.checkPermissions(this.user_data.role);
         this.userService.getTeachersByCollege(String(this.user_data.id_college)).subscribe((result: any) => {
           if(result.status == 200) {
             this.teachers = result.data;

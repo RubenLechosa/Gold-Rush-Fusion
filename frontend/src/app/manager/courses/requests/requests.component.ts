@@ -31,7 +31,8 @@ export class RequestsComponent {
     this.userService.getUserDetails(String(localStorage.getItem('id'))).subscribe((response: any) => {
       if(response.status == 200 && response.data) {
         this.user_data = response.data;
-
+        
+        this.authService.checkPermissions(this.user_data.role);
         this.reloadUsers();
       } else {
         this.authService.logout();

@@ -35,6 +35,11 @@ export class CourseComponent {
             this.course_data.requests = JSON.parse(this.course_data.requests);
             this.code = this.course_data.code;
 
+            var cursos = JSON.parse(this.user_data.courses);
+            if(cursos.indexOf(this.id_course)) {
+              this.router.navigate(["/manager"]);
+            }
+            
             this.dataLoaded = Promise.resolve(true);
           }
         });
