@@ -6,6 +6,8 @@ use App\Http\Controllers\Api\CoursesController;
 use App\Http\Controllers\Api\PopersController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FileController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -49,6 +51,9 @@ Route::post('popers/create-poper', [PopersController::class, 'createPoper']);
 Route::post('college/get-college', [CollegeController::class, 'getDetailsCollege']);
 Route::post('college/save-college', [CollegeController::class, 'editCollege']);
 
+Route::post('file',[FileController::class,'file']);
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
