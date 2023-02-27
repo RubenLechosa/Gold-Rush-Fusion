@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string("img")->default("null");
             $table->text("shop");
             $table->text("requests");
+            $table->text("tasks");
             $table->timestamps();
             $table->foreign('id_college')->references('id_college')->on('colleges');
         });
