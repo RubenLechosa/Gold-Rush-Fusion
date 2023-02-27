@@ -16,6 +16,7 @@ import { ShopComponent } from './courses/shop/shop.component';
 import { NewPoperComponent } from './popers/new-poper/new-poper.component';
 import { RequestsComponent } from './courses/requests/requests.component';
 import { EditCollegeComponent } from './colleges/edit-college/edit-college.component';
+import { TasksComponent } from './courses/tasks/tasks.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { EditCollegeComponent } from './colleges/edit-college/edit-college.compo
     ShopComponent,
     NewPoperComponent,
     RequestsComponent,
-    EditCollegeComponent
+    EditCollegeComponent,
+    TasksComponent
   ],
   imports: [
     CommonModule,

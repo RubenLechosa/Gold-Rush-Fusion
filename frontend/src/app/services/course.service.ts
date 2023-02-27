@@ -40,4 +40,8 @@ export class CourseService {
   refreshCode(id_course: string) {
     return this.frameworkService.post('course/refresh-code', { id_course });
   }
+
+  uploadFile(file: String) {
+    return this.frameworkService.post('file', { file });
+  }
 }

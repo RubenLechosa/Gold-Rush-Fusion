@@ -47,6 +47,7 @@ export class EditCourseComponent {
                   this.dataLoaded = Promise.resolve(true);
                 }
               });
+
             } else {
               this.course_data = {course_name: "", img: "", id_teacher: " "}
               this.dataLoaded = Promise.resolve(true);
@@ -70,14 +71,20 @@ export class EditCourseComponent {
     if(this.id_course != 0) {
       this.courseService.saveCourse(this.id_course, String(this.form.get('course_name')?.value), String(this.form.get('id_teacher')?.value), this.user_data.id_college, String(this.form.get('img')?.value)).subscribe((courses: any) => {
         if(courses.status == 200) {
-          this.router.navigate(["/manager"]);
+          this.courseService.uploadFile(String(this.form.get("img")?.value)).subscribe((result: any) => {
+            console.log(result);
+            this.router.navigate(["/manager"]);
+          });
         }
         this.alreadySubmit = false;
       });
     } else {
       this.courseService.createCourse(String(this.form.get('course_name')?.value), String(this.form.get('id_teacher')?.value), this.user_data.id_college, String(this.form.get('img')?.value)).subscribe((courses: any) => {
         if(courses.status == 200) {
-          this.router.navigate(["/manager"]);
+          this.courseService.uploadFile(String(this.form.get("img")?.value)).subscribe((result: any) => {
+            console.log(result);
+            this.router.navigate(["/manager"]);
+          });
         }
         this.alreadySubmit = false;
       });
