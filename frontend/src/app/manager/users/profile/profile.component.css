@@ -30,7 +30,7 @@
 }
 
 .h2{
-    font-family: 'Helsinki', sans-serif;
+    font-family: 'Gooseberry Juice', sans-serif;
     color: var(--black);
 }
 
@@ -47,7 +47,7 @@
     display: block;
     text-align: center;
     justify-content: center ;
-    font-family: 'Helsinki', sans-serif;
+    font-family: 'Gooseberry Juice', sans-serif;
     background-color: var(--red);
     transition: 500ms;
     color: var(--black);

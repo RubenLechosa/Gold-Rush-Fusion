@@ -1,5 +1,5 @@
 .titleFlex h1{
-    font-family: 'Helsinki', sans-serif;
+    font-family: 'Gooseberry Juice', sans-serif;
     color: var(--white);
     margin: 0px;
 }
@@ -27,6 +27,16 @@
     transform: scale(1.2);
 }
 
+
+.accordion-collapse{
+    border: 1px solid var(--black);
+    border-radius: 0px !important;
+    margin: 0px;
+}
+
+.accordion{
+    border-radius: 0px !important;
+}
 
 
 
