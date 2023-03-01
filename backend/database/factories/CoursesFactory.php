@@ -28,6 +28,7 @@ class CoursesFactory extends Factory
             'shop' => "{}",
             'code'=>fake()->unique()->asciify('******'),
             'requests'=>"{}",
+            'tasks'=>"{}",
 
         ];
     }

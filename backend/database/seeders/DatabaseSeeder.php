@@ -4,10 +4,14 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\Category;
 use App\Models\Colleges;
+use App\Models\Course_uf;
 use App\Models\Courses;
 use App\Models\Popers;
+use App\Models\Tasks;
 use App\Models\User;
+use App\Models\Users_submits;
 use Faker\Factory;
 use Illuminate\Database\Seeder;
 
@@ -44,6 +48,13 @@ class DatabaseSeeder extends Seeder
 
         User::factory()->count(10)->create(); 
         Courses::factory()->count(10)->create(); 
+        Category::factory()->count(10)->create();
+        Course_uf::factory()->count(10)->create();
+        Tasks::factory()->count(10)->create();
+        Users_submits::factory()->count(10)->create();
+
+
+
          
         
         
