@@ -21,59 +21,61 @@
                 </div>
                 
             </div>
-
-            
             
             <div class="tab-content" id="nav-tabContent">
-            <!--home Tab-->
-            <div class="tab-pane show active fade" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                <div class="">
-                    <h2>Home</h2>
+                <!--home Tab-->
+                <div class="tab-pane show active fade" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                    <div class="">
+                        <h2>Home</h2>
+                    </div>
                 </div>
-            </div>
-            <!--End home Tab-->
+                <!--End home Tab-->
 
-            <!--content Tab-->
-            <div class="tab-pane fade" id="nav-content" role="tabpanel" aria-labelledby="nav-content-tab">
-                <div class="">
-                    <div class="accordion" id="accordionExample" *ngFor="let category of tasks_list">
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingOne">
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                                    {{category.titulo}}
-                                </button>
-                            </h2>
-                            <div *ngFor="let task of category.tasks" id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                                <a href="{{'/manager/course/'+id_course+'/tasks/'+task.id_tasks}}">
-                                    <div class="accordion-body">
-                                        <span><i class="icon {{task.type}}"></i>{{task.title}}</span>
-                                        <span class="pull-right text-muted" *ngIf="task.type == 'task' || task.type == 'exam'">0/100</span>
-                                    </div>
-                                </a>
+                <!--content Tab-->
+                <div class="tab-pane fade" id="nav-content" role="tabpanel" aria-labelledby="nav-content-tab">
+                    <div class="mb-4">
+                        <a class="btn btn-login" href="{{'/manager/course/'+id_course+'/edit-category/0'}}"><i class="fa-solid fa-plus me-2"></i> Add Category</a>
+                        <a class="btn btn-login" href="{{'/manager/course/'+id_course+'/edit-task/0'}}"><i class="fa-solid fa-plus me-2"></i> Add Task</a>
+                    </div>
+                    <div class="">
+                        <div class="accordion" id="accordionExample" *ngFor="let category of tasks_list">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingOne">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                        {{category.titulo}}
+                                    </button>
+                                </h2>
+
+                                <div *ngFor="let task of category.tasks" id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                    <a href="{{'/manager/course/'+id_course+'/tasks/'+task.id_tasks}}">
+                                        <div class="accordion-body">
+                                            <span><i class="icon {{task.type}}"></i>{{task.title}}</span>
+                                            <span class="pull-right text-muted" *ngIf="task.type == 'task' || task.type == 'exam'">0/100</span>
+                                        </div>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <!--End content Tab-->
+                <!--End content Tab-->
 
-            <!--forum Tab-->
-            <div class="tab-pane fade" id="nav-forum" role="tabpanel" aria-labelledby="nav-forum-tab">
-                <div class="">
-                    <h2>Forum</h2>
+                <!--forum Tab-->
+                <div class="tab-pane fade" id="nav-forum" role="tabpanel" aria-labelledby="nav-forum-tab">
+                    <div class="">
+                        <h2>Forum</h2>
+                    </div>
                 </div>
-            </div>
-            <!--End forum Tab-->
+                <!--End forum Tab-->
 
-            <!--marks Tab-->
-            <div class="tab-pane fade" id="nav-marks" role="tabpanel" aria-labelledby="nav-marks-tab">
-                <div class="">
-                    <h2>Marks</h2>
+                <!--marks Tab-->
+                <div class="tab-pane fade" id="nav-marks" role="tabpanel" aria-labelledby="nav-marks-tab">
+                    <div class="">
+                        <h2>Marks</h2>
+                    </div>
                 </div>
+                <!--End marks Tab-->
             </div>
-            <!--End marks Tab-->
         </div>
-        </div>
-
     </div>
 </main>

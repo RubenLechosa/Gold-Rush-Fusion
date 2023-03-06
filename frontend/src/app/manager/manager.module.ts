@@ -18,6 +18,8 @@ import { RequestsComponent } from './courses/requests/requests.component';
 import { EditCollegeComponent } from './colleges/edit-college/edit-college.component';
 import { TasksComponent } from './courses/tasks/tasks.component';
 import { TaskViewComponent } from './courses/task-view/task-view.component';
+import { EditTaskComponent } from './tasks/edit-task/edit-task.component';
+import { EditCategoryComponent } from './tasks/edit-category/edit-category.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,9 @@ import { TaskViewComponent } from './courses/task-view/task-view.component';
     RequestsComponent,
     EditCollegeComponent,
     TasksComponent,
-    TaskViewComponent
+    TaskViewComponent,
+    EditTaskComponent,
+    EditCategoryComponent
   ],
   imports: [
     CommonModule,
