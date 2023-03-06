@@ -8,7 +8,7 @@
                 <div class="titleFlex">
                     <div class="navFlex">
                         <a href="/manager/course/{{id_course}}"><i class="fa-solid fa-angle-left fa-2xl"></i></a> 
-                        <h1 class="text-white">Programación</h1>
+                        <h1 class="text-white">{{course_data.course_name}}</h1>
                     </div>
                     <nav>
                         <div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -36,67 +36,23 @@
             <!--content Tab-->
             <div class="tab-pane fade" id="nav-content" role="tabpanel" aria-labelledby="nav-content-tab">
                 <div class="">
-
-                <div class="accordion" id="accordionExample">
-                    <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingOne">
-                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                            UF1
-                        </button>
-                    </h2>
-                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                        <div class="accordion-body">
-                            <a href=""><i class="fa-solid fa-paperclip"></i> File.zip</a>
-                        </div>
-                        <div class="accordion-body">
-                            <a href=""><i class="fa-solid fa-file-pen"></i>Task 1</a>
-                        </div>
-                        <div class="accordion-body">
-                            <a href=""><i class="fa-solid fa-file"></i> Page 1</a>
-                        </div>
-                        <div class="accordion-body">
-                            <a href=""><i class="fa-solid fa-comments"></i>Forum 1</a>
-                        </div>
-                        <div class="accordion-body">
-                            <a href=""><i class="fa-solid fa-rocket"></i> Test 1</a>
-                        </div>
-                        <div class="accordion-body">
-                            <a href=""><i class="fa-solid fa-link"></i>Link 1</a>
-                        </div>
+                    <div class="accordion" id="accordionExample" *ngFor="let category of tasks_list">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingOne">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                    {{category.titulo}}
+                                </button>
+                            </h2>
+                            <div *ngFor="let task of category.tasks" id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                <a href="{{'/manager/course/'+id_course+'/tasks/'+task.id_tasks}}">
+                                    <div class="accordion-body">
+                                        <span><i class="icon {{task.type}}"></i>{{task.title}}</span>
+                                        <span class="pull-right text-muted" *ngIf="task.type == 'task' || task.type == 'exam'">0/100</span>
+                                    </div>
+                                </a>
+                            </div>
                         </div>
                     </div>
-                </div>
-
-                <div class="accordion" id="accordionExample">
-                    <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingTwo">
-                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                            UF2
-                        </button>
-                    </h2>
-                    <div id="collapseTwo" class="accordion-collapse collapse show" aria-labelledby="headingTwo" data-bs-parent="#accordionExample1">
-                        <div class="accordion-body">
-                            <a href=""><i class="fa-solid fa-paperclip"></i> File.zip</a>
-                        </div>
-                        <div class="accordion-body">
-                            <a href=""><i class="fa-solid fa-file-pen"></i>Task 1</a>
-                        </div>
-                        <div class="accordion-body">
-                            <a href=""><i class="fa-solid fa-file"></i> Page 1</a>
-                        </div>
-                        <div class="accordion-body">
-                            <a href=""><i class="fa-solid fa-comments"></i>Forum 1</a>
-                        </div>
-                        <div class="accordion-body">
-                            <a href=""><i class="fa-solid fa-rocket"></i> Test 1</a>
-                        </div>
-                        <div class="accordion-body">
-                            <a href=""><i class="fa-solid fa-link"></i>Link 1</a>
-                        </div>
-                        </div>
-                    </div>
-                </div>
-
                 </div>
             </div>
             <!--End content Tab-->

@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\CollegeController;
 use App\Http\Controllers\Api\CoursesController;
+use App\Http\Controllers\Api\TasksController;
 use App\Http\Controllers\Api\PopersController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -50,6 +51,10 @@ Route::post('popers/create-poper', [PopersController::class, 'createPoper']);
 // College
 Route::post('college/get-college', [CollegeController::class, 'getDetailsCollege']);
 Route::post('college/save-college', [CollegeController::class, 'editCollege']);
+
+// Tasks
+Route::post('tasks/get-tasks-list', [TasksController::class, 'getTaskList']);
+Route::post('tasks/get-task', [TasksController::class, 'getDetails']);
 
 Route::post('file',[FileController::class,'file']);
 

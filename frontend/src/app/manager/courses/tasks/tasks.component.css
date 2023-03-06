@@ -97,4 +97,37 @@
     transition: transform .2s;
 }
 
+/* Icons */
+.icon::before {
+    display: inline-block;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    font-family: "Font Awesome 5 Free";
+    font-weight: 600;
+}
 
+.task::before {
+    content: "\f31c";
+}
+
+.forum::before {
+    content: "\f086";
+}
+
+.exam::before {
+    content: "\f135";
+}
+
+.file::before {
+    content: "\f0c6";
+}
+
+.link::before {
+    content: "\f0c1";
+}
+
+.page::before {
+    content: "\f15b";
+}

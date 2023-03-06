@@ -6,16 +6,17 @@ import { TaskService } from 'src/app/services/task.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
-  selector: 'app-tasks',
-  templateUrl: './tasks.component.html',
-  styleUrls: ['./tasks.component.css']
+  selector: 'app-task-view',
+  templateUrl: './task-view.component.html',
+  styleUrls: ['./task-view.component.css']
 })
-export class TasksComponent {
+export class TaskViewComponent {
   dataLoaded!: Promise<boolean>;
   user_data: any;
   id_course?: number;
+  id_task?: number;
   course_data: any;
-  tasks_list: any;
+  task_data: any;
 
 constructor(private authService: AuthService, private userService: UserService, private route: ActivatedRoute,  private router: Router, private courseService: CourseService, private tasksService: TaskService) { }
 
@@ -25,6 +26,7 @@ ngOnInit(): void {
 
   this.route.params.subscribe(params => {
     this.id_course = params['id']; // (+) converts string 'id' to a number
+    this.id_task = params['id_task']; // (+) converts string 'id' to a number
   });
 
 
@@ -43,13 +45,9 @@ ngOnInit(): void {
             this.router.navigate(["/manager"]);
           }
 
-          this.tasksService.getTasksList(Number(this.id_course)).subscribe((tasks: any) => {
+          this.tasksService.getTaskDetails(Number(this.id_task)).subscribe((tasks: any) => {
             if(tasks.status == 200) {
-              this.tasks_list = tasks.data;
-    
-              if(this.tasks_list.tasks) {
-                this.tasks_list.tasks = JSON.parse(this.tasks_list.tasks)
-              }
+              this.task_data = tasks.data;
 
               this.dataLoaded = Promise.resolve(true);
             }
