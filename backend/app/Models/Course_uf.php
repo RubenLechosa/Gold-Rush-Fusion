@@ -12,4 +12,5 @@ class Course_uf extends Model
         'name',
         'total_points',
     ];
+    protected $table = 'course_uf';
 }

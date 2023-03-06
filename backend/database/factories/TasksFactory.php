@@ -26,6 +26,7 @@ class TasksFactory extends Factory
             'id_course_uf' => fake()->randomElement($idsCourse_uf),
             'title'=>fake()->title(),
             'description' => fake()->text($maxNbChars = 100),
+            'type'=>fake()->randomElement(["task","forum","exam","file","link","page"]),
             'file_rubrica' => "{}",
             'contents' => "{}",
             'percentage' => fake()->numberBetween(1, 100),
