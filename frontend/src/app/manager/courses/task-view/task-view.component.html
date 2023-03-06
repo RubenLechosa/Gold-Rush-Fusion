@@ -3,14 +3,42 @@
 <main *ngIf="dataLoaded | async">
     <app-navbar [user_details]="user_data"></app-navbar>
 
-    <div class="container mt-5">
-        <div class="card">
-            <div class="card-body">
-                <a href="/manager/course/{{id_course}}/tasks" class="d-inline-block me-3"><i class="fa-solid fa-angle-left fa-2xl"></i></a> 
-                <span class="h3 d-inline-block">{{task_data.title}}</span>
-                <hr>
-                <h6>Description</h6>
-                <p>{{task_data.description}}</p>
+    <div class="main">
+        <div class="container">
+            <div class="row">
+                <div class="titleFlex">
+                    <a href="/manager/course/{{id_course}}/tasks"><i class="fa-solid fa-angle-left fa-2xl"></i></a> 
+                    <h1 class="text-white">{{task_data.title}}</h1>   
+                </div>
+                <div class="desc">
+                    <h6 *ngIf="task_data.description">Description</h6>
+                    <p *ngIf="task_data.description">{{task_data.description}}</p>
+                </div>
+
+                <div class="file" *ngIf="task_data.type == 'file'">
+                    <p>File</p>
+                </div>
+
+                <div class="task" *ngIf="task_data.type == 'task'">
+                    <p>Task</p>
+                </div>
+
+                <div class="forum" *ngIf="task_data.type == 'forum'">
+                    <p>Forum</p>
+                </div>
+
+                <div class="exam" *ngIf="task_data.type == 'exam'">
+                    <p>Exam</p>
+                </div>
+
+                <div class="link" *ngIf="task_data.type == 'link'">
+                    <p>Link</p>
+                </div>
+
+                <div class="page" *ngIf="task_data.type == 'page'">
+                    <p>Page</p>
+                </div>
+
             </div>
         </div>
     </div>
