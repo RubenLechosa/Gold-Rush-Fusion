@@ -1,0 +1,37 @@
+.titleFlex h1{
+    font-family: 'Gooseberry Juice', sans-serif;
+    color: var(--white);
+    margin: 0px;
+}
+
+.titleFlex{
+    display: flex;
+    align-items: center;
+    margin-top: 2rem;
+
+}
+
+.titleFlex a{
+    font-size: 20px;
+    color: var(--yellow);
+    margin-right: 1rem;
+    transition: transform .2s;
+}
+
+.titleFlex a:hover{
+    transform: scale(1.2);
+}
+
+.desc{
+    color: var(--white);
+    font-family: 'Rubik', sans-serif;
+    margin-top: 2rem;
+}
+
+.desc h6{
+    font-size: 25px;
+}
+
+.desc p{
+    font-size: 18px;
+}

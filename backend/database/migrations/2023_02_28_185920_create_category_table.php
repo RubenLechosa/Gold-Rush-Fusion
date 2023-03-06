@@ -16,11 +16,13 @@ return new class extends Migration
         Schema::create('category', function (Blueprint $table) {
             $table->id("id_category");
             $table->unsignedBigInteger("id_course")->nullable();
-            $table->string('titulo');
+            $table->string('title');
             $table->integer("order")->nullable();
             $table->timestamps();
 
         });
+
+      
     }
 
     /**
@@ -31,5 +33,6 @@ return new class extends Migration
     public function down()
     {
         Schema::dropIfExists('category');
+       
     }
 };

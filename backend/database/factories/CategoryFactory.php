@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -20,9 +20,12 @@ class CategoryFactory extends Factory
         $idsCourse = DB::table('courses')->pluck('id_course');
         return [
             'id_course' => fake()->randomElement($idsCourse),
-            'titulo' => fake()->title(),
+            'title' => fake()->title(),
             'order'=>fake()->unique()->numberBetween(1, 1000),
 
         ];
+
+       
     }
+    
 }
