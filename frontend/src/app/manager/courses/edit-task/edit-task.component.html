@@ -63,7 +63,7 @@
                     <div class="buttons w-100">
                       <button class="btn btn-login" type="submit" *ngIf="id_task != 0" [disabled]="alreadySubmit || form.invalid">Save</button>
                       <button class="btn btn-login" type="submit" *ngIf="id_task == 0" [disabled]="alreadySubmit || form.invalid">Create</button>
-                      <a class="btn btn-exit" href="/manager">Cancel</a>
+                      <a class="btn btn-exit" href="{{'/manager/course/' + id_course + '/tasks'}">Cancel</a>
                     </div>
                   </div>
                 </div>

@@ -50,7 +50,7 @@
                                 <div *ngFor="let task of category.tasks" id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                                     <a href="{{'/manager/course/'+id_course+'/tasks/'+task.id_tasks}}">
                                         <div class="accordion-body">
-                                            <span><i class="icon {{task.type}}"></i>{{task.title}}</span>
+                                            <span><button class="btn btn-secondary"><i class="fa-solid fa-minus m-0 me-3"></i></button><i class="icon {{task.type}}"></i>{{task.title}}</span>
                                             <a href="{{'/manager/course/'+id_course+'/edit-task/'+task.id_tasks}}" class="btn btn-secondary pull-right ms-3 text-white" *ngIf="user_data.role == 'teacher' || user_data.role == 'college_manager' || user_data.role == 'admin'"><i class="fa-solid fa-pen-to-square m-0"></i></a>
                                             <span class="pull-right text-muted" *ngIf="task.type == 'task' || task.type == 'exam'">0/100</span>
                                         </div>

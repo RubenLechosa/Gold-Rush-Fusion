@@ -25,7 +25,7 @@ export class EditTaskComponent {
     title: new FormControl(null, Validators.compose([Validators.minLength(2), Validators.required])),
     description: new FormControl(null),
     id_category: new FormControl(null, Validators.required),
-    type: new FormControl(null, Validators.compose([Validators.required, Validators.pattern("task|forum|exam|file|link|page")])),
+    type: new FormControl(null, Validators.compose([Validators.required, Validators.pattern("Task|Forum|Exam|File|Link|Page")])),
     limit_date: new FormControl(null),
     file_rubrica: new FormControl(null),
     contents: new FormControl(null),
