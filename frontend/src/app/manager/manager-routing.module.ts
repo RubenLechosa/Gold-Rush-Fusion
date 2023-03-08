@@ -3,6 +3,7 @@ import {RouterModule, Routes} from '@angular/router';
 import { EditCollegeComponent } from './colleges/edit-college/edit-college.component';
 import { CourseComponent } from './courses/course/course.component';
 import { EditCourseComponent } from './courses/edit-course/edit-course.component';
+import { EditTaskComponent } from './courses/edit-task/edit-task.component';
 import { RankingComponent } from './courses/ranking/ranking.component';
 import { RequestsComponent } from './courses/requests/requests.component';
 import { ShopComponent } from './courses/shop/shop.component';
@@ -28,8 +29,11 @@ const routes: Routes = [
   {path: 'course/:id/ranking', component: RankingComponent},
   {path: 'course/:id/requests', component: RequestsComponent},
   {path: 'course/:id/shop', component: ShopComponent},
+
+  // Tasks
   {path: 'course/:id/tasks', component: TasksComponent},
   {path: 'course/:id/tasks/:id_task', component: TaskViewComponent},
+  {path: 'course/:id/edit-task/:id_task', component: EditTaskComponent},
 
   //College
   {path: 'college/:id/edit', component: EditCollegeComponent},
