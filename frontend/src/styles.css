@@ -191,13 +191,18 @@ a:active {
   color: var(--white) !important;
 }
 
-.form-floating input {
+.form-floating input, .form-floating textarea {
   font-family: 'Rubik', sans-serif;
   border-radius: 15px;
   border: 2px solid transparent;
   color: var(--white);
   padding-left: 10px;
   background-image: linear-gradient(#AF0AEB, #73009C);
+}
+
+.form-floating textarea, .form-floating textarea:focus{
+  height: 4rem !important;
+  color: var(--white);
 }
 
 .form-floating input.is-invalid {

@@ -15,14 +15,14 @@
                     </div>
                     <div class="form-floating mb-3">
                         <input type="text" id="title" placeholder="..." ngModel="{{task_data.title}}" formControlName="title" class="form-control" [ngClass]="(form.controls['title'].invalid && form.controls['title'].touched ? 'is-invalid' : '')">
-                        <label for="title">Ttitle</label>
+                        <label for="title">Title</label>
                         <div id="validationServerUsernameFeedback" class="invalid-feedback">
                             Must be at least 2 characters.
                         </div>
                     </div>
                     <div class="form-floating mb-3">
-                        <textarea class="form-control text-dark" placeholder="Leave a comment here" ngModel="{{task_data.description}}" formControlName="description"></textarea>
-                        <label for="floatingTextarea" class="text-dark">Description</label>
+                        <textarea class="form-control" rows="8" placeholder="Leave a comment here" ngModel="{{task_data.description}}" formControlName="description"></textarea>
+                        <label for="floatingTextarea" class="">Description</label>
                     </div>
                     <div class="form-floating mb-3">
                         <select id="select_category" [ngClass]="(form.controls['id_category'].invalid && form.controls['id_category'].touched ? 'is-invalid' : '')" class="form-select form-control" ngModel="{{task_data.id_category}}" formControlName="id_category" required>
