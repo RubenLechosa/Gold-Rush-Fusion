@@ -19,6 +19,7 @@ export class EditTaskComponent {
   id_task?: number;
   course_data: any;
   task_data: any;
+  categories: any = [];
   task_types = ["Task", "Forum", "Exam", "File", "Link", "Page"];
 
   form = new FormGroup({
@@ -36,12 +37,10 @@ export class EditTaskComponent {
   constructor(private authService: AuthService, private userService: UserService, private route: ActivatedRoute,  private router: Router, private courseService: CourseService, private tasksService: TaskService) { }
 
   ngOnInit(): void {
-
     this.route.params.subscribe(params => {
       this.id_course = params['id']; // (+) converts string 'id' to a number
       this.id_task = params['id_task']; // (+) converts string 'id' to a number
     });
-
 
     this.userService.getUserDetails(String(localStorage.getItem('id'))).subscribe((response: any) => {
       if(response.status == 200 && response.data) {
@@ -62,13 +61,26 @@ export class EditTaskComponent {
               this.tasksService.getTaskDetails(Number(this.id_task)).subscribe((tasks: any) => {
                 if(tasks.status == 200) {
                   this.task_data = tasks.data;
-  
-                  this.dataLoaded = Promise.resolve(true);
+
+                  this.tasksService.getCategories(Number(this.id_course)).subscribe((category: any) => {
+                    if(category.status == 200) {
+                      this.categories = category.data;
+                    }
+
+                    this.dataLoaded = Promise.resolve(true);
+                  });
                 }
               });
             } else {
               this.task_data = {title: "", description: "", id_category: 0, file_rubrica: "", img: "", id_teacher: " "}
-              this.dataLoaded = Promise.resolve(true);
+              
+              this.tasksService.getCategories(Number(this.id_course)).subscribe((category: any) => {
+                if(category.status == 200) {
+                  this.categories = category.data;
+                }
+
+                this.dataLoaded = Promise.resolve(true);
+              });
             }
 
           }
@@ -81,6 +93,12 @@ export class EditTaskComponent {
   }
 
   onSubmit() {
+    this.tasksService.getCategories(Number(this.id_course)).subscribe((category: any) => {
+      if(category.status == 200) {
+        this.categories = category.data;
+      }
 
+      this.dataLoaded = Promise.resolve(true);
+    });
   }
 }

@@ -15,4 +15,12 @@ export class TaskService {
   getTaskDetails(id_task: number) {
     return this.frameworkService.post('tasks/get-task', { id_task });
   }
+
+  removeTask(id_task: number) {
+    return this.frameworkService.post('tasks/delete-task', { id_task });
+  }
+
+  getCategories(id_course: number) {
+    return this.frameworkService.post('tasks/get-categories', { id_course });
+  }
 }

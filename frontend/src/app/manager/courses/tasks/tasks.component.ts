@@ -11,18 +11,19 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./tasks.component.css']
 })
 export class TasksComponent {
+  alreadySubmit: boolean = false;
   dataLoaded!: Promise<boolean>;
   user_data: any;
   id_course?: number;
   course_data: any;
   tasks_list: any;
 
-constructor(private authService: AuthService, private userService: UserService, private route: ActivatedRoute,  private router: Router, private courseService: CourseService, private tasksService: TaskService) { }
+
+  constructor(private authService: AuthService, private userService: UserService, private route: ActivatedRoute,  private router: Router, private courseService: CourseService, private tasksService: TaskService) { }
 
 
 
 ngOnInit(): void {
-
   this.route.params.subscribe(params => {
     this.id_course = params['id']; // (+) converts string 'id' to a number
   });
@@ -42,23 +43,36 @@ ngOnInit(): void {
           if(cursos.indexOf(this.id_course)) {
             this.router.navigate(["/manager"]);
           }
-
-          this.tasksService.getTasksList(Number(this.id_course)).subscribe((tasks: any) => {
-            if(tasks.status == 200) {
-              this.tasks_list = tasks.data;
-    
-              if(this.tasks_list.tasks) {
-                this.tasks_list.tasks = JSON.parse(this.tasks_list.tasks)
-              }
-
-              this.dataLoaded = Promise.resolve(true);
-            }
-          });
+          
+          this.reloadTasks();
+          this.dataLoaded = Promise.resolve(true);
         }
       });
 
     } else {
       this.authService.logout();
+    }
+  });
+}
+
+reloadTasks() {
+  this.tasksService.getTasksList(Number(this.id_course)).subscribe((tasks: any) => {
+    if(tasks.status == 200) {
+      this.tasks_list = tasks.data;
+
+      if(this.tasks_list.tasks) {
+        this.tasks_list.tasks = JSON.parse(this.tasks_list.tasks);
+      }
+    }
+  });
+  this.alreadySubmit = false;
+}
+
+deleteTask(id_task: number) {
+  this.alreadySubmit = true;
+  this.tasksService.removeTask(id_task).subscribe((tasks: any) => {
+    if(tasks.status == 200) {
+      this.reloadTasks();
     }
   });
 }

@@ -52,4 +52,43 @@ class TasksController extends Controller
             "msg" => "No tasks data"
         ]);
     }
+
+    public function getCategory(Request $request) {
+        $request->validate([
+            "id_course" => "required"
+        ]);
+
+        if($categories = Category::where("id_course", "=", $request->id_course)->get()) {
+            return response()->json([
+                "status" => 200,
+                "data" => $categories
+            ]);
+        }
+
+        return response()->json([
+            "status" => 400,
+            "msg" => "No tasks data"
+        ]);
+    }
+
+    public function delete(Request $request) {
+        $request->validate([
+            'id_task' => 'required'
+        ]);
+
+        $rows_affected = DB::delete('delete from tasks WHERE id_tasks = ?', [$request->id_task]);
+
+        if($rows_affected > 0) {
+            return response()->json([
+                "status" => 200,
+                "msg"   => "Se ha borrado con exito",
+            ]);
+        }
+
+        return response()->json([
+            "status" => 300,
+            "msg"   => "No se ha encontrado el producto para borrar",
+        ]);
+    }
+
 }

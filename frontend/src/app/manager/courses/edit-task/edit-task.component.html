@@ -27,10 +27,11 @@
                     <div class="form-floating mb-3">
                         <select id="select_category" [ngClass]="(form.controls['id_category'].invalid && form.controls['id_category'].touched ? 'is-invalid' : '')" class="form-select form-control" ngModel="{{task_data.id_category}}" formControlName="id_category" required>
                             <option value=""></option>
+                            <option value="{{category.id_category}}" *ngFor="let category of categories">{{category.titulo}}</option>
                         </select>
                         <label for="select_category">Choose a Category</label>
                         <div id="validationServerUsernameFeedback" class="invalid-feedback">
-                            Invalid, Teacher Required.
+                            Invalid, Category Required.
                         </div>
                     </div>
                     <div class="form-floating mb-3">
