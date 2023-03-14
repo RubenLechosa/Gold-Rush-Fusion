@@ -20,7 +20,14 @@
                 </div>
 
                 <div class="task" *ngIf="task_data.type == 'task'">
-                    <p>Task</p>
+                    <div class="taskInfo">
+                        <button>Nuevo Intento</button>
+                        <p>Fecha de entrega: 14/15/2002</p>
+                        <p>Peso: 10%</p>
+                        <p>Disponible después de 6 de mar en 17:10</p>
+                        <span>Enunciado: </span><a href="#">Nombre.pdf</a>
+                    </div>
+                    
                 </div>
 
                 <div class="forum" *ngIf="task_data.type == 'forum'">
