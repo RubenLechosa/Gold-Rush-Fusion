@@ -7,39 +7,46 @@
         <div class="container">
             <div class="row">
                 <div class="titleFlex">
-                    <a href="/manager/course/{{id_course}}/tasks"><i class="fa-solid fa-angle-left fa-2xl"></i></a> 
-                    <h1 class="text-white">{{task_data.title}}</h1>   
+                    <div class="flexing">
+                        <a href="/manager/course/{{id_course}}/tasks"><i class="fa-solid fa-angle-left fa-2xl"></i></a> 
+                        <h1 class="text-white">{{task_data.title}}</h1>   
+                    </div>
+                    <a class="btn btn-login">Nuevo Intento</a>
                 </div>
                 <div class="desc">
                     <h6 *ngIf="task_data.description">Description</h6>
                     <p *ngIf="task_data.description">{{task_data.description}}</p>
                 </div>
 
-                <div class="file" *ngIf="task_data.type == 'file'">
-                    <a href="#">Nombre.pdf</a>
-                </div>
-
                 <div class="task" *ngIf="task_data.type == 'task'">
                     <div class="taskInfo">
-                        <button>Nuevo Intento</button>
                         <p>Fecha de entrega: 14/15/2002</p>
                         <p>Peso: 10%</p>
                         <p>Disponible después de 6 de mar en 17:10</p>
-                        <span>Enunciado: </span><a href="#">Nombre.pdf</a>
+                        <div class="enun">
+                            <span>Enunciado: </span><a href="#">Nombre.pdf</a>
+                        </div>
                     </div>
                     
                 </div>
 
                 <div class="forum" *ngIf="task_data.type == 'forum'">
-                    <p>Forum</p>
+                    
                 </div>
 
                 <div class="exam" *ngIf="task_data.type == 'exam'">
-                    <p>Exam</p>
-                </div>
-
-                <div class="link" *ngIf="task_data.type == 'link'">
-                    <p>Link</p>
+                    <div class="flex2">
+                        <div class="time">
+                            <span>20 min</span>
+                            <p>Limit Time</p>
+                        </div>
+                        <div class="date">
+                            <span>16/1/2023 13:00</span>
+                            <p>Limit Date</p>
+                        </div>
+                    </div>
+                    <hr>
+                    <a class="btn btn-login">Start</a>
                 </div>
 
                 <div class="page" *ngIf="task_data.type == 'page'">
