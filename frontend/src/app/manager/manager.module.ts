@@ -20,6 +20,7 @@ import { TasksComponent } from './courses/tasks/tasks.component';
 import { TaskViewComponent } from './courses/task-view/task-view.component';
 import { EditTaskComponent } from './courses/edit-task/edit-task.component';
 
+
 @NgModule({
   declarations: [
     MainComponent,
