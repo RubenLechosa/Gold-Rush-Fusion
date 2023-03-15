@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Courses;
+use PharIo\Manifest\Url;
 
 class FileController extends Controller
 {
@@ -15,7 +16,8 @@ class FileController extends Controller
             $comPic = str_replace('','_', $filenameOnly).'-'.rand() . '_'.time(). '.'.$extenshion;
             $path = $request->file('img')->storeAs('public/posts', $comPic);
 
-            return ['status' => 200, 'message' => 'Post Saved Succesfully'];
+            
+            return ['status' => 200, 'message' => 'Post Saved Succesfully', "data" => "http://localhost:8000/storage/posts/".$comPic];
         }
 
         return ['status' => 500, 'message' => 'Something Went Wrong'];

@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Post } from 'src/app/post.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { CourseService } from 'src/app/services/course.service';
+import { DataService } from 'src/app/services/data.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -17,14 +19,14 @@ export class EditCourseComponent {
   user_data: any;
   course_data: any;
   teachers: any;
-
+  files: any;
   form = new FormGroup({
     course_name: new FormControl(null, Validators.compose([Validators.minLength(3), Validators.required])),
     id_teacher: new FormControl(null, Validators.required),
     img: new FormControl(null)
   });
 
-  constructor(private authService: AuthService, private router: Router, private courseService: CourseService, private route: ActivatedRoute, private userService: UserService) { }
+  constructor(private authService: AuthService, private router: Router, private courseService: CourseService, private route: ActivatedRoute, private dataService: DataService,  private userService: UserService) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -61,22 +63,32 @@ export class EditCourseComponent {
 
   }
 
+  uploadImage(event: any){
+    this.files = event.target.files[0];
+    console.log(this.files);
+
+  }
+   
   onSubmit() {
     if(this.form.invalid) {
       this.alreadySubmit = true;
       return;
     }
 
+    
+    const formData = new FormData();
+    formData.append("img", this.files, this.files.name);
+
     this.alreadySubmit = true;
     if(this.id_course != 0) {
-      this.courseService.saveCourse(this.id_course, String(this.form.get('course_name')?.value), String(this.form.get('id_teacher')?.value), this.user_data.id_college, String(this.form.get('img')?.value)).subscribe((courses: any) => {
-        if(courses.status == 200) {
-          this.courseService.uploadFile(String(this.form.get("img")?.value)).subscribe((result: any) => {
-            console.log(result);
+      this.dataService.uploadData(formData).subscribe((result: any) => {
+        this.courseService.saveCourse(this.id_course, String(this.form.get('course_name')?.value), String(this.form.get('id_teacher')?.value), this.user_data.id_college, String(result.data)).subscribe((courses: any) => {
+          if(courses.status == 200) {
             this.router.navigate(["/manager"]);
-          });
-        }
-        this.alreadySubmit = false;
+          }
+          
+          this.alreadySubmit = false;
+        });
       });
     } else {
       this.courseService.createCourse(String(this.form.get('course_name')?.value), String(this.form.get('id_teacher')?.value), this.user_data.id_college, String(this.form.get('img')?.value)).subscribe((courses: any) => {

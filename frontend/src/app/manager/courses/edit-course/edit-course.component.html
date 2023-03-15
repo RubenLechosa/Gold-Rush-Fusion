@@ -31,7 +31,7 @@
                   </div>
                 </div>
                 <div class="form-floating mb-3 custom-file">
-                    <input type="file" id="img" formControlName="img" class="form-control">
+                    <input type="file" id="img" formControlName="img" class="form-control" (change)="uploadImage($event)">
                     <label for="img">Curse Image</label>
                 </div>
                 <div class="buttons">
