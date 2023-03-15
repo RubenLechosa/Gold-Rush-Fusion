@@ -45,6 +45,10 @@
                         Choose A Valid Role
                     </div>
                 </div>
+                <div class="form-floating mb-3 custom-file">
+                    <input type="file" id="img" formControlName="img" class="form-control" (change)="uploadImage($event)">
+                    <label for="img">Profile Image</label>
+                </div>
                 <div class="form-floating mb-3">
                     <input class="form-control" id="birth_date" placeholder="..." type="date" formControlName="birth_date" name="birth_date" ngModel="{{editing_data.birth_date}}">
                     <label for="birth_date">Birth Date</label>

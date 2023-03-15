@@ -93,12 +93,22 @@ export class EditTaskComponent {
   }
 
   onSubmit() {
-    this.tasksService.getCategories(Number(this.id_course)).subscribe((category: any) => {
-      if(category.status == 200) {
-        this.categories = category.data;
-      }
-
-      this.dataLoaded = Promise.resolve(true);
-    });
+    if(this.id_task) {
+      this.tasksService.editTask(Number(this.id_task), "").subscribe((category: any) => {
+        if(category.status == 200) {
+          this.categories = category.data;
+        }
+  
+        this.dataLoaded = Promise.resolve(true);
+      });
+    } else {
+      this.tasksService.newTask(Number(this.id_course), "").subscribe((category: any) => {
+        if(category.status == 200) {
+          this.categories = category.data;
+        }
+  
+        this.dataLoaded = Promise.resolve(true);
+      });
+    }
   }
 }

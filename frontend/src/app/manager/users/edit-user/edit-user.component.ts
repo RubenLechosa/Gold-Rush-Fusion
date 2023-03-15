@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { DataService } from 'src/app/services/data.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -13,6 +14,7 @@ export class EditUserComponent implements OnInit {
   dataLoaded!: Promise<boolean>;
   user_data: any;
   editing_data: any;
+  files: any;
   id_profile!: number;
 
   form = new FormGroup({
@@ -24,7 +26,7 @@ export class EditUserComponent implements OnInit {
     birth_date: new FormControl(null)
   });
 
-  constructor(private authService: AuthService, public userService: UserService,  private readonly route: ActivatedRoute, private readonly router: Router ) { }
+  constructor(private authService: AuthService, public userService: UserService,  private readonly route: ActivatedRoute, private readonly router: Router, private dataService: DataService ) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -50,15 +52,24 @@ export class EditUserComponent implements OnInit {
     });
   }
 
+  uploadImage(event: any){
+    this.files = event.target.files[0];
+  }
+
   onSubmit() {
     if (this.form.invalid) {
       return;
     }
 
-    this.userService.editUser(this.id_profile, String(this.form.get('name')?.value), String(this.form.get('last_name')?.value), String(this.form.get('nick')?.value), String(this.form.get('email')?.value), String(this.form.get('role')?.value), String(this.form.get('birth_date')?.value)).subscribe((response: any) => {
-      if(response.status == 200) {
-        this.router.navigate(["/manager/user/"+this.editing_data.id_user]);
-      }
+    const formData = new FormData();
+    formData.append("img", this.files, this.files.name);
+
+    this.dataService.uploadData(formData).subscribe((result: any) => {
+      this.userService.editUser(this.id_profile, String(this.form.get('name')?.value), String(this.form.get('last_name')?.value), String(this.form.get('nick')?.value), String(this.form.get('email')?.value), String(this.form.get('role')?.value), String(this.form.get('birth_date')?.value), result.data).subscribe((response: any) => {
+        if(response.status == 200) {
+          this.router.navigate(["/manager/user/"+this.editing_data.id_user]);
+        }
+      });
     });
   }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Tasks;
 use App\Models\Category;
+use App\Models\Courses;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -12,6 +13,48 @@ use Illuminate\Support\Facades\Hash;
 
 class TasksController extends Controller
 {
+    public function createCourses(Request $request) {
+        $request->validate([
+            'id_category'  => 'required',
+            'type' => 'required',
+            'title' => 'required',
+            'description' => 'required',
+            'limit_date' => 'required',
+            "percentage" => '',
+            "max_mark" => ''
+        ]);
+
+        $task = new Tasks();
+        $task->id_category = $request->id_category;
+        $task->id_course_uf = 1;
+        $task->type = $request->type;
+        $task->title = $request->title;
+        $task->description = $request->description;
+        $task->limit_date = $request->limit_date;
+        $task->file_rubrica = "";
+        $task->contents = "{}";
+        $task->percentage = 0;
+        $task->max_mark = 0;
+
+        if($request->type == "task") {
+            $task->percentage = $request->percentage;
+            $task->max_mark = $request->max_mark;
+        }
+
+        if($task->save()) {
+            return response()->json([
+                "status" => 200,
+                "msg" => "¡Course creado con exito!",
+                "id_course" => $task->id_course
+            ]);
+        }
+
+        return response()->json([
+            "status" => 400,
+            "msg" => "¡No se ha creado el course!"
+        ]);
+    }
+
     public function getTaskList(Request $request) {
         $request->validate([
             "id_course" => "required"

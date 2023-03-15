@@ -65,8 +65,6 @@ export class EditCourseComponent {
 
   uploadImage(event: any){
     this.files = event.target.files[0];
-    console.log(this.files);
-
   }
    
   onSubmit() {
@@ -74,7 +72,6 @@ export class EditCourseComponent {
       this.alreadySubmit = true;
       return;
     }
-
     
     const formData = new FormData();
     formData.append("img", this.files, this.files.name);

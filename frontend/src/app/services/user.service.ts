@@ -34,8 +34,8 @@ export class UserService {
     return this.frameworkService.post('users/get-teachers-college', { id_college });
   }
 
-  editUser(id_user: number, name: string, last_name: string, nick: string, email: string, role: string, birth_date: string) {
-    return this.frameworkService.post('users/edit-user', { id_user, name, last_name, nick, email, role, birth_date});
+  editUser(id_user: number, name: string, last_name: string, nick: string, email: string, role: string, birth_date: string, profile_img: string) {
+    return this.frameworkService.post('users/edit-user', { id_user, name, last_name, nick, email, role, birth_date, profile_img });
   }
 
   addCourse(id_course: string, id_user: string) {

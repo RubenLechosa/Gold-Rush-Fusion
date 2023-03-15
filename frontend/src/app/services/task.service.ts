@@ -23,4 +23,12 @@ export class TaskService {
   getCategories(id_course: number) {
     return this.frameworkService.post('tasks/get-categories', { id_course });
   }
+
+  newTask(id_course: number, name: string) {
+    return this.frameworkService.post('tasks/get-categories', { id_course });
+  }
+
+  editTask(id_task: number, name: string) {
+    return this.frameworkService.post('tasks/get-categories', { id_task });
+  }
 }
