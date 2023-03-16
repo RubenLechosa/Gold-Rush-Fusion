@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Post } from 'src/app/post.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { CourseService } from 'src/app/services/course.service';
-import { DataService } from 'src/app/services/data.service';
+import { FrameworkService } from 'src/app/services/framework.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -26,7 +26,7 @@ export class EditCourseComponent {
     img: new FormControl(null)
   });
 
-  constructor(private authService: AuthService, private router: Router, private courseService: CourseService, private route: ActivatedRoute, private dataService: DataService,  private userService: UserService) { }
+  constructor(private authService: AuthService, private router: Router, private courseService: CourseService, private route: ActivatedRoute, private frameworkService: FrameworkService,  private userService: UserService) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -78,7 +78,7 @@ export class EditCourseComponent {
 
     this.alreadySubmit = true;
     if(this.id_course != 0) {
-      this.dataService.uploadData(formData).subscribe((result: any) => {
+      this.frameworkService.upload_file(formData).subscribe((result: any) => {
         this.courseService.saveCourse(this.id_course, String(this.form.get('course_name')?.value), String(this.form.get('id_teacher')?.value), this.user_data.id_college, String(result.data)).subscribe((courses: any) => {
           if(courses.status == 200) {
             this.router.navigate(["/manager"]);
@@ -91,7 +91,6 @@ export class EditCourseComponent {
       this.courseService.createCourse(String(this.form.get('course_name')?.value), String(this.form.get('id_teacher')?.value), this.user_data.id_college, String(this.form.get('img')?.value)).subscribe((courses: any) => {
         if(courses.status == 200) {
           this.courseService.uploadFile(String(this.form.get("img")?.value)).subscribe((result: any) => {
-            console.log(result);
             this.router.navigate(["/manager"]);
           });
         }

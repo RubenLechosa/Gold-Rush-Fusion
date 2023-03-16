@@ -17,7 +17,7 @@ class FileController extends Controller
             $path = $request->file('img')->storeAs('public/posts', $comPic);
 
             
-            return ['status' => 200, 'message' => 'Post Saved Succesfully', "data" => "http://localhost:8000/storage/posts/".$comPic];
+            return ['status' => 200, 'message' => 'Post Saved Succesfully', "data" => "/storage/posts/".$comPic];
         }
 
         return ['status' => 500, 'message' => 'Something Went Wrong'];

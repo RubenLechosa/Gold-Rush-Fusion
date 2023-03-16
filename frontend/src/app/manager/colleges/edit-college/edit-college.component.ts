@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { CollegeService } from 'src/app/services/college.service';
 import { CourseService } from 'src/app/services/course.service';
+import { FrameworkService } from 'src/app/services/framework.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -16,6 +17,7 @@ export class EditCollegeComponent {
   id_college!: number;
   dataLoaded!: Promise<boolean>;
   user_data: any;
+  files: any;
   college_data: any;
 
   form = new FormGroup({
@@ -23,7 +25,7 @@ export class EditCollegeComponent {
     logo: new FormControl(null)
   });
 
-  constructor(private authService: AuthService, private router: Router, private collegeService: CollegeService, private route: ActivatedRoute, private userService: UserService) { }
+  constructor(private authService: AuthService, private router: Router, private collegeService: CollegeService, private route: ActivatedRoute, private userService: UserService, private frameworkService: FrameworkService) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -55,13 +57,18 @@ export class EditCollegeComponent {
       return;
     }
 
+    const formData = new FormData();
+    formData.append("img", this.files, this.files.name);
+
     this.alreadySubmit = true;
     if(this.id_college != 0) {
-      this.collegeService.saveCollege(String(this.id_college), String(this.form.get('college_name')?.value), String(this.form.get('logo')?.value)).subscribe((result: any) => {
-        if(result.status == 200) {
-          this.router.navigate(["/manager"]);
-        }
-        this.alreadySubmit = false;
+      this.frameworkService.upload_file(formData).subscribe((result: any) => {
+        this.collegeService.saveCollege(String(this.id_college), String(this.form.get('college_name')?.value), String(this.form.get('logo')?.value)).subscribe((result: any) => {
+          if(result.status == 200) {
+            this.router.navigate(["/manager"]);
+          }
+          this.alreadySubmit = false;
+        });
       });
     }
   }

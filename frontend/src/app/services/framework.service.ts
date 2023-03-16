@@ -23,4 +23,9 @@ export class FrameworkService {
   post(url: string, body: any) {
     return this.http.post(`${baseUrl}/${url}`, body, {headers: header});
   }
+
+  upload_file(data: any){
+    const headers = new HttpHeaders();
+    return this.http.post(`${baseUrl}/file/`, data , { headers: headers});
+  }
 }
