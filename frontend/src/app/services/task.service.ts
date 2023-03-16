@@ -24,11 +24,15 @@ export class TaskService {
     return this.frameworkService.post('tasks/get-categories', { id_course });
   }
 
-  newTask(id_course: number, name: string) {
-    return this.frameworkService.post('tasks/get-categories', { id_course });
+  newCategory(id_category: number, type: string, title: string, description: string, limit_date: string, percentage: string, max_mark: string) {
+    return this.frameworkService.post('tasks/new-category', { id_category, type, title, description, limit_date, percentage, max_mark });
   }
 
-  editTask(id_task: number, name: string) {
-    return this.frameworkService.post('tasks/get-categories', { id_task });
+  newTask(id_category: number, type: string, title: string, description: string, limit_date: string, percentage: string, max_mark: string) {
+    return this.frameworkService.post('tasks/new-task', { id_category, type, title, description, limit_date, percentage, max_mark });
+  }
+
+  editTask(id_task: number, id_category: number, type: string, title: string, description: string, limit_date: string, percentage: string, max_mark: string) {
+    return this.frameworkService.post('tasks/edit-task', { id_task, id_category, type, title, description, limit_date, percentage, max_mark });
   }
 }

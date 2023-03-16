@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Hash;
 
 class TasksController extends Controller
 {
-    public function createCourses(Request $request) {
+    public function createTask(Request $request) {
         $request->validate([
             'id_category'  => 'required',
             'type' => 'required',
@@ -33,13 +33,8 @@ class TasksController extends Controller
         $task->limit_date = $request->limit_date;
         $task->file_rubrica = "";
         $task->contents = "{}";
-        $task->percentage = 0;
-        $task->max_mark = 0;
-
-        if($request->type == "task") {
-            $task->percentage = $request->percentage;
-            $task->max_mark = $request->max_mark;
-        }
+        $task->percentage = $request->percentage;
+        $task->max_mark = $request->max_mark;
 
         if($task->save()) {
             return response()->json([
@@ -111,6 +106,34 @@ class TasksController extends Controller
         return response()->json([
             "status" => 400,
             "msg" => "No tasks data"
+        ]);
+    }
+
+    public function editTask(Request $request) {
+        $request->validate([
+            'id_task' => 'required',
+        ]);
+        
+        $set_clause_parts = [];
+        foreach($request->all() as $key => $value) {
+            if($key != "id_task") {
+                $set_clause_parts[] = "{$key}='{$value}'";
+            }
+        }
+                
+        $set_clause = implode(', ', $set_clause_parts);
+        $rows_affected = DB::update('UPDATE tasks SET '.$set_clause.' where id_tasks = ?', [$request->id_task]);
+
+        if($rows_affected > 0) {
+            return response()->json([
+                "status" => 200,
+                "msg"   => "Se ha actualizado con exito",
+            ]);
+        }
+
+        return response()->json([
+            "status" => 300,
+            "msg"   => "No se ha encontrado la task para actualizar",
         ]);
     }
 

@@ -57,6 +57,8 @@ Route::post('tasks/get-tasks-list', [TasksController::class, 'getTaskList']);
 Route::post('tasks/get-task', [TasksController::class, 'getDetails']);
 Route::post('tasks/delete-task', [TasksController::class, 'delete']);
 Route::post('tasks/get-categories', [TasksController::class, 'getCategory']);
+Route::post('tasks/new-task', [TasksController::class, 'createTask']);
+Route::post('tasks/edit-task', [TasksController::class, 'editTask']);
 
 Route::post('file',[FileController::class,'file']);
 

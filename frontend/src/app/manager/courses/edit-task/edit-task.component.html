@@ -30,6 +30,7 @@
                             <option value="{{category.id_category}}" *ngFor="let category of categories">{{category.titulo}}</option>
                         </select>
                         <label for="select_category">Choose a Category</label>
+                        <a role="button">New Category</a>
                         <div id="validationServerUsernameFeedback" class="invalid-feedback">
                             Invalid, Category Required.
                         </div>
@@ -37,7 +38,7 @@
                     <div class="form-floating mb-3">
                         <select id="select_category" [ngClass]="(form.controls['type'].invalid && form.controls['type'].touched ? 'is-invalid' : '')" class="form-select form-control" ngModel="{{task_data.type}}" formControlName="type" required>
                             <option value=""></option>
-                            <option value="{{type}}" *ngFor="let type of task_types">{{type}}</option>
+                            <option value="{{type.toLowerCase()}}" *ngFor="let type of task_types">{{type}}</option>
                         </select>
                         <label for="select_category">Choose a Type</label>
                         <div id="validationServerUsernameFeedback" class="invalid-feedback">
@@ -49,22 +50,31 @@
                         <label for="title">Limit Date</label>
                     </div>
                     
-                    <div *ngIf="form.controls['type'].value == 'Task'">
-                        task
+                    <div class="w-100" *ngIf="form.controls['type'].value == 'task'">
+                      <h6>Task Settings</h6>
+                      <div class="form-floating mb-3">
+                        <input type="number" id="percentage" min="0" placeholder="..." ngModel="{{task_data.percentage}}" formControlName="percentage" class="form-control">
+                        <label for="percentage">Percentage</label>
+                      </div>
+                      <div class="form-floating mb-3">
+                        <input type="number" id="max_mark" min="0" placeholder="..." ngModel="{{task_data.max_mark}}" formControlName="max_mark" class="form-control">
+                        <label for="max_mark">Max Mark</label>
+                      </div>
                     </div>
-                    <div *ngIf="form.controls['type'].value == 'Page'">
+
+                    <div class="w-100" *ngIf="form.controls['type'].value == 'page'">
                         Page
                     </div>
-                    <div *ngIf="form.controls['type'].value == 'Link'">
+                    <div class="w-100" *ngIf="form.controls['type'].value == 'link'">
                         Link
                     </div>
-                    <div *ngIf="form.controls['type'].value == 'File'">
+                    <div class="w-100" *ngIf="form.controls['type'].value == 'file'">
                         File
                     </div>
                     <div class="buttons w-100">
                       <button class="btn btn-login" type="submit" *ngIf="id_task != 0" [disabled]="alreadySubmit || form.invalid">Save</button>
                       <button class="btn btn-login" type="submit" *ngIf="id_task == 0" [disabled]="alreadySubmit || form.invalid">Create</button>
-                      <a class="btn btn-exit" href="{{'/manager/course/' + id_course + '/tasks'}">Cancel</a>
+                      <a class="btn btn-exit" href="{{'/manager/course/' + id_course + '/tasks'}}">Cancel</a>
                     </div>
                   </div>
                 </div>

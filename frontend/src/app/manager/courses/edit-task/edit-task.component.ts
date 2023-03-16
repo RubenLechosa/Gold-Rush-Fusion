@@ -26,7 +26,7 @@ export class EditTaskComponent {
     title: new FormControl(null, Validators.compose([Validators.minLength(2), Validators.required])),
     description: new FormControl(null),
     id_category: new FormControl(null, Validators.required),
-    type: new FormControl(null, Validators.compose([Validators.required, Validators.pattern("Task|Forum|Exam|File|Link|Page")])),
+    type: new FormControl(null, Validators.compose([Validators.required, Validators.pattern(this.task_types.join('|').toLowerCase())])),
     limit_date: new FormControl(null),
     file_rubrica: new FormControl(null),
     contents: new FormControl(null),
@@ -93,18 +93,18 @@ export class EditTaskComponent {
   }
 
   onSubmit() {
-    if(this.id_task) {
-      this.tasksService.editTask(Number(this.id_task), "").subscribe((category: any) => {
-        if(category.status == 200) {
-          this.categories = category.data;
+    if(this.id_task != 0) {
+      this.tasksService.editTask(Number(this.id_task), Number(this.form.get("id_category")?.value), String(this.form.get("type")?.value), String(this.form.get("title")?.value), String(this.form.get("description")?.value), String(this.form.get("limit_date")?.value), String(this.form.get("percentage")?.value), String(this.form.get("max_mark")?.value)).subscribe((result: any) => {
+        if(result.status == 200) {
+          this.router.navigate(["/manager/course/"+this.id_course+"/tasks"]);
         }
   
         this.dataLoaded = Promise.resolve(true);
       });
     } else {
-      this.tasksService.newTask(Number(this.id_course), "").subscribe((category: any) => {
-        if(category.status == 200) {
-          this.categories = category.data;
+      this.tasksService.newTask(Number(this.form.get("id_category")?.value), String(this.form.get("type")?.value), String(this.form.get("title")?.value), String(this.form.get("description")?.value), String(this.form.get("limit_date")?.value), String(this.form.get("percentage")?.value), String(this.form.get("max_mark")?.value)).subscribe((result: any) => {
+        if(result.status == 200) {
+          this.router.navigate(["/manager/course/"+this.id_course+"/tasks"]);
         }
   
         this.dataLoaded = Promise.resolve(true);
