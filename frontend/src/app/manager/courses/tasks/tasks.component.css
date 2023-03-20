@@ -60,7 +60,7 @@
 }
 
 .accordion-header button,
-.accordion-body a {
+.accordion-body .text-end a {
     font-family: 'Rubik', sans-serif;
     color: var(--purple);
     
@@ -131,3 +131,51 @@
 .page::before {
     content: "\f15b";
 }
+
+.marks table, .marks table a{
+    color: var(--white) !important;
+}
+
+.marks table span{
+    font-weight: bold;
+}
+
+.marks .comment a{
+    color: green !important;
+    background-color: #eee;
+    padding: 5px;
+    border-radius: 10px;
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+}
+
+.marks .noSend{
+    color: var(--red);
+    background-color: #eee;
+    padding: 5px;
+    border-radius: 10px;
+    border: 1px solid black;
+}
+
+.marks .noTime{
+    color: rgb(44, 44, 185);
+    background-color: #eee;
+    padding: 5px;
+    border-radius: 10px;
+    border: 1px solid black;
+}
+
+.marks .onTime{
+    color: green;
+    background-color: #eee;
+    padding: 5px;
+    border-radius: 10px;
+    border: 1px solid black;
+}
+
+
+
+
