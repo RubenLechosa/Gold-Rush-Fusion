@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Tasks;
 use App\Models\Category;
 use App\Models\Courses;
+use Illuminate\Console\View\Components\Task;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -73,6 +74,25 @@ class TasksController extends Controller
         ]);
     }
 
+    public function getAllTasksByUser(Request $request) {
+        $request->validate([
+            "id_user" => "required"
+        ]);
+
+        $task = Tasks::where("id_user", "=", $request->id_user)->get();
+
+        if($task) {
+            return response()->json([
+                "status" => 200,
+                "data" => $task
+            ]);
+        }
+
+        return response()->json([
+            "status" => 400,
+            "msg" => "No user data"
+        ]);
+    }
     public function getDetails(Request $request) {
         $request->validate([
             "id_task" => "required"
