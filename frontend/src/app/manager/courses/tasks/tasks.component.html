@@ -43,7 +43,7 @@
         <div class="tab-pane fade" id="nav-content" role="tabpanel" aria-labelledby="nav-content-tab">
           <div class="row mb-4">
             <div class="text-end">
-              <a class="btn btn-login w-25" href="{{'/manager/course/'+id_course+'/edit-task/0'}}"><i
+              <a class="btn btn-login w-25" href="{{'/manager/course/'+id_course+'/edit-task/0'}}" *ngIf="user_data.role == 'teacher' || user_data.role == 'college_manager' || user_data.role == 'admin'"><i
                   class="fa-solid fa-plus me-2"></i> New Task</a>
             </div>
           </div>

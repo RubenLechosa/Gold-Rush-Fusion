@@ -17,6 +17,7 @@ export class TaskViewComponent {
   id_task?: number;
   course_data: any;
   task_data: any;
+  view_submit: boolean = false;
 
 constructor(private authService: AuthService, private userService: UserService, private route: ActivatedRoute,  private router: Router, private courseService: CourseService, private tasksService: TaskService) { }
 
@@ -59,6 +60,10 @@ ngOnInit(): void {
       this.authService.logout();
     }
   });
+}
+
+changeViewSubmit(bool: boolean) {
+  this.view_submit = bool;
 }
 
 }

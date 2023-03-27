@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\CollegeController;
 use App\Http\Controllers\Api\CoursesController;
 use App\Http\Controllers\Api\TasksController;
 use App\Http\Controllers\Api\PopersController;
+use App\Http\Controllers\Api\CategoryController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FileController;
@@ -59,6 +60,7 @@ Route::post('tasks/delete-task', [TasksController::class, 'delete']);
 Route::post('tasks/get-categories', [TasksController::class, 'getCategory']);
 Route::post('tasks/new-task', [TasksController::class, 'createTask']);
 Route::post('tasks/edit-task', [TasksController::class, 'editTask']);
+Route::post('tasks/new-category', [CategoryController::class, 'createCategory']);
 
 Route::post('file',[FileController::class,'file']);
 

@@ -91,16 +91,16 @@
               <h1 class="modal-title fs-5" id="addStudentLabel"><i class="fa-solid fa-user-plus"></i> Add Category</h1>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          <form (ngSubmit)="onSubmit()" [formGroup]="form">
+          <form (ngSubmit)="onSubmitCategory()" [formGroup]="categoryForm">
               <div class="modal-body">
                 <div class="form-floating mb-3">
-                  <input type="text" id="title" placeholder="..." ngModel="{{task_data.title}}" formControlName="title" class="form-control" [ngClass]="(form.controls['title'].invalid && form.controls['title'].touched ? 'is-invalid' : '')">
+                  <input type="text" id="title" placeholder="..." formControlName="title" class="form-control" [ngClass]="(categoryForm.controls['title'].invalid && categoryForm.controls['title'].touched ? 'is-invalid' : '')">
                   <label for="title">Title</label>
                 </div>
               </div>
               <div class="modal-footer">
                   <button type="submit" class="btn btn-login"><i class="fa-solid fa-plus me-1"></i> Add Category</button>
-                  <button type="button" class="btn btn-exit" #closebutton data-bs-dismiss="modal"><i class="fa-solid fa-xmark me-1"></i> Cancel</button>
+                  <button type="button" class="btn btn-exit" #closeCategoryModal data-bs-dismiss="modal"><i class="fa-solid fa-xmark me-1"></i> Cancel</button>
               </div>
           </form>
       </div>

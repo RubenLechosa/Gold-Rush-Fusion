@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
@@ -34,24 +34,19 @@ class CategoryController extends Controller
      public function createCategory(Request $request) {
         $request->validate([
             'title'  => 'required',
-            'order' => 'required',
+            'id_course' => 'required',
         ]);
 
         $category = new Category();
-        $category->title = $request->title;
-        $category->order = $request->order;
+        $category->titulo = $request->title;
+        $category->id_course = $request->id_course;
         
         if($category->save()) {
-            $category = Category::where("id_user", "=", $request->id_user)->first();
-            $category->id_category = $category->id;
-
-            if($category->save()) {
-                return response()->json([
-                    "status" => 200,
-                    "msg" => "Category creada con exito!",
-                    "id_category" => $category->id
-                ]);
-            }
+            return response()->json([
+                "status" => 200,
+                "msg" => "Category creada con exito!",
+                "id_category" => $category->id
+            ]);
         }
 
         return response()->json([
