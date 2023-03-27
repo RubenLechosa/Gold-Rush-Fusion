@@ -30,7 +30,7 @@
                             <option value="{{category.id_category}}" *ngFor="let category of categories">{{category.titulo}}</option>
                         </select>
                         <label for="select_category">Choose a Category</label>
-                        <a role="button">New Category</a>
+                        <a type="button" data-bs-toggle="modal" data-bs-target="#addCategory" >New Category</a>
                         <div id="validationServerUsernameFeedback" class="invalid-feedback">
                             Invalid, Category Required.
                         </div>
@@ -83,5 +83,28 @@
           </form>
         </div>
       </div>
+        <!-- Modal -->
+<div class="modal fade" id="addCategory" tabindex="-1" aria-labelledby="addStudentLabel" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h1 class="modal-title fs-5" id="addStudentLabel"><i class="fa-solid fa-user-plus"></i> Add Category</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <form (ngSubmit)="onSubmit()" [formGroup]="form">
+              <div class="modal-body">
+                <div class="form-floating mb-3">
+                  <input type="text" id="title" placeholder="..." ngModel="{{task_data.title}}" formControlName="title" class="form-control" [ngClass]="(form.controls['title'].invalid && form.controls['title'].touched ? 'is-invalid' : '')">
+                  <label for="title">Title</label>
+                </div>
+              </div>
+              <div class="modal-footer">
+                  <button type="submit" class="btn btn-login"><i class="fa-solid fa-plus me-1"></i> Add Category</button>
+                  <button type="button" class="btn btn-exit" #closebutton data-bs-dismiss="modal"><i class="fa-solid fa-xmark me-1"></i> Cancel</button>
+              </div>
+          </form>
+      </div>
+  </div>
+</div>
     </main>
     

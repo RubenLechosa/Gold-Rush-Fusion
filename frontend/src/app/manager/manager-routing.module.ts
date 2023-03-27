@@ -11,6 +11,7 @@ import { TaskViewComponent } from './courses/task-view/task-view.component';
 import { TasksComponent } from './courses/tasks/tasks.component';
 import { UserListComponent } from './courses/user-list/user-list.component';
 import { MainComponent } from './main/main.component';
+import { UserSubmitsListComponent } from './user-submits-list/user-submits-list.component';
 import { EditUserComponent } from './users/edit-user/edit-user.component';
 import { ProfileComponent } from './users/profile/profile.component';
 
@@ -34,6 +35,7 @@ const routes: Routes = [
   {path: 'course/:id/tasks', component: TasksComponent},
   {path: 'course/:id/tasks/:id_task', component: TaskViewComponent},
   {path: 'course/:id/edit-task/:id_task', component: EditTaskComponent},
+  {path: 'course/:id/user-submits/:id_task', component: UserSubmitsListComponent},
 
   //College
   {path: 'college/:id/edit', component: EditCollegeComponent},

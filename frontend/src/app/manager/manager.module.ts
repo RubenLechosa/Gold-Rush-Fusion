@@ -19,6 +19,7 @@ import { EditCollegeComponent } from './colleges/edit-college/edit-college.compo
 import { TasksComponent } from './courses/tasks/tasks.component';
 import { TaskViewComponent } from './courses/task-view/task-view.component';
 import { EditTaskComponent } from './courses/edit-task/edit-task.component';
+import { UserSubmitsListComponent } from './user-submits-list/user-submits-list.component';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { EditTaskComponent } from './courses/edit-task/edit-task.component';
     EditCollegeComponent,
     TasksComponent,
     TaskViewComponent,
-    EditTaskComponent
+    EditTaskComponent,
+    UserSubmitsListComponent
   ],
   imports: [
     CommonModule,
