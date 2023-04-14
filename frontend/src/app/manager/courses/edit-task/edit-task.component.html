@@ -27,7 +27,7 @@
                     <div class="form-floating mb-3">
                         <select id="select_category" [ngClass]="(form.controls['id_category'].invalid && form.controls['id_category'].touched ? 'is-invalid' : '')" class="form-select form-control" ngModel="{{task_data.id_category}}" formControlName="id_category" required>
                             <option value=""></option>
-                            <option value="{{category.id_category}}" *ngFor="let category of categories">{{category.titulo}}</option>
+                            <option value="{{category.id_category}}" *ngFor="let category of categories">{{category.title}}</option>
                         </select>
                         <label for="select_category">Choose a Category</label>
                         <a type="button" data-bs-toggle="modal" data-bs-target="#addCategory" >New Category</a>

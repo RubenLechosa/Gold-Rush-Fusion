@@ -80,11 +80,13 @@ export class UserListComponent {
   }
 
   submitRemoveStudent(id_user: string) {
-    this.userService.removeCourse(String(this.id_course), String(id_user)).subscribe((result: any) => {
-      if(result.status == 200) {
-        this.reloadUsers();
-      }
-    });
+    if(confirm("Are you sure duki gay?")) {
+      this.userService.removeCourse(String(this.id_course), String(id_user)).subscribe((result: any) => {
+        if(result.status == 200) {
+          this.reloadUsers();
+        }
+      });
+    }
   }
 
   submitAddGems() {

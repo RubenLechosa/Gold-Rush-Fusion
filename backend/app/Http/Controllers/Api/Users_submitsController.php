@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -33,27 +33,20 @@ class Users_submitsController extends Controller
         $request->validate([
             'id_tasks'  => 'required',
             'id_user' => 'required',
-            'submit'  => 'required',
-            'mark' => 'required',
+            'submit'  => 'required'
         ]);
 
         $submits = new Users_submits();
         $submits->id_tasks = $request->id_tasks;
         $submits->id_user = $request->id_user;
         $submits->submit = $request->submit;
-        $submits->mark = $request->mark;
+        $submits->mark = 1;
         
         if($submits->save()) {
-            $submits = Users_submits::where("id_user", "=", $request->id_user)->first();
-            $submits->id_users_submits = $submits->id;
-
-            if($submits->save()) {
-                return response()->json([
-                    "status" => 200,
-                    "msg" => "submits creada con exito!",
-                    "id_users_submits" => $submits->id
-                ]);
-            }
+            return response()->json([
+                "status" => 200,
+                "msg" => "submits creada con exito!"
+            ]);
         }
 
         return response()->json([
@@ -62,12 +55,12 @@ class Users_submitsController extends Controller
         ]);
     }
 
-    public function getAllSubmitsByTask(Request $request) {
+    public function getAllSubmitsByCourse(Request $request) {
         $request->validate([
-            "id_task" => "required"
+            "id_course" => "required"
         ]);
 
-        $submits = Users_submits::where("id_task", "=", $request->id_task)->get();
+        $submits = Users_submits::get();
 
         if($submits) {
             return response()->json([
@@ -96,7 +89,7 @@ class Users_submitsController extends Controller
         }
                 
         $set_clause = implode(', ', $set_clause_parts);
-        $rows_affected = DB::update('UPDATE users_submits SET '.$set_clause.' where id = ?', [$request->id_users_submits]);
+        $rows_affected = DB::update('UPDATE users_submits SET '.$set_clause.' where id_users_submits = ?', [$request->id_users_submits]);
 
         if($rows_affected > 0) {
             return response()->json([
@@ -104,6 +97,18 @@ class Users_submitsController extends Controller
                 "msg"   => "Se ha actualizado con exito",
             ]);
         }
+
+        return response()->json([
+            "status" => 300,
+            "msg"   => "No se ha encontrado el submit para actualizar",
+        ]);
+    }
+
+    public function setMark(Request $request) {
+        $request->validate([
+            'id_users_submits' => 'required',
+            'mark' => 'required',
+        ]);
 
         return response()->json([
             "status" => 300,

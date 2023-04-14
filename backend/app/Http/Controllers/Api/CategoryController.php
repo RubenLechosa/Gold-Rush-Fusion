@@ -38,7 +38,7 @@ class CategoryController extends Controller
         ]);
 
         $category = new Category();
-        $category->titulo = $request->title;
+        $category->title = $request->title;
         $category->id_course = $request->id_course;
         
         if($category->save()) {

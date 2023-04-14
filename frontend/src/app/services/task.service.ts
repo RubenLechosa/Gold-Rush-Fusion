@@ -39,4 +39,16 @@ export class TaskService {
   createCategory(id_course: number, title: string) {
     return this.frameworkService.post('tasks/new-category', { title, id_course });
   }
+
+  uploadTask(id_tasks: number, id_user: number, submit: string) {
+    return this.frameworkService.post('tasks/new-upload', { id_tasks, id_user, submit });
+  }
+
+  getAllSubmitsByCourse(id_course: number) {
+    return this.frameworkService.post('tasks/get-submits', { id_course });
+  }
+
+  setMark(id_users_submits: number, mark: number) {
+    return this.frameworkService.post('tasks/set-mark', { id_users_submits, mark });
+  }
 }

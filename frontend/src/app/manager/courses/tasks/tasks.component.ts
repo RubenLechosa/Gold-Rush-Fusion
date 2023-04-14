@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { CourseService } from 'src/app/services/course.service';
@@ -11,17 +12,23 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./tasks.component.css']
 })
 export class TasksComponent {
+  @ViewChild('closeCategoryModal') closeCategoryModal!:any;
+  @ViewChild('openModal') openModal!:any;
+
   alreadySubmit: boolean = false;
   dataLoaded!: Promise<boolean>;
   user_data: any;
   id_course?: number;
   course_data: any;
   tasks_list: any;
+  submits_list: any;
+  id_users_submits: any;
 
+  markForm = new FormGroup({
+    mark: new FormControl(null, Validators.required)
+  });
 
   constructor(private authService: AuthService, private userService: UserService, private route: ActivatedRoute,  private router: Router, private courseService: CourseService, private tasksService: TaskService) { }
-
-
 
 ngOnInit(): void {
   this.route.params.subscribe(params => {
@@ -45,6 +52,7 @@ ngOnInit(): void {
           }
           
           this.reloadTasks();
+          this.reloadUploads();
           this.dataLoaded = Promise.resolve(true);
         }
       });
@@ -68,13 +76,41 @@ reloadTasks() {
   this.alreadySubmit = false;
 }
 
-deleteTask(id_task: number) {
-  this.alreadySubmit = true;
-  this.tasksService.removeTask(id_task).subscribe((tasks: any) => {
+reloadUploads() {
+  this.tasksService.getAllSubmitsByCourse(Number(this.id_course)).subscribe((tasks: any) => {
     if(tasks.status == 200) {
-      this.reloadTasks();
+      this.submits_list = tasks.data;
     }
   });
+  
+  this.alreadySubmit = false;
+}
+
+deleteTask(id_task: number) {
+  if(confirm("Are you sure little dog?")){
+    this.alreadySubmit = true;
+    this.tasksService.removeTask(id_task).subscribe((tasks: any) => {
+      if(tasks.status == 200) {
+        this.reloadTasks();
+      }
+    });
+  }
+}
+
+openMarkModal(id_subm: number) {
+  this.openModal.nativeElement.click();
+  this.id_users_submits = id_subm;
+}
+
+onsubmitMark() {
+  this.tasksService.setMark(Number(this.id_users_submits),  Number(this.markForm.get("mark")?.value)).subscribe((tasks: any) => {
+    if(tasks.status == 200) {
+      this.closeCategoryModal.nativeElement.click();
+      this.reloadUploads();
+    }
+  });
+
+  this.alreadySubmit = false;
 }
 
 }

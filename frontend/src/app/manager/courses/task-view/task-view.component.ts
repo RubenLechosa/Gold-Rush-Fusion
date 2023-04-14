@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { CourseService } from 'src/app/services/course.service';
@@ -19,6 +20,9 @@ export class TaskViewComponent {
   task_data: any;
   view_submit: boolean = false;
 
+  submitForm = new FormGroup({
+    submit: new FormControl(null, Validators.required)
+  })
 constructor(private authService: AuthService, private userService: UserService, private route: ActivatedRoute,  private router: Router, private courseService: CourseService, private tasksService: TaskService) { }
 
 
@@ -64,6 +68,14 @@ ngOnInit(): void {
 
 changeViewSubmit(bool: boolean) {
   this.view_submit = bool;
+}
+
+onSubmit() {
+  this.tasksService.uploadTask(Number(this.id_task), Number(localStorage.getItem('id')), String(this.submitForm.get("submit")?.value)).subscribe((submit: any) => {
+    if(submit.status == 200) {
+      this.router.navigate(["/manager"]);
+    }
+  });
 }
 
 }

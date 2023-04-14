@@ -9,7 +9,7 @@ use App\Http\Controllers\Api\CategoryController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FileController;
-
+use App\Http\Controllers\Api\Users_submitsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,6 +61,9 @@ Route::post('tasks/get-categories', [TasksController::class, 'getCategory']);
 Route::post('tasks/new-task', [TasksController::class, 'createTask']);
 Route::post('tasks/edit-task', [TasksController::class, 'editTask']);
 Route::post('tasks/new-category', [CategoryController::class, 'createCategory']);
+Route::post('tasks/new-upload', [Users_submitsController::class, 'createSubmits']);
+Route::post('tasks/get-submits', [Users_submitsController::class, 'getAllSubmitsByCourse']);
+Route::post('tasks/set-mark', [Users_submitsController::class, 'editSubmit']);
 
 Route::post('file',[FileController::class,'file']);
 
