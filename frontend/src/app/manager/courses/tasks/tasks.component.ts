@@ -45,11 +45,6 @@ ngOnInit(): void {
       this.courseService.getDetails(String(this.id_course)).subscribe((courses: any) => {
         if(courses.status == 200) {
           this.course_data = courses.data;
-
-          var cursos = JSON.parse(this.user_data.courses);
-          if(cursos.indexOf(this.id_course)) {
-            this.router.navigate(["/manager"]);
-          }
           
           this.reloadTasks();
           this.reloadUploads();

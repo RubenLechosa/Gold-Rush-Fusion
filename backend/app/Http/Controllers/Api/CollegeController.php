@@ -3,107 +3,99 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Category\CollegeEditRequest;
+use App\Http\Requests\Category\GetByIdCollegeRequest;
+use App\Http\Requests\College\CollegeCreateRequest;
 use App\Models\User;
 use App\Models\Colleges;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 
 class CollegeController extends Controller
 {
-    //Esta funcion muestra el perfil del usuario
-    public function getDetailsCollege(Request $request) {
-        $request->validate([
-            "id_college" => "required"
-        ]);
+    public function find() {
 
-        if($college = Colleges::where("id_college", "=", $request->id_college)->first()) {
+        $colleges = Colleges::get();
+
+        return response()->json([
+            "status" => Response::HTTP_OK,
+            "success"=> true,
+            "data"  => $colleges
+        ]);
+    }
+
+    public function findOne(GetByIdCollegeRequest $request) {
+        $request = $request->validated();
+
+        if($college = Colleges::where("id_category", "=", $request["id_college"])->first()) {
             return response()->json([
-                "status" => 200,
-                "data" => $college
+                "status" => Response::HTTP_OK,
+                "success"=> true,
+                "data"  => $college
             ]);
         }
 
         return response()->json([
-            "status" => 400,
-            "msg" => "No college data"
+            "status" => Response::HTTP_BAD_REQUEST,
+            "success"=> false
         ]);
     }
 
-    public function createCollege(Request $request) {
-        $request->validate([
-            'name'  => 'required|min:4|max:20',
-            'logo' => 'required',
-        ]);
-
-        $college = new Colleges();
-        $college->name = $request->name;
-        $college->logo = $request->logo;
- 
-
-        
-        if($college->save()) {
+    public function store(CollegeCreateRequest $request) {
+        if(Colleges::create($request->validated())) {
             return response()->json([
-                "status" => 200,
-                "msg" => "¡College creado con exito!",
-                "id_college" => $college->id
+                "status" => Response::HTTP_OK,
+                "success"=> true
             ]);
         }
 
         return response()->json([
-            "status" => 400,
-            "msg" => "¡No se ha creado el college!"
+            "status" => Response::HTTP_BAD_REQUEST,
+            "success"=> false
         ]);
     }
 
-    public function editCollege(Request $request) {
-        $request->validate([
-            'id_college' => 'required',
-        ]);
-        
-        $set_clause_parts = [];
-        foreach($request->all() as $key => $value) {
-            if($key != "id_college") {
-                $set_clause_parts[] = "{$key}='{$value}'";
+    public function update(CollegeEditRequest $request) {
+        $validated = $request->validated();
+
+        if($college = Colleges::find($validated["id_college"])) {
+            $college->fill($validated);
+
+            if($college->save()) {
+                return response()->json([
+                    "status" => Response::HTTP_OK,
+                    "success"=> true
+                ]);
             }
         }
-                
-        $set_clause = implode(', ', $set_clause_parts);
-        $rows_affected = DB::update('UPDATE colleges SET '.$set_clause.' where id_college = ?', [$request->id_college]);
-
-        if($rows_affected > 0) {
-            return response()->json([
-                "status" => 200,
-                "msg"   => "Se ha actualizado con exito",
-            ]);
-        }
 
         return response()->json([
-            "status" => 300,
-            "msg"   => "No se ha encontrado el college para actualizar",
+            "status" => Response::HTTP_BAD_REQUEST,
+            "success"=> false
         ]);
     }
 
 
     
-    public function deleteCollege(Request $request) {
-        $request->validate([
-            'id_college' => 'required'
-        ]);
-
-        $rows_affected = DB::delete('delete from colleges WHERE id = ?', [$request->id_college]);
-
-        if($rows_affected > 0) {
-            return response()->json([
-                "status" => 200,
-                "msg"   => "Se ha borrado con exito",
-            ]);
+    public function delete(GetByIdCollegeRequest $request) {
+        $request = $request->validated();
+        
+        if($college = Colleges::find($request["id_college"])) {
+            if($college->delete()) {
+                return response()->json([
+                    "status" => Response::HTTP_OK,
+                    "success"=> true
+                ]);
+            }
         }
 
         return response()->json([
-            "status" => 300,
-            "msg"   => "No se ha encontrado el college para borrar",
+            "status" => Response::HTTP_BAD_REQUEST,
+            "success"=> false,
+            "msg"   => "College not found",
         ]);
     }
 }

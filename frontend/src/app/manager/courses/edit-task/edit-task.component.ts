@@ -58,11 +58,6 @@ export class EditTaskComponent {
           if(courses.status == 200) {
             this.course_data = courses.data;
 
-            var cursos = JSON.parse(this.user_data.courses);
-            if(cursos.indexOf(this.id_course)) {
-              this.router.navigate(["/manager"]);
-            }
-
             if(this.id_task != 0) {
               this.tasksService.getTaskDetails(Number(this.id_task)).subscribe((tasks: any) => {
                 if(tasks.status == 200) {

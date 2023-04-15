@@ -3,108 +3,101 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Category\CategoryCreateRequest;
+use App\Http\Requests\Category\CategoryEditRequest;
+use App\Http\Requests\Category\GetByIdCategoryRequest;
+use App\Http\Requests\Course\GetByCourseRequest;
 use App\Models\Category;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Response;
 
 
 class CategoryController extends Controller
 {
+    public function findOne(GetByIdCategoryRequest $request) {
+        $request = $request->validated();
 
-
-    public function getDetailsCategory(Request $request) {
-        $request->validate([
-            "id_category" => "required"
-        ]);
-
-        if($category = Category::where("id", "=", $request->id_category)->first()) {
+        if($category = Category::find($request["id_category"])) {
             return response()->json([
-                "status" => 200,
-                "data" => $category
+                "status" => Response::HTTP_OK,
+                "success"=> true,
+                "data"  => $category
             ]);
         }
 
         return response()->json([
-            "status" => 400,
-            "msg" => "No category data"
+            "status" => Response::HTTP_BAD_REQUEST,
+            "success"=> false
         ]);
     }
 
 
-     public function createCategory(Request $request) {
-        $request->validate([
-            'title'  => 'required',
-            'id_course' => 'required',
-        ]);
-
-        $category = new Category();
-        $category->title = $request->title;
-        $category->id_course = $request->id_course;
-        
-        if($category->save()) {
+     public function create(CategoryCreateRequest $request) {
+        if(Category::create($request->validated())) {
             return response()->json([
-                "status" => 200,
-                "msg" => "Category creada con exito!",
-                "id_category" => $category->id
+                "status" => Response::HTTP_OK,
+                "success"=> true
             ]);
         }
 
         return response()->json([
-            "status" => 400,
-            "msg" => "¡Category no creada!"
+            "status" => Response::HTTP_BAD_REQUEST,
+            "success"=> false
         ]);
     }
 
-    public function editCategory(Request $request) {
-        $request->validate([
-            'id_category' => 'required',
-        ]);
-        
-        $set_clause_parts = [];
-        foreach($request->all() as $key => $value) {
-            if($key != "id_category") {
-                $set_clause_parts[] = "{$key}='{$value}'";
+    public function update(CategoryEditRequest $request) {
+        $validated = $request->validated();
+
+        if($category = Category::find($validated["id_category"])) {
+            $category->fill($validated);
+
+            if($category->save()) {
+                return response()->json([
+                    "status" => Response::HTTP_OK,
+                    "success"=> true
+                ]);
             }
         }
-                
-        $set_clause = implode(', ', $set_clause_parts);
-        $rows_affected = DB::update('UPDATE category SET '.$set_clause.' where id = ?', [$request->id_category]);
 
-        if($rows_affected > 0) {
+        return response()->json([
+            "status" => Response::HTTP_BAD_REQUEST,
+            "success"=> false
+        ]);
+    }
+
+    public function delete(GetByIdCategoryRequest $request) {
+        $request = $request->validated();
+        
+        if($category = Category::find($request["id_category"])) {
+            if($category->delete()) {
+                return response()->json([
+                    "status" => Response::HTTP_OK,
+                    "success"=> true
+                ]);
+            }
+        }
+
+        return response()->json([
+            "status" => Response::HTTP_BAD_REQUEST,
+            "success"=> false,
+            "msg"   => "Category not found",
+        ]);
+    }
+
+    public function getCategoriesOnCourse(GetByCourseRequest $request) {
+        $request = $request->validated();
+
+        if($categories = Category::where("id_course", "=", $request["id_course"])->get()) {
             return response()->json([
-                "status" => 200,
-                "msg"   => "Se ha actualizado con exito",
+                "status" => Response::HTTP_OK,
+                "success"=> true,
+                "data"  => $categories
             ]);
         }
 
         return response()->json([
-            "status" => 300,
-            "msg"   => "No se ha encontrado el category para actualizar",
+            "status" => Response::HTTP_BAD_REQUEST,
+            "success"=> false
         ]);
     }
-
-    public function deleteCategory(Request $request) {
-        $request->validate([
-            'id_category' => 'required'
-        ]);
-
-        $rows_affected = DB::delete('delete from category WHERE id = ?', [$request->id_category]);
-
-        if($rows_affected > 0) {
-            return response()->json([
-                "status" => 200,
-                "msg"   => "Se ha borrado con exito",
-            ]);
-        }
-
-        return response()->json([
-            "status" => 300,
-            "msg"   => "No se ha encontrado el category para borrar",
-        ]);
-    }
-
-
-
-
-
 }

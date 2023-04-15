@@ -3,36 +3,25 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Category\GetByIdCollegeRequest;
+use App\Http\Requests\Course\GetByCourseRequest;
+use App\Http\Requests\Users\GetByIdUserRequest;
+use App\Http\Requests\Users\UserEditRequest;
+use App\Http\Requests\Users\UserLoginRequest;
+use App\Http\Requests\Users\UserRegisterRequest;
 use App\Models\User;
 use App\Models\Colleges;
 use App\Models\Courses;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    //Esta funcion introduce un nuevo usuario a la BD
-    public function register(Request $request) {
-        $request->validate([
-            'nick'  => 'required|unique:users',
-            'name' => 'required',
-            'last_name' => 'required',
-            'email' => 'required|email|unique:users',
-            'college'=> 'required',
-            'password' => 'required|confirmed|min:6'
-        ]);
-
-        $user = new User();
-        $user->nick = $request->nick;
-        $user->name = $request->name;
-        $user->last_name = $request->last_name;
-        $user->email = $request->email;
-        $user->role = 'college_manager';
-        $user->inventory = "{}";
-        $user->courses = "{}";
-        $user->password = Hash::make($request->password);
+    public function register(UserRegisterRequest $request) {
+        $request = $request->validated();
 
         $college = new Colleges();
         $college->college_name = $request->college;
@@ -41,179 +30,149 @@ class UserController extends Controller
         $college->requests = '[]';
         $college->save();
 
-        $user->id_college = $college->id;
-        
-        if($user->save()) {
+        $request["password"] = Hash::make($request->password);
+        $request["id_college"] = $college->id;
+        $request["role"] = 'college_manager';
+        $request["inventory"] = "{}";
+        $request["courses"] = "{}";
+
+        if(User::create($request)) {
             return response()->json([
-                "status" => 200,
-                "msg" => "¡Registro de usuario exitoso!",
-                "id_user" => $user->id_user
+                "status" => Response::HTTP_OK,
+                "success"=> true
             ]);
         }
 
         return response()->json([
-            "status" => 400,
-            "msg" => "¡Registro Fallido!"
+            "status" => Response::HTTP_BAD_REQUEST,
+            "success"=> false
         ]);
+        
     }
 
-    //Esta funcion comprueba que el usuario existe y lo autentica con un token
-    public function login(Request $request) {
-        $request->validate([
-            "email" => "required|email",
-            "password" => "required"
-        ]);
+    public function login(UserLoginRequest $request) {
+        $request = $request->validated();
 
-        $user = User::where("email", "=", $request->email)->first();
-        if(isset($user->id_user)){
+        if($user = User::where("email", "=", $request["email"])->first()) {
             if(Hash::check($request->password, $user->password)){
-
                 return response()->json([
-                    "status" => 200,
+                    "status" => Response::HTTP_OK,
+                    "success"=> true,
                     "id_user" => $user->id_user,
-                    "access_token" => "logged"
                 ]);
             }else{
                 return response()->json([
-                    "status" => 401,
-                    "msg" => "La password es incorrecta",
+                    "status" => Response::HTTP_BAD_REQUEST,
+                    "success"=> false,
+                    "msg"   => "Password not match",
                 ]);
             }
-        }else{
-            return response()->json([
-                "status" => 401,
-                "msg" => "Usuario no registrado",
-            ]);
         }
-    }
-
-    public function update(Request $request) {
-        $request->validate([
-            'id_user' => 'required',
-        ]);
         
-        $set_clause_parts = [];
-        foreach($request->all() as $key => $value) {
-            if($key != "id_user") {
-                $set_clause_parts[] = "{$key}='{$value}'";
-            }
-        }
-                
-        $set_clause = implode(', ', $set_clause_parts);
-        $rows_affected = DB::update('UPDATE users SET '.$set_clause.' where id_user = ?', [$request->id_user]);
-
-        if($rows_affected > 0) {
-            return response()->json([
-                "status" => 200,
-                "msg"   => "Se ha actualizado con exito",
-            ]);
-        }
-
         return response()->json([
-            "status" => 300,
-            "msg"   => "No se ha encontrado el profesor para actualizar",
+            "status" => Response::HTTP_BAD_REQUEST,
+            "success"=> false,
+            "msg"   => "User not found",
         ]);
     }
+    
+    public function update(UserEditRequest $request) {
+        $validated = $request->validated();
 
-        // Delete specific product
-        public function delete(Request $request) {
-            $request->validate([
-                'id_user' => 'required'
-            ]);
-    
-            $rows_affected = DB::delete('delete from users WHERE id_user = ?', [$request->id_user]);
-    
-            if($rows_affected > 0) {
+        if($user = User::find($validated["id_user"])) {
+            $user->fill($validated);
+
+            if($user->save()) {
                 return response()->json([
-                    "status" => 200,
-                    "msg"   => "Se ha borrado con exito",
+                    "status" => Response::HTTP_OK,
+                    "success"=> true
                 ]);
             }
-    
-            return response()->json([
-                "status" => 300,
-                "msg"   => "No se ha encontrado el producto para borrar",
-            ]);
         }
 
-    //Esta funcion muestra el perfil del usuario
-    public function getDetails(Request $request) {
-        $request->validate([
-            "id_user" => "required"
+        return response()->json([
+            "status" => Response::HTTP_BAD_REQUEST,
+            "success"=> false
         ]);
+    }
 
-        $user = User::where("id_user", "=", $request->id_user)->leftJoin('colleges', 'users.id_college', '=', 'colleges.id_college')->leftJoin('popers', 'users.id_poper', '=', 'popers.id_poper')->first();
+    public function delete(GetByIdUserRequest $request) {
+        $request = $request->validated();
+        
+        if($user = Courses::find($request["id_user"])) {
+            if($user->delete()) {
+                return response()->json([
+                    "status" => Response::HTTP_OK,
+                    "success"=> true
+                ]);
+            }
+        }
+
+        return response()->json([
+            "status" => Response::HTTP_BAD_REQUEST,
+            "success"=> false,
+            "msg"   => "User not found",
+        ]);
+    }
+
+    public function findOne(GetByIdUserRequest $request) {
+        $request = $request->validated();
+
+        $user = User::where("id_user", "=", $request["id_user"])
+                    ->leftJoin('colleges', 'users.id_college', '=', 'colleges.id_college')
+                    ->leftJoin('popers', 'users.id_poper', '=', 'popers.id_poper')
+                    ->first();
 
         if($user) {
             return response()->json([
-                "status" => 200,
+                "status" => Response::HTTP_OK,
+                "success"=> true,
                 "data" => $user
             ]);
         }
 
         return response()->json([
-            "status" => 400,
-            "msg" => "No user data"
+            "status" => Response::HTTP_BAD_REQUEST,
+            "success"=> false,
+            "msg"   => "User not found",
         ]);
     }
 
-    public function getAllUsersByCourse(Request $request) {
-        $request->validate([
-            "id_course" => "required"
-        ]);
+    public function getAllUsersByCourse(GetByCourseRequest $request) {
+        $request = $request->validated();
 
-        $users = User::whereJsonContains('courses', $request->id_course)->leftJoin('colleges', 'users.id_college', '=', 'colleges.id_college')->get();
+        $users = User::whereJsonContains('courses', $request["id_course"])->leftJoin('colleges', 'users.id_college', '=', 'colleges.id_college')->get();
 
         if($users) {
             return response()->json([
-                "status" => 200,
+                "status" => Response::HTTP_OK,
+                "success"=> true,
                 "data" => $users
             ]);
         }
 
         return response()->json([
-            "status" => 400,
-            "msg" => "No users data"
+            "status" => Response::HTTP_BAD_REQUEST,
+            "success"=> false,
+            "msg"   => "User not found",
         ]);
     }
 
-    public function getAllUsersByCollege(Request $request) {
-        $request->validate([
-            "id_college" => "required"
-        ]);
+    public function getAllUsersByCollege(GetByIdCollegeRequest $request) {
+        $request = $request->validated();
 
-        $users = User::where("id_college", "=", $request->id_college)->get();
-
-        if($users) {
+        if($users = User::where("id_college", "=", $request["id_college"])->get()) {
             return response()->json([
-                "status" => 200,
+                "status" => Response::HTTP_OK,
+                "success"=> true,
                 "data" => $users
             ]);
         }
 
         return response()->json([
-            "status" => 400,
-            "msg" => "No user data"
-        ]);
-    }
-
-    public function getAllTeachersByCollege(Request $request) {
-        $request->validate([
-            "id_college" => "required"
-        ]);
-
-        $user = User::where("id_college", "=", $request->id_college)->get();
-
-        if($user) {
-            return response()->json([
-                "status" => 200,
-                "data" => $user
-            ]);
-        }
-
-        return response()->json([
-            "status" => 400,
-            "msg" => "No user data"
+            "status" => Response::HTTP_BAD_REQUEST,
+            "success"=> false,
+            "msg"   => "User not found",
         ]);
     }
 

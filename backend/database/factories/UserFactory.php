@@ -37,13 +37,6 @@ class UserFactory extends Factory
             'inventory' => "{}",
             'birth_date'=>fake()->date(),
             'force_change_pass' =>fake()->boolean()
-
-
-
-
-
-
-          //  fake()->randomNumber();
             
         ];
     }

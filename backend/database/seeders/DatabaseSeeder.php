@@ -30,7 +30,7 @@ class DatabaseSeeder extends Seeder
 
         \App\Models\User::factory()->create([
             'name' => 'Myke',
-            'email' => 'test@duki.com',
+            'email' => 'alex@test.com',
             'last_name' => 'Towers',
             'nick'=> 'MykeTowers69',
             'email_verified_at' => now(),

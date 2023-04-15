@@ -9,6 +9,8 @@ class Popers extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'id_poper';
+
     protected $fillable = [
         'poper_name',
         'skin',

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger("id_tasks")->nullable();
             $table->unsignedBigInteger("id_user")->nullable();
             $table->text('submit');
-            $table->integer("mark");
+            $table->integer("mark")->default(0);
             $table->timestamps();
         });
     }

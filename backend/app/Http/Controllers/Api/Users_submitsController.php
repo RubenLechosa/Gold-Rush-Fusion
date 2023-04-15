@@ -3,136 +3,103 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\User_Submits\SubmitsCreateRequest;
+use App\Http\Requests\User_Submits\SubmitsEditRequest;
+use App\Http\Requests\Course\GetByCourseRequest;
+use App\Http\Requests\User_Submits\SubmitsGetByIdRequest;
 use Illuminate\Http\Request;
 use App\Models\Users_submits;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 
 
 class Users_submitsController extends Controller
 {
-    public function getDetailsSubmits(Request $request) {
-        $request->validate([
-            "id_users_submits" => "required"
-        ]);
+    public function findOne(SubmitsGetByIdRequest $request) {
+        $request = $request->validated();
 
-        if($submits = Users_submits::where("id", "=", $request->submits)->first()) {
+        if($submit = Users_submits::where("id_users_submits", "=", $request["id_users_submits"])->first()) {
             return response()->json([
-                "status" => 200,
-                "data" => $submits
+                "status" => Response::HTTP_OK,
+                "success"=> true,
+                "data"  => $submit
             ]);
         }
 
         return response()->json([
-            "status" => 400,
-            "msg" => "No submits data"
+            "status" => Response::HTTP_BAD_REQUEST,
+            "success"=> false
         ]);
     }
 
 
-     public function createSubmits(Request $request) {
-        $request->validate([
-            'id_tasks'  => 'required',
-            'id_user' => 'required',
-            'submit'  => 'required'
-        ]);
-
-        $submits = new Users_submits();
-        $submits->id_tasks = $request->id_tasks;
-        $submits->id_user = $request->id_user;
-        $submits->submit = $request->submit;
-        $submits->mark = 1;
-        
-        if($submits->save()) {
+     public function create(SubmitsCreateRequest $request) {
+        if(Users_submits::create($request->validated())) {
             return response()->json([
-                "status" => 200,
-                "msg" => "submits creada con exito!"
+                "status" => Response::HTTP_OK,
+                "success"=> true
             ]);
         }
 
         return response()->json([
-            "status" => 400,
-            "msg" => "Submit no creada!"
+            "status" => Response::HTTP_BAD_REQUEST,
+            "success"=> false
         ]);
     }
 
-    public function getAllSubmitsByCourse(Request $request) {
-        $request->validate([
-            "id_course" => "required"
-        ]);
+    public function findByCourse(GetByCourseRequest $request) {
+        $request = $request->validated();
 
-        $submits = Users_submits::get();
-
-        if($submits) {
+        if($submits = Users_submits::where("id_course", "=", $request["id_course"])->get()) {
             return response()->json([
-                "status" => 200,
-                "data" => $submits
+                "status" => Response::HTTP_OK,
+                "success"=> true,
+                "data"  => $submits
             ]);
         }
 
         return response()->json([
-            "status" => 400,
-            "msg" => "No user data"
+            "status" => Response::HTTP_BAD_REQUEST,
+            "success"=> false
         ]);
     }
 
+    public function update(SubmitsEditRequest $request) {
+        $validated = $request->validated();
 
-    public function editSubmit(Request $request) {
-        $request->validate([
-            'id_users_submits' => 'required',
-        ]);
-        
-        $set_clause_parts = [];
-        foreach($request->all() as $key => $value) {
-            if($key != "id_users_submits") {
-                $set_clause_parts[] = "{$key}='{$value}'";
+        if($submit = Users_submits::find($validated["id_users_submits"])) {
+            $submit->fill($validated);
+
+            if($submit->save()) {
+                return response()->json([
+                    "status" => Response::HTTP_OK,
+                    "success"=> true
+                ]);
             }
         }
-                
-        $set_clause = implode(', ', $set_clause_parts);
-        $rows_affected = DB::update('UPDATE users_submits SET '.$set_clause.' where id_users_submits = ?', [$request->id_users_submits]);
-
-        if($rows_affected > 0) {
-            return response()->json([
-                "status" => 200,
-                "msg"   => "Se ha actualizado con exito",
-            ]);
-        }
 
         return response()->json([
-            "status" => 300,
-            "msg"   => "No se ha encontrado el submit para actualizar",
+            "status" => Response::HTTP_BAD_REQUEST,
+            "success"=> false
         ]);
     }
 
-    public function setMark(Request $request) {
-        $request->validate([
-            'id_users_submits' => 'required',
-            'mark' => 'required',
-        ]);
-
-        return response()->json([
-            "status" => 300,
-            "msg"   => "No se ha encontrado el submit para actualizar",
-        ]);
-    }
-
-    public function deleteSubmit(Request $request) {
-        $request->validate([
-            'id_users_submits' => 'required'
-        ]);
-
-        $rows_affected = DB::delete('delete from users_submits WHERE id = ?', [$request->id_users_submits]);
-
-        if($rows_affected > 0) {
-            return response()->json([
-                "status" => 200,
-                "msg"   => "Se ha borrado con exito",
-            ]);
+    public function delete(SubmitsGetByIdRequest $request) {
+        $request = $request->validated();
+        
+        if($submit = Users_submits::find($request["id_user_submits"])) {
+            if($submit->delete()) {
+                return response()->json([
+                    "status" => Response::HTTP_OK,
+                    "success"=> true
+                ]);
+            }
         }
 
         return response()->json([
-            "status" => 300,
-            "msg"   => "No se ha encontrado el submit para borrar",
+            "status" => Response::HTTP_BAD_REQUEST,
+            "success"=> false,
+            "msg"   => "Submit not found",
         ]);
     }
 }

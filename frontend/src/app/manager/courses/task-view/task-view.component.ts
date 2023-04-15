@@ -45,11 +45,6 @@ ngOnInit(): void {
         if(courses.status == 200) {
           this.course_data = courses.data;
 
-          var cursos = JSON.parse(this.user_data.courses);
-          if(cursos.indexOf(this.id_course)) {
-            this.router.navigate(["/manager"]);
-          }
-
           this.tasksService.getTaskDetails(Number(this.id_task)).subscribe((tasks: any) => {
             if(tasks.status == 200) {
               this.task_data = tasks.data;

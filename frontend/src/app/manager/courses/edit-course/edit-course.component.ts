@@ -74,7 +74,9 @@ export class EditCourseComponent {
     }
     
     const formData = new FormData();
-    formData.append("img", this.files, this.files.name);
+    if(this.files != null) {
+      formData.append("img", this.files, this.files.name);
+    }
 
     this.alreadySubmit = true;
     if(this.id_course != 0) {
@@ -89,7 +91,7 @@ export class EditCourseComponent {
       });
     } else {
       this.courseService.createCourse(String(this.form.get('course_name')?.value), String(this.form.get('id_teacher')?.value), this.user_data.id_college, String(this.form.get('img')?.value)).subscribe((courses: any) => {
-        if(courses.status == 200) {
+        if(courses.status == 200 && this.files != null) {
           this.courseService.uploadFile(String(this.form.get("img")?.value)).subscribe((result: any) => {
             this.router.navigate(["/manager"]);
           });
