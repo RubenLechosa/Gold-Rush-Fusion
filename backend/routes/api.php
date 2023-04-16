@@ -43,6 +43,7 @@ Route::post('course/get-details', [CoursesController::class, 'findOne']);
 Route::post('course/get-users', [UserController::class, 'getAllUsersByCourse']);
 Route::post('course/get-ranking', [CoursesController::class, 'getRanking']);
 Route::post('course/refresh-code', [CoursesController::class, 'refreshCode']);
+Route::post('course/delete', [CoursesController::class, 'delete']);
 
 //Requests Course
 Route::post('course/get-requests', [CoursesController::class, 'getAllUsersByRequests']);

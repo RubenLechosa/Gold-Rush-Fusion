@@ -37,6 +37,11 @@ export class CourseService {
     return this.frameworkService.post('course/resolve-request', { id_course, id_user, accepted });
   }
 
+  deleteCourse(id_course: number) {
+    return this.frameworkService.post('course/delete', { id_course });
+  }
+
+
   refreshCode(id_course: string) {
     return this.frameworkService.post('course/refresh-code', { id_course });
   }

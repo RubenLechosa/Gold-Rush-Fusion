@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { CollegeService } from 'src/app/services/college.service';
+import { CourseService } from 'src/app/services/course.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -21,7 +22,7 @@ export class MainComponent implements OnInit {
     code: new FormControl(null, Validators.required)
   });
 
-  constructor(private authService: AuthService, private userService: UserService, private router: Router) { }
+  constructor(private authService: AuthService, private userService: UserService, private router: Router, private courseService: CourseService) { }
 
   ngOnInit(): void {
     this.userService.getUserDetails(String(localStorage.getItem('id'))).subscribe((response: any) => {
@@ -61,6 +62,15 @@ export class MainComponent implements OnInit {
       if(courses.status == 200) {
         this.reloadCourses();
         this.closebutton.nativeElement.click();
+      }
+    });
+  }
+
+  removeCourse(id_course: number) {
+    this.courseService.deleteCourse(id_course).subscribe((courses: any) => {
+      console.log(courses);
+      if(courses.status == 200) {
+        this.reloadCourses();
       }
     });
   }
