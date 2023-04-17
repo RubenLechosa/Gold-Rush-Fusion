@@ -33,7 +33,7 @@
                     </div>
                     <div class="boton" *ngIf="user_data.role == 'college_manager' || user_data.role == 'teacher'|| user_data.role == 'admin'">
                         <a class="btn btn-login" href="/manager/course/edit/{{course.id_course}}">Edit</a>
-                        <a class="btn btn-danger" href="#" (click)="removeCourse(course.id_course)">Delete</a>
+                        <button class="btn btn-danger w-100" (click)="removeCourse(course.id_course)">Delete</button>
                     </div>
                 </a> 
             </div>  

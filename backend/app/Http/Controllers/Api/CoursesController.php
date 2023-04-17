@@ -32,7 +32,7 @@ class CoursesController extends Controller
             } else if($user->role == "teacher") {
                 $courses = Courses::where("courses.id_college", "=", $user->id_college)->where("courses.id_teacher", "=", $user->id_user)->leftJoin('users', 'courses.id_teacher', '=', 'users.id_user')->get();
             } else if($user->role == "admin") {
-                $courses = Courses::leftJoin('users', 'courses.id_teacher', '=', 'users.id_user')->get();
+                $courses = Courses::get();
             } else {
                 foreach (json_decode($user->courses, true) as $id_course) {
                     $courses[] = Courses::where("id_course", "=", $id_course)->leftJoin('users', 'courses.id_teacher', '=', 'users.id_user')->first();

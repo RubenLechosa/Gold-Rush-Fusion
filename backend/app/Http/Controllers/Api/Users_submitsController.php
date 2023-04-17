@@ -7,6 +7,7 @@ use App\Http\Requests\User_Submits\SubmitsCreateRequest;
 use App\Http\Requests\User_Submits\SubmitsEditRequest;
 use App\Http\Requests\Course\GetByCourseRequest;
 use App\Http\Requests\User_Submits\SubmitsGetByIdRequest;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Users_submits;
 use Illuminate\Http\Response;
@@ -50,7 +51,11 @@ class Users_submitsController extends Controller
     public function findByCourse(GetByCourseRequest $request) {
         $request = $request->validated();
 
-        if($submits = Users_submits::where("id_course", "=", $request["id_course"])->get()) {
+        if($submits = Users_submits::where("id_course", "=", $request["id_course"])
+                ->leftJoin('tasks', 'tasks.id_tasks', '=', 'users_submits.id_tasks')
+                ->leftJoin('users', 'users.id_user', '=', 'users_submits.id_user')
+                ->get()
+        ) {
             return response()->json([
                 "status" => Response::HTTP_OK,
                 "success"=> true,
@@ -71,6 +76,30 @@ class Users_submitsController extends Controller
             $submit->fill($validated);
 
             if($submit->save()) {
+                return response()->json([
+                    "status" => Response::HTTP_OK,
+                    "success"=> true
+                ]);
+            }
+        }
+
+        return response()->json([
+            "status" => Response::HTTP_BAD_REQUEST,
+            "success"=> false
+        ]);
+    }
+
+    public function setMark(SubmitsEditRequest $request) {
+        $validated = $request->validated();
+
+        if($submit = Users_submits::find($validated["id_users_submits"])) {
+            $user = User::find($submit["id_user"]);
+            $user->pepas += $validated["mark"] * 10;
+            $submit->fill($validated);
+
+            if($submit->save()) {
+                $user->save();
+                
                 return response()->json([
                     "status" => Response::HTTP_OK,
                     "success"=> true

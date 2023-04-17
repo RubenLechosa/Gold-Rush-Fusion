@@ -111,8 +111,8 @@
                 </thead>
                 <tbody>
                   <tr *ngFor="let submit of submits_list">
-                    <th><a href="#">Nombre Tarea </a></th>
-                    <th><a href="#">MYKETOWERS69 </a></th>
+                    <th><a href="#">{{submit.title}} </a></th>
+                    <th><a href="#">{{submit.nick}} </a></th>
                     <td>{{submit.created_at}}</td>
                     <td><span class="onTime">On Time</span></td>
                     <td><span>{{submit.mark}}</span></td>

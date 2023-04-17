@@ -40,8 +40,8 @@ export class TaskService {
     return this.frameworkService.post('tasks/new-category', { title, id_course });
   }
 
-  uploadTask(id_tasks: number, id_user: number, submit: string) {
-    return this.frameworkService.post('tasks/new-upload', { id_tasks, id_user, submit });
+  uploadTask(id_tasks: number, id_course: number, id_user: number, submit: string) {
+    return this.frameworkService.post('tasks/new-upload', { id_tasks, id_course, id_user, submit });
   }
 
   getAllSubmitsByCourse(id_course: number) {

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Category\GetByIdCollegeRequest;
+use App\Http\Requests\College\GetByIdCollegeRequest;
 use App\Http\Requests\Course\GetByCourseRequest;
 use App\Http\Requests\Users\GetByIdUserRequest;
 use App\Http\Requests\Users\UserEditRequest;

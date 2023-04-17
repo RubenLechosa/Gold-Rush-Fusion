@@ -25,6 +25,7 @@ class SubmitsCreateRequest extends FormRequest
     {
         return [
             'id_tasks' => 'required',
+            'id_course' => 'required',
             'id_user' => 'required',
             'submit' => '',
             'mark' => '',

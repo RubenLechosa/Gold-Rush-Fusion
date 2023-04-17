@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('users_submits', function (Blueprint $table) {
             $table->id("id_users_submits");
+            $table->unsignedBigInteger("id_course");
             $table->unsignedBigInteger("id_tasks")->nullable();
             $table->unsignedBigInteger("id_user")->nullable();
             $table->text('submit');

@@ -12,6 +12,7 @@ class Users_submits extends Model
 
     protected $fillable = [
         'id_tasks',
+        'id_course',
         'id_user',
         'submit',
         'mark',

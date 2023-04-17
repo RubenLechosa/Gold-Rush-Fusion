@@ -19,10 +19,11 @@ class Users_submitsFactory extends Factory
     {
         $idsTasks = DB::table('tasks')->pluck('id_tasks');
         $idsUser = DB::table('users')->pluck('id_user');
-
+        $idsCourse = DB::table('courses')->pluck('id_course');
 
         return [
             'id_tasks' => fake()->randomElement($idsTasks),
+            'id_course' => fake()->randomElement($idsCourse),
             'id_user' => fake()->randomElement($idsUser),
             'submit' => "{}",
             'mark' => fake()->numberBetween(1, 10),

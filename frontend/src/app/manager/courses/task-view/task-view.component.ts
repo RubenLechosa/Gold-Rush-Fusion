@@ -66,7 +66,7 @@ changeViewSubmit(bool: boolean) {
 }
 
 onSubmit() {
-  this.tasksService.uploadTask(Number(this.id_task), Number(localStorage.getItem('id')), String(this.submitForm.get("submit")?.value)).subscribe((submit: any) => {
+  this.tasksService.uploadTask(Number(this.id_task), Number(this.id_course), Number(localStorage.getItem('id')), String(this.submitForm.get("submit")?.value)).subscribe((submit: any) => {
     if(submit.status == 200) {
       this.router.navigate(["/manager"]);
     }
