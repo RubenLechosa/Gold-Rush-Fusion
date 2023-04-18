@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('description');
             $table->text('file_rubrica')->nullable();
-            $table->text('contents');
+            $table->text('contents')->default("{}");
             $table->date('limit_date')->nullable();
             $table->integer('percentage');
             $table->integer('max_mark');

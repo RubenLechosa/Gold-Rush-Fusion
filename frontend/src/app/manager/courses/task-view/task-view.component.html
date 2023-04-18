@@ -11,7 +11,7 @@
                         <a href="/manager/course/{{id_course}}/tasks"><i class="fa-solid fa-angle-left fa-2xl"></i></a> 
                         <h1 class="text-white">{{task_data.title}}</h1>   
                     </div>
-                    <button class="btn btn-login" (click)="changeViewSubmit(true)">Nuevo Intento</button>
+                    <button class="btn btn-login" (click)="changeViewSubmit(true)" *ngIf="task_data.type == 'task' || task_data.type == 'exam'">Nuevo Intento</button>
                 </div>
                 <div class="desc">
                     <h6 *ngIf="task_data.description">Description</h6>
@@ -21,7 +21,7 @@
                 <div class="task" *ngIf="task_data.type == 'task'">
                     <div class="taskInfo">
                         <p>Fecha de entrega: 14/15/2002</p>
-                        <p>Peso: 10%</p>
+                        <p>Peso: {{task_data.percentage}}%</p>
                         <p>Disponible después de 6 de mar en 17:10</p>
                         <div class="enun">
                             <span>Enunciado: </span><a href="#">Nombre.pdf</a>
@@ -57,9 +57,6 @@
                                   <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home"
                                     type="button" role="tab" aria-controls="nav-home" aria-selected="true"><i
                                       class="fa-solid fa-house-user"></i> File</button>
-                                  <button class="nav-link" id="nav-content-tab" data-bs-toggle="tab" data-bs-target="#nav-file"
-                                    type="button" role="tab" aria-controls="nav-file" aria-selected="false"><i
-                                      class="fa-solid fa-list-check"></i> Text</button>
                                 </div>
                             </nav>
 
@@ -67,15 +64,24 @@
                                 <!--home Tab-->
                                 <div class="tab-pane show active fade" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                                     <div class="">
-                                        <div class="container">
+                                        <div class="container" *ngIf="!task_submit">
                                             <div class="row">
                                                 <form action="" class="mt-3" (ngSubmit)="onSubmit()" [formGroup]="submitForm">
-                                                    
+                                                    <label for="">Files</label>
+                                                    <input type="file" id="img" name="contents[file]" class="form-control" (change)="uploadImage($event)">
+
                                                     <label for="">Comments</label>
-                                                    <textarea name="" placeholder="Submit Comments" class="form-control mt-2" formControlName="submit"></textarea>
+                                                    <textarea name="contents[comments]" placeholder="Submit Comments" class="form-control mt-2" formControlName="submit"></textarea>
 
                                                     <button class="pull-right btn btn-primary mt-3" type="submit">Submit</button>
                                                 </form>
+                                            </div>
+                                        </div>
+
+                                        <div class="container" *ngIf="task_submit">
+                                            <div class="row">
+                                                <h2>Ya esta enviado mi rey!</h2>
+                                                <button class="btn btn-primary align-center" (click)="changeTaskSubmit(false)">Volver a Entregar</button>
                                             </div>
                                         </div>
                                     </div>

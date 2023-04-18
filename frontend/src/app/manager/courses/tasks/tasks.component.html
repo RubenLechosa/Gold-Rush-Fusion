@@ -22,7 +22,7 @@
                 role="tab" aria-controls="nav-profile" aria-selected="false"><i class="fa-brands fa-wpforms"></i>
                 Forum</button>
               <button class="nav-link" id="nav-marks-tab" data-bs-toggle="tab" data-bs-target="#nav-marks" type="button"
-                role="tab" aria-controls="nav-profile" aria-selected="false" *ngIf="user_data.role == 'teacher'"><i class="fa-solid fa-check"></i>
+                role="tab" aria-controls="nav-profile" aria-selected="false" *ngIf="user_data.role == 'teacher' || user_data.role == 'college_manager' || user_data.role == 'admin'"><i class="fa-solid fa-check"></i>
                 Marks</button>
             </div>
           </nav>
@@ -70,7 +70,6 @@
                       class="btn btn-secondary pull-right ms-3 text-white"
                       *ngIf="user_data.role == 'teacher' || user_data.role == 'college_manager' || user_data.role == 'admin'"><i
                         class="fa-solid fa-pen-to-square m-0"></i></a>
-                    <span class="pull-right text-muted" *ngIf="task.type == 'task' || task.type == 'exam'">0/100</span>
                   </div>
 
                 </div>

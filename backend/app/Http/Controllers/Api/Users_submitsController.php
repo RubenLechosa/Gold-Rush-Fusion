@@ -7,6 +7,7 @@ use App\Http\Requests\User_Submits\SubmitsCreateRequest;
 use App\Http\Requests\User_Submits\SubmitsEditRequest;
 use App\Http\Requests\Course\GetByCourseRequest;
 use App\Http\Requests\User_Submits\SubmitsGetByIdRequest;
+use App\Http\Requests\User_Submits\SubmitsGetByUserAndId;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Users_submits;
@@ -16,10 +17,10 @@ use Illuminate\Support\Facades\DB;
 
 class Users_submitsController extends Controller
 {
-    public function findOne(SubmitsGetByIdRequest $request) {
+    public function findOne(SubmitsGetByUserAndId $request) {
         $request = $request->validated();
 
-        if($submit = Users_submits::where("id_users_submits", "=", $request["id_users_submits"])->first()) {
+        if($submit = Users_submits::where("id_tasks", "=", $request["id_task"])->where("id_user", "=", $request["id_user"])->first()) {
             return response()->json([
                 "status" => Response::HTTP_OK,
                 "success"=> true,
@@ -35,7 +36,14 @@ class Users_submitsController extends Controller
 
 
      public function create(SubmitsCreateRequest $request) {
-        if(Users_submits::create($request->validated())) {
+        $validated = $request->validated();
+        if($submits = Users_submits::where("id_tasks", "=", $validated["id_tasks"])->where("id_user", "=", $validated["id_user"])->get()) {
+            foreach ($submits as $idx => $submit) {
+                $submit->delete();
+            }
+        }
+
+        if(Users_submits::create($validated)) {
             return response()->json([
                 "status" => Response::HTTP_OK,
                 "success"=> true

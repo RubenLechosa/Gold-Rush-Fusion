@@ -70,6 +70,7 @@ Route::post('tasks/get-categories', [CategoryController::class, 'getCategoriesOn
 // Task_submits
 Route::post('tasks/new-upload', [Users_submitsController::class, 'create']);
 Route::post('tasks/get-submits', [Users_submitsController::class, 'findByCourse']);
+Route::post('tasks/get-submit', [Users_submitsController::class, 'findOne']);
 Route::post('tasks/set-mark', [Users_submitsController::class, 'setMark']);
 
 // Post Files

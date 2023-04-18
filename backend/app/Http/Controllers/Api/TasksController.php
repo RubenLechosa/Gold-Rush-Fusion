@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Tasks\GetByIdTaskRequest;
 use App\Http\Requests\Tasks\TasksEditRequest;
+use App\Http\Requests\Tasks\TasksCreateRequest;
 use App\Http\Requests\Course\GetByCourseRequest;
 use App\Http\Requests\Users\GetByIdUserRequest;
 use App\Models\Tasks;
@@ -14,7 +15,7 @@ use Illuminate\Http\Response;
 
 class TasksController extends Controller
 {
-    public function create(Request $request) {
+    public function create(TasksCreateRequest $request) {
         if(Tasks::create($request->validated())) {
             return response()->json([
                 "status" => Response::HTTP_OK,

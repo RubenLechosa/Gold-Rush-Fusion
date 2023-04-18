@@ -48,6 +48,10 @@ export class TaskService {
     return this.frameworkService.post('tasks/get-submits', { id_course });
   }
 
+  getSubmitDetails(id_task: number, id_user: number) {
+    return this.frameworkService.post('tasks/get-submit', { id_task, id_user });
+  }
+
   setMark(id_users_submits: number, mark: number) {
     return this.frameworkService.post('tasks/set-mark', { id_users_submits, mark });
   }
