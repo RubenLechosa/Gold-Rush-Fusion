@@ -106,3 +106,12 @@ h1 {
   background-color: var(--yellow);
   color: black;
 }
+
+.buttonsAlign{
+  display: flex;
+  z-index: 1000;
+}
+
+.buttonsAlign .delete{
+  color: var(--red);
+}

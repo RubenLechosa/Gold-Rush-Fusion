@@ -22,20 +22,23 @@
                         Enter code
                         (El mas en grande y enter code abajo)
                     </div>
-                </div>             
-                <a *ngFor="let course of user_data.courses" class="card text-decoration-none text-black" href="/manager/course/{{course.id_course}}">
-                    <div class="imgCurso">   
-                        <img src="{{(course.img != 'null' && course.img != ''  ? course.img : '/assets/img/defaultCourse.jpg')}}" class="card-img-top" alt="Imagen del Curso">
-                    </div>
-                    <div class="card-body">
-                        <h5>{{course.course_name}}</h5>
-                        <p><span>Teacher: </span>{{course.name}}</p> 
-                    </div>
-                    <div class="boton" *ngIf="user_data.role == 'college_manager' || user_data.role == 'teacher'|| user_data.role == 'admin'">
-                        <a class="btn btn-login" href="/manager/course/edit/{{course.id_course}}">Edit</a>
-                        <button class="btn btn-danger w-100" (click)="removeCourse(course.id_course)">Delete</button>
-                    </div>
-                </a> 
+                </div> 
+                <div *ngFor="let course of user_data.courses" class="card text-decoration-none text-black">   
+                    <a href="/manager/course/{{course.id_course}}">
+                        <div class="imgCurso">   
+                            <img src="{{(course.img != 'null' && course.img != ''  ? course.img : '/assets/img/defaultCourse.jpg')}}" class="card-img-top" alt="Imagen del Curso">
+                        </div>
+                        <div class="card-body">
+                            <h5>{{course.course_name}}</h5>
+                            <p><span>Teacher: </span>{{course.name}}</p> 
+                        </div>
+                    </a>
+                        <div class="boton buttonsAlign" *ngIf="user_data.role == 'college_manager' || user_data.role == 'teacher'|| user_data.role == 'admin'">
+                            <a class="btn btn-login edit" href="/manager/course/edit/{{course.id_course}}">Edit</a>
+                            <a class="btn btn-login delete" [routerLink]="" (click)="removeCourse(course.id_course)">Delete</a>
+                        </div>
+                </div>            
+                
             </div>  
         </div>
     </div>
