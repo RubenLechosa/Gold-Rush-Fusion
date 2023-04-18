@@ -17,8 +17,8 @@ class CollegesFactory extends Factory
     public function definition()
     {
         return [
-            'college_name' => fake()->firstName()
-
+            'college_name' => fake()->firstName(),
+            'logo'          => fake()->imageUrl(360, 100, 'logo')
         ];
     }
 }

@@ -2,7 +2,7 @@
     <nav class="navbar container navbar-expand-lg">
         <div class="container-fluid">
           <a class="navbar-brand logoNav" href="/manager">
-            <img class="logoNav" src="{{user_details.logo}}" alt="Logo" width="175">
+            <img class="logoNav" src="{{(user_details.logo && user_details.logo != null ? user_details.logo : './assets/img/poweredBy.png')}}" alt="Logo" width="175">
           </a>
           <button class="navbar-toggler collapsed d-flex d-lg-none flex-column justify-content-around" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="toggler-icon top-bar"></span>
@@ -22,7 +22,7 @@
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="http://localhost:8000{{user_details.profile_img}}" class="userImg" alt="Foto User">{{user_details.nick}}
+                    <img src="{{(user_details.profile_img ? user_details.profile_img : './assets/img/usersDefault.png')}}" class="userImg" alt="Foto User">{{user_details.nick}}
                 </a>
                 <ul class="dropdown-menu">
                   <li><a class="dropdown-item bg-transparent" href="/manager/user/{{user_details.id_user}}"><i class="fa-solid fa-user"></i> Profile</a></li>

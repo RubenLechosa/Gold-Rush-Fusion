@@ -21,7 +21,7 @@
                     </div>
                 </div>
                 <div class="form-floating mb-3 custom-file">
-                    <input type="file" id="img" ngModel="{{college_data.logo}}" formControlName="logo" class="form-control">
+                    <input type="file" id="img" class="form-control" (change)="uploadImage($event)">
                     <label for="img">College Image</label>
                 </div>
                 <div class="buttons">

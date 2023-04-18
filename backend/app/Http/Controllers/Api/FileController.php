@@ -12,7 +12,9 @@ class FileController extends Controller
 {
     public function store(Request $request){
         if($request->hasFile('img')){
-            $path = $request->file('img')->storeAs('public/posts', $request->file('img')->hashName());
+            $name = $request->file('img')->hashName();
+            $save = $request->file('img')->storeAs('public/posts', $name);
+            $path = 'http://localhost:8000/storage/posts/'. $request->file('img')->hashName();
 
             return response()->json([
                 "status" => Response::HTTP_OK,
@@ -22,8 +24,10 @@ class FileController extends Controller
         }
 
         return response()->json([
+            "status"    => Response::HTTP_OK,
             "success" => false,
-            "msg" => "Something went wrong"
-        ], Response::HTTP_BAD_REQUEST);
+            "msg" => "No file",
+            "data"  => ""
+        ]);
     }
 }

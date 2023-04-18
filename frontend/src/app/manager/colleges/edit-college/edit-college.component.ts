@@ -48,7 +48,10 @@ export class EditCollegeComponent {
         this.authService.logout();
       }
     });
+  }
 
+  uploadImage(event: any){
+    this.files = event.target.files[0];
   }
 
   onSubmit() {
@@ -58,12 +61,14 @@ export class EditCollegeComponent {
     }
 
     const formData = new FormData();
-    formData.append("img", this.files, this.files.name);
+    if(this.files != null) {
+      formData.append("img", this.files, this.files.name);
+    }
 
     this.alreadySubmit = true;
     if(this.id_college != 0) {
       this.frameworkService.upload_file(formData).subscribe((result: any) => {
-        this.collegeService.saveCollege(String(this.id_college), String(this.form.get('college_name')?.value), String(this.form.get('logo')?.value)).subscribe((result: any) => {
+        this.collegeService.saveCollege(String(this.id_college), String(this.form.get('college_name')?.value), String(result.data)).subscribe((result: any) => {
           if(result.status == 200) {
             this.router.navigate(["/manager"]);
           }

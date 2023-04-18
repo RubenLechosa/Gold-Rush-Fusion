@@ -62,7 +62,9 @@ export class EditUserComponent implements OnInit {
     }
 
     const formData = new FormData();
-    formData.append("img", this.files, this.files.name);
+    if(this.files != null) {
+      formData.append("img", this.files, this.files.name);
+    }
 
     this.frameworkService.upload_file(formData).subscribe((result: any) => {
       this.userService.editUser(this.id_profile, String(this.form.get('name')?.value), String(this.form.get('last_name')?.value), String(this.form.get('nick')?.value), String(this.form.get('email')?.value), String(this.form.get('role')?.value), String(this.form.get('birth_date')?.value), result.data).subscribe((response: any) => {

@@ -24,8 +24,8 @@ class TasksFactory extends Factory
         return [
             'id_category' => fake()->randomElement($idsCategory),
             'id_course_uf' => fake()->randomElement($idsCourse_uf),
-            'title'=>fake()->title(),
-            'description' => fake()->text($maxNbChars = 100),
+            'title'=>fake()->sentence(rand(1, 4)),
+            'description' => fake()->text(100),
             'type'=>fake()->randomElement(["task","forum","exam","file","link","page"]),
             'file_rubrica' => "{}",
             'contents' => "{}",

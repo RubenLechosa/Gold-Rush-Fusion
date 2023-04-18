@@ -107,7 +107,12 @@ class CoursesController extends Controller
         $validated = $request->validated();
 
         if($course = Courses::find($validated["id_course"])) {
+            $old_img = $course->img;
             $course->fill($validated);
+
+            if($course->img == '' || $course->img == null) {
+                $course->img = $old_img;
+            }
 
             if($course->save()) {
                 return response()->json([

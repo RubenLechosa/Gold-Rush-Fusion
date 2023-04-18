@@ -7,7 +7,7 @@
         <div class="container">
             <div class="card">
                 <h1 class="text-white">Editing {{editing_data.nick}}</h1>
-                <img src="{{editing_data.profile_img}}" width="125" alt="profile image" class="rounded-circle mb-3 mt-3">
+                <img src="{{(editing_data.profile_img ? editing_data.profile_img : './assets/img/usersDefault.png')}}" width="125" alt="profile image" class="rounded-circle mb-3 mt-3">
             <form (ngSubmit)="onSubmit()" [formGroup]="form">
                 <div class="form-floating mb-3">
                     <input class="form-control" [ngClass]="(form.controls['nick'].invalid && form.controls['nick'].touched ? 'is-invalid' : '')" id="nick" placeholder="..." type="text" formControlName="nick" name="nick" ngModel="{{editing_data.nick}}">
@@ -46,7 +46,7 @@
                     </div>
                 </div>
                 <div class="form-floating mb-3 custom-file">
-                    <input type="file" id="img" formControlName="img" class="form-control" (change)="uploadImage($event)">
+                    <input type="file" id="img" class="form-control" (change)="uploadImage($event)">
                     <label for="img">Profile Image</label>
                 </div>
                 <div class="form-floating mb-3">

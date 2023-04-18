@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Category\CollegeEditRequest;
+use App\Http\Requests\College\CollegeEditRequest;
 use App\Http\Requests\College\GetByIdCollegeRequest;
 use App\Http\Requests\College\CollegeCreateRequest;
 use App\Models\User;
@@ -30,7 +30,7 @@ class CollegeController extends Controller
     public function findOne(GetByIdCollegeRequest $request) {
         $request = $request->validated();
 
-        if($college = Colleges::where("id_category", "=", $request["id_college"])->first()) {
+        if($college = Colleges::where("id_college", "=", $request["id_college"])->first()) {
             return response()->json([
                 "status" => Response::HTTP_OK,
                 "success"=> true,
@@ -62,7 +62,12 @@ class CollegeController extends Controller
         $validated = $request->validated();
 
         if($college = Colleges::find($validated["id_college"])) {
+            $old_img = $college->logo;
             $college->fill($validated);
+
+            if($college->logo == '' || $college->logo == null) {
+                $college->logo = $old_img;
+            }
 
             if($college->save()) {
                 return response()->json([

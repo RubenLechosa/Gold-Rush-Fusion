@@ -54,7 +54,7 @@ class UserController extends Controller
         $request = $request->validated();
 
         if($user = User::where("email", "=", $request["email"])->first()) {
-            if(Hash::check($request->password, $user->password)){
+            if(Hash::check($request["password"], $user->password)){
                 return response()->json([
                     "status" => Response::HTTP_OK,
                     "success"=> true,
@@ -80,7 +80,12 @@ class UserController extends Controller
         $validated = $request->validated();
 
         if($user = User::find($validated["id_user"])) {
+            $old_img = $user->profile_img;
             $user->fill($validated);
+
+            if($user->profile_img == '' || $user->profile_img == null) {
+                $user->profile_img = $old_img;
+            }
 
             if($user->save()) {
                 return response()->json([
