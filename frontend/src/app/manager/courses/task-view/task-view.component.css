@@ -92,3 +92,21 @@
     font-size: 18px;    
 }
 
+.user_submit .card{
+    background-color: var(--yellow);
+}
+
+.user_submit .card .nav-link{
+    background-image: linear-gradient(#AF0AEB, #73009C);
+    color: var(--white);
+    border: 1px solid #AF0AEB;
+}
+
+.user_submit .card .btn-login{
+    color: var(--purple);
+}
+
+.user_submit .card .btn-login:hover{
+    color: var(--white);
+}
+

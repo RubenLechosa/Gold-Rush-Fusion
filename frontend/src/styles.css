@@ -186,7 +186,7 @@ a:active {
   font-weight: bold;
 }
 
-table{
+table, a, p, span{
   font-family: 'Rubik', sans-serif;
 }
 

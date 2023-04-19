@@ -132,24 +132,22 @@
     content: "\f15b";
 }
 
-.marks table, .marks table a{
-    color: var(--white) !important;
-}
-
 .marks table span{
     font-weight: bold;
 }
 
 .marks .comment a{
-    color: green !important;
     background-color: #eee;
     padding: 5px;
     border-radius: 10px;
-    width: 20%;
-    display: flex;
-    justify-content: center;
     align-items: center;
     border: 1px solid black;
+    margin: 0rem 0.5rem 0rem 0.5rem;
+    cursor: pointer;
+}
+
+.marks .comment{
+    padding: 1px;
 }
 
 .marks .noSend{
@@ -174,6 +172,14 @@
     padding: 5px;
     border-radius: 10px;
     border: 1px solid black;
+}
+
+.modal .container{
+    padding: 1.5rem;
+}
+
+.modal .container .file::before{
+    display: none;
 }
 
 
