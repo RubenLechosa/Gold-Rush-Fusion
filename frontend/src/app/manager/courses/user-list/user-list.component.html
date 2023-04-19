@@ -13,7 +13,7 @@
                         <h1>User list</h1>
                     </div>
                     <div class="boton">
-                        <button class="btn btn-login" type="button" data-bs-toggle="modal" data-bs-target="#addStudent" ><i class="fa-solid fa-plus me-2"></i> Add Student</button>
+                        <button class="btn btn-login" type="button" data-bs-toggle="modal" data-bs-target="#addStudent" *ngIf="user_data.role == 'teacher' || user_data.role == 'college_manager' || user_data.role == 'admin'"><i class="fa-solid fa-plus me-2"></i> Add Student</button>
                     </div>
                 </div> 
                 
@@ -21,16 +21,20 @@
                 <div class="card mb-3" *ngFor="let user of user_list">
                     <div class="card-body">
                         <div class="align-middle">
-                            <div style="float: left;" class="d-inline-block">
+                            <a style="float: left;" class="d-inline-block" href="/manager/user/{{user.id_user}}" target="_blank">
                                 <img src="{{user.profile_img}}" alt="" width="50px" class="d-inline-block">
                                 <span class="ms-4"><b>{{user.name}} {{user.last_name}}</b></span>
                                 <span class="ms-2">@{{user.nick}}</span>
-                            </div>
-                            <div style="float:right;" class="d-inline-block">
+                            </a>
+                            <div style="float:right;" class="d-inline-block" *ngIf="user_data.role == 'teacher' || user_data.role == 'college_manager' || user_data.role == 'admin'">
                                 <span class="me-4">Pepas: {{user.pepas}}</span>
                                 <button class="btn btn-success me-3" (click)="this.editingUser = user.id_user" type="button" data-bs-toggle="modal" data-bs-target="#addGems"><i class="fa-regular fa-gem"></i></button>
                                 <a class="btn btn-secondary me-3 text-white" href="/manager/user/edit/{{user.id_user}}"><i class="fa-regular fa-pen-to-square"></i></a>
                                 <button class="btn btn-danger me-3" (click)="submitRemoveStudent(user.id_user)"><i class="fa-solid fa-trash"></i></button>
+                            </div>
+
+                            <div style="float:right;" class="d-inline-block"  *ngIf="user_data.role == 'student'">
+                                <button class="btn btn-secondary me-3" (click)="submitRemoveStudent(user.id_user)"><i class="fa-solid fa-shield"></i></button>
                             </div>
                         </div>
                     </div>

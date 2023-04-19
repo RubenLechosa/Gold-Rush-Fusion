@@ -40,7 +40,6 @@ export class UserListComponent {
     this.userService.getUserDetails(String(localStorage.getItem('id'))).subscribe((response: any) => {
       if(response.status == 200 && response.data) {
         this.user_data = response.data;
-        this.authService.checkPermissions(this.user_data.role);
 
         this.reloadUsers();
       } else {
@@ -50,7 +49,7 @@ export class UserListComponent {
   }
 
   reloadUsers() {
-    this.courseService.getAllUsersByCourse(String(this.id_course)).subscribe((users: any) => {
+    this.courseService.getAllUsersByCourse(String(this.id_course), String(localStorage.getItem('id'))).subscribe((users: any) => {
       if(users.status == 200) {
         this.user_list = users.data;
         

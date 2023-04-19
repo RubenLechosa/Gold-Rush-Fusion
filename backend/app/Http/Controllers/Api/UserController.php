@@ -9,6 +9,7 @@ use App\Http\Requests\Users\GetByIdUserRequest;
 use App\Http\Requests\Users\UserEditRequest;
 use App\Http\Requests\Users\UserLoginRequest;
 use App\Http\Requests\Users\UserRegisterRequest;
+use App\Http\Requests\Course\GetByCourseAndUserRequest;
 use App\Models\User;
 use App\Models\Colleges;
 use App\Models\Courses;
@@ -143,10 +144,10 @@ class UserController extends Controller
         ]);
     }
 
-    public function getAllUsersByCourse(GetByCourseRequest $request) {
+    public function getAllUsersByCourse(GetByCourseAndUserRequest $request) {
         $request = $request->validated();
 
-        $users = User::whereJsonContains('courses', $request["id_course"])->leftJoin('colleges', 'users.id_college', '=', 'colleges.id_college')->get();
+        $users = User::whereJsonContains('courses', $request["id_course"])->leftJoin('colleges', 'users.id_college', '=', 'colleges.id_college')->get()->except($request["id_user"]);
 
         if($users) {
             return response()->json([

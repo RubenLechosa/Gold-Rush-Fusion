@@ -12,7 +12,7 @@
                     <h1 class="text-white">CURSO {{course_data.course_name}}<span *ngIf="user_data.role == 'teacher' || user_data.role == 'college_manager' || user_data.role == 'admin'"> - {{this.code}} <button class="btn btn-secondary btn-refresh" (click)="refreshCode()" [disabled]="refreshDisabled" ><i class="fa-solid fa-arrows-rotate first-child"></i></button></span></h1>   
                 </div>
                     <div class="balls mt-5">
-                        <a href="/manager/course/{{id_course}}/users" class="btn btn-login flexDentro" *ngIf="user_data.role == 'teacher' || user_data.role == 'college_manager' || user_data.role == 'admin'"><i class="fa-solid fa-address-book fa-2xl"></i> User List</a>
+                        <a href="/manager/course/{{id_course}}/users" class="btn btn-login flexDentro"><i class="fa-solid fa-address-book fa-2xl"></i> User List</a>
                         <a href="/manager/course/{{id_course}}/ranking" class="btn btn-login flexDentro"><i class="fa-solid fa-ranking-star fa-2xl"></i> Ranking</a>
                         <a href="/manager/course/{{id_course}}/requests" class="btn btn-login flexDentro" *ngIf="user_data.role == 'teacher' || user_data.role == 'college_manager' || user_data.role == 'admin'">
                             <i class="fa-solid fa-code-pull-request fa-2xl"></i> 
