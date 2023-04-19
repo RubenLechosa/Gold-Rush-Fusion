@@ -53,18 +53,9 @@ class DatabaseSeeder extends Seeder
         Tasks::factory()->count(10)->create();
         Users_submits::factory()->count(10)->create();
 
-        $users = User::get();
-        $courses = Courses::get();
 
-        foreach ($users as $user) {
-            $course = array();
-            for ($i=0; $i < 2; $i++) { 
-                $course[] = strval(rand(1, count($courses)));
-            }
 
-            $user->courses = json_encode($course);
-            $user->save();
-        }
+         
         
         
     }
