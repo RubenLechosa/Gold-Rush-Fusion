@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\College\GetByIdCollegeRequest;
+use App\Http\Requests\Course\GetByCourseAndUserRequest;
 use App\Http\Requests\Course\GetByCourseRequest;
 use App\Http\Requests\Users\GetByIdUserRequest;
 use App\Http\Requests\Users\UserEditRequest;
@@ -143,10 +144,10 @@ class UserController extends Controller
         ]);
     }
 
-    public function getAllUsersByCourse(GetByCourseRequest $request) {
+    public function getAllUsersByCourse(GetByCourseAndUserRequest $request) {
         $request = $request->validated();
 
-        $users = User::whereJsonContains('courses', $request["id_course"])->leftJoin('colleges', 'users.id_college', '=', 'colleges.id_college')->get();
+        $users = User::whereJsonContains('courses', $request["id_course"])->leftJoin('colleges', 'users.id_college', '=', 'colleges.id_college')->get()->except($request["id_user"]);;
 
         if($users) {
             return response()->json([
