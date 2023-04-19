@@ -20,14 +20,16 @@ class CoursesFactory extends Factory
         $idsTeacher = DB::table('users')->pluck('id_user');
         $idsCollege = DB::table('colleges')->pluck('id_college');
 
+
         return [
             'course_name' => fake()->firstName(),
             'id_teacher' => fake()->randomElement($idsTeacher),
             'id_college' => fake()->randomElement($idsCollege),
             'shop' => "{}",
-            'code'=>    fake()->regexify('[A-Za-z0-9]{5}'),
+            'code'=>fake()->unique()->asciify('******'),
             'requests'=>"{}",
             'tasks'=>"{}",
+
         ];
     }
 }

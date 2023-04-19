@@ -107,7 +107,7 @@ class TasksController extends Controller
     public function delete(GetByIdTaskRequest $request) {
         $request = $request->validated();
         
-        if($category = Tasks::find($request)) {
+        if($category = Tasks::where("id_tasks", "=", $request["id_task"])->first()) {
             if($category->delete()) {
                 return response()->json([
                     "status" => Response::HTTP_OK,
