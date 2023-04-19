@@ -1,3 +1,4 @@
+import { DatePipe, formatDate } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -40,7 +41,7 @@ export class EditTaskComponent {
     title: new FormControl(null, Validators.required)
   })
 
-  constructor(private authService: AuthService, private userService: UserService, private route: ActivatedRoute,  private router: Router, private courseService: CourseService, private tasksService: TaskService) { }
+  constructor(private authService: AuthService, private userService: UserService, private route: ActivatedRoute,  private router: Router, private courseService: CourseService, private tasksService: TaskService) {}
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -67,7 +68,7 @@ export class EditTaskComponent {
                 }
               });
             } else {
-              this.task_data = {title: "", description: "", id_category: 0, file_rubrica: "", img: "", id_teacher: " "}
+              this.task_data = {title: "", description: "", id_category: 0, file_rubrica: "", img: "", limit_date: formatDate(new Date(), 'yyyy-MM-dd', 'en'), type: "task"}
               
               this.reloadCateogries();
             }
@@ -122,11 +123,10 @@ export class EditTaskComponent {
 
     this.tasksService.createCategory(Number(this.id_course), String(this.categoryForm.get("title")?.value)).subscribe((result: any) => {
       if(result.status == 200) {
+        this.task_data["id_category"] = result.data.id_category;
         this.reloadCateogries();
         this.closeCategoryModal.nativeElement.click();
       }
-
-      this.dataLoaded = Promise.resolve(true);
     });
   }
 }

@@ -20,7 +20,7 @@ class CategoryFactory extends Factory
         $idsCourse = DB::table('courses')->pluck('id_course');
         return [
             'id_course' => fake()->randomElement($idsCourse),
-            'title' => fake()->title(),
+            'title' => fake()->sentence(rand(1, 2)),
             'order'=>fake()->unique()->numberBetween(1, 1000),
 
         ];

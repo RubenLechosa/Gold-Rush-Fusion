@@ -52,6 +52,9 @@
                 <h2 class="accordion-header" id="headingOne">
                   <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
                     aria-expanded="false" aria-controls="collapseOne">
+                    <button [disabled]="alreadySubmit" class="btn btn-danger me-3"
+                    *ngIf="user_data.role == 'teacher' || user_data.role == 'college_manager' || user_data.role == 'admin'"
+                    (click)="deleteCategory(category.id_category)"><i class="fa-solid fa-minus m-0"></i></button>
                     {{category.title}}
                   </button>
                 </h2>

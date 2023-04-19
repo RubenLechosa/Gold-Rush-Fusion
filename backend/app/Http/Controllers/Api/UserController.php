@@ -9,6 +9,7 @@ use App\Http\Requests\Users\GetByIdUserRequest;
 use App\Http\Requests\Users\UserEditRequest;
 use App\Http\Requests\Users\UserLoginRequest;
 use App\Http\Requests\Users\UserRegisterRequest;
+use App\Http\Requests\Course\GetByCourseAndUserRequest;
 use App\Models\User;
 use App\Models\Colleges;
 use App\Models\Courses;
@@ -123,7 +124,7 @@ class UserController extends Controller
     public function findOne(GetByIdUserRequest $request) {
         $request = $request->validated();
 
-        $user = User::where("id_user", "=", $request["id_user"])
+        $user = User::where($request)
                     ->leftJoin('colleges', 'users.id_college', '=', 'colleges.id_college')
                     ->leftJoin('popers', 'users.id_poper', '=', 'popers.id_poper')
                     ->first();
@@ -143,10 +144,10 @@ class UserController extends Controller
         ]);
     }
 
-    public function getAllUsersByCourse(GetByCourseRequest $request) {
+    public function getAllUsersByCourse(GetByCourseAndUserRequest $request) {
         $request = $request->validated();
 
-        $users = User::whereJsonContains('courses', $request["id_course"])->leftJoin('colleges', 'users.id_college', '=', 'colleges.id_college')->get();
+        $users = User::whereJsonContains('courses', $request["id_course"])->leftJoin('colleges', 'users.id_college', '=', 'colleges.id_college')->get()->except($request["id_user"]);
 
         if($users) {
             return response()->json([
@@ -166,7 +167,7 @@ class UserController extends Controller
     public function getAllUsersByCollege(GetByIdCollegeRequest $request) {
         $request = $request->validated();
 
-        if($users = User::where("id_college", "=", $request["id_college"])->get()) {
+        if($users = User::where($request)->get()) {
             return response()->json([
                 "status" => Response::HTTP_OK,
                 "success"=> true,

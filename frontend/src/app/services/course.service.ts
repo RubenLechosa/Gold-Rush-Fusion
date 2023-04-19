@@ -21,8 +21,8 @@ export class CourseService {
     return this.frameworkService.post('course/get-details', { id_course });
   }
 
-  getAllUsersByCourse(id_course: string) {
-    return this.frameworkService.post('course/get-users', { id_course });
+  getAllUsersByCourse(id_course: string, id_user: string) {
+    return this.frameworkService.post('course/get-users', { id_course, id_user });
   }
 
   getAllRequestsByCourse(id_course: string) {

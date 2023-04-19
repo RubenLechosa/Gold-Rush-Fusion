@@ -131,7 +131,7 @@ class CoursesController extends Controller
     public function delete(GetByCourseRequest $request) {
         $request = $request->validated();
         
-        if($course = Courses::find($request["id_course"])) {
+        if($course = Courses::find($request)) {
             if($course->delete()) {
                 return response()->json([
                     "status" => Response::HTTP_OK,
@@ -151,7 +151,7 @@ class CoursesController extends Controller
         $request = $request->validated();
 
         $users = array();
-        $course = Courses::find($request["id_course"]);
+        $course = Courses::find($request);
 
         foreach (json_decode($course->requests, true) as $id_user) {
             if($user = User::find($id_user)) {
@@ -173,7 +173,7 @@ class CoursesController extends Controller
             $user_request = json_decode($course["requests"], true);
 
             foreach ($user_request as $idx => $id_user) {
-                if($id_user == $request->id_user) {
+                if($id_user == $request["id_user"]) {
                     unset($user_request[$idx]);
                 }
             }
@@ -182,7 +182,7 @@ class CoursesController extends Controller
             
             if($course->save()) {
                 if($request->accepted) {
-                    $user = User::where("id_user", "=", $request->id_user)->first();
+                    $user = User::find($request["id_user"]);
                     $json = json_decode($user->courses, true);
                     $user->courses = json_encode(array_merge(array($request->id_course), $json));
                     $user->save();
@@ -206,17 +206,15 @@ class CoursesController extends Controller
 
         $new_code = false;
 
-        if($course = Courses::find($request["id_course"])) {
+        if($course = Courses::where($request)->first()) {
             do {
-                $new_code = Str::random(5);
-            } while (!$rows_affected = DB::update("UPDATE courses SET code='".$new_code."' where id_course = ?", [$request["id_course"]]));
-        }
+                $course->code = Str::random(5);
+            } while (!$course->save());
 
-        if($rows_affected > 0) {
             return response()->json([
                 "status" => Response::HTTP_OK,
                 "success"=> true,
-                "new_code"  => $new_code
+                "new_code"  => $course->code
             ]);
         }
 

@@ -30,7 +30,7 @@ class CollegeController extends Controller
     public function findOne(GetByIdCollegeRequest $request) {
         $request = $request->validated();
 
-        if($college = Colleges::where("id_college", "=", $request["id_college"])->first()) {
+        if($college = Colleges::find($request)) {
             return response()->json([
                 "status" => Response::HTTP_OK,
                 "success"=> true,
@@ -88,7 +88,7 @@ class CollegeController extends Controller
     public function delete(GetByIdCollegeRequest $request) {
         $request = $request->validated();
         
-        if($college = Colleges::find($request["id_college"])) {
+        if($college = Colleges::find($request)) {
             if($college->delete()) {
                 return response()->json([
                     "status" => Response::HTTP_OK,
