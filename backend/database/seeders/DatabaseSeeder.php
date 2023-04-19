@@ -12,6 +12,7 @@ use App\Models\Popers;
 use App\Models\Tasks;
 use App\Models\User;
 use App\Models\Users_submits;
+use App\Models\Badges;
 use Faker\Factory;
 use Illuminate\Database\Seeder;
 
@@ -52,6 +53,8 @@ class DatabaseSeeder extends Seeder
         Course_uf::factory()->count(10)->create();
         Tasks::factory()->count(10)->create();
         Users_submits::factory()->count(10)->create();
+        Badges::factory()->count(10)->create();
+
 
         $users = User::get();
         $courses = Courses::get();

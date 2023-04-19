@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('badges', function (Blueprint $table) {
             $table->id("id_badge");
             $table->unsignedBigInteger("id_user");
-            $table->enum('type',["rubrica"]);
+            $table->enum('type',['R','C','A','G','H']);
             $table->integer("level")->default(0);
             $table->integer("expToNextLvl");
             $table->integer("acutalExp")->default(0);
