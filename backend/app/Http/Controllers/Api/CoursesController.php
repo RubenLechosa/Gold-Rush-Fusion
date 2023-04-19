@@ -131,7 +131,7 @@ class CoursesController extends Controller
     public function delete(GetByCourseRequest $request) {
         $request = $request->validated();
         
-        if($course = Courses::find($request)) {
+        if($course = Courses::where($request)->first()) {
             if($course->delete()) {
                 return response()->json([
                     "status" => Response::HTTP_OK,

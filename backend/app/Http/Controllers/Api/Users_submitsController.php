@@ -124,7 +124,7 @@ class Users_submitsController extends Controller
     public function delete(SubmitsGetByIdRequest $request) {
         $request = $request->validated();
         
-        if($submit = Users_submits::find($request["id_user_submits"])) {
+        if($submit = Users_submits::where($request)->first()) {
             if($submit->delete()) {
                 return response()->json([
                     "status" => Response::HTTP_OK,

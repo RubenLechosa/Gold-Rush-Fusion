@@ -88,7 +88,7 @@ class CollegeController extends Controller
     public function delete(GetByIdCollegeRequest $request) {
         $request = $request->validated();
         
-        if($college = Colleges::find($request)) {
+        if($college = Colleges::where($request)->first()) {
             if($college->delete()) {
                 return response()->json([
                     "status" => Response::HTTP_OK,
