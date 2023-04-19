@@ -8,6 +8,7 @@ use App\Http\Requests\Category\CategoryEditRequest;
 use App\Http\Requests\Category\GetByIdCategoryRequest;
 use App\Http\Requests\Course\GetByCourseRequest;
 use App\Models\Category;
+use App\Models\Tasks;
 use Illuminate\Http\Response;
 
 
@@ -16,7 +17,7 @@ class CategoryController extends Controller
     public function findOne(GetByIdCategoryRequest $request) {
         $request = $request->validated();
 
-        if($category = Category::find($request["id_category"])) {
+        if($category = Category::find($request)) {
             return response()->json([
                 "status" => Response::HTTP_OK,
                 "success"=> true,
@@ -32,10 +33,11 @@ class CategoryController extends Controller
 
 
      public function create(CategoryCreateRequest $request) {
-        if(Category::create($request->validated())) {
+        if($category = Category::create($request->validated())) {
             return response()->json([
                 "status" => Response::HTTP_OK,
-                "success"=> true
+                "success"=> true,
+                "data" => ["id_category" => $category->id_category]
             ]);
         }
 
@@ -68,8 +70,14 @@ class CategoryController extends Controller
     public function delete(GetByIdCategoryRequest $request) {
         $request = $request->validated();
         
-        if($category = Category::find($request["id_category"])) {
+        if($category = Category::where($request)->first()) {
             if($category->delete()) {
+                $tasks = Tasks::where($request)->get();
+
+                foreach ($tasks as $task) {
+                    $task->delete();
+                }
+
                 return response()->json([
                     "status" => Response::HTTP_OK,
                     "success"=> true

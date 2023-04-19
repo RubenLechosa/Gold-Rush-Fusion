@@ -66,6 +66,7 @@ Route::post('tasks/get-tasks-list', [TasksController::class, 'getTaskList']);
 // Category
 Route::post('tasks/new-category', [CategoryController::class, 'create']);
 Route::post('tasks/get-categories', [CategoryController::class, 'getCategoriesOnCourse']);
+Route::post('tasks/delete-category', [CategoryController::class, 'delete']);
 
 // Task_submits
 Route::post('tasks/new-upload', [Users_submitsController::class, 'create']);

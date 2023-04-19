@@ -92,6 +92,17 @@ deleteTask(id_task: number) {
   }
 }
 
+deleteCategory(id_category: number) {
+  if(confirm("Are you sure?")){
+    this.alreadySubmit = true;
+    this.tasksService.deleteCategory(id_category).subscribe((tasks: any) => {
+      if(tasks.status == 200) {
+        this.reloadTasks();
+      }
+    });
+  }
+}
+
 openMarkModal(id_subm: number) {
   this.openModal.nativeElement.click();
   this.id_users_submits = id_subm;

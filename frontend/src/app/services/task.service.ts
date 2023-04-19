@@ -40,6 +40,10 @@ export class TaskService {
     return this.frameworkService.post('tasks/new-category', { title, id_course });
   }
 
+  deleteCategory(id_category: number) {
+    return this.frameworkService.post('tasks/delete-category', { id_category });
+  }
+
   uploadTask(id_tasks: number, id_course: number, id_user: number, submit: string) {
     return this.frameworkService.post('tasks/new-upload', { id_tasks, id_course, id_user, submit });
   }

@@ -123,7 +123,7 @@ class UserController extends Controller
     public function findOne(GetByIdUserRequest $request) {
         $request = $request->validated();
 
-        $user = User::where("id_user", "=", $request["id_user"])
+        $user = User::where($request)
                     ->leftJoin('colleges', 'users.id_college', '=', 'colleges.id_college')
                     ->leftJoin('popers', 'users.id_poper', '=', 'popers.id_poper')
                     ->first();
@@ -166,7 +166,7 @@ class UserController extends Controller
     public function getAllUsersByCollege(GetByIdCollegeRequest $request) {
         $request = $request->validated();
 
-        if($users = User::where("id_college", "=", $request["id_college"])->get()) {
+        if($users = User::where($request)->get()) {
             return response()->json([
                 "status" => Response::HTTP_OK,
                 "success"=> true,

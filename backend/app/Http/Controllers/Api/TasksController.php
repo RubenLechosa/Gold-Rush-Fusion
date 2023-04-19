@@ -32,7 +32,7 @@ class TasksController extends Controller
     public function findOne(GetByIdTaskRequest $request) {
         $request = $request->validated();
 
-        if($task = Tasks::find($request["id_task"])) {
+        if($task = Tasks::find($request)) {
             return response()->json([
                 "status" => Response::HTTP_OK,
                 "success"=> true,
@@ -69,7 +69,7 @@ class TasksController extends Controller
     public function getTaskList(GetByCourseRequest $request) {
         $request = $request->validated();
 
-        if($categories = Category::where("id_course", "=", $request["id_course"])->get()) {
+        if($categories = Category::where($request)->get()) {
             foreach ($categories as $idx => $category) {
                 $categories[$idx]["tasks"] = Tasks::where("id_category", "=", $category["id_category"])->get();
             }
@@ -107,7 +107,7 @@ class TasksController extends Controller
     public function delete(GetByIdTaskRequest $request) {
         $request = $request->validated();
         
-        if($category = Tasks::find($request["id_task"])) {
+        if($category = Tasks::find($request)) {
             if($category->delete()) {
                 return response()->json([
                     "status" => Response::HTTP_OK,
