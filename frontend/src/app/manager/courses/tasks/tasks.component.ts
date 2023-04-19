@@ -82,7 +82,7 @@ reloadUploads() {
 }
 
 deleteTask(id_task: number) {
-  if(confirm("Are you sure little dog?")){
+  if(confirm("Are you you sure you want to remove the task?")){
     this.alreadySubmit = true;
     this.tasksService.removeTask(id_task).subscribe((tasks: any) => {
       if(tasks.status == 200) {
