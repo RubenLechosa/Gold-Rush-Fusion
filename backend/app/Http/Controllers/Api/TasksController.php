@@ -32,7 +32,7 @@ class TasksController extends Controller
     public function findOne(GetByIdTaskRequest $request) {
         $request = $request->validated();
 
-        if($task = Tasks::find($request)) {
+        if($task = Tasks::where("id_tasks", "=", $request)->first()) {
             return response()->json([
                 "status" => Response::HTTP_OK,
                 "success"=> true,
@@ -49,7 +49,7 @@ class TasksController extends Controller
     public function update(TasksEditRequest $request) {
         $validated = $request->validated();
 
-        if($task = Tasks::find($validated["id_task"])) {
+        if($task = Tasks::where("id_tasks", "=", $validated["id_task"])) {
             $task->fill($validated);
 
             if($task->save()) {

@@ -26,7 +26,7 @@ class CoursesFactory extends Factory
             'id_teacher' => fake()->randomElement($idsTeacher),
             'id_college' => fake()->randomElement($idsCollege),
             'shop' => "{}",
-            'code'=>fake()->unique()->asciify('******'),
+            'code'=>    fake()->regexify('[A-Za-z0-9]{5}'),
             'requests'=>"{}",
             'tasks'=>"{}",
 
