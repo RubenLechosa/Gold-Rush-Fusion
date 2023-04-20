@@ -1,5 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { formatDate } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { CourseService } from 'src/app/services/course.service';
@@ -77,6 +78,10 @@ reloadUploads() {
   this.tasksService.getAllSubmitsByCourse(Number(this.id_course)).subscribe((tasks: any) => {
     if(tasks.status == 200) {
       this.submits_list = tasks.data;
+
+      this.submits_list.forEach((_task: any, idx: any) => {
+        this.submits_list[idx].created_at = formatDate(_task.created_at, 'yyyy-MM-dd', 'en');
+      });
     }
   });
   

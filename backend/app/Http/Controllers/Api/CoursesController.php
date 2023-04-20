@@ -204,8 +204,6 @@ class CoursesController extends Controller
     public function refreshCode(GetByCourseRequest $request) {
         $request = $request->validated();
 
-        $new_code = false;
-
         if($course = Courses::where($request)->first()) {
             do {
                 $course->code = Str::random(5);

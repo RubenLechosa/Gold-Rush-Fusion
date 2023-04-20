@@ -21,7 +21,6 @@ import { TaskViewComponent } from './courses/task-view/task-view.component';
 import { EditTaskComponent } from './courses/edit-task/edit-task.component';
 import { UserSubmitsListComponent } from './user-submits-list/user-submits-list.component';
 
-
 @NgModule({
   declarations: [
     MainComponent,
