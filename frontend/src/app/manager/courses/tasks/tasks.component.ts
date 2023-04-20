@@ -23,9 +23,11 @@ export class TasksComponent {
   tasks_list: any;
   submits_list: any;
   id_users_submits: any;
+  submit_data: any;
 
   markForm = new FormGroup({
-    mark: new FormControl(null, Validators.required)
+    mark: new FormControl(null, Validators.required),
+    comment: new FormControl(null)
   });
 
   constructor(private authService: AuthService, private userService: UserService, private route: ActivatedRoute,  private router: Router, private courseService: CourseService, private tasksService: TaskService) { }
@@ -103,16 +105,24 @@ deleteCategory(id_category: number) {
   }
 }
 
-openMarkModal(id_subm: number) {
-  this.openModal.nativeElement.click();
+openMarkModal(id_subm: number, id_task: number, id_user: number) {
   this.id_users_submits = id_subm;
+
+  this.tasksService.getSubmitDetails(Number(id_task), Number(id_user)).subscribe((tasks: any) => {
+    console.log(tasks);
+    if(tasks.status == 200) {
+      this.submit_data = tasks.data;
+      this.submit_data.submit = JSON.parse(tasks.data.submit);
+      this.openModal.nativeElement.click();
+    }
+  });
 }
 
 onsubmitMark() {
-  this.tasksService.setMark(Number(this.id_users_submits),  Number(this.markForm.get("mark")?.value)).subscribe((tasks: any) => {
+  this.tasksService.setMark(Number(this.id_users_submits),  Number(this.markForm.get("mark")?.value), String(this.markForm.get("comment")?.value)).subscribe((tasks: any) => {
     if(tasks.status == 200) {
-      this.closeCategoryModal.nativeElement.click();
       this.reloadUploads();
+      this.closeCategoryModal.nativeElement.click();
     }
   });
 

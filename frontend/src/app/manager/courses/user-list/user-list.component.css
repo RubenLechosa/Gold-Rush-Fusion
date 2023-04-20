@@ -8,6 +8,12 @@
     font-family: 'Gooseberry Juice', sans-serif;
 }
 
+.text-points {
+    font-family: 'Gooseberry Juice', sans-serif;
+    font-size: 22px;
+    vertical-align: middle;
+}
+
 .addCourse{
     display: flex;
     justify-content: space-between;
@@ -91,4 +97,33 @@
 
 .balls .btn-login::after{
     background-color: transparent;
+}
+
+.btn.btn-badge {
+    border-color: black;
+    border-width: 1px;
+    border-radius: 0;
+}
+
+.btn-badge:hover{
+    background-color: rgb(217, 217, 217);
+}
+
+.btn-badge.active {
+    background-color: var(--purple);
+    color: white;
+}
+
+.btns {
+    display: inline-block;
+}
+
+.btns:first-child {
+    border-top-left-radius: 5px !important;
+    border-bottom-left-radius: 5px !important;
+}
+
+.btns:last-child .btn-badge {
+    border-top-right-radius: 5px !important;
+    border-bottom-right-radius: 5px !important;
 }

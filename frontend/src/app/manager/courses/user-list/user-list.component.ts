@@ -20,6 +20,7 @@ export class UserListComponent {
   user_list: any;
   all_users: any;
   editingUser!: number;
+  activePoints: number = 50;
 
   form = new FormGroup({
     id_student: new FormControl(null, Validators.required)
@@ -99,5 +100,14 @@ export class UserListComponent {
         this.closeGemsButton.nativeElement.click();
       }
     });
+  }
+
+  openBadgesModal(id_user: number) {
+    this.activePoints = 50;
+    this.editingUser = id_user;
+  }
+
+  setActivePoints(val: number) {
+    this.activePoints = val;
   }
 }

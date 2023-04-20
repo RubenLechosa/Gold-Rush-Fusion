@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string("password");
             $table->enum('role',["student","teacher","college_manager","admin"]);
             $table->integer("pepas")->default(0);
+            $table->integer("skills_points")->default(1000);
             $table->string("profile_img")->default("/assets/img/prueba.png");
             $table->unsignedBigInteger("id_college")->nullable();
             $table->json("courses");

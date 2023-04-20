@@ -16,5 +16,6 @@ class Users_submits extends Model
         'id_user',
         'submit',
         'mark',
+        'teacher_comment'
     ];
 }

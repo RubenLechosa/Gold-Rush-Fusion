@@ -24,7 +24,7 @@ class CoursesController extends Controller
     public function getAllCoursesByUser(GetByIdUserRequest $request) {
         $request = $request->validated();
 
-        if($user = User::find($request["id_user"])) {
+        if($user = User::where($request)->first()) {
             $courses = array();
 
             if($user->role == "college_manager") {
@@ -32,7 +32,7 @@ class CoursesController extends Controller
             } else if($user->role == "teacher") {
                 $courses = Courses::where("courses.id_college", "=", $user->id_college)->where("courses.id_teacher", "=", $user->id_user)->leftJoin('users', 'courses.id_teacher', '=', 'users.id_user')->get();
             } else if($user->role == "admin") {
-                $courses = Courses::get();
+                $courses = Courses::leftJoin('users', 'courses.id_teacher', '=', 'users.id_user')->get();
             } else {
                 foreach (json_decode($user->courses, true) as $id_course) {
                     $courses[] = Courses::where("id_course", "=", $id_course)->leftJoin('users', 'courses.id_teacher', '=', 'users.id_user')->first();

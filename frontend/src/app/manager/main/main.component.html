@@ -17,10 +17,9 @@
                 </div>
                 
                 <div class="card" type="button" data-bs-toggle="modal" data-bs-target="#enterCode">
-                    <div class="card-body">
-                        <i class="fa-solid fa-plus"></i>
-                        Enter code
-                        (El mas en grande y enter code abajo)
+                    <div class="card-body text-center">
+                        <i class="fa-solid fa-plus text-muted enter-code-btn"></i>
+                        <h6 class="text-muted">[Enter Code]</h6>
                     </div>
                 </div> 
                 <div *ngFor="let course of user_data.courses" class="card text-decoration-none text-black">   
@@ -30,7 +29,7 @@
                         </div>
                         <div class="card-body">
                             <h5>{{course.course_name}}</h5>
-                            <p><span>Teacher: </span>{{course.name}}</p> 
+                            <p><span>Teacher: </span>{{course.last_name}}</p> 
                         </div>
                     </a>
                         <div class="boton buttonsAlign" *ngIf="user_data.role == 'college_manager' || user_data.role == 'teacher'|| user_data.role == 'admin'">

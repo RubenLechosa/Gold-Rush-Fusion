@@ -115,3 +115,9 @@ h1 {
 .buttonsAlign .delete{
   color: var(--red);
 }
+
+.enter-code-btn {
+  font-size: 200px; 
+  align-content: center; 
+  vertical-align: baseline;
+}

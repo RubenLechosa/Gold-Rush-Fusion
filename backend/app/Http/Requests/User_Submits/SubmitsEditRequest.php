@@ -29,6 +29,7 @@ class SubmitsEditRequest extends FormRequest
             'id_user' => '',
             'submit' => '',
             'mark' => '',
+            'teacher_comment' => 'max:254'
         ];
     }
 }

@@ -101,34 +101,36 @@
 
             <div class="marks">
               <div class="card">
-                <table class="table">
-                  <thead>
-                    <tr>
-                      <th scope="col">Task Name</th>
-                      <th scope="col">Student Name</th>
-                      <th scope="col">Deadline</th>
-                      <th scope="col">Status</th>
-                      <th scope="col">Mark</th>
-                      <th scope="col">Actions</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr *ngFor="let submit of submits_list">
-                      <th><a href="#">{{submit.title}} </a></th>
-                      <th><a href="#">{{submit.nick}} </a></th>
-                      <td>{{submit.created_at}}</td>
-                      <td><span class="onTime">On Time</span></td>
-                      <td><span>{{submit.mark}}</span></td>
-                      <td class="comment">
-                        <a (click)="openMarkModal(submit.id_users_submits)"><i class="fa-solid fa-inbox"></i> <span>1</span></a>
-                        <a type="button" data-bs-toggle="modal" data-bs-target="#marks">
-                          Marks
-                        </a>
-                        <a href="#" class="d-none" data-bs-toggle="modal" data-bs-target="#addCategory" #openModal></a>
-                      </td>  
-                    </tr>
-                  </tbody>
-                </table>
+                <div class="card-body">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">Task Name</th>
+                        <th scope="col">Student Name</th>
+                        <th scope="col">Deadline</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Mark</th>
+                        <th scope="col">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let submit of submits_list">
+                        <th><a href="#">{{submit.title}} </a></th>
+                        <th><a href="#">{{submit.nick}} </a></th>
+                        <td>{{submit.created_at}}</td>
+                        <td><span class="onTime">On Time</span></td>
+                        <td><span>{{submit.mark}}</span></td>
+                        <td class="comment">
+                          <a><i class="fa-solid fa-inbox"></i> <span>1</span></a>
+                          <a type="button" (click)="openMarkModal(submit.id_users_submits, submit.id_tasks, submit.id_user)">
+                            Marks
+                          </a>
+                          <a class="d-none" data-bs-toggle="modal" data-bs-target="#marks" #openModal></a>
+                        </td>  
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
               </div>
             </div>
           </div>
@@ -142,17 +144,17 @@
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+          <h1 class="modal-title fs-5" id="exampleModalLabel">User Submit</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
           <div class="container">
-            <div> 
+            <div *ngIf="this.submit_data && this.submit_data.submit.comments"> 
               <h5>Student Comment</h5>
-              <p>Esto es el comentario que ha metido el Alumno si lo ha metido</p>
+              <p>{{this.submit_data.submit.comments}}</p>
             </div>
-            <div class="file"> 
+            <div class="file" *ngIf="this.submit_data && this.submit_data.submit.file"> 
               <h5>Download Task</h5>
-              <a href="">File.png</a>
+              <a [href]="this.submit_data.submit.file" target="_blank" [download]="'file.jpg'">File.png</a>
             </div>
             
           </div>
@@ -164,8 +166,8 @@
                 <label for="comment">Comment</label>
               </div>
               <div class="form-floating mb-3">
-                <input type="number" max="10" id="title" placeholder="..." formControlName="mark" class="form-control">
-                <label for="title">Mark</label>
+                <input type="number" max="10" id="mark" placeholder="..." formControlName="mark" class="form-control">
+                <label for="mark">Mark</label>
               </div>
             </div>
 

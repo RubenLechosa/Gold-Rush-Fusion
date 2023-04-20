@@ -20,6 +20,7 @@ return new class extends Migration
             $table->unsignedBigInteger("id_user")->nullable();
             $table->text('submit');
             $table->integer("mark")->default(0);
+            $table->string("teacher_comment")->default("");
             $table->timestamps();
         });
     }

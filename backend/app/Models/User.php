@@ -27,6 +27,7 @@ class User extends Authenticatable
         'password',
         'role',
         'pepas',
+        'skills_points',
         'profile_img',
         'id_course',
         'id_poper',

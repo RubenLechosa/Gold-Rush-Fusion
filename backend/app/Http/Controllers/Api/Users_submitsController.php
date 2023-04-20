@@ -34,7 +34,6 @@ class Users_submitsController extends Controller
         ]);
     }
 
-
      public function create(SubmitsCreateRequest $request) {
         $validated = $request->validated();
         if($submits = Users_submits::where("id_tasks", "=", $validated["id_tasks"])->where("id_user", "=", $validated["id_user"])->get()) {
@@ -102,6 +101,11 @@ class Users_submitsController extends Controller
 
         if($submit = Users_submits::find($validated["id_users_submits"])) {
             $user = User::find($submit["id_user"]);
+
+            if($submit->mark != 0) {
+                $user->pepas -= $submit->mark * 10;
+            }
+
             $user->pepas += $validated["mark"] * 10;
             $submit->fill($validated);
 

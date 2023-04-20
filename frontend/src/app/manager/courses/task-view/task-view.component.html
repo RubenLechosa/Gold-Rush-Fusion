@@ -73,7 +73,7 @@
                                                     </div>
 
                                                     <div class="form-floating mb-3">
-                                                        <textarea max="10" id="comment" placeholder="..." formControlName="comment" class="form-control" cols="30" rows="10"></textarea>
+                                                        <textarea max="10" id="comment" placeholder="..." formControlName="submit" class="form-control" cols="30" rows="10"></textarea>
                                                         <label for="comment">Comments</label>
                                                     </div>
 
@@ -83,9 +83,20 @@
                                         </div>
 
                                         <div class="container" *ngIf="task_submit">
-                                            <div class="row">
-                                                <h2>Ya esta enviado mi rey!</h2>
-                                                <button class="btn btn-primary align-center" (click)="changeTaskSubmit(false)">Volver a Entregar</button>
+                                            <div class="row mt-2">
+                                                <div>
+                                                    <div class="card">
+                                                        <div class="card-body" *ngIf="task_data.submit.mark > 0">
+                                                            <h5>Nota: {{task_data.submit.mark}}</h5>
+                                                            <h5 *ngIf="task_data.submit.teacher_comment">Teacher Comment: {{task_data.submit.teacher_comment}}</h5>
+                                                        </div>
+    
+                                                        <div class="card-body" *ngIf="task_data.submit.mark == 0">
+                                                            <h5>Waiting for teacher review</h5>
+                                                        </div>
+                                                    </div>
+                                                    <button class="pull-right btn btn-login mt-3" (click)="changeTaskSubmit(false)">Nuevo Intento</button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

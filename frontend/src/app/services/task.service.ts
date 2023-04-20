@@ -56,7 +56,7 @@ export class TaskService {
     return this.frameworkService.post('tasks/get-submit', { id_task, id_user });
   }
 
-  setMark(id_users_submits: number, mark: number) {
-    return this.frameworkService.post('tasks/set-mark', { id_users_submits, mark });
+  setMark(id_users_submits: number, mark: number, teacher_comment: string) {
+    return this.frameworkService.post('tasks/set-mark', { id_users_submits, mark, teacher_comment });
   }
 }

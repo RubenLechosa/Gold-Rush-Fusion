@@ -30,6 +30,7 @@
                                 <button class="btn btn-success me-3" (click)="this.editingUser = user.id_user" type="button" data-bs-toggle="modal" data-bs-target="#addGems"><i class="fa-regular fa-gem"></i></button>
                                 <a class="btn btn-secondary me-3 text-white" href="/manager/user/edit/{{user.id_user}}"><i class="fa-regular fa-pen-to-square"></i></a>
                                 <button class="btn btn-danger me-3" (click)="submitRemoveStudent(user.id_user)"><i class="fa-solid fa-trash"></i></button>
+                                <button class="btn btn-secondary me-3" (click)="openBadgesModal(user.id_user)" data-bs-toggle="modal" data-bs-target="#addBadges"><i class="fa-solid fa-shield"></i></button>
                             </div>
 
                             <div style="float:right;" class="d-inline-block"  *ngIf="user_data.role == 'student'">
@@ -99,6 +100,70 @@
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-login" [disabled]="formGems.invalid"><i class="fa-solid fa-plus me-1"></i> Add Gems</button>
+                    <button type="button" class="btn btn-exit" #closeGemsButton data-bs-dismiss="modal"><i class="fa-solid fa-xmark me-1"> </i>Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade modal-lg" id="addBadges" tabindex="-1" aria-labelledby="addBadges" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="addStudentLabel"><i class="fa-solid fa-shield"></i> Give Points</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form (ngSubmit)="submitAddGems()" [formGroup]="formGems">
+                <div class="card-body p-3">
+                    <div class="btns">
+                        <button class="btn btn-badge" (click)="setActivePoints(50)" [ngClass]="activePoints == 50 ? 'active' : ''">50</button>
+                        <button class="btn btn-badge" (click)="setActivePoints(100)" [ngClass]="activePoints == 100 ? 'active' : ''">100</button>
+                        <button class="btn btn-badge" (click)="setActivePoints(500)" [ngClass]="activePoints == 500 ? 'active' : ''">500</button>
+                        <button class="btn btn-badge" (click)="setActivePoints(1000)" [ngClass]="activePoints == 1000 ? 'active' : ''">1000</button>
+                    </div>
+                    <div class="d-inline-block pull-right">
+                        <span class="text-points">Remaining Points: {{user_data.skills_points}}</span>
+                    </div>
+                    <div class="mt-4">
+                        <table class="table">
+                            <thead>
+                              <tr>
+                                <th class="col-md-3">Badge</th>
+                                <th class="col-md-4">Description</th>
+                                <th class="col-md-2">Add Points</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="align-middle"><img src="https://www.floridareadytowork.com/photoset/Digital%20Badges/Communicating%20Effectively%20Badge.png" alt="" width="100px"></td>
+                                    <td class="align-middle">Descripcion bacana asdasa</td>
+                                    <td class="align-middle">
+                                        <div class="input-group">
+                                            <input type="number" readonly value="0" min="0" class="input-sm form-control">
+                                            <button class="btn btn-success"><i class="fa-solid fa-plus"></i></button>
+                                            <button class="btn btn-danger"><i class="fa-solid fa-minus"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="align-middle"><img src="https://www.floridareadytowork.com/photoset/Digital%20Badges/Communicating%20Effectively%20Badge.png" alt="" width="100px"></td>
+                                    <td class="align-middle">Descripcion bacana asdasa</td>
+                                    <td class="align-middle">
+                                        <div class="input-group">
+                                            <input type="number" readonly value="0" min="0" class="input-sm form-control">
+                                            <button class="btn btn-success"><i class="fa-solid fa-plus"></i></button>
+                                            <button class="btn btn-danger"><i class="fa-solid fa-minus"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-login" [disabled]="formGems.invalid"><i class="fa-solid fa-plus me-1"></i> Give Points</button>
                     <button type="button" class="btn btn-exit" #closeGemsButton data-bs-dismiss="modal"><i class="fa-solid fa-xmark me-1"> </i>Cancel</button>
                 </div>
             </form>
