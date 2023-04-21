@@ -13,6 +13,7 @@ use App\Http\Requests\Users\UserRegisterRequest;
 use App\Models\User;
 use App\Models\Colleges;
 use App\Models\Courses;
+use App\Models\Badges;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
@@ -130,6 +131,8 @@ class UserController extends Controller
                     ->first();
 
         if($user) {
+            $user["badges"] = Badges::where("id_user", "=", $user->id_user)->where("level", "!=", "0")->get();
+
             return response()->json([
                 "status" => Response::HTTP_OK,
                 "success"=> true,

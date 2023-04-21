@@ -2,6 +2,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { BadgeService } from 'src/app/services/badge.service';
 import { CourseService } from 'src/app/services/course.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -13,6 +14,7 @@ import { UserService } from 'src/app/services/user.service';
 export class UserListComponent {
   @ViewChild('closebutton') closebutton!:any;
   @ViewChild('closeGemsButton') closeGemsButton!:any;
+  @ViewChild('closeBadgesButton') closeBadgesButton!:any;
   
   id_course!: number;
   dataLoaded!: Promise<boolean>;
@@ -22,16 +24,26 @@ export class UserListComponent {
   editingUser!: number;
   activePoints: number = 50;
 
-  form = new FormGroup({
-    id_student: new FormControl(null, Validators.required)
-  });
+  form = new FormGroup({ id_student: new FormControl(null, Validators.required) });
 
   formGems = new FormGroup({
     gems: new FormControl(null, Validators.compose([Validators.required, Validators.min(1)])),
     action: new FormControl(null, Validators.compose([Validators.required, Validators.pattern("res|sum|set")]))
   });
+
+  formBadge = new FormGroup({C: new FormControl(null), R: new FormControl(null), H: new FormControl(null), G: new FormControl(null), A: new FormControl(null)});
+  restPoints: number = 0;
+  disabledSubmit: boolean = true;
+
+  badges: any = [
+    {name: 'C', title: 'Coperación', value: 0},
+    {name: 'R', title: 'Responsabilidad', value: 0},
+    {name: 'H', title: 'Habilidades De Pensar', value: 0},
+    {name: 'G', title: 'Gestion Emociones', value: 0},
+    {name: 'A', title: 'Autonomia y Iniciativa', value: 0}
+  ]
   
-  constructor(private authService: AuthService, private userService: UserService,  private courseService: CourseService, private route: ActivatedRoute) { }
+  constructor(private authService: AuthService, private userService: UserService, private badgeService: BadgeService, private courseService: CourseService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -41,6 +53,7 @@ export class UserListComponent {
     this.userService.getUserDetails(String(localStorage.getItem('id'))).subscribe((response: any) => {
       if(response.status == 200 && response.data) {
         this.user_data = response.data;
+        this.restPoints = this.user_data.skills_points;
 
         this.reloadUsers();
       } else {
@@ -105,9 +118,60 @@ export class UserListComponent {
   openBadgesModal(id_user: number) {
     this.activePoints = 50;
     this.editingUser = id_user;
+    this.restPoints = this.user_data.skills_points;
+
+    this.badges.forEach((badge:any, idx: any) => {
+      this.badges[idx].value = 0;
+    });
   }
 
   setActivePoints(val: number) {
     this.activePoints = val;
+  }
+
+  sumPoints(index: any) {
+    if(this.restPoints >= this.activePoints) {
+      this.badges[index].value += this.activePoints;
+      this.restPoints -= this.activePoints;
+    }
+
+    this.disabledSubmit = true;
+    this.badges.forEach((badge: any) => {
+      if(badge.value > 0) {
+        this.disabledSubmit = false;
+      }
+    });
+  }
+
+  resPoints(index: any) {
+    if(this.badges[index].value >= this.activePoints) {
+      this.badges[index].value -= this.activePoints;
+      this.restPoints += this.activePoints;
+    }
+
+    this.disabledSubmit = true;
+    this.badges.forEach((badge: any) => {
+      if(badge.value > 0) {
+        this.disabledSubmit = false;
+      }
+    });
+  }
+
+  submitPoints() {
+    this.badgeService.givePoints(this.editingUser, Number(localStorage.getItem('id')), String(JSON.stringify(this.badges))).subscribe((result: any) => {
+      console.log(result);
+      if(result.status == 200) {
+        this.reloadUsers();
+
+        this.userService.getUserDetails(String(localStorage.getItem('id'))).subscribe((response: any) => {
+          if(response.status == 200 && response.data) {
+            this.user_data = response.data;
+            this.restPoints = this.user_data.skills_points;
+          }
+        });
+
+        this.closeBadgesButton.nativeElement.click();
+      }
+    });
   }
 }

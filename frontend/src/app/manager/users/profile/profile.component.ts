@@ -14,6 +14,7 @@ export class ProfileComponent implements OnInit {
   self_data: any;
   id_profile = "";
   selfProfile: boolean = false;
+  badge_info: any = {C: 'Coperación', R: 'Responsabilidad', A: 'Autonomia', H: 'Habilidades De Pensar', G: 'Gestion Emocional'}; 
 
   constructor(private authService: AuthService, public userService: UserService,  private readonly route: ActivatedRoute, private readonly router: Router ) { }
 
@@ -32,7 +33,7 @@ export class ProfileComponent implements OnInit {
             this.user_data = response.data;
             this.user_data.skin = (this.user_data.skin != "{}" && this.user_data.skin != "" ? JSON.parse(this.user_data.skin) : JSON.parse('{"skin_base":"/assets/img/popers/poper1.png"}'));
             this.user_data.stats_base = (this.user_data.stats_base != "{}" && this.user_data.stats_base != "" ? JSON.parse(this.user_data.stats_base) : JSON.parse('{"health": "200", "strength": "50"}'))
-    
+
             this.userService.getCourses(String(localStorage.getItem('id'))).subscribe((courses: any) => {
               if(courses.status == 200) {
                 this.user_data.courses = courses.data;

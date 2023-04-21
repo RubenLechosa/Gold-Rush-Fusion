@@ -9,7 +9,6 @@ class Badges extends Model
 {
     use HasFactory;
 
-    
     protected $primaryKey = 'id_badge';
     protected $table = 'badges';
 
@@ -18,7 +17,6 @@ class Badges extends Model
         'type',
         'level',
         'expToNextLvl',
-        'acutalExp',
-        
+        'actualExp',
     ];
 }

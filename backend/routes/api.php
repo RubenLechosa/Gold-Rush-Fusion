@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\PopersController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\FileController;
 use App\Http\Controllers\Api\Users_submitsController;
+use App\Http\Controllers\Api\BadgesController;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -74,6 +75,8 @@ Route::post('tasks/get-submits', [Users_submitsController::class, 'findByCourse'
 Route::post('tasks/get-submit', [Users_submitsController::class, 'findOne']);
 Route::post('tasks/set-mark', [Users_submitsController::class, 'setMark']);
 
+// Badges
+Route::post('badges/give-points', [BadgesController::class, 'givePoints']);
 // Post Files
 Route::post('file', [FileController::class, 'store']);
 

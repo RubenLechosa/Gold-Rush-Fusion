@@ -19,7 +19,7 @@ return new class extends Migration
             $table->enum('type',['R','C','A','G','H']);
             $table->integer("level")->default(0);
             $table->integer("expToNextLvl");
-            $table->integer("acutalExp")->default(0);
+            $table->integer("actualExp")->default(0);
             $table->timestamps();
         });
     }

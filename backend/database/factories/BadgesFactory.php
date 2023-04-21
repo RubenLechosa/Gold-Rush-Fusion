@@ -19,13 +19,14 @@ class BadgesFactory extends Factory
     public function definition()
     {
         $idsUser = DB::table('users')->pluck('id_user');
+        $level = fake()->numberBetween(1, 5);
 
         return [
             'id_user' => fake()->randomElement($idsUser),
             'type'=>fake()->randomElement(['R','C','A','G','H']),
-            'level' => fake()->numberBetween(1, 5),
-            'expToNextLvl' => fake()->numberBetween(1, 3000),
-            'acutalExp'=>fake()->numberBetween(1, 10000),
+            'level' => $level,
+            'expToNextLvl' => $level * 1100,
+            'acutalExp'=> fake()->numberBetween(0, $level * 1099),
         ];
     }
 }

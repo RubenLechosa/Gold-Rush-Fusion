@@ -114,47 +114,35 @@
                 <h1 class="modal-title fs-5" id="addStudentLabel"><i class="fa-solid fa-shield"></i> Give Points</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form (ngSubmit)="submitAddGems()" [formGroup]="formGems">
+            <form (ngSubmit)="submitPoints()" [formGroup]="formBadge">
                 <div class="card-body p-3">
                     <div class="btns">
-                        <button class="btn btn-badge" (click)="setActivePoints(50)" [ngClass]="activePoints == 50 ? 'active' : ''">50</button>
-                        <button class="btn btn-badge" (click)="setActivePoints(100)" [ngClass]="activePoints == 100 ? 'active' : ''">100</button>
-                        <button class="btn btn-badge" (click)="setActivePoints(500)" [ngClass]="activePoints == 500 ? 'active' : ''">500</button>
-                        <button class="btn btn-badge" (click)="setActivePoints(1000)" [ngClass]="activePoints == 1000 ? 'active' : ''">1000</button>
+                        <button class="btn btn-badge" type="button" (click)="setActivePoints(50)" [ngClass]="activePoints == 50 ? 'active' : ''">50</button>
+                        <button class="btn btn-badge" type="button" (click)="setActivePoints(100)" [ngClass]="activePoints == 100 ? 'active' : ''">100</button>
+                        <button class="btn btn-badge" type="button" (click)="setActivePoints(500)" [ngClass]="activePoints == 500 ? 'active' : ''">500</button>
+                        <button class="btn btn-badge" type="button" (click)="setActivePoints(1000)" [ngClass]="activePoints == 1000 ? 'active' : ''">1000</button>
                     </div>
                     <div class="d-inline-block pull-right">
-                        <span class="text-points">Remaining Points: {{user_data.skills_points}}</span>
+                        <span class="text-points">Remaining Points: {{restPoints}}</span>
                     </div>
                     <div class="mt-4">
                         <table class="table">
                             <thead>
                               <tr>
                                 <th class="col-md-3">Badge</th>
-                                <th class="col-md-4">Description</th>
+                                <th class="col-md-4">Title</th>
                                 <th class="col-md-2">Add Points</th>
                               </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td class="align-middle"><img src="https://www.floridareadytowork.com/photoset/Digital%20Badges/Communicating%20Effectively%20Badge.png" alt="" width="100px"></td>
-                                    <td class="align-middle">Descripcion bacana asdasa</td>
+                                <tr *ngFor="let badge of badges; let i = index" [attr.data-index]="i">
+                                    <td class="align-middle"><img src="./assets/badges/badge_{{badge.name}}.png" alt="" width="100px"></td>
+                                    <td class="align-middle">{{badge.title}}</td>
                                     <td class="align-middle">
                                         <div class="input-group">
-                                            <input type="number" readonly value="0" min="0" class="input-sm form-control">
-                                            <button class="btn btn-success"><i class="fa-solid fa-plus"></i></button>
-                                            <button class="btn btn-danger"><i class="fa-solid fa-minus"></i></button>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td class="align-middle"><img src="https://www.floridareadytowork.com/photoset/Digital%20Badges/Communicating%20Effectively%20Badge.png" alt="" width="100px"></td>
-                                    <td class="align-middle">Descripcion bacana asdasa</td>
-                                    <td class="align-middle">
-                                        <div class="input-group">
-                                            <input type="number" readonly value="0" min="0" class="input-sm form-control">
-                                            <button class="btn btn-success"><i class="fa-solid fa-plus"></i></button>
-                                            <button class="btn btn-danger"><i class="fa-solid fa-minus"></i></button>
+                                            <button class="btn btn-danger" (click)="resPoints(i)" type="button"><i class="fa-solid fa-minus"></i></button>
+                                            <input type="number" readonly value="0" min="0" class="input-sm form-control" formControlName="{{badge.name}}" ngModel="{{badge.value}}">
+                                            <button class="btn btn-success" (click)="sumPoints(i)" type="button"><i class="fa-solid fa-plus"></i></button>
                                         </div>
                                     </td>
                                 </tr>
@@ -163,8 +151,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-login" [disabled]="formGems.invalid"><i class="fa-solid fa-plus me-1"></i> Give Points</button>
-                    <button type="button" class="btn btn-exit" #closeGemsButton data-bs-dismiss="modal"><i class="fa-solid fa-xmark me-1"> </i>Cancel</button>
+                    <button type="submit" class="btn btn-login" [disabled]="disabledSubmit"><i class="fa-solid fa-plus me-1"></i> Give Points</button>
+                    <button type="button" class="btn btn-exit" #closeBadgesButton data-bs-dismiss="modal"><i class="fa-solid fa-xmark me-1"> </i>Cancel</button>
                 </div>
             </form>
         </div>
