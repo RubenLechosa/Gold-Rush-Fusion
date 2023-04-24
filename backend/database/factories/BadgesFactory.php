@@ -5,7 +5,7 @@ namespace Database\Factories;
 use Illuminate\Support\Facades\DB;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
+
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Badges>
  */
@@ -26,7 +26,7 @@ class BadgesFactory extends Factory
             'type'=>fake()->randomElement(['R','C','A','G','H']),
             'level' => $level,
             'expToNextLvl' => $level * 1100,
-            'acutalExp'=> fake()->numberBetween(0, $level * 1099),
+            'actualExp'=> fake()->numberBetween(0, $level * 1099),
         ];
     }
 }

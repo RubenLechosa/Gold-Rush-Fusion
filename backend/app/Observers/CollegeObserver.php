@@ -3,11 +3,11 @@
 namespace App\Observers;
 
 use App\Models\Courses;
-use App\Models\College;
+use App\Models\Colleges;
 
-class CoursesObserver
+class CollegeObserver
 {
-    public function deleted(College $college): void
+    public function deleted(Colleges $college): void
     {
         $courses = Courses::where("id_college", "=", $college->id_college)->get();
 
