@@ -164,3 +164,11 @@
 .text-left {
     text-align: left !important;
 }
+
+.modal-footer .btn-login, .modal-footer .btn-exit{
+    margin: 0px 5px 0px 5px;
+}
+
+.btnSpace button{
+    border: 1px solid #fff;
+}

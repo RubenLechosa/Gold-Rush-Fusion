@@ -64,8 +64,9 @@
                                                 </tr>
                                             </table>
                                             <div class="btnSpace">
-                                                <a href="#" class="btn-primary text-white p-1" type="button" *ngIf="selfProfile"><i class="fa-solid fa-key me-1"></i> Change Password</a>
-                                            </div>
+                                                <button type="button" *ngIf="selfProfile" class="btn-primary text-white p-1" data-bs-toggle="modal" data-bs-target="#passwd">
+                                                    <i class="fa-solid fa-key me-1"></i> Change Password
+                                                </button>                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -139,6 +140,48 @@
                                 </div>
                             </div>
 
+                                          <!-- Change Password -->
+              <div class="modal fade" id="passwd" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="exampleModalLabel">Change Password</h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="container">
+                    <form  >
+                      <div class="modal-body">
+                        <div class="form-floating mb-3">
+                            <input type="password" id="currentPasswd" placeholder="..." formControlName=""
+                            class="form-control">
+                          <label for="currentPasswd">Current Password</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="password" id="newPasswd" placeholder="..." formControlName=""
+                            class="form-control">
+                          <label for="newPasswd">New Password</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="password" id="confirmPasswd" placeholder="..." formControlName=""
+                            class="form-control">
+                          <label for="confirmPasswd">Confirm Password</label>
+                        </div>
+
+                      </div>
+
+
+                      <div class="modal-footer row">
+                        <button type="submit" class="btn btn-login col"><i class="fa-solid fa-plus me-1"></i> Save
+                          Password</button>
+                        <button type="button" class="btn btn-exit col" #closeCategoryModal data-bs-dismiss="modal"><i
+                            class="fa-solid fa-xmark me-1"></i> Cancel</button>
+                      </div>
+                    </form>
+                </div>
+                  </div>
+                </div>
+              </div>
+
                             <!--Badges Tab-->
                             <div class="tab-pane fade" id="nav-badges" role="tabpanel" aria-labelledby="nav-badges-tab">
                                 <div class="userInfo">
@@ -166,4 +209,8 @@
             </div>
         </div>
     </div>
+
+    
+
+
 </main>
