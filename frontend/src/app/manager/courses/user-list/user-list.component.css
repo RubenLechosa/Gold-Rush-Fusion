@@ -84,3 +84,7 @@
     border-top-right-radius: 5px !important;
     border-bottom-right-radius: 5px !important;
 }
+
+.modalHistory{
+    --bs-modal-width: 1000px !important;
+}

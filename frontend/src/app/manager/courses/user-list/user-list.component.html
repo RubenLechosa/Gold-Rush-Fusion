@@ -1,160 +1,248 @@
 <app-loader *ngIf="!dataLoaded"></app-loader>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <main *ngIf="dataLoaded | async">
-    <app-navbar [user_details]="user_data"></app-navbar>
+  <app-navbar [user_details]="user_data"></app-navbar>
 
-    <div class="main mt-3">
-        <div class="container">
-            <div class="row">
-                <div class="addCourse mb-4">
-                    <div class="titleFlex">
-                        <a href="/manager/course/{{id_course}}"><i class="fa-solid fa-angle-left fa-2xl"></i></a> 
-                        <h1>User list</h1>
-                    </div>
-                    <div class="boton">
-                        <button class="btn btn-login" type="button" data-bs-toggle="modal" data-bs-target="#addStudent" *ngIf="user_data.role == 'teacher' || user_data.role == 'college_manager' || user_data.role == 'admin'"><i class="fa-solid fa-plus me-2"></i> Add Student</button>
-                    </div>
-                </div> 
-                
-
-                <div class="card mb-3" *ngFor="let user of user_list">
-                    <div class="card-body">
-                        <div class="align-middle">
-                            <a style="float: left;" class="d-inline-block" href="/manager/user/{{user.id_user}}" target="_blank">
-                                <img src="{{user.profile_img}}" alt="" width="50px" class="d-inline-block">
-                                <span class="ms-4"><b>{{user.name}} {{user.last_name}}</b></span>
-                                <span class="ms-2">@{{user.nick}}</span>
-                            </a>
-                            <div style="float:right;" class="d-inline-block" *ngIf="user_data.role == 'teacher' || user_data.role == 'college_manager' || user_data.role == 'admin'">
-                                <span class="me-4">Pepas: {{user.pepas}}</span>
-                                <button class="btn btn-success me-3" (click)="this.editingUser = user.id_user" type="button" data-bs-toggle="modal" data-bs-target="#addGems"><i class="fa-regular fa-gem"></i></button>
-                                <a class="btn btn-secondary me-3 text-white" href="/manager/user/edit/{{user.id_user}}"><i class="fa-regular fa-pen-to-square"></i></a>
-                                <button class="btn btn-danger me-3" (click)="submitRemoveStudent(user.id_user)"><i class="fa-solid fa-trash"></i></button>
-                                <button class="btn btn-secondary me-3" (click)="openBadgesModal(user.id_user)" data-bs-toggle="modal" data-bs-target="#addBadges"><i class="fa-solid fa-shield"></i></button>
-                            </div>
-
-                            <div style="float:right;" class="d-inline-block"  *ngIf="user_data.role == 'student'">
-                                <button class="btn btn-secondary me-3" (click)="submitRemoveStudent(user.id_user)"><i class="fa-solid fa-shield"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>  
+  <div class="main mt-3">
+    <div class="container">
+      <div class="row">
+        <div class="addCourse mb-4">
+          <div class="titleFlex">
+            <a href="/manager/course/{{id_course}}"><i class="fa-solid fa-angle-left fa-2xl"></i></a>
+            <h1>User list</h1>
+          </div>
+          <div class="boton">
+            <button class="btn btn-login me-2" type="button" data-bs-toggle="modal" data-bs-target="#history"><i
+                class="fa-solid fa-clock-rotate-left"></i> History</button>
+            <button class="btn btn-login" type="button" data-bs-toggle="modal" data-bs-target="#addStudent"
+              *ngIf="user_data.role == 'teacher' || user_data.role == 'college_manager' || user_data.role == 'admin'"><i
+                class="fa-solid fa-plus me-2"></i> Add Student</button>
+          </div>
         </div>
+
+
+        <div class="card mb-3" *ngFor="let user of user_list">
+          <div class="card-body">
+            <div class="align-middle">
+              <a style="float: left;" class="d-inline-block" href="/manager/user/{{user.id_user}}" target="_blank">
+                <img src="{{user.profile_img}}" alt="" width="50px" class="d-inline-block">
+                <span class="ms-4"><b>{{user.name}} {{user.last_name}}</b></span>
+                <span class="ms-2">@{{user.nick}}</span>
+              </a>
+              <div style="float:right;" class="d-inline-block"
+                *ngIf="user_data.role == 'teacher' || user_data.role == 'college_manager' || user_data.role == 'admin'">
+                <span class="me-4">Pepas: {{user.pepas}}</span>
+                <button class="btn btn-success me-3" (click)="this.editingUser = user.id_user" type="button"
+                  data-bs-toggle="modal" data-bs-target="#addGems"><i class="fa-regular fa-gem"></i></button>
+                <a class="btn btn-secondary me-3 text-white" href="/manager/user/edit/{{user.id_user}}"><i
+                    class="fa-regular fa-pen-to-square"></i></a>
+                <button class="btn btn-danger me-3" (click)="submitRemoveStudent(user.id_user)"><i
+                    class="fa-solid fa-trash"></i></button>
+                <button class="btn btn-secondary me-3" (click)="openBadgesModal(user.id_user)" data-bs-toggle="modal"
+                  data-bs-target="#addBadges"><i class="fa-solid fa-shield"></i></button>
+              </div>
+
+              <div style="float:right;" class="d-inline-block" *ngIf="user_data.role == 'student'">
+                <button class="btn btn-secondary me-3" (click)="submitRemoveStudent(user.id_user)"><i
+                    class="fa-solid fa-shield"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <br>
+  </div>
+  <br>
 </main>
 
 <!-- Modal -->
 <div class="modal fade" id="addStudent" tabindex="-1" aria-labelledby="addStudentLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="addStudentLabel"><i class="fa-solid fa-user-plus"></i> Add Student</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form (ngSubmit)="submitAddStudent()" [formGroup]="form">
-                <div class="modal-body">
-                    <div class="form-floating text-black">
-                        <select class="form-select" formControlName="id_student" aria-label="Floating label select example">
-                            <option selected>--- Select a Student ---</option>
-                            <option value="{{student.id_user}}" *ngFor="let student of all_users">{{student.name}} {{student.last_name}} - {{student.email}}</option>
-                        </select>
-                        <label for="floatingSelect" class="text-black">Students On College</label>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-login"><i class="fa-solid fa-plus me-1"></i> Add User</button>
-                    <button type="button" class="btn btn-exit" #closebutton data-bs-dismiss="modal"><i class="fa-solid fa-xmark me-1"></i> Cancel</button>
-                </div>
-            </form>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="addStudentLabel"><i class="fa-solid fa-user-plus"></i> Add Student</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form (ngSubmit)="submitAddStudent()" [formGroup]="form">
+        <div class="modal-body">
+          <div class="form-floating text-black">
+            <select class="form-select" formControlName="id_student" aria-label="Floating label select example">
+              <option selected>--- Select a Student ---</option>
+              <option value="{{student.id_user}}" *ngFor="let student of all_users">{{student.name}}
+                {{student.last_name}} - {{student.email}}</option>
+            </select>
+            <label for="floatingSelect" class="text-black">Students On College</label>
+          </div>
         </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-login"><i class="fa-solid fa-plus me-1"></i> Add User</button>
+          <button type="button" class="btn btn-exit" #closebutton data-bs-dismiss="modal"><i
+              class="fa-solid fa-xmark me-1"></i> Cancel</button>
+        </div>
+      </form>
     </div>
+  </div>
 </div>
 
 <div class="modal fade" id="addGems" tabindex="-1" aria-labelledby="addGemsLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="addStudentLabel"><i class="fa-regular fa-gem"></i> Add Gems</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="addStudentLabel"><i class="fa-regular fa-gem"></i> Add Gems</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form (ngSubmit)="submitAddGems()" [formGroup]="formGems">
+        <div class="card-body p-3">
+          <div class="form-floating text-black">
+            <select formControlName="action" class="form-select mb-3">
+              <option value="" [selected]="true">Choose one...</option>
+              <option value="sum">Plus</option>
+              <option value="res">Minus</option>
+              <option value="set">Set</option>
+            </select>
+            <label for="action">Action</label>
+          </div>
+          <div class="form-floating text-black">
+            <input id="gems"
+              [ngClass]="(formGems.controls['gems'].invalid && formGems.controls['gems'].touched ? 'is-invalid' : '')"
+              type="number" class="form-control" formControlName="gems" min="1" value="1">
+            <label for="gems">Gem Num</label>
+            <div id="validationGems" class="invalid-feedback">
+              Must be minimum 1
             </div>
-            <form (ngSubmit)="submitAddGems()" [formGroup]="formGems">
-                <div class="card-body p-3">
-                    <div class="form-floating text-black">
-                        <select formControlName="action" class="form-select mb-3">
-                            <option value="" [selected]="true">Choose one...</option>
-                            <option value="sum">Plus</option>
-                            <option value="res">Minus</option>
-                            <option value="set">Set</option>
-                        </select>
-                        <label for="action">Action</label>
-                    </div>
-                    <div class="form-floating text-black">
-                        <input id="gems" [ngClass]="(formGems.controls['gems'].invalid && formGems.controls['gems'].touched ? 'is-invalid' : '')" type="number" class="form-control" formControlName="gems" min="1" value="1">
-                        <label for="gems">Gem Num</label>
-                        <div id="validationGems" class="invalid-feedback">
-                            Must be minimum 1
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-login" [disabled]="formGems.invalid"><i class="fa-solid fa-plus me-1"></i> Add Gems</button>
-                    <button type="button" class="btn btn-exit" #closeGemsButton data-bs-dismiss="modal"><i class="fa-solid fa-xmark me-1"> </i>Cancel</button>
-                </div>
-            </form>
+          </div>
         </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-login" [disabled]="formGems.invalid"><i
+              class="fa-solid fa-plus me-1"></i> Add Gems</button>
+          <button type="button" class="btn btn-exit" #closeGemsButton data-bs-dismiss="modal"><i
+              class="fa-solid fa-xmark me-1"> </i>Cancel</button>
+        </div>
+      </form>
     </div>
+  </div>
 </div>
 
-<div class="modal fade modal-lg" id="addBadges" tabindex="-1" aria-labelledby="addBadges" aria-hidden="true">
+
+<!-- Hostory -->
+<div class="modal fade modalHistory" id="history" tabindex="-1" aria-labelledby="history" aria-hidden="true">
     <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="addStudentLabel"><i class="fa-solid fa-shield"></i> Give Points</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form (ngSubmit)="submitPoints()" [formGroup]="formBadge">
-                <div class="card-body p-3">
-                    <div class="btns">
-                        <button class="btn btn-badge" type="button" (click)="setActivePoints(50)" [ngClass]="activePoints == 50 ? 'active' : ''">50</button>
-                        <button class="btn btn-badge" type="button" (click)="setActivePoints(100)" [ngClass]="activePoints == 100 ? 'active' : ''">100</button>
-                        <button class="btn btn-badge" type="button" (click)="setActivePoints(500)" [ngClass]="activePoints == 500 ? 'active' : ''">500</button>
-                        <button class="btn btn-badge" type="button" (click)="setActivePoints(1000)" [ngClass]="activePoints == 1000 ? 'active' : ''">1000</button>
-                    </div>
-                    <div class="d-inline-block pull-right">
-                        <span class="text-points">Remaining Points: {{restPoints}}</span>
-                    </div>
-                    <div class="mt-4">
-                        <table class="table">
-                            <thead>
-                              <tr>
-                                <th class="col-md-3">Badge</th>
-                                <th class="col-md-4">Title</th>
-                                <th class="col-md-2">Add Points</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let badge of badges; let i = index" [attr.data-index]="i">
-                                    <td class="align-middle"><img src="./assets/badges/badge_{{badge.name}}.png" alt="" width="100px"></td>
-                                    <td class="align-middle">{{badge.title}}</td>
-                                    <td class="align-middle">
-                                        <div class="input-group">
-                                            <button class="btn btn-danger" (click)="resPoints(i)" type="button"><i class="fa-solid fa-minus"></i></button>
-                                            <input type="number" readonly value="0" min="0" class="input-sm form-control" formControlName="{{badge.name}}" ngModel="{{badge.value}}">
-                                            <button class="btn btn-success" (click)="sumPoints(i)" type="button"><i class="fa-solid fa-plus"></i></button>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-login" [disabled]="disabledSubmit"><i class="fa-solid fa-plus me-1"></i> Give Points</button>
-                    <button type="button" class="btn btn-exit" #closeBadgesButton data-bs-dismiss="modal"><i class="fa-solid fa-xmark me-1"> </i>Cancel</button>
-                </div>
-            </form>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">History</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
+        <div class="modal-body">
+            <h2>Filterable Table</h2>
+            <p>Type something in the input field to search the table for first names, last names or emails:</p>  
+            <input class="form-control" id="myInput" type="text" placeholder="Search..">
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Image</th>
+                    <th scope="col">User</th>
+                    <th scope="col">Request User</th>
+                    <th scope="col">Total Points</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="myTable">
+                  <tr>
+                    <th>1</th>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                    <td>@mdo</td>
+                    <td><button class="btn btn-exit m-0">Remove</button></td>
+                  </tr>
+                  <tr>
+                    <th>1</th>
+                    <td>Dani</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                    <td>@mdo</td>
+                    <td><button class="btn btn-exit m-0">Remove</button></td>
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-exit" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
     </div>
+  </div>
+
+<div class="modal fade modal-lg" id="addBadges" tabindex="-1" aria-labelledby="addBadges" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="addStudentLabel"><i class="fa-solid fa-shield"></i> Give Points</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form (ngSubmit)="submitPoints()" [formGroup]="formBadge">
+        <div class="card-body p-3">
+          <div class="btns">
+            <button class="btn btn-badge" type="button" (click)="setActivePoints(50)"
+              [ngClass]="activePoints == 50 ? 'active' : ''">50</button>
+            <button class="btn btn-badge" type="button" (click)="setActivePoints(100)"
+              [ngClass]="activePoints == 100 ? 'active' : ''">100</button>
+            <button class="btn btn-badge" type="button" (click)="setActivePoints(500)"
+              [ngClass]="activePoints == 500 ? 'active' : ''">500</button>
+            <button class="btn btn-badge" type="button" (click)="setActivePoints(1000)"
+              [ngClass]="activePoints == 1000 ? 'active' : ''">1000</button>
+          </div>
+          <div class="d-inline-block pull-right">
+            <span class="text-points">Remaining Points: {{restPoints}}</span>
+          </div>
+          <div class="mt-4">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th class="col-md-3">Badge</th>
+                  <th class="col-md-4">Title</th>
+                  <th class="col-md-2">Add Points</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let badge of badges; let i = index" [attr.data-index]="i">
+                  <td class="align-middle"><img src="./assets/badges/badge_{{badge.name}}.png" alt="" width="100px">
+                  </td>
+                  <td class="align-middle">{{badge.title}}</td>
+                  <td class="align-middle">
+                    <div class="input-group">
+                      <button class="btn btn-danger" (click)="resPoints(i)" type="button"><i
+                          class="fa-solid fa-minus"></i></button>
+                      <input type="number" readonly value="0" min="0" class="input-sm form-control"
+                        formControlName="{{badge.name}}" ngModel="{{badge.value}}">
+                      <button class="btn btn-success" (click)="sumPoints(i)" type="button"><i
+                          class="fa-solid fa-plus"></i></button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-login" [disabled]="disabledSubmit"><i class="fa-solid fa-plus me-1"></i>
+            Give Points</button>
+          <button type="button" class="btn btn-exit" #closeBadgesButton data-bs-dismiss="modal"><i
+              class="fa-solid fa-xmark me-1"> </i>Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>
+
+<script>
+    $(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>
