@@ -77,6 +77,8 @@ Route::post('tasks/get-submit', [Users_submitsController::class, 'findOne']);
 
 // Badges
 Route::post('badges/give-points', [BadgesController::class, 'givePoints']);
+Route::post('badges/give-history', [BadgesController::class, 'getHistory']);
+Route::post('badges/remove-history', [BadgesController::class, 'removeHistory']);
 // Post Files
 Route::post('file', [FileController::class, 'store']);
 

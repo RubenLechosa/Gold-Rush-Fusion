@@ -91,7 +91,8 @@
               "src/styles.css"
             ],
             "scripts": [
-              "node_modules/tinymce/tinymce.min.js"
+              "node_modules/tinymce/tinymce.min.js",
+              "node_modules/jquery/dist/jquery.min.js"
             ]
           }
         }

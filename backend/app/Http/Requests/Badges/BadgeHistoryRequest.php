@@ -4,7 +4,7 @@ namespace App\Http\Requests\Badges;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class BadgesGivePointsRequest extends FormRequest
+class BadgeHistoryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,7 +26,6 @@ class BadgesGivePointsRequest extends FormRequest
         return [
             'id_user' => 'required',
             'id_request_user'=> 'required',
-            'id_course'     => 'required',
             'badges' => 'required',
         ];
     }

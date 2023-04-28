@@ -1,3 +1,4 @@
+import { formatDate } from '@angular/common';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -23,6 +24,9 @@ export class UserListComponent {
   all_users: any;
   editingUser!: number;
   activePoints: number = 50;
+
+  filteredHistory: any;
+  AllHistory: any;
 
   form = new FormGroup({ id_student: new FormControl(null, Validators.required) });
 
@@ -56,6 +60,7 @@ export class UserListComponent {
         this.restPoints = this.user_data.skills_points;
 
         this.reloadUsers();
+        this.reloadHistory();
       } else {
         this.authService.logout();
       }
@@ -76,6 +81,18 @@ export class UserListComponent {
         });
       }
     });
+  }
+
+  reloadHistory() {
+    this.badgeService.giveHistory(Number(this.id_course)).subscribe((history: any) => {
+      if(history.status == 200) {
+        this.AllHistory = history.data;
+        
+        this.AllHistory.forEach((_history: any, idx: any) => {
+          this.AllHistory[idx].created_at = formatDate(_history.created_at, 'yyyy-MM-dd', 'en');
+        });
+      }
+    }); 
   }
 
   submitAddStudent() {
@@ -158,8 +175,7 @@ export class UserListComponent {
   }
 
   submitPoints() {
-    this.badgeService.givePoints(this.editingUser, Number(localStorage.getItem('id')), String(JSON.stringify(this.badges))).subscribe((result: any) => {
-      console.log(result);
+    this.badgeService.givePoints(this.editingUser, this.id_course, Number(localStorage.getItem('id')), String(JSON.stringify(this.badges))).subscribe((result: any) => {
       if(result.status == 200) {
         this.reloadUsers();
 
@@ -171,6 +187,14 @@ export class UserListComponent {
         });
 
         this.closeBadgesButton.nativeElement.click();
+      }
+    });
+  }
+  
+  removeHistory(id_history: number) {
+    this.badgeService.removeHistory(id_history).subscribe((result: any) => {
+      if(result.status == 200) {
+        this.reloadHistory();
       }
     });
   }

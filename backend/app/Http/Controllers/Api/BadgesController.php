@@ -7,11 +7,39 @@ use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\Badges\BadgesGivePointsRequest;
+use App\Http\Requests\Course\GetByCourseRequest;
 use App\Models\BadgeHistory;
 use Illuminate\Http\Response;
 
 class BadgesController extends Controller
 {
+    public function getHistory(Request $request) {
+    
+        $badges = BadgeHistory::where("id_course", "=", $request["id_course"])->leftJoin('users', 'badge_histories.id_user_submited', '=', 'users.id_user')->get();
+
+        return response()->json([
+            "status" => Response::HTTP_OK,
+            "success"=> true,
+            "data" => $badges
+        ]);
+    }
+
+    public function removeHistory(Request $request) {
+        $badge = BadgeHistory::where("id_badge_history", "=", $request["id_badge_history"])->first();
+
+        if($user_give_points = User::find($badge->id_user_submited)) {
+            $user_give_points->skills_points = $badge->total_points;
+            $user_give_points->save();
+        }
+
+        if($badge->delete()) {
+            return response()->json([
+                "status" => Response::HTTP_OK,
+                "success"=> true
+            ]);
+        }
+    }
+
     public function givePoints(BadgesGivePointsRequest $request) {
         $request = $request->validated();
         $badges = json_decode($request["badges"], true);
@@ -51,6 +79,7 @@ class BadgesController extends Controller
                     $user_badge_history = new BadgeHistory();
                     $user_badge_history->id_user = $request["id_request_user"];
                     $user_badge_history->id_user_submited = $request["id_user"];
+                    $user_badge_history->id_course = $request["id_course"];
                     $user_badge_history->badge = $badge["name"];
                     $user_badge_history->total_points = $badge["value"];
                     $user_badge_history->save();

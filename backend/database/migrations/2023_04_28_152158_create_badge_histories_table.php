@@ -14,9 +14,10 @@ return new class extends Migration
     public function up()
     {
         Schema::create('badge_histories', function (Blueprint $table) {
-            $table->id();
+            $table->id('id_badge_history');
             $table->unsignedBigInteger("id_user")->nullable();
             $table->unsignedBigInteger("id_user_submited")->nullable();
+            $table->unsignedBigInteger("id_course")->nullable();
             $table->integer("total_points");
             $table->string("badge");
             $table->timestamps();
