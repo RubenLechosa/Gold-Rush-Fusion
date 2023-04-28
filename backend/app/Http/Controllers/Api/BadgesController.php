@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\Badges\BadgesGivePointsRequest;
+use App\Models\BadgeHistory;
 use Illuminate\Http\Response;
 
 class BadgesController extends Controller
@@ -46,6 +47,13 @@ class BadgesController extends Controller
     
                         $user_badge->save();
                     }
+
+                    $user_badge_history = new BadgeHistory();
+                    $user_badge_history->id_user = $request["id_request_user"];
+                    $user_badge_history->id_user_submited = $request["id_user"];
+                    $user_badge_history->badge = $badge["name"];
+                    $user_badge_history->total_points = $badge["value"];
+                    $user_badge_history->save();
                 }
             }
         }
