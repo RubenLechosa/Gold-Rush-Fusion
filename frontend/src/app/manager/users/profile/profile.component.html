@@ -145,37 +145,35 @@
                 <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h1 class="modal-title fs-5" id="exampleModalLabel">Change Password</h1>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Change Password</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="container">
-                    <form  >
-                      <div class="modal-body">
-                        <div class="form-floating mb-3">
-                            <input type="password" id="currentPasswd" placeholder="..." formControlName=""
-                            class="form-control">
-                          <label for="currentPasswd">Current Password</label>
+                    <form (ngSubmit)="onSubmit()" [formGroup]="form">
+                        <div class="modal-body">
+                            <div class="form-floating mb-3">
+                                <input type="password" id="currentPasswd" placeholder="..." formControlName="password"
+                                class="form-control">
+                                <label for="currentPasswd">Current Password</label>
+                            </div>
+                            <hr>
+                            <div class="form-floating mb-3">
+                                <input type="password" id="newPasswd" placeholder="..." formControlName="new_password"
+                                class="form-control">
+                                <label for="newPasswd">New Password</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="password" id="confirmPasswd" placeholder="..." formControlName="confirm_password"
+                                class="form-control">
+                                <label for="confirmPasswd">Confirm Password</label>
+                            </div>
                         </div>
-                        <div class="form-floating mb-3">
-                            <input type="password" id="newPasswd" placeholder="..." formControlName=""
-                            class="form-control">
-                          <label for="newPasswd">New Password</label>
+                        <div class="modal-footer row">
+                            <button type="submit" class="btn btn-login col"><i class="fa-solid fa-plus me-1"></i> Save
+                            Password</button>
+                            <button type="button" class="btn btn-exit col" #closeCategoryModal data-bs-dismiss="modal"><i
+                                class="fa-solid fa-xmark me-1"></i> Cancel</button>
                         </div>
-                        <div class="form-floating mb-3">
-                            <input type="password" id="confirmPasswd" placeholder="..." formControlName=""
-                            class="form-control">
-                          <label for="confirmPasswd">Confirm Password</label>
-                        </div>
-
-                      </div>
-
-
-                      <div class="modal-footer row">
-                        <button type="submit" class="btn btn-login col"><i class="fa-solid fa-plus me-1"></i> Save
-                          Password</button>
-                        <button type="button" class="btn btn-exit col" #closeCategoryModal data-bs-dismiss="modal"><i
-                            class="fa-solid fa-xmark me-1"></i> Cancel</button>
-                      </div>
                     </form>
                 </div>
                   </div>

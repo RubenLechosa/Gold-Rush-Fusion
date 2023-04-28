@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\College\GetByIdCollegeRequest;
 use App\Http\Requests\Course\GetByCourseAndUserRequest;
 use App\Http\Requests\Course\GetByCourseRequest;
+use App\Http\Requests\Users\changePasswordRequest;
 use App\Http\Requests\Users\GetByIdUserRequest;
 use App\Http\Requests\Users\UserEditRequest;
 use App\Http\Requests\Users\UserLoginRequest;
@@ -270,6 +271,29 @@ class UserController extends Controller
         return response()->json([
             "status" => 400,
             "msg" => "No user data"
+        ]);
+    }
+
+    public function changePassword(changePasswordRequest $request) {
+        $request = $request->validated();
+
+        if($users = User::where("id_user", "=", $request["id_user"])->where("password", "=", Hash::make($request["password"]))->first()) {
+            if($request["new_password"] == $request["confirm_password"]) {
+                $users->password = Hash::make($request["new_password"]);
+
+                if($users->save()) {
+                    return response()->json([
+                        "status" => Response::HTTP_OK,
+                        "success"=> true
+                    ]);
+                }
+            }
+        }
+
+        return response()->json([
+            "status" => Response::HTTP_BAD_REQUEST,
+            "success"=> false,
+            "msg"   => "User not found",
         ]);
     }
 

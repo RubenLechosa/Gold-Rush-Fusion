@@ -34,6 +34,7 @@ Route::post('users/get-users-college', [UserController::class, 'getAllUsersByCol
 Route::post('users/get-teachers-college', [UserController::class, 'getAllUsersByCollege']);
 Route::post('users/add-course', [UserController::class, 'addCourseToUser']);
 Route::post('users/remove-course', [UserController::class, 'removeCourseToUser']);
+Route::post('users/change-password', [UserController::class, 'changePassword']);
 
 // Courses
 Route::post('users/get-courses', [CoursesController::class, 'getAllCoursesByUser']);
@@ -73,7 +74,6 @@ Route::post('tasks/delete-category', [CategoryController::class, 'delete']);
 Route::post('tasks/new-upload', [Users_submitsController::class, 'create']);
 Route::post('tasks/get-submits', [Users_submitsController::class, 'findByCourse']);
 Route::post('tasks/get-submit', [Users_submitsController::class, 'findOne']);
-Route::post('tasks/set-mark', [Users_submitsController::class, 'setMark']);
 
 // Badges
 Route::post('badges/give-points', [BadgesController::class, 'givePoints']);

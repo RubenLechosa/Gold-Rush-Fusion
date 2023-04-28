@@ -53,4 +53,8 @@ export class UserService {
   joinCourseFromCode(id_user: number, code: string) {
     return this.frameworkService.post('users/join-course', { id_user, code });
   }
+
+  changePassword(id_user: number, password: string, new_password: string, confirm_password: string) {
+    return this.frameworkService.post('users/change-password', { id_user, password, new_password, confirm_password });
+  }
 }

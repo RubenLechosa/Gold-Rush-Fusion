@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
@@ -15,6 +16,12 @@ export class ProfileComponent implements OnInit {
   id_profile = "";
   selfProfile: boolean = false;
   badge_info: any = {C: 'Coperación', R: 'Responsabilidad', A: 'Autonomia', H: 'Habilidades De Pensar', G: 'Gestion Emocional'}; 
+
+  form = new FormGroup({
+    password: new FormControl(null, Validators.compose([Validators.minLength(4), Validators.required])),
+    new_password: new FormControl(null, Validators.compose([Validators.minLength(4), Validators.required])),
+    confirm_password: new FormControl(null, Validators.compose([Validators.minLength(4), Validators.required]))
+  });
 
   constructor(private authService: AuthService, public userService: UserService,  private readonly route: ActivatedRoute, private readonly router: Router ) { }
 
@@ -40,13 +47,22 @@ export class ProfileComponent implements OnInit {
         
                 this.dataLoaded = Promise.resolve(true);
               } else {
-                this.router.navigate(["/manager"])
+                this.router.navigate(["/manager"]);
               }
             });
           }
         });
       }
     });
-
+  }
+  
+  onSubmit() {
+    this.userService.changePassword(Number(localStorage.getItem('id')), String(this.form.get("password")?.value), String(this.form.get("new_password")?.value), String(this.form.get("confirm_password")?.value)).subscribe((passwords: any) => {
+      if(passwords.status == 200) {
+        this.authService.logout();
+      } else {
+        this.router.navigate(["/profile/"+this.id_profile]);
+      }
+    });
   }
 }
