@@ -12,8 +12,9 @@
             <h1>User list</h1>
           </div>
           <div class="boton">
-            <button class="btn btn-login me-2" type="button" data-bs-toggle="modal" data-bs-target="#history"><i
-                class="fa-solid fa-clock-rotate-left"></i> History</button>
+            <button class="btn btn-login me-2" type="button" data-bs-toggle="modal" data-bs-target="#history"
+            *ngIf="user_data.role == 'teacher' || user_data.role == 'college_manager' || user_data.role == 'admin'">
+              <i class="fa-solid fa-clock-rotate-left"></i> History</button>
             <button class="btn btn-login" type="button" data-bs-toggle="modal" data-bs-target="#addStudent"
               *ngIf="user_data.role == 'teacher' || user_data.role == 'college_manager' || user_data.role == 'admin'"><i
                 class="fa-solid fa-plus me-2"></i> Add Student</button>
@@ -129,13 +130,66 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">History</h1>
+          <h1 class="modal-title fs-5" id="exampleModalLabel"><i class="fa-solid fa-clock-rotate-left"></i> Skills History</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <h2>Filterable Table</h2>
-            <p>Type something in the input field to search the table for first names, last names or emails:</p>  
-            <input class="form-control" id="myInput" type="text" placeholder="Search..">
+          <div class="card mb-4">
+            <div class="card-header">
+              <h6><i class="fa-solid fa-filter"></i> Filters</h6>
+            </div>
+            <div class="card-body">
+              <form action="">
+                <div class="container">
+                  <div class="row">
+                    <div class="col-md-3">
+                      <div class="text-black">
+                        <label for="floatingSelect" class="text-black">User</label>
+                        <select class="form-select">
+                          <option value=""></option>
+                          <option value="{{student.id_user}}" *ngFor="let student of user_list">{{student.name}}
+                            {{student.last_name}} - {{student.email}}</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="col-md-3">
+                      <div class="text-black">
+                        <label for="floatingSelect" class="text-black">User Evaluated</label>
+                        <select class="form-select">
+                          <option value=""></option>
+                          <option value="{{student.id_user}}" *ngFor="let student of user_list">{{student.name}}
+                            {{student.last_name}} - {{student.email}}</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="col-md-3">
+                      <div class="text-black">
+                        <label for="floatingSelect" class="text-black">Skill</label>
+                        <select class="form-select">
+                          <option value=""></option>
+                          <option value="{{badge.name}}" *ngFor="let badge of badges">{{badge.title}}</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="text-black">
+                        <label for="floatingSelect" class="text-black">Date</label>
+                        <input type="date" class="form-control">
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="pull-right">
+                      <button class="btn btn-success pull-right mt-3"><i class="fa-solid fa-magnifying-glass"></i> Search</button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
             <table class="table">
                 <thead>
                   <tr>
@@ -150,8 +204,8 @@
                 <tbody id="myTable">
                   <tr *ngFor="let history of AllHistory">
                     <th><img src="./assets/badges/badge_{{history.badge}}.png" alt="" width="100px"></th>
-                    <td>MykeTowers69</td>
-                    <td>{{history.name}}</td>
+                    <td>{{history.user.name}} {{history.user.last_name}}</td>
+                    <td>{{history.user_submited.name}} {{history.user_submited.last_name}}</td>
                     <td>{{history.total_points}}</td>
                     <td>{{history.created_at}}</td>
                     <td><button class="btn btn-exit m-0" (click)="removeHistory(history.id_badge_history)">Remove</button></td>

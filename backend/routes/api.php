@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\BadgeHistoryController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\CollegeController;
 use App\Http\Controllers\Api\CoursesController;
@@ -77,8 +78,8 @@ Route::post('tasks/get-submit', [Users_submitsController::class, 'findOne']);
 
 // Badges
 Route::post('badges/give-points', [BadgesController::class, 'givePoints']);
-Route::post('badges/give-history', [BadgesController::class, 'getHistory']);
-Route::post('badges/remove-history', [BadgesController::class, 'removeHistory']);
+Route::post('badges/give-history', [BadgeHistoryController::class, 'getByCourse']);
+Route::post('badges/remove-history', [BadgeHistoryController::class, 'remove']);
 // Post Files
 Route::post('file', [FileController::class, 'store']);
 

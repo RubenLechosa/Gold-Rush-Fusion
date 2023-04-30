@@ -58,6 +58,7 @@ class UserController extends Controller
 
         if($user = User::where("email", "=", $request["email"])->first()) {
             if(Hash::check($request["password"], $user->password)){
+
                 return response()->json([
                     "status" => Response::HTTP_OK,
                     "success"=> true,

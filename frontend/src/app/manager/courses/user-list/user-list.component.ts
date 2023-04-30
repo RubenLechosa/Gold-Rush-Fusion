@@ -183,6 +183,7 @@ export class UserListComponent {
           if(response.status == 200 && response.data) {
             this.user_data = response.data;
             this.restPoints = this.user_data.skills_points;
+            this.reloadHistory();
           }
         });
 
