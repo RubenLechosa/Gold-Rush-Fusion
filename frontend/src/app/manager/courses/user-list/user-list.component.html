@@ -44,8 +44,8 @@
               </div>
 
               <div style="float:right;" class="d-inline-block" *ngIf="user_data.role == 'student'">
-                <button class="btn btn-secondary me-3" (click)="submitRemoveStudent(user.id_user)"><i
-                    class="fa-solid fa-shield"></i></button>
+                <button class="btn btn-secondary me-3" (click)="openBadgesModal(user.id_user)" data-bs-toggle="modal"
+                  data-bs-target="#addBadges"><i class="fa-solid fa-shield"></i></button>
               </div>
             </div>
           </div>
