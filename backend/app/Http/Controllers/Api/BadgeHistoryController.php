@@ -43,7 +43,7 @@ class BadgeHistoryController extends Controller
     }
 
 
-    public function remove(GetByIdBadgeHistoryRequest $request) {
+    public function remove(Request $request) {
         $badge = BadgeHistory::where("id_badge_history", "=", $request["id_badge_history"])->first();
 
         if($user_give_points = User::find($badge->id_user_submited)) {

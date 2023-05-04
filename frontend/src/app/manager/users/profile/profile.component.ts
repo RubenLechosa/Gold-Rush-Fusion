@@ -15,7 +15,8 @@ export class ProfileComponent implements OnInit {
   self_data: any;
   id_profile = "";
   selfProfile: boolean = false;
-  badge_info: any = {C: 'Coperación', R: 'Responsabilidad', A: 'Autonomia', H: 'Habilidades De Pensar', G: 'Gestion Emocional'}; 
+  badge_info: any = {C: 'Cooperation', R: 'Responsability', A: 'Autonomy', H: 'Habilities to thing about', G: 'Emotional Gestion'};
+  badge_desc: any = {C: 'Skill that includes behaviors that facilitate group work: actions related to participation, active listening, shared decision-making, and conflict resolution.', R: 'Ability that refers to self-discipline to achieve a goal, and to maintain an attitude of work and effort towards the tasks to be performed.', A: 'L’Autonomia implica treballar de forma independent, sense necessitat de supervisió i demanant ajuda només quan es requereix. La Iniciativa indica conﬁança per tirar les coses endavant: proposar idees i buscar solucions als problemes quan és necessari.', H: 'Skills that allow you to capture information and process it to build and organize knowledge, so that it can be used to solve problems in a variety of situations. They involve intellectual inquiry, idea generation and metacognition skills.', G: 'Skill that involves being aware of one´s own emotions and those of others and managing them appropriately.'}; 
 
   form = new FormGroup({
     password: new FormControl(null, Validators.compose([Validators.minLength(4), Validators.required])),

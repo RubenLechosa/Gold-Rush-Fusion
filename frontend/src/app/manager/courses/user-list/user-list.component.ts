@@ -27,6 +27,7 @@ export class UserListComponent {
 
   filteredHistory: any;
   AllHistory: any;
+ 
 
   form = new FormGroup({ id_student: new FormControl(null, Validators.required) });
 
@@ -34,10 +35,12 @@ export class UserListComponent {
     gems: new FormControl(null, Validators.compose([Validators.required, Validators.min(1)])),
     action: new FormControl(null, Validators.compose([Validators.required, Validators.pattern("res|sum|set")]))
   });
+  
 
   formBadge = new FormGroup({C: new FormControl(null), R: new FormControl(null), H: new FormControl(null), G: new FormControl(null), A: new FormControl(null)});
   restPoints: number = 0;
   disabledSubmit: boolean = true;
+  
 
   badges: any = [
     {name: 'C', title: 'Coperación', value: 0},
@@ -46,6 +49,7 @@ export class UserListComponent {
     {name: 'G', title: 'Gestion Emociones', value: 0},
     {name: 'A', title: 'Autonomia y Iniciativa', value: 0}
   ]
+  
   
   constructor(private authService: AuthService, private userService: UserService, private badgeService: BadgeService, private courseService: CourseService, private route: ActivatedRoute) { }
 
@@ -65,6 +69,7 @@ export class UserListComponent {
         this.authService.logout();
       }
     });
+
   }
 
   reloadUsers() {
@@ -94,6 +99,7 @@ export class UserListComponent {
       }
     }); 
   }
+  
 
   submitAddStudent() {
     if(this.form.invalid) {
@@ -198,5 +204,28 @@ export class UserListComponent {
         this.reloadHistory();
       }
     });
+  }
+
+  performTableFilter() {
+    var input:any, filter, table:any, tr, td, i, j, txtValue;
+    input = document.getElementById("myInput");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("myTable");
+    tr = table.getElementsByTagName("tr");
+  
+    for (i = 0; i < tr.length; i++) {
+      for (j = 0; j < tr[i].cells.length; j++) {
+        td = tr[i].cells[j];
+        if (td) {
+          txtValue = td.textContent || td.innerText;
+          if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+            break;
+          } else {
+            tr[i].style.display = "none";
+          }
+        }
+      }
+    }
   }
 }

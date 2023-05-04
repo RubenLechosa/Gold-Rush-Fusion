@@ -206,13 +206,13 @@
         </div>
         <div class="modal-body">
           <div class="row justify-content-center" *ngFor="let badge of user_data.badges">
-            <div class="col-4 row align-items-center text-center">
+            <div class="col-5 row align-items-center text-center">
                 <img src="./assets/badges/badge_{{badge.type}}.png" alt="" width="135">
-                <h5 class="text-black">{{badge_info[badge.type]}}</h5>
+                <h5 class="text-black fs-6">{{badge_info[badge.type]}}</h5>
                 <p class="text-muted">Level: {{badge.level}}</p>
             </div>
-            <div class="col-8">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatem impedit enim nemo ducimus quasi illo eum ratione voluptas numquam beatae?
+            <div class="col-7">
+                {{badge_desc[badge.type]}}
             </div>
           </div>
         </div>
