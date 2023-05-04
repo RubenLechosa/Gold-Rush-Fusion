@@ -180,3 +180,11 @@
     object-fit: cover;
     
 }
+
+.btn-badge{
+    border: 1px solid transparent;
+}
+
+.modal-title{
+    font-family: 'Gooseberry Juice', sans-serif;
+}
