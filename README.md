@@ -65,7 +65,13 @@ contiene las variables de entorno para tu aplicación.
 
 Busca las siguientes líneas en el archivo .env:
 
-![](media/image1.emf)
+'DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=nombre_bd
+DB_USERNAME=nombre_usuario
+DB_PASSWORD=contraseña
+'
 
 Estas líneas configuran la conexión a la base de datos para tu
 aplicación. Asegúrate de que la información sea correcta para tu sistema
