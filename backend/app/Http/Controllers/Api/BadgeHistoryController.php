@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Badges\GetBadgeHistoryRequest;
-use App\Http\Requests\Badges\GetByIdBadgeHistoryRequest;
 use App\Http\Requests\Course\GetByCourseRequest;
 use App\Models\BadgeHistory;
 use App\Models\User;

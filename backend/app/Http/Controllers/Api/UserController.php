@@ -54,30 +54,20 @@ class UserController extends Controller
     }
 
     public function login(UserLoginRequest $request) {
-        $request = $request->validated();
+        $credentials = $request->validated();
 
-        if($user = User::where("email", "=", $request["email"])->first()) {
-            if(Hash::check($request["password"], $user->password)){
-
-                return response()->json([
-                    "status" => Response::HTTP_OK,
-                    "success"=> true,
-                    "id_user" => $user->id_user,
-                ]);
-            }else{
-                return response()->json([
-                    "status" => Response::HTTP_BAD_REQUEST,
-                    "success"=> false,
-                    "msg"   => "Password not match",
-                ]);
-            }
+        if (!Auth::attempt($credentials)) {
+            return response()->json([
+                'success' => false
+            ], Response::HTTP_FORBIDDEN);
         }
         
+        $user = User::where("email", "=", $request["email"])->first();
         return response()->json([
-            "status" => Response::HTTP_BAD_REQUEST,
-            "success"=> false,
-            "msg"   => "User not found",
-        ]);
+            'success' => true,
+            'id_user' => $user->id_user,
+            'access_token' => $request->user()->createToken($request->ip())->plainTextToken
+        ], Response::HTTP_OK);
     }
     
     public function update(UserEditRequest $request) {

@@ -18,6 +18,7 @@ export class AuthService {
   login(email: string, password: string) {
     return this.userService.login(email, password).subscribe((response: any) => {
         this._isLoggedIn.next(true);
+        console.log(response);
 
         localStorage.setItem('id', response.id_user);
         localStorage.setItem('token', response.access_token);

@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'laravel/laravel',
-        'pretty_version' => 'v9.5.1',
-        'version' => '9.5.1.0',
-        'reference' => NULL,
+        'pretty_version' => 'dev-main',
+        'version' => 'dev-main',
+        'reference' => 'de13c549daf8dc289de6d3822b3ac647fe58665f',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -25,6 +25,15 @@
                 0 => '*',
             ),
         ),
+        'darkaonline/l5-swagger' => array(
+            'pretty_version' => '8.5.0',
+            'version' => '8.5.0.0',
+            'reference' => '8e61ce632fb90eb9d78cf34918d133c46baa93b4',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../darkaonline/l5-swagger',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'davedevelopment/hamcrest-php' => array(
             'dev_requirement' => true,
             'replaced' => array(
@@ -37,6 +46,15 @@
             'reference' => 'f41715465d65213d644d3141a6a93081be5d3549',
             'type' => 'library',
             'install_path' => __DIR__ . '/../dflydev/dot-access-data',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'doctrine/annotations' => array(
+            'pretty_version' => '2.0.1',
+            'version' => '2.0.1.0',
+            'reference' => 'e157ef3f3124bbf6fe7ce0ffd109e8a8ef284e7f',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../doctrine/annotations',
             'aliases' => array(),
             'dev_requirement' => false,
         ),
@@ -365,9 +383,9 @@
             'dev_requirement' => false,
         ),
         'laravel/laravel' => array(
-            'pretty_version' => 'v9.5.1',
-            'version' => '9.5.1.0',
-            'reference' => NULL,
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'reference' => 'de13c549daf8dc289de6d3822b3ac647fe58665f',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -622,6 +640,15 @@
             'aliases' => array(),
             'dev_requirement' => true,
         ),
+        'psr/cache' => array(
+            'pretty_version' => '3.0.0',
+            'version' => '3.0.0.0',
+            'reference' => 'aa5030cfa5405eccfdcb1083ce040c2cb8d253bf',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../psr/cache',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'psr/container' => array(
             'pretty_version' => '2.0.2',
             'version' => '2.0.2.0',
@@ -709,8 +736,8 @@
         'psr/log-implementation' => array(
             'dev_requirement' => false,
             'provided' => array(
-                0 => '1.0|2.0|3.0',
-                1 => '1.0.0 || 2.0.0 || 3.0.0',
+                0 => '1.0.0 || 2.0.0 || 3.0.0',
+                1 => '1.0|2.0|3.0',
             ),
         ),
         'psr/simple-cache' => array(
@@ -949,6 +976,15 @@
             'install_path' => __DIR__ . '/../spatie/laravel-ignition',
             'aliases' => array(),
             'dev_requirement' => true,
+        ),
+        'swagger-api/swagger-ui' => array(
+            'pretty_version' => 'v4.18.3',
+            'version' => '4.18.3.0',
+            'reference' => '6d6374baa8df31a1b8f5fc91fb9970233c432a23',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../swagger-api/swagger-ui',
+            'aliases' => array(),
+            'dev_requirement' => false,
         ),
         'symfony/console' => array(
             'pretty_version' => 'v6.2.5',
@@ -1205,6 +1241,15 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+        'symfony/yaml' => array(
+            'pretty_version' => 'v6.2.10',
+            'version' => '6.2.10.0',
+            'reference' => '61916f3861b1e9705b18cfde723921a71dd1559d',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../symfony/yaml',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'theseer/tokenizer' => array(
             'pretty_version' => '1.2.1',
             'version' => '1.2.1.0',
@@ -1247,6 +1292,15 @@
             'reference' => '11cb2199493b2f8a3b53e7f19068fc6aac760991',
             'type' => 'library',
             'install_path' => __DIR__ . '/../webmozart/assert',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'zircote/swagger-php' => array(
+            'pretty_version' => '4.7.10',
+            'version' => '4.7.10.0',
+            'reference' => '6d2f0fcc46bf9043877de8656a9ea95331155522',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../zircote/swagger-php',
             'aliases' => array(),
             'dev_requirement' => false,
         ),

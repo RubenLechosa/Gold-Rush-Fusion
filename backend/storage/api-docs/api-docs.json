@@ -1,0 +1,88 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "GoldRushFusion Api",
+        "version": "1.0"
+    },
+    "servers": [{
+        "url": "http://localhost:8000/api",
+        "description": "Development server"
+    }],
+    "paths": {
+        "/register": {
+            "get": {
+                "summary": "TITULO EJEMPLO",
+                "description": "Register User From Form",
+                "tags": ["Auth"],
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/Token"
+                    },
+                    {
+                        "name": "nick",
+                        "in": "body",
+                        "description": "token to be passed as a header",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "required|email",
+                            "example": "token"
+                        }
+                    }
+                ],
+                "requestBody": {
+                },
+                "responses": {
+                    "200": {
+                        "description": "An example endpoint",
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "message": {
+                                        "type": "string",
+                                        "example": "hola"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Bad request"
+                    }
+                }
+            }
+        },
+        "/login": {
+            "get": {
+                "tags": ["Auth"],
+                "responses": {
+                    "200": {
+                        "description": "An example endpoint"
+                    },
+                    "403": {
+                        "description": "Bad request"
+                    }
+                }
+            }
+        }
+    },
+
+    "components": {
+        "parameters": {
+            "Token": {
+                "name": "token",
+                "in": "body",
+                "description": "token to be passed as a header",
+                "required": true,
+                "schema": {
+                    "type": "string",
+                    "description": "required|email",
+                    "example": "token"
+                }
+            }
+        },
+        "responses": {
+
+        }
+    }
+}
