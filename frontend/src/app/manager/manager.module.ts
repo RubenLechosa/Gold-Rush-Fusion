@@ -20,7 +20,7 @@ import { TasksComponent } from './courses/tasks/tasks.component';
 import { TaskViewComponent } from './courses/task-view/task-view.component';
 import { EditTaskComponent } from './courses/edit-task/edit-task.component';
 import { UserSubmitsListComponent } from './user-submits-list/user-submits-list.component';
-
+import { AngularEditorModule } from '@kolkov/angular-editor';
 @NgModule({
   declarations: [
     MainComponent,
@@ -46,7 +46,8 @@ import { UserSubmitsListComponent } from './user-submits-list/user-submits-list.
     ReactiveFormsModule,
     FormsModule,
     ManagerRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    AngularEditorModule
   ]
 })
 export class ManagerModule {

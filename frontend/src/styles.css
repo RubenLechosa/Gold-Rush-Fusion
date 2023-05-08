@@ -1,6 +1,7 @@
 /* Fuentes Principales */
 @import url('https://fonts.cdnfonts.com/css/gooseberry-juice');
 @import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
+@import '../node_modules/font-awesome/css/font-awesome.css';
 
 /*Variables de colores*/
 :root {

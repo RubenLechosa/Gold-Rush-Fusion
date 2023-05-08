@@ -7,12 +7,15 @@ import { CourseService } from 'src/app/services/course.service';
 import { TaskService } from 'src/app/services/task.service';
 import { UserService } from 'src/app/services/user.service';
 
+
 @Component({
   selector: 'app-tasks',
   templateUrl: './tasks.component.html',
   styleUrls: ['./tasks.component.css']
 })
 export class TasksComponent {
+  htmlContent: string = '';
+
   @ViewChild('closeCategoryModal') closeCategoryModal!:any;
   @ViewChild('openModal') openModal!:any;
 
