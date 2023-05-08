@@ -134,9 +134,64 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <div class="input-group mb-3">
-            <input type="text" class="form-control" id="myInput" (keyup)="performTableFilter()" placeholder="Search..." aria-label="Username" aria-describedby="basic-addon1">
-          </div>            
+          
+          
+          <div class="card mb-4">
+            <div class="card-header">
+              <h6><i class="fa-solid fa-filter"></i> Filters</h6>
+            </div>
+            <div class="card-body">
+              <form action="">
+                <div class="container">
+                  <div class="row">
+                    <div class="col-md-3">
+                      <div class="text-black">
+                        <label for="floatingSelect" class="text-black">User</label>
+                        <select class="form-select">
+                          <option value=""></option>
+                          <option value="{{student.id_user}}" *ngFor="let student of user_list">{{student.name}}
+                            {{student.last_name}} - {{student.email}}</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="col-md-3">
+                      <div class="text-black">
+                        <label for="floatingSelect" class="text-black">User Evaluated</label>
+                        <select class="form-select">
+                          <option value=""></option>
+                          <option value="{{student.id_user}}" *ngFor="let student of user_list">{{student.name}}
+                            {{student.last_name}} - {{student.email}}</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="col-md-3">
+                      <div class="text-black">
+                        <label for="floatingSelect" class="text-black">Skill</label>
+                        <select class="form-select">
+                          <option value=""></option>
+                          <option value="{{badge.name}}" *ngFor="let badge of badges">{{badge.title}}</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="text-black">
+                        <label for="floatingSelect" class="text-black">Date</label>
+                        <input type="date" class="form-control">
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="pull-right">
+                      <button class="btn btn-success pull-right mt-3"><i class="fa-solid fa-magnifying-glass"></i> Search</button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
           <table class="table" id="searchable">
                 <thead>
                   <tr>
@@ -166,16 +221,6 @@
       </div>
     </div>
   </div>
-
-  <script>
-function filterTable() {
-  $(document).ready(function() {
-    $("#myInput").on("keyup", function() {
-      performTableFilter();
-    });
-  });
-}
-  </script>
 
 <div class="modal fade modal-lg" id="addBadges" tabindex="-1" aria-labelledby="addBadges" aria-hidden="true">
   <div class="modal-dialog">
