@@ -81,7 +81,7 @@ Si estás usando MySQL como tu sistema de base de datos, asegúrate de que
 la extensión PHP **pdo_mysql** esté habilitada. Puedes verificar esto
 ejecutando el siguiente comando en una terminal o línea de comandos:
 
-![](media/image2.emf)
+```php -m | grep pdo_mysql```
 
 Si la extensión está habilitada, verás el resultado **pdo_mysql** en la
 pantalla.
@@ -92,7 +92,7 @@ Ejecuta las migraciones de Laravel para crear las tablas necesarias en
 tu base de datos. Ejecuta el siguiente comando en una terminal o línea
 de comandos en la raíz de tu proyecto de Laravel:
 
-![](media/image3.emf)
+```php artisan migrate:fresh --seed```
 
 Esto creará la base de datos si no lo está, todas las tablas necesarias
 y llenara la base de datos para hacer pruebas, todo en un solo comando.
@@ -102,7 +102,7 @@ y llenara la base de datos para hacer pruebas, todo en un solo comando.
 Para poder guardar todas las imágenes en el servidor debemos enlazar las
 rutas, lo hacemos con el siguiente comando:
 
-![](media/image4.emf)
+```php artisan storage:link```
 
 ### Ejecución del servidor Laravel
 
@@ -110,16 +110,16 @@ Una vez finalizada la instalación y configuración de la base de datos,
 navega hasta la carpeta del proyecto de Laravel utilizando el siguiente
 comando:
 
-![](media/image5.emf)
+```cd nombre_proyecto (backend en nuestro caso)```
 
 Y para terminar de instalar las librearias de nuestro proyecto debemos
 ejecutar el siguiente comando:
 
-![](media/image6.emf)
+```composer install```
 
 Ejecuta el siguiente comando para iniciar el servidor de desarrollo:
 
-![](media/image7.emf)
+```php artisan serve```
 
 Esto iniciará el servidor de desarrollo de Laravel en el puerto 8000.
 Ahora, puedes navegar a http://localhost:8000 en tu navegador para ver
@@ -138,7 +138,7 @@ instalar Node.js desde su sitio web oficial: [Node.js
 Abre una terminal o línea de comandos y ejecuta el siguiente comando
 para instalar Angular CLI de forma global:
 
-![](media/image8.emf)
+```npm install -g @angular/cli```
 
 Este comando instalará la herramienta de línea de comandos de Angular
 CLI que se utiliza para crear y gestionar proyectos de Angular.
@@ -146,21 +146,21 @@ CLI que se utiliza para crear y gestionar proyectos de Angular.
 Navega hasta la carpeta del proyecto de Angular utilizando el siguiente
 comando:
 
-![](media/image9.emf)
+```cd nombre_proyecto (forntend en nuestro caso)```
 
 ### Librerías
 
 Debemos instalar todas las librerías que hemos utilizado y lo haremos
 con el siguiente comando:
 
-![](media/image10.emf)
+```npm install```
 
 ### Ejecución del servidor Angular
 
 Ejecuta el siguiente comando para iniciar el servidor de desarrollo de
 Angular:
 
-![](media/image11.emf)
+```ng serve –open```
 
 Este comando iniciará el servidor de desarrollo de Angular en el puerto
 4200. Ahora, puedes navegar a http://localhost:4200 en tu navegador para
