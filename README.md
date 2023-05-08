@@ -1,24 +1,10 @@
-  -----------------------------------------------------------------------
-  Gold Rush Fusion
-  -----------------------------------------------------------------------
-  Guía de instalación
-
-  Laravel y Angular
-  -----------------------------------------------------------------------
-
-+-----------------------------------------------------------------------+
-| Ruben Lechosa, Alex Madrigal y Eric Escabias                          |
-|                                                                       |
-| 5-2023                                                                |
-+=======================================================================+
-+-----------------------------------------------------------------------+
 
 # Contenido {#contenido .TOC-Heading}
 
 [Instalación de Laravel
 [1](#instalación-de-laravel)](#instalación-de-laravel)
 
-[Composer [1](#composer)](#composer)
+[ [Composer](#composer)]
 
 [Descargar Proyecto [1](#descargar-proyecto)](#descargar-proyecto)
 
