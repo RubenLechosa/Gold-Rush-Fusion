@@ -1,29 +1,26 @@
 
-# Contenido {#contenido .TOC-Heading}
+# Guía de instalación
 
-[Instalación de Laravel
-[1](#instalación-de-laravel)](#instalación-de-laravel)
+## [Instalación de Laravel](#instalación-de-laravel)
 
-[ [Composer](#composer)]
+[Composer](#composer)
 
-[Descargar Proyecto [1](#descargar-proyecto)](#descargar-proyecto)
+[Descargar Proyecto](#descargar-proyecto)
 
-[Base de datos [1](#base-de-datos)](#base-de-datos)
+[Base de datos](#base-de-datos)
 
-[Storage [2](#storage)](#storage)
+[Storage](#storage)
 
-[Ejecución del servidor Laravel
-[2](#ejecución-del-servidor-laravel)](#ejecución-del-servidor-laravel)
+[Ejecución del servidor Laravel](#ejecución-del-servidor-laravel)
 
-[Instalación de Angular
-[4](#instalación-de-angular)](#instalación-de-angular)
 
-[Instalación [4](#instalación)](#instalación)
+## [Instalación de Angular](#instalación-de-angular)
 
-[Librerías [4](#librerías)](#librerías)
+[Instalación](#instalación)
 
-[Ejecución del servidor Angular
-[4](#ejecución-del-servidor-angular)](#ejecución-del-servidor-angular)
+[Librerías](#librerías)
+
+[Ejecución del servidor Angular](#ejecución-del-servidor-angular)]
 
 ## Instalación de Laravel
 
