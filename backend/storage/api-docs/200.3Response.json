@@ -1,0 +1,21 @@
+{
+    "type": "object",
+    "properties": {
+        "status": {
+            "type": "integer",
+            "example": 200
+        },
+        "success": {
+            "type": "boolean",
+            "example": true
+        },
+        "id_user":{
+            "type": "integer",
+            "example":"5"
+        },
+        "access_token":{
+            "type": "string",
+            "example":"DSFJDJ24421ASJD213JQ"
+        }
+    }
+}
