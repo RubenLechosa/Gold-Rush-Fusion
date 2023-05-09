@@ -10,7 +10,6 @@ use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\FileController;
 use App\Http\Controllers\Api\Users_submitsController;
 use App\Http\Controllers\Api\BadgesController;
-
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -25,8 +24,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('register', [UserController::class, 'register']);
-Route::post('login', [UserController::class, 'login']);
+Route::post('register', [UserController::class, 'register'])->middleware('throttle:5,60');;
+Route::post('login', [UserController::class, 'login'])->middleware('throttle:5,60');
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('users/get-user', [UserController::class, 'findOne']);

@@ -1,0 +1,13 @@
+{
+    "type": "object",
+    "properties": {
+        "acces_token": {
+            "type": "string",
+            "example": "asdsadsaq332421421"
+        },
+        "message": {
+            "type": "string",
+            "example": "asdsadsa"
+        }
+    }
+}

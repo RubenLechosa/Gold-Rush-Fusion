@@ -14,6 +14,11 @@
                 "summary": "TITULO EJEMPLO",
                 "description": "Register User From Form",
                 "tags": ["Auth"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/Token"
@@ -31,23 +36,14 @@
                     }
                 ],
                 "requestBody": {
+                    "$ref": "#/components/requestBodies/AuthBody"
                 },
                 "responses": {
                     "200": {
-                        "description": "An example endpoint",
-                        "content": {
-                            "application/json": {
-                                "examples": {
-                                    "message": {
-                                        "type": "string",
-                                        "example": "hola"
-                                    }
-                                }
-                            }
-                        }
+                        "$ref": "#/components/responses/AuthResponse"
                     },
-                    "403": {
-                        "description": "Bad request"
+                    "400": {
+                        "$ref": "#/components/responses/AuthResponse"
                     }
                 }
             }
@@ -68,6 +64,13 @@
     },
 
     "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
+            }
+        },
         "parameters": {
             "Token": {
                 "name": "token",
@@ -81,8 +84,23 @@
                 }
             }
         },
+        "requestBodies": {
+            "AuthBody": {
+                "$ref": "LoginBody.json"
+            }
+        },
         "responses": {
+            "AuthResponse": {
+                "description": "Esta respuesta es si todo ok",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "LoginResponse.json"
+                        }
+                    }
+                }
 
+            }
         }
     }
 }
