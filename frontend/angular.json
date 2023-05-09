@@ -22,8 +22,7 @@
             "tsConfig": "tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
-              "src/assets",
-              "./node_modules/@kolkov/angular-editor/assets/"
+              "src/assets"
             ],
             "styles": [
               "src/styles.css"
