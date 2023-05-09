@@ -35,13 +35,18 @@ export class UserListComponent {
     gems: new FormControl(null, Validators.compose([Validators.required, Validators.min(1)])),
     action: new FormControl(null, Validators.compose([Validators.required, Validators.pattern("res|sum|set")]))
   });
-  
 
+  formFilters = new FormGroup({
+    user: new FormControl(null),
+    badge: new FormControl(null),
+    id_user_submited: new FormControl(null),
+    created_at: new FormControl(null),
+  });
+  
   formBadge = new FormGroup({C: new FormControl(null), R: new FormControl(null), H: new FormControl(null), G: new FormControl(null), A: new FormControl(null)});
   restPoints: number = 0;
   disabledSubmit: boolean = true;
   
-
   badges: any = [
     {name: 'C', title: 'Coperación', value: 0},
     {name: 'R', title: 'Responsabilidad', value: 0},
@@ -89,7 +94,8 @@ export class UserListComponent {
   }
 
   reloadHistory() {
-    this.badgeService.giveHistory(Number(this.id_course)).subscribe((history: any) => {
+
+    this.badgeService.giveHistory(Number(this.id_course), {"id_user": this.formFilters.get("user")?.value, "badge": this.formFilters.get("badge")?.value, "id_user_submited": this.formFilters.get("id_user_submited")?.value, "created_at": this.formFilters.get("created_at")?.value}).subscribe((history: any) => {
       if(history.status == 200) {
         this.AllHistory = history.data;
         
@@ -100,6 +106,9 @@ export class UserListComponent {
     }); 
   }
   
+  submitFilters() {
+    this.reloadHistory();
+  }
 
   submitAddStudent() {
     if(this.form.invalid) {

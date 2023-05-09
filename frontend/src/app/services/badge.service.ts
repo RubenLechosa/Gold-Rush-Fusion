@@ -14,8 +14,8 @@ export class BadgeService {
     return this.frameworkService.post('badges/give-points', { id_user, id_course, id_request_user, badges });
   }
 
-  giveHistory(id_course: number) {
-    return this.frameworkService.post('badges/give-history', { id_course });
+  giveHistory(id_course: number, filters: any = []) {
+    return this.frameworkService.post('badges/give-history', { id_course, filters });
   }
 
   removeHistory(id_badge_history: number) {
