@@ -55,4 +55,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    protected function popers(): \Illuminate\Database\Eloquent\Relations\BelongsTo 
+    {
+        return $this->belongsTo(Popers::class);
+    }
 }

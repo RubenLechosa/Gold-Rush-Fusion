@@ -28,60 +28,63 @@ use Illuminate\Support\Facades\Route;
 Route::post('register', [UserController::class, 'register']);
 Route::post('login', [UserController::class, 'login']);
 
-Route::post('users/get-user', [UserController::class, 'findOne']);
-Route::post('users/edit-user', [UserController::class, 'update']);
-Route::post('users/modify-gems', [UserController::class, 'modifyGems']);
-Route::post('users/get-users-college', [UserController::class, 'getAllUsersByCollege']);
-Route::post('users/get-teachers-college', [UserController::class, 'getAllUsersByCollege']);
-Route::post('users/add-course', [UserController::class, 'addCourseToUser']);
-Route::post('users/remove-course', [UserController::class, 'removeCourseToUser']);
-Route::post('users/change-password', [UserController::class, 'changePassword']);
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('users/get-user', [UserController::class, 'findOne']);
+    Route::post('users/edit-user', [UserController::class, 'update']);
+    Route::post('users/modify-gems', [UserController::class, 'modifyGems']);
+    Route::post('users/get-users-college', [UserController::class, 'getAllUsersByCollege']);
+    Route::post('users/get-teachers-college', [UserController::class, 'getAllUsersByCollege']);
+    Route::post('users/add-course', [UserController::class, 'addCourseToUser']);
+    Route::post('users/remove-course', [UserController::class, 'removeCourseToUser']);
+    Route::post('users/change-password', [UserController::class, 'changePassword']);
+    
+    // Courses
+    Route::post('users/get-courses', [CoursesController::class, 'getAllCoursesByUser']);
+    Route::post('users/join-course', [UserController::class, 'joinCourseByCode']);
+    Route::post('course/create-course', [CoursesController::class, 'create']);
+    Route::post('course/save-course', [CoursesController::class, 'update']);
+    Route::post('course/get-details', [CoursesController::class, 'findOne']);
+    Route::post('course/get-users', [UserController::class, 'getAllUsersByCourse']);
+    Route::post('course/get-ranking', [CoursesController::class, 'getRanking']);
+    Route::post('course/refresh-code', [CoursesController::class, 'refreshCode']);
+    Route::post('course/delete', [CoursesController::class, 'delete']);
+    
+    //Requests Course
+    Route::post('course/get-requests', [CoursesController::class, 'getAllUsersByRequests']);
+    Route::post('course/resolve-request', [CoursesController::class, 'resolveRequest']);
+    
+    // Popers
+    Route::post('popers/create-poper', [PopersController::class, 'create']);
+    
+    // College
+    Route::post('college/get-college', [CollegeController::class, 'findOne']);
+    Route::post('college/save-college', [CollegeController::class, 'update']);
+    
+    // Tasks
+    Route::post('tasks/new-task', [TasksController::class, 'create']);
+    Route::post('tasks/edit-task', [TasksController::class, 'update']);
+    Route::post('tasks/delete-task', [TasksController::class, 'delete']);
+    Route::post('tasks/get-task', [TasksController::class, 'findOne']);
+    Route::post('tasks/get-tasks-list', [TasksController::class, 'getTaskList']);
+    
+    // Category
+    Route::post('tasks/new-category', [CategoryController::class, 'create']);
+    Route::post('tasks/get-categories', [CategoryController::class, 'getCategoriesOnCourse']);
+    Route::post('tasks/delete-category', [CategoryController::class, 'delete']);
+    
+    // Task_submits
+    Route::post('tasks/new-upload', [Users_submitsController::class, 'create']);
+    Route::post('tasks/get-submits', [Users_submitsController::class, 'findByCourse']);
+    Route::post('tasks/get-submit', [Users_submitsController::class, 'findOne']);
+    
+    // Badges
+    Route::post('badges/give-points', [BadgesController::class, 'givePoints']);
+    Route::post('badges/give-history', [BadgeHistoryController::class, 'getByCourse']);
+    Route::post('badges/remove-history', [BadgeHistoryController::class, 'remove']);
+    // Post Files
+    Route::post('file', [FileController::class, 'store']);
+});
 
-// Courses
-Route::post('users/get-courses', [CoursesController::class, 'getAllCoursesByUser']);
-Route::post('users/join-course', [UserController::class, 'joinCourseByCode']);
-Route::post('course/create-course', [CoursesController::class, 'create']);
-Route::post('course/save-course', [CoursesController::class, 'update']);
-Route::post('course/get-details', [CoursesController::class, 'findOne']);
-Route::post('course/get-users', [UserController::class, 'getAllUsersByCourse']);
-Route::post('course/get-ranking', [CoursesController::class, 'getRanking']);
-Route::post('course/refresh-code', [CoursesController::class, 'refreshCode']);
-Route::post('course/delete', [CoursesController::class, 'delete']);
-
-//Requests Course
-Route::post('course/get-requests', [CoursesController::class, 'getAllUsersByRequests']);
-Route::post('course/resolve-request', [CoursesController::class, 'resolveRequest']);
-
-// Popers
-Route::post('popers/create-poper', [PopersController::class, 'create']);
-
-// College
-Route::post('college/get-college', [CollegeController::class, 'findOne']);
-Route::post('college/save-college', [CollegeController::class, 'update']);
-
-// Tasks
-Route::post('tasks/new-task', [TasksController::class, 'create']);
-Route::post('tasks/edit-task', [TasksController::class, 'update']);
-Route::post('tasks/delete-task', [TasksController::class, 'delete']);
-Route::post('tasks/get-task', [TasksController::class, 'findOne']);
-Route::post('tasks/get-tasks-list', [TasksController::class, 'getTaskList']);
-
-// Category
-Route::post('tasks/new-category', [CategoryController::class, 'create']);
-Route::post('tasks/get-categories', [CategoryController::class, 'getCategoriesOnCourse']);
-Route::post('tasks/delete-category', [CategoryController::class, 'delete']);
-
-// Task_submits
-Route::post('tasks/new-upload', [Users_submitsController::class, 'create']);
-Route::post('tasks/get-submits', [Users_submitsController::class, 'findByCourse']);
-Route::post('tasks/get-submit', [Users_submitsController::class, 'findOne']);
-
-// Badges
-Route::post('badges/give-points', [BadgesController::class, 'givePoints']);
-Route::post('badges/give-history', [BadgeHistoryController::class, 'getByCourse']);
-Route::post('badges/remove-history', [BadgeHistoryController::class, 'remove']);
-// Post Files
-Route::post('file', [FileController::class, 'store']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

@@ -11,11 +11,11 @@ export class UserService {
   constructor(private frameworkService: FrameworkService) { }
 
   login(email: string, password: string) {
-    return this.frameworkService.post('login', { email, password });
+    return this.frameworkService.post('login', { email, password }, false);
   }
 
   register(nick: string, name: string, last_name: string, email: string, college: string, password: string, password_confirmation: string) {
-    return this.frameworkService.post('register', { nick, name, last_name, email, college, password, password_confirmation });
+    return this.frameworkService.post('register', { nick, name, last_name, email, college, password, password_confirmation }, false);
   }
 
   getUserDetails(id_user: string) {

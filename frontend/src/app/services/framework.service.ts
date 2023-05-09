@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 const baseUrl = 'http://localhost:8000/api';
-const header = new HttpHeaders({
+var header = new HttpHeaders({
   'Content-Type': 'application/json',
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Headers': 'Content-Type',
@@ -20,7 +20,17 @@ export class FrameworkService {
     return this.http.get(`${baseUrl}/${url}`, body);
   }
 
-  post(url: string, body: any) {
+  post(url: string, body: any, auth: boolean = true) {
+    if(auth) {
+      header = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Headers': 'Content-Type',
+        'Access-Control-Allow-Methods': 'GET,POST,OPTIONS,DELETE,PUT',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+      });
+    }
+
     return this.http.post(`${baseUrl}/${url}`, body, {headers: header});
   }
 
