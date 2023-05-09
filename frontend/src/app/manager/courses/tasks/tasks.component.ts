@@ -6,6 +6,12 @@ import { AuthService } from 'src/app/services/auth.service';
 import { CourseService } from 'src/app/services/course.service';
 import { TaskService } from 'src/app/services/task.service';
 import { UserService } from 'src/app/services/user.service';
+import { AngularEditorConfig } from '@kolkov/angular-editor';
+import { DomSanitizer } from '@angular/platform-browser';
+import * as XLSX from 'xlsx';
+import Swal from 'sweetalert2';
+
+
 
 
 @Component({
@@ -14,7 +20,15 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./tasks.component.css']
 })
 export class TasksComponent {
-  htmlContent: string = '';
+  texto: string = '';
+  
+
+  mostrarContenidoHTML() {
+    // Desinfectar y marcar el contenido HTML como seguro
+    let contenidoSeguro = this.sanitizer.bypassSecurityTrustHtml(this.texto);
+
+    return contenidoSeguro;
+  }
 
   @ViewChild('closeCategoryModal') closeCategoryModal!:any;
   @ViewChild('openModal') openModal!:any;
@@ -34,7 +48,30 @@ export class TasksComponent {
     comment: new FormControl(null)
   });
 
-  constructor(private authService: AuthService, private userService: UserService, private route: ActivatedRoute,  private router: Router, private courseService: CourseService, private tasksService: TaskService) { }
+  editorConfig: AngularEditorConfig = {
+    editable: true,
+      spellcheck: true,
+      height: 'auto',
+      minHeight: '300px',
+      maxHeight: '500px',
+      width: 'auto',
+      minWidth: '0',
+      translate: 'yes',
+      enableToolbar: true,
+      showToolbar: true,
+      placeholder: 'Enter text here...',
+      defaultParagraphSeparator: '',
+      defaultFontName: '',
+      defaultFontSize: '',
+      fonts: [
+        {class: 'arial', name: 'Arial'},
+        {class: 'times-new-roman', name: 'Times New Roman'},
+        {class: 'calibri', name: 'Calibri'},
+        {class: 'comic-sans-ms', name: 'Comic Sans MS'}
+      ]
+};
+
+  constructor(private sanitizer: DomSanitizer, private authService: AuthService, private userService: UserService, private route: ActivatedRoute,  private router: Router, private courseService: CourseService, private tasksService: TaskService) { }
 
 ngOnInit(): void {
   this.route.params.subscribe(params => {
@@ -97,6 +134,11 @@ deleteTask(id_task: number) {
     this.tasksService.removeTask(id_task).subscribe((tasks: any) => {
       if(tasks.status == 200) {
         this.reloadTasks();
+        Swal.fire({
+          title: 'Task Removed',
+          icon: 'success',
+          confirmButtonText: 'OK'
+        });
       }
     });
   }
@@ -108,6 +150,11 @@ deleteCategory(id_category: number) {
     this.tasksService.deleteCategory(id_category).subscribe((tasks: any) => {
       if(tasks.status == 200) {
         this.reloadTasks();
+        Swal.fire({
+          title: 'Category Removed',
+          icon: 'success',
+          confirmButtonText: 'OK'
+        });
       }
     });
   }
@@ -131,10 +178,38 @@ onsubmitMark() {
     if(tasks.status == 200) {
       this.reloadUploads();
       this.closeCategoryModal.nativeElement.click();
+      Swal.fire({
+        title: 'Mark Submited',
+        icon: 'success',
+        confirmButtonText: 'OK'
+      });
     }
   });
 
   this.alreadySubmit = false;
+}
+
+exportToExcel() {
+  let tabla = document.getElementById("miTabla");
+
+  if (tabla != null) { // Verifica que "tabla" no sea nula
+    // Elimina la última columna de la tabla
+    let rows = tabla.getElementsByTagName('tr');
+    for (let i = 0; i < rows.length; i++) {
+      rows[i].deleteCell(-1);
+    }
+
+    let worksheet: XLSX.WorkSheet = XLSX.utils.table_to_sheet(tabla);
+    let workbook: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Marks');
+    XLSX.writeFile(workbook, 'marks.xlsx');
+
+    Swal.fire({
+      title: 'Marks Exported',
+      icon: 'success',
+      confirmButtonText: 'OK'
+    });
+  }
 }
 
 }

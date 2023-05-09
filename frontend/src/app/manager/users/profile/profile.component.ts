@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-profile',
@@ -59,6 +60,7 @@ export class ProfileComponent implements OnInit {
   
   onSubmit() {
     this.userService.changePassword(Number(localStorage.getItem('id')), String(this.form.get("password")?.value), String(this.form.get("new_password")?.value), String(this.form.get("confirm_password")?.value)).subscribe((passwords: any) => {
+      
       if(passwords.status == 200) {
         this.authService.logout();
       } else {

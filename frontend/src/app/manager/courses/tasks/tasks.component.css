@@ -1,7 +1,19 @@
-.titleFlex h1 {
+.titleFlex h1, h2 {
     font-family: 'Gooseberry Juice', sans-serif;
     color: var(--white);
     margin: 0px;
+}
+
+.home button{
+    width: 200px !important;
+}
+
+.home-modal .modal-dialog{
+    max-width: 1000px !important;
+}
+
+.home-editor{
+    color: var(--white) !important;
 }
 
 .titleFlex {
@@ -23,6 +35,8 @@
     margin-right: 1rem;
     transition: transform .2s;
 }
+
+
 
 .titleFlex a:hover {
     transform: scale(1.2);

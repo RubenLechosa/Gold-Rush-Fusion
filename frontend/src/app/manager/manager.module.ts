@@ -21,6 +21,7 @@ import { TaskViewComponent } from './courses/task-view/task-view.component';
 import { EditTaskComponent } from './courses/edit-task/edit-task.component';
 import { UserSubmitsListComponent } from './user-submits-list/user-submits-list.component';
 import { AngularEditorModule } from '@kolkov/angular-editor';
+
 @NgModule({
   declarations: [
     MainComponent,
@@ -39,7 +40,7 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
     TasksComponent,
     TaskViewComponent,
     EditTaskComponent,
-    UserSubmitsListComponent
+    UserSubmitsListComponent,
   ],
   imports: [
     CommonModule,

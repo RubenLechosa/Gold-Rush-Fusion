@@ -21,7 +21,7 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule, 
-    AngularEditorModule
+    AngularEditorModule,
   ],
   providers: [
   ],
