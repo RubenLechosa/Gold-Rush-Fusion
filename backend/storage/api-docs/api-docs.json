@@ -10,8 +10,8 @@
     }],
     "paths": {
         "/register": {
-            "get": {
-                "summary": "TITULO EJEMPLO",
+            "post": {
+                "summary": "REGISTER",
                 "description": "Register User From Form",
                 "tags": ["Auth"],
                 "security": [
@@ -26,37 +26,123 @@
                     {
                         "name": "nick",
                         "in": "body",
-                        "description": "token to be passed as a header",
+                        "description": "nick of the register form",
                         "required": true,
                         "schema": {
                             "type": "string",
                             "description": "required|email",
-                            "example": "token"
+                            "example": "JorgitoCrack"
+                        }
+                    },
+                    {
+                        "name": "name",
+                        "in": "body",
+                        "description": "name of the register form",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "required",
+                            "example": "Mark"
+                        }
+                    },
+                    {
+                        "name": "last_name",
+                        "in": "body",
+                        "description": "last_name of the register form",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "required",
+                            "example": "Zuckenberg"
+                        }
+                    },
+                    {
+                        "name": "email",
+                        "in": "body",
+                        "description": "email of the register form",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "required|email|unique:users",
+                            "example": "test@test.com"
+                        }
+                    },
+                    {
+                        "name": "id_college",
+                        "in": "body",
+                        "description": "id_college of the register form",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "required",
+                            "example": "5"
+                        }
+                    },
+                    {
+                        "name": "password",
+                        "in": "body",
+                        "description": "password of the register form",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "required|confirmed|min:6",
+                            "example": "password"
                         }
                     }
+
+                    
+                    
+
                 ],
                 "requestBody": {
-                    "$ref": "#/components/requestBodies/AuthBody"
+                    "$ref": "#/components/requestBodies/RegisterBody"
                 },
                 "responses": {
                     "200": {
-                        "$ref": "#/components/responses/AuthResponse"
+                        "$ref": "#/components/responses/200Response"
                     },
                     "400": {
-                        "$ref": "#/components/responses/AuthResponse"
+                        "$ref": "#/components/responses/400Response"
                     }
                 }
             }
         },
         "/login": {
-            "get": {
+            "post": {
+                "summary": "LOGIN",
+                "description": "Login User From Form",
                 "tags": ["Auth"],
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/Token"
+                    },
+                    {
+                        "$ref": "#/components/parameters/email"
+                    },
+                    {
+                        "name": "password",
+                        "in": "body",
+                        "description": "password of the register form",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "required",
+                            "example": "password"
+                        }
+                    }
+                    
+                    
+
+                ],
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/RegisterBody"
+                },
                 "responses": {
                     "200": {
-                        "description": "An example endpoint"
+                        "$ref": "#/components/responses/200Response"
                     },
-                    "403": {
-                        "description": "Bad request"
+                    "400": {
+                        "$ref": "#/components/responses/400Response"
                     }
                 }
             }
@@ -82,11 +168,25 @@
                     "description": "required|email",
                     "example": "token"
                 }
+            },
+            "email": {
+                "name": "email",
+                "in": "body",
+                "description": "email of the form",
+                "required": true,
+                "schema": {
+                    "type": "string",
+                    "description": "required|email",
+                    "example": "test@test.com"
+                }
             }
         },
         "requestBodies": {
             "AuthBody": {
                 "$ref": "LoginBody.json"
+            },
+            "RegisterBody": {
+                "$ref": "RegisterBody.json"
             }
         },
         "responses": {
@@ -96,6 +196,50 @@
                     "application/json": {
                         "schema": {
                             "$ref": "LoginResponse.json"
+                        }
+                    }
+                }
+
+            },
+            "200Response": {
+                "description": "Creado con exito!",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "200Response.json"
+                        }
+                    }
+                }
+
+            },
+            "400Response": {
+                "description": "Fallo al crear!",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "400Response.json"
+                        }
+                    }
+                }
+
+            },
+            "403Response": {
+                "description": "Fallo al entrar!",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "403Response.json"
+                        }
+                    }
+                }
+
+            },
+            "200.3Response": {
+                "description": "Has entrado con exito!!",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "200.3Response.json"
                         }
                     }
                 }

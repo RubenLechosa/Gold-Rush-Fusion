@@ -32,7 +32,7 @@ class UserRegisterRequest extends FormRequest
             'name' => 'required',
             'last_name' => 'required',
             'email' => 'required|email|unique:users',
-            'college'=> 'required',
+            'id_college'=> 'required',
             'password' => 'required|confirmed|min:6'
         ];
     }

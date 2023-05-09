@@ -9,7 +9,12 @@
                     "email": {
                         "type": "string",
                         "description": "required|email",
-                        "example": "duki@gmail.com"
+                        "example": "test@test.com"
+                    },
+                    "password": {
+                        "type": "string",
+                        "description": "required",
+                        "example": "password"
                     }
                 }
             }

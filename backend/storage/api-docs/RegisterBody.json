@@ -1,0 +1,44 @@
+{
+    "required": "true",
+    "content": {
+        "application/json": {
+            "schema": {
+                "type": "object",
+                "required": ["nick", "name","last_name", "email","id_college", "password"],
+                "properties": {
+                    "nick": {
+                        "type": "string",
+                        "description": "required|unique:users",
+                        "example": "MykeTowers69"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "required",
+                        "example": "Myke"
+                    },
+                    "last_name": {
+                        "type": "string",
+                        "description": "required",
+                        "example": "Towers"
+                    },
+                    "email": {
+                        "type": "string",
+                        "description": "required|email|unique:users",
+                        "example": "test@test.com"
+                    },
+                    "id_college": {
+                        "type": "string",
+                        "description": "required",
+                        "example": "1"
+                    },
+                    "password": {
+                        "type": "string",
+                        "description": "required|confirmed|min:6",
+                        "example": "password"
+                    }
+
+                }
+            }
+        }
+    }
+}
