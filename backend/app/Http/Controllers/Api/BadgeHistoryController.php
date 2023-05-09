@@ -19,8 +19,8 @@ class BadgeHistoryController extends Controller
 
         if(isset($request["filters"]) && count($request["filters"])) {
             foreach ($request["filters"] as $idx => $filter) {
-                if($filter["value"] != "") {
-                    $badges = $badges->where($filter["key"], "=", $filter["value"]);
+                if($filter != "") {
+                    $badges = $badges->where($idx, $filter);
                 }
             }
         }

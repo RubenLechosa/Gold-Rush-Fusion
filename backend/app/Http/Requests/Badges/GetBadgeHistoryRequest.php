@@ -25,7 +25,7 @@ class GetBadgeHistoryRequest extends FormRequest
     {
         return [
             'id_course'     => 'required',
-            'filters' => 'array',
+            'filters' => '',
         ];
     }
 }

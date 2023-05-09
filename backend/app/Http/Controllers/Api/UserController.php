@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\College\GetByIdCollegeRequest;
 use App\Http\Requests\Course\GetByCourseAndUserRequest;
-use App\Http\Requests\Course\GetByCourseRequest;
 use App\Http\Requests\Users\changePasswordRequest;
 use App\Http\Requests\Users\GetByIdUserRequest;
 use App\Http\Requests\Users\UserEditRequest;
@@ -20,6 +19,7 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Carbon\Carbon;
 
 class UserController extends Controller
 {
@@ -61,8 +61,21 @@ class UserController extends Controller
                 'success' => false
             ], Response::HTTP_FORBIDDEN);
         }
-        
+        $current = Carbon::today();
+        $current->addDays(7);
+
         $user = User::where("email", "=", $request["email"])->first();
+        $datetime = Carbon::createFromDate($user->updated_at);
+
+        if($current->diffForHumans() == $datetime->diffForHumans()) {
+            $user->updated_at = Carbon::now();
+
+            if($user->save()) {
+                $user->skills_points = 1000;
+                $user->save();
+            }
+        }
+
         return response()->json([
             'success' => true,
             'id_user' => $user->id_user,
@@ -72,7 +85,7 @@ class UserController extends Controller
     
     public function update(UserEditRequest $request) {
         $validated = $request->validated();
-
+        
         if($user = User::find($validated["id_user"])) {
             $old_img = $user->profile_img;
             $user->fill($validated);
