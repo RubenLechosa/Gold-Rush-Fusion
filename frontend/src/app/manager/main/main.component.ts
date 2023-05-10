@@ -70,7 +70,6 @@ export class MainComponent implements OnInit {
   removeCourse(id_course: number) {
     if(confirm("Are you sure you want to delete the course?")) {
       this.courseService.deleteCourse(id_course).subscribe((courses: any) => {
-        console.log(courses);
         if(courses.status == 200) {
           this.reloadCourses();
         }      

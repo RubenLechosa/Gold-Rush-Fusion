@@ -17,6 +17,7 @@ class Courses extends Model
         'shop',
         'img',
         'code',
+        'home_description'
     ];
 
 }

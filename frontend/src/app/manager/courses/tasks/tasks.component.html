@@ -35,7 +35,7 @@
               <button *ngIf="user_data.role == 'teacher' || user_data.role == 'college_manager' || user_data.role == 'admin'" type="button" data-bs-toggle="modal" data-bs-target="#textHTML" class="btn btn-login col-3 m-0">Edit Home</button>
             </div>
             <div class="mt-2" [innerHTML]="mostrarContenidoHTML()">
-              {{texto}}
+              {{course_data.home_description}}
             </div>
           </div>
         </div>
@@ -53,8 +53,10 @@
         <angular-editor sanitizeHTML="false" [config]="editorConfig" [placeholder]="'Enter text here...'" [(ngModel)]="texto"></angular-editor>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-login m-1">Save Changes</button>
-        <button type="button" class="btn btn-exit mt-1" data-bs-dismiss="modal">Cancel</button>
+        <form>
+          <button type="button" class="btn btn-login m-1" (click)="submitHomeContent()">Save Changes</button>
+        </form>
+        <button type="button" class="btn btn-exit mt-1" data-bs-dismiss="modal" #closeHomeModal>Cancel</button>
       </div>
     </div>
   </div>

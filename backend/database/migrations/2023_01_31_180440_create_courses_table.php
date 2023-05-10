@@ -23,7 +23,9 @@ return new class extends Migration
             $table->string("img")->default("null");
             $table->text("shop")->default('{}');
             $table->text("requests")->default('[]');
-            $table->text("tasks")->default('{}');;
+            $table->text("tasks")->default('{}');
+            $table->text("home_description")->default('');
+            
             $table->timestamps();
             $table->foreign('id_college')->references('id_college')->on('colleges');
         });

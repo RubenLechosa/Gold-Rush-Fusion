@@ -28,7 +28,8 @@ class CourseEditRequest extends FormRequest
             'course_name'  => 'min:4|max:20',
             'id_teacher' => '',
             'id_college' => '',
-            'img' => ''
+            'img' => '',
+            'home_description' => ''
         ];
     }
 }

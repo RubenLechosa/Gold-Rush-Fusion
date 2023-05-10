@@ -8,11 +8,6 @@ import { TaskService } from 'src/app/services/task.service';
 import { UserService } from 'src/app/services/user.service';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { DomSanitizer } from '@angular/platform-browser';
-import * as XLSX from 'xlsx';
-import Swal from 'sweetalert2';
-
-
-
 
 @Component({
   selector: 'app-tasks',
@@ -20,17 +15,8 @@ import Swal from 'sweetalert2';
   styleUrls: ['./tasks.component.css']
 })
 export class TasksComponent {
-  texto: string = '';
-  
-
-  mostrarContenidoHTML() {
-    // Desinfectar y marcar el contenido HTML como seguro
-    let contenidoSeguro = this.sanitizer.bypassSecurityTrustHtml(this.texto);
-
-    return contenidoSeguro;
-  }
-
   @ViewChild('closeCategoryModal') closeCategoryModal!:any;
+  @ViewChild('closeHomeModal') closeHomeModal!:any;
   @ViewChild('openModal') openModal!:any;
 
   alreadySubmit: boolean = false;
@@ -42,6 +28,7 @@ export class TasksComponent {
   submits_list: any;
   id_users_submits: any;
   submit_data: any;
+  texto: string = '';
 
   markForm = new FormGroup({
     mark: new FormControl(null, Validators.required),
@@ -88,7 +75,7 @@ ngOnInit(): void {
       this.courseService.getDetails(String(this.id_course)).subscribe((courses: any) => {
         if(courses.status == 200) {
           this.course_data = courses.data;
-          
+          this.texto = this.course_data.home_description;
           this.reloadTasks();
           this.reloadUploads();
           this.dataLoaded = Promise.resolve(true);
@@ -134,11 +121,11 @@ deleteTask(id_task: number) {
     this.tasksService.removeTask(id_task).subscribe((tasks: any) => {
       if(tasks.status == 200) {
         this.reloadTasks();
-        Swal.fire({
-          title: 'Task Removed',
-          icon: 'success',
-          confirmButtonText: 'OK'
-        });
+        // Swal.fire({
+        //   title: 'Task Removed',
+        //   icon: 'success',
+        //   confirmButtonText: 'OK'
+        // });
       }
     });
   }
@@ -150,11 +137,11 @@ deleteCategory(id_category: number) {
     this.tasksService.deleteCategory(id_category).subscribe((tasks: any) => {
       if(tasks.status == 200) {
         this.reloadTasks();
-        Swal.fire({
-          title: 'Category Removed',
-          icon: 'success',
-          confirmButtonText: 'OK'
-        });
+        // Swal.fire({
+        //   title: 'Category Removed',
+        //   icon: 'success',
+        //   confirmButtonText: 'OK'
+        // });
       }
     });
   }
@@ -178,11 +165,11 @@ onsubmitMark() {
     if(tasks.status == 200) {
       this.reloadUploads();
       this.closeCategoryModal.nativeElement.click();
-      Swal.fire({
-        title: 'Mark Submited',
-        icon: 'success',
-        confirmButtonText: 'OK'
-      });
+      // Swal.fire({
+      //   title: 'Mark Submited',
+      //   icon: 'success',
+      //   confirmButtonText: 'OK'
+      // });
     }
   });
 
@@ -199,17 +186,40 @@ exportToExcel() {
       rows[i].deleteCell(-1);
     }
 
-    let worksheet: XLSX.WorkSheet = XLSX.utils.table_to_sheet(tabla);
-    let workbook: XLSX.WorkBook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workbook, worksheet, 'Marks');
-    XLSX.writeFile(workbook, 'marks.xlsx');
+    // let worksheet: XLSX.WorkSheet = XLSX.utils.table_to_sheet(tabla);
+    // let workbook: XLSX.WorkBook = XLSX.utils.book_new();
+    // XLSX.utils.book_append_sheet(workbook, worksheet, 'Marks');
+    // XLSX.writeFile(workbook, 'marks.xlsx');
 
-    Swal.fire({
-      title: 'Marks Exported',
-      icon: 'success',
-      confirmButtonText: 'OK'
-    });
+    // Swal.fire({
+    //   title: 'Marks Exported',
+    //   icon: 'success',
+    //   confirmButtonText: 'OK'
+    // });
   }
+}
+
+submitHomeContent() {
+  console.log(this.texto);
+  this.courseService.saveDescription(Number(this.id_course), this.texto).subscribe((tasks: any) => {
+    console.log(tasks);
+    if(tasks.status == 200) {
+      this.course_data.home_description = this.texto;
+      this.closeHomeModal.nativeElement.click();
+      // Swal.fire({
+      //   title: 'Home Saved',
+      //   icon: 'success',
+      //   confirmButtonText: 'OK'
+      // });
+    }
+  });
+}
+
+mostrarContenidoHTML() {
+  // Desinfectar y marcar el contenido HTML como seguro
+  let contenidoSeguro = this.sanitizer.bypassSecurityTrustHtml(this.course_data.home_description);
+
+  return contenidoSeguro;
 }
 
 }

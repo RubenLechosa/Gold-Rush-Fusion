@@ -41,12 +41,15 @@ export class CourseService {
     return this.frameworkService.post('course/delete', { id_course });
   }
 
-
   refreshCode(id_course: string) {
     return this.frameworkService.post('course/refresh-code', { id_course });
   }
 
   uploadFile(file: String) {
     return this.frameworkService.post('file', { file });
+  }
+
+  saveDescription(id_course: number, home_description: string) {
+    return this.frameworkService.post('course/save-course', { id_course, home_description });
   }
 }
