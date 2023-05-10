@@ -14,11 +14,6 @@
                 "summary": "REGISTER",
                 "description": "Register User From Form",
                 "tags": ["Auth"],
-                "security": [
-                    {
-                        "bearerAuth": []
-                    }
-                ],
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/Token"
@@ -146,10 +141,153 @@
                     }
                 }
             }
+        },
+        "/users/get-user": {
+            "post": {
+                "summary": "GET-USER",
+                "description": "Find User by id",
+                "tags": ["User"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id_user",
+                        "in": "body",
+                        "description": "id from user",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "required",
+                            "example": "5"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/GetUserBody"
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/CreateResponse"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400msgResponse"
+                    }
+                }
+            }
+        },
+        "/users/edit-user": {
+            "post": {
+                "summary": "EDIT-USER",
+                "description": "Edit User by id",
+                "tags": ["User"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id_user",
+                        "in": "body",
+                        "description": "id from user",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "required",
+                            "example": "5"
+                        }
+                    },
+                    {
+                        "name": "name",
+                        "in": "body",
+                        "description": "name from user",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "",
+                            "example": "Mike"
+                        }
+                    },
+                    {
+                        "name": "last_name",
+                        "in": "body",
+                        "description": "last_name from user",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "",
+                            "example": "Romero"
+                        }
+                    },
+                    {
+                        "name": "nick",
+                        "in": "body",
+                        "description": "nick from user",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "",
+                            "example": "TerminatorCoC"
+                        }
+                    },
+                    {
+                        "name": "nick",
+                        "in": "body",
+                        "description": "nick from user",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "required",
+                            "example": "TerminatorCoC"
+                        }
+                    },
+                    {
+                        "name": "email",
+                        "in": "body",
+                        "description": "email from user",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "",
+                            "example": "terminator@gmail.com"
+                        }
+                    },
+                    {
+                        "name": "role",
+                        "in": "body",
+                        "description": "email from user",
+                        "required": true,
+                        "schema": {
+                            "type": "enum",
+                            "enum": ["student","teacher","college_manager","admin"],
+                            "example": "student"
+                        }
+                    }
+                    
+
+                    
+
+                ],
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/GetUserBody"
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/CreateResponse"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400msgResponse"
+                    }
+                }
+            }
         }
     },
 
     "components": {
+
         "securitySchemes": {
             "bearerAuth": {
                 "type": "http",
@@ -187,6 +325,9 @@
             },
             "RegisterBody": {
                 "$ref": "RegisterBody.json"
+            },
+            "GetUserBody": {
+                "$ref": "GetUserBody.json"
             }
         },
         "responses": {
@@ -240,6 +381,28 @@
                     "application/json": {
                         "schema": {
                             "$ref": "200.3Response.json"
+                        }
+                    }
+                }
+
+            },
+            "CreateResponse": {
+                "description": "Ha funcionado con exito!!",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "CreateResponse.json"
+                        }
+                    }
+                }
+
+            },
+            "400msgResponse": {
+                "description": "Encontrado con exito!!",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "400msgResponse.json"
                         }
                     }
                 }
