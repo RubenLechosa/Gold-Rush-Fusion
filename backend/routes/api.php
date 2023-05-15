@@ -24,8 +24,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('register', [UserController::class, 'register'])->middleware('throttle:5,60');;
-Route::post('login', [UserController::class, 'login'])->middleware('throttle:5,60');
+Route::post('register', [UserController::class, 'register'])->middleware('throttle:20,60');;
+Route::post('login', [UserController::class, 'login'])->middleware('throttle:20,60');
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('users/get-user', [UserController::class, 'findOne']);

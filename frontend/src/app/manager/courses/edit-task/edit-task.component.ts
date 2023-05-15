@@ -65,6 +65,7 @@ export class EditTaskComponent {
                   this.task_data = tasks.data;
 
                   this.reloadCateogries();
+                  
                 }
               });
             } else {
