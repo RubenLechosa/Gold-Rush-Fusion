@@ -1,7 +1,7 @@
 import { formatDate } from '@angular/common';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { BadgeService } from 'src/app/services/badge.service';
 import { CourseService } from 'src/app/services/course.service';
@@ -56,7 +56,7 @@ export class UserListComponent {
   ]
   
   
-  constructor(private authService: AuthService, private userService: UserService, private badgeService: BadgeService, private courseService: CourseService, private route: ActivatedRoute) { }
+  constructor(private router: Router, private userService: UserService, private badgeService: BadgeService, private courseService: CourseService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -71,7 +71,7 @@ export class UserListComponent {
         this.reloadUsers();
         this.reloadHistory();
       } else {
-        this.authService.logout();
+        this.router.navigate(['/login']);
       }
     });
 

@@ -37,7 +37,7 @@ export class MainComponent implements OnInit {
           this.dataLoaded = Promise.resolve(true);
         }
       } else {
-        this.authService.logout();
+        this.router.navigate(['/login']);
       }
     });
   }
@@ -49,7 +49,7 @@ export class MainComponent implements OnInit {
         this.user_data.courses = courses.data;
         this.dataLoaded = Promise.resolve(true);
       } else {
-        this.authService.logout();
+        this.router.navigate(['/login']);
       }
     });
   }

@@ -33,11 +33,11 @@ export class RankingComponent {
 
             this.dataLoaded = Promise.resolve(true);
           } else {
-            this.authService.logout();
+            this.router.navigate(['/login']);
           }
         });
       } else {
-        this.authService.logout();
+        this.router.navigate(['/login']);
       }
     });
   }

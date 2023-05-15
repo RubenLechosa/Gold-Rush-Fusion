@@ -14,11 +14,8 @@
                                 <input type="password" class="form-control" id="passwordInput" placeholder="password" formControlName="password"/>
                                 <label for="passwordInput">Password</label>
                             </div>
-                            <div class="alert alert-danger" *ngIf="error == 'email'">
-                                A user with that email already exists
-                            </div>
-                            <div class="alert alert-danger" *ngIf="error == 'username'">
-                                A user with that username already exists
+                            <div class="alert alert-danger" *ngIf="error">
+                                User not found with credentials
                             </div>
                             <button type="submit" class="btn btn-login w-100 mt-1">Login</button>
                             <p class="purpul text-center mt-2">Need an account? <a href="/register">Access here</a></p>

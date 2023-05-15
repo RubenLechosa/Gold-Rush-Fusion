@@ -67,7 +67,7 @@ class UserController extends Controller
         $user = User::where("email", "=", $request["email"])->first();
         $datetime = Carbon::createFromDate($user->updated_at);
 
-        if($current->diffForHumans() == $datetime->diffForHumans()) {
+        if($current->diffForHumans() >= $datetime->diffForHumans()) {
             $user->updated_at = Carbon::now();
 
             if($user->save()) {

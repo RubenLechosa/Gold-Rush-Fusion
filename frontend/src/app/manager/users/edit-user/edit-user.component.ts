@@ -47,7 +47,7 @@ export class EditUserComponent implements OnInit {
           }
         });
       } else {
-        this.authService.logout();
+        this.router.navigate(['/login']);
       }
     });
   }

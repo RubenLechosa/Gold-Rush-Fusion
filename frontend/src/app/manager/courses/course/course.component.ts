@@ -39,7 +39,7 @@ export class CourseComponent {
           }
         });
       } else {
-        this.authService.logout();
+        this.router.navigate(['/login']);
       }
     });
   }

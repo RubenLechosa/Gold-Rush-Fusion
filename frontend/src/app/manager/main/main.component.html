@@ -1,7 +1,8 @@
 
 <app-loader *ngIf="!dataLoaded"></app-loader>
 <app-new-poper *ngIf="!hasPoper && (dataLoaded | async)"></app-new-poper>
-<main *ngIf="hasPoper && (dataLoaded | async)">
+<main 
+>
     <app-navbar [user_details]="user_data"></app-navbar>
 
     <div class="main">

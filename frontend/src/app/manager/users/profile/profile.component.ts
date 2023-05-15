@@ -62,7 +62,7 @@ export class ProfileComponent implements OnInit {
     this.userService.changePassword(Number(localStorage.getItem('id')), String(this.form.get("password")?.value), String(this.form.get("new_password")?.value), String(this.form.get("confirm_password")?.value)).subscribe((passwords: any) => {
       
       if(passwords.status == 200) {
-        this.authService.logout();
+        this.router.navigate(['/login']);
       } else {
         this.router.navigate(["/profile/"+this.id_profile]);
       }

@@ -64,7 +64,7 @@ ngOnInit(): void {
       });
 
     } else {
-      this.authService.logout();
+      this.router.navigate(['/login']);
     }
   });
 }

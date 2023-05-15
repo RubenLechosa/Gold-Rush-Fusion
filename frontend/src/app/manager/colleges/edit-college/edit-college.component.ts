@@ -45,7 +45,7 @@ export class EditCollegeComponent {
           }
         });
       } else {
-        this.authService.logout();
+        this.router.navigate(['/login']);
       }
     });
   }

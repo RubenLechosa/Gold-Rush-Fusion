@@ -77,7 +77,7 @@ export class EditTaskComponent {
         });
 
       } else {
-        this.authService.logout();
+        this.router.navigate(['/login']);
       }
     });
   }
