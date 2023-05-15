@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
-//import Swal from 'sweetalert2';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-profile',
@@ -64,7 +64,9 @@ export class ProfileComponent implements OnInit {
       if(passwords.status == 200) {
         this.router.navigate(['/login']);
       } else {
+        
         this.router.navigate(["/profile/"+this.id_profile]);
+        
       }
     });
   }

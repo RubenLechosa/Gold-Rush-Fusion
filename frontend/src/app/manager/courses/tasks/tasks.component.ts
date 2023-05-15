@@ -8,6 +8,7 @@ import { TaskService } from 'src/app/services/task.service';
 import { UserService } from 'src/app/services/user.service';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { DomSanitizer } from '@angular/platform-browser';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-tasks',
@@ -121,11 +122,11 @@ deleteTask(id_task: number) {
     this.tasksService.removeTask(id_task).subscribe((tasks: any) => {
       if(tasks.status == 200) {
         this.reloadTasks();
-        // Swal.fire({
-        //   title: 'Task Removed',
-        //   icon: 'success',
-        //   confirmButtonText: 'OK'
-        // });
+        Swal.fire({
+          title: 'Task Removed',
+          icon: 'success',
+          confirmButtonText: 'OK'
+        });
       }
     });
   }
@@ -137,11 +138,11 @@ deleteCategory(id_category: number) {
     this.tasksService.deleteCategory(id_category).subscribe((tasks: any) => {
       if(tasks.status == 200) {
         this.reloadTasks();
-        // Swal.fire({
-        //   title: 'Category Removed',
-        //   icon: 'success',
-        //   confirmButtonText: 'OK'
-        // });
+        Swal.fire({
+          title: 'Category Removed',
+          icon: 'success',
+          confirmButtonText: 'OK'
+        });
       }
     });
   }
