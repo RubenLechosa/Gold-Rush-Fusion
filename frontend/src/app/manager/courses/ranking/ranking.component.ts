@@ -16,7 +16,7 @@ export class RankingComponent {
   ranking: any;
   id_course!: number;
 
-  constructor(private authService: AuthService, private userService: UserService, private route: ActivatedRoute, private courseService: CourseService) { }
+  constructor(private authService: AuthService, private userService: UserService, private route: ActivatedRoute, private router: Router, private courseService: CourseService) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {

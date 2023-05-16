@@ -32,6 +32,7 @@ return array(
     'App\\Http\\Requests\\Badges\\BadgeHistoryRequest' => $baseDir . '/app/Http/Requests/Badges/BadgeHistoryRequest.php',
     'App\\Http\\Requests\\Badges\\BadgesGivePointsRequest' => $baseDir . '/app/Http/Requests/Badges/BadgesGivePointsRequest.php',
     'App\\Http\\Requests\\Badges\\GetBadgeHistoryRequest' => $baseDir . '/app/Http/Requests/Badges/GetBadgeHistoryRequest.php',
+    'App\\Http\\Requests\\Badges\\GetByIdBadgeHistoryRequest' => $baseDir . '/app/Http/Requests/Badges/GetByIdBadgeHistoryRequest.php',
     'App\\Http\\Requests\\Category\\CategoryCreateRequest' => $baseDir . '/app/Http/Requests/Category/CategoryCreateRequest.php',
     'App\\Http\\Requests\\Category\\CategoryEditRequest' => $baseDir . '/app/Http/Requests/Category/CategoryEditRequest.php',
     'App\\Http\\Requests\\Category\\GetByIdCategoryRequest' => $baseDir . '/app/Http/Requests/Category/GetByIdCategoryRequest.php',

@@ -554,6 +554,7 @@ class ComposerStaticInit514d6dfc2ccb5b2ee5b78b5d14609699
         'App\\Http\\Requests\\Badges\\BadgeHistoryRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Badges/BadgeHistoryRequest.php',
         'App\\Http\\Requests\\Badges\\BadgesGivePointsRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Badges/BadgesGivePointsRequest.php',
         'App\\Http\\Requests\\Badges\\GetBadgeHistoryRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Badges/GetBadgeHistoryRequest.php',
+        'App\\Http\\Requests\\Badges\\GetByIdBadgeHistoryRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Badges/GetByIdBadgeHistoryRequest.php',
         'App\\Http\\Requests\\Category\\CategoryCreateRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Category/CategoryCreateRequest.php',
         'App\\Http\\Requests\\Category\\CategoryEditRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Category/CategoryEditRequest.php',
         'App\\Http\\Requests\\Category\\GetByIdCategoryRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Category/GetByIdCategoryRequest.php',
