@@ -35,7 +35,13 @@ export class FrameworkService {
   }
 
   upload_file(data: any){
-    const headers = new HttpHeaders();
-    return this.http.post(`${baseUrl}/file/`, data , { headers: headers});
+    header = new HttpHeaders({
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Headers': 'Content-Type',
+      'Access-Control-Allow-Methods': 'GET,POST,OPTIONS,DELETE,PUT',
+      'Authorization': `Bearer ${localStorage.getItem('token')}`,
+    });
+
+    return this.http.post(`${baseUrl}/file/`, data , { headers: header});
   }
 }

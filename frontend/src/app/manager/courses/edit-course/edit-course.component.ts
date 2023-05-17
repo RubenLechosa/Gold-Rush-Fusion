@@ -80,22 +80,25 @@ export class EditCourseComponent {
 
     this.alreadySubmit = true;
     if(this.id_course != 0) {
-      this.frameworkService.upload_file(formData).subscribe((result: any) => {
-        this.courseService.saveCourse(this.id_course, String(this.form.get('course_name')?.value), String(this.form.get('id_teacher')?.value), this.user_data.id_college, String(result.data)).subscribe((courses: any) => {
-          if(courses.status == 200) {
-            this.router.navigate(["/manager"]);
-          }
-          
-          this.alreadySubmit = false;
-        });
+      this.courseService.saveCourse(this.id_course, String(this.form.get('course_name')?.value), String(this.form.get('id_teacher')?.value), this.user_data.id_college, String(this.form.get('img')?.value)).subscribe((courses: any) => {
+        if(courses.status == 200  && this.files != null) {
+          this.frameworkService.upload_file(formData).subscribe((result: any) => {
+
+          });
+        }
+
+        this.router.navigate(["/manager"]);
+        this.alreadySubmit = false;
       });
+
     } else {
       this.courseService.createCourse(String(this.form.get('course_name')?.value), String(this.form.get('id_teacher')?.value), this.user_data.id_college, String(this.form.get('img')?.value)).subscribe((courses: any) => {
         if(courses.status == 200 && this.files != null) {
           this.courseService.uploadFile(String(this.form.get("img")?.value)).subscribe((result: any) => {
-            this.router.navigate(["/manager"]);
           });
         }
+
+        this.router.navigate(["/manager"]);
         this.alreadySubmit = false;
       });
     }

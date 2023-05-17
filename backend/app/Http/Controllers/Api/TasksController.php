@@ -49,7 +49,7 @@ class TasksController extends Controller
     public function update(TasksEditRequest $request) {
         $validated = $request->validated();
 
-        if($task = Tasks::where("id_tasks", "=", $validated["id_task"])) {
+        if($task = Tasks::where("id_tasks", "=", $validated["id_task"])->first()) {
             $task->fill($validated);
 
             if($task->save()) {
