@@ -44,7 +44,6 @@ export class MainComponent implements OnInit {
 
   reloadCourses() {
     this.userService.getCourses(String(localStorage.getItem('id'))).subscribe((courses: any) => {
-      console.log(courses);
       if(courses.status == 200) {
         this.user_data.courses = courses.data;
         this.dataLoaded = Promise.resolve(true);
