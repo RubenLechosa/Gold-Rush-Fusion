@@ -52,11 +52,12 @@
       <div class="modal-body">
         <angular-editor sanitizeHTML="false" [config]="editorConfig" [placeholder]="'Enter text here...'" [(ngModel)]="texto"></angular-editor>
       </div>
-      <div class="modal-footer">
+      <div class="ms-3 me-3 mb-3">
         <form>
-          <button type="button" class="btn btn-login m-1" (click)="submitHomeContent()">Save Changes</button>
+          <button type="button" class="btn btn-login m-0" (click)="submitHomeContent()">Save Changes</button>
+          <button type="button" class="btn btn-exit mt-1" data-bs-dismiss="modal" #closeHomeModal>Cancel</button>
         </form>
-        <button type="button" class="btn btn-exit mt-1" data-bs-dismiss="modal" #closeHomeModal>Cancel</button>
+        
       </div>
     </div>
   </div>
