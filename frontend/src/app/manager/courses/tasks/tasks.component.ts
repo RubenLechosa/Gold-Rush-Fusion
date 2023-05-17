@@ -9,6 +9,7 @@ import { UserService } from 'src/app/services/user.service';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { DomSanitizer } from '@angular/platform-browser';
 import Swal from 'sweetalert2';
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-tasks',
@@ -166,11 +167,11 @@ onsubmitMark() {
     if(tasks.status == 200) {
       this.reloadUploads();
       this.closeCategoryModal.nativeElement.click();
-      // Swal.fire({
-      //   title: 'Mark Submited',
-      //   icon: 'success',
-      //   confirmButtonText: 'OK'
-      // });
+      Swal.fire({
+      title: 'Mark Submited',
+      icon: 'success',
+      confirmButtonText: 'OK'
+      });
     }
   });
 
@@ -180,25 +181,31 @@ onsubmitMark() {
 exportToExcel() {
   let tabla = document.getElementById("miTabla");
 
-  if (tabla != null) { // Verifica que "tabla" no sea nula
-    // Elimina la última columna de la tabla
-    let rows = tabla.getElementsByTagName('tr');
+  if (tabla != null) {
+    // Realiza una copia de la tabla original
+    let tablaCopia = tabla.cloneNode(true) as HTMLElement;
+
+    // Elimina la última columna de la copia de la tabla
+    let rows = tablaCopia.getElementsByTagName('tr');
     for (let i = 0; i < rows.length; i++) {
       rows[i].deleteCell(-1);
     }
 
-    // let worksheet: XLSX.WorkSheet = XLSX.utils.table_to_sheet(tabla);
-    // let workbook: XLSX.WorkBook = XLSX.utils.book_new();
-    // XLSX.utils.book_append_sheet(workbook, worksheet, 'Marks');
-    // XLSX.writeFile(workbook, 'marks.xlsx');
+    let worksheet: XLSX.WorkSheet = XLSX.utils.table_to_sheet(tablaCopia);
+    let workbook: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Marks');
+    XLSX.writeFile(workbook, 'marks.xlsx');
 
-    // Swal.fire({
-    //   title: 'Marks Exported',
-    //   icon: 'success',
-    //   confirmButtonText: 'OK'
-    // });
+    Swal.fire({
+      title: 'Marks Exported',
+      icon: 'success',
+      confirmButtonText: 'OK'
+    });
   }
 }
+
+
+
 
 submitHomeContent() {
   console.log(this.texto);
@@ -207,11 +214,11 @@ submitHomeContent() {
     if(tasks.status == 200) {
       this.course_data.home_description = this.texto;
       this.closeHomeModal.nativeElement.click();
-      // Swal.fire({
-      //   title: 'Home Saved',
-      //   icon: 'success',
-      //   confirmButtonText: 'OK'
-      // });
+      Swal.fire({
+      title: 'Home Saved',
+      icon: 'success',
+      confirmButtonText: 'OK'
+      });
     }
   });
 }
