@@ -151,7 +151,7 @@ class CoursesController extends Controller
         $request = $request->validated();
 
         $users = array();
-        $course = Courses::find($request);
+        $course = Courses::where("id_course", $request["id_course"])->first();
 
         foreach (json_decode($course->requests, true) as $id_user) {
             if($user = User::find($id_user)) {
