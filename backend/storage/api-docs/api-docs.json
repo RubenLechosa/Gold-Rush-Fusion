@@ -240,7 +240,7 @@
                         "required": true,
                         "schema": {
                             "type": "string",
-                            "description": "required",
+                            "description": "",
                             "example": "TerminatorCoC"
                         }
                     },
@@ -265,21 +265,359 @@
                             "enum": ["student","teacher","college_manager","admin"],
                             "example": "student"
                         }
+                    },
+                    {
+                        "name": "pepas",
+                        "in": "body",
+                        "description": "number of pepas from user",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "",
+                            "example": "10"
+                        }
+                    },
+                    {
+                        "name": "profile_img",
+                        "in": "body",
+                        "description": "profile_img from user",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "",
+                            "example": "/assets/img/prueba.png"
+                        }
+                    },
+                    {
+                        "name": "id_poper",
+                        "in": "body",
+                        "description": "id_poper from user",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "",
+                            "example": "1"
+                        }
+                    },
+                    {
+                        "name": "inventory",
+                        "in": "body",
+                        "description": "inventory from user",
+                        "required": true,
+                        "schema": {
+                            "type": "json",
+                            "description": "",
+                            "example": ""
+                        }
+                    },
+                    {
+                        "name": "birth_date",
+                        "in": "body",
+                        "description": "birth_date from user",
+                        "required": true,
+                        "schema": {
+                            "type": "date",
+                            "description": "",
+                            "example": "1974-11-07"
+                        }
                     }
+
                     
 
                     
 
                 ],
                 "requestBody": {
-                    "$ref": "#/components/requestBodies/GetUserBody"
+                    "$ref": "#/components/requestBodies/EditUserBody"
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/200Response"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400Response"
+                    }
+                }
+            }
+        },
+        "/users/modify-gems": {
+            "post": {
+                "summary": "MODIFY-GEMS",
+                "description": "Modify gems by user",
+                "tags": ["User"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id_user",
+                        "in": "body",
+                        "description": "id from user",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "required",
+                            "example": "5"
+                        }
+                    },
+                    {
+                        "name": "pepas",
+                        "in": "body",
+                        "description": "pepas from user",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "required",
+                            "example": "5"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/ModifyGemsBody"
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/200onlymsgResponse"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400onlymsgResponse"
+                    }
+                }
+            }
+        },
+        "/users/get-users-college": {
+            "post": {
+                "summary": "GET-USERS-COLLEGE",
+                "description": "get users college",
+                "tags": ["User"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id_college",
+                        "in": "body",
+                        "description": "id_college from user",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "required",
+                            "example": "5"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/GetUsersCollegeBody"
                 },
                 "responses": {
                     "200": {
                         "$ref": "#/components/responses/CreateResponse"
                     },
                     "400": {
-                        "$ref": "#/components/responses/400msgResponse"
+                        "$ref": "#/components/responses/400succesmsgResponse"
+                    }
+                }
+            }
+        },
+        "/users/get-teachers-college": {
+            "post": {
+                "summary": "GET-TEACHERS-COLLEGE",
+                "description": "get-teachers-college",
+                "tags": ["User"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id_college",
+                        "in": "body",
+                        "description": "id_college from user",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "required",
+                            "example": "5"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/GetUsersCollegeBody"
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/CreateResponse"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400succesmsgResponse"
+                    }
+                }
+            }
+        },
+        "/users/add-course": {
+            "post": {
+                "summary": "ADD-COURSE",
+                "description": "add-course",
+                "tags": ["User"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id_course",
+                        "in": "body",
+                        "description": "id_college from user",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "required",
+                            "example": "5"
+                        }
+                    },
+                    {
+                        "name": "id_user",
+                        "in": "body",
+                        "description": "id_college from user",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "required",
+                            "example": "5"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/AddCourseBody"
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/200onlymsgResponse"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400onlymsgResponse"
+                    }
+                }
+            }
+        },
+        "/users/remove-course": {
+            "post": {
+                "summary": "REMOVE-COURSE",
+                "description": "remove-course",
+                "tags": ["User"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id_course",
+                        "in": "body",
+                        "description": "id_college from user",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "required",
+                            "example": "5"
+                        }
+                    },
+                    {
+                        "name": "id_user",
+                        "in": "body",
+                        "description": "id_college from user",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "required",
+                            "example": "5"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/AddCourseBody"
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/200onlymsgResponse"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400onlymsgResponse"
+                    }
+                }
+            }
+        },
+        "/users/change-password": {
+            "post": {
+                "summary": "CHANGE-PASSWORD",
+                "description": "change-password",
+                "tags": ["User"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id_user",
+                        "in": "body",
+                        "description": "id_user from user",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "required",
+                            "example": "5"
+                        }
+                    },
+                    {
+                        "name": "password",
+                        "in": "body",
+                        "description": "password from user",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "required",
+                            "example": "password"
+                        }
+                    },
+                    {
+                        "name": "new_password",
+                        "in": "body",
+                        "description": "new_password from user",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "required",
+                            "example": "newpassword"
+                        }
+                    },
+                    {
+                        "name": "confirm_password",
+                        "in": "body",
+                        "description": "confirm_password from user",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "required",
+                            "example": "confirm password"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/AddCourseBody"
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/200onlymsgResponse"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400onlymsgResponse"
                     }
                 }
             }
@@ -328,6 +666,18 @@
             },
             "GetUserBody": {
                 "$ref": "GetUserBody.json"
+            },
+            "EditUserBody": {
+                "$ref": "EditUserBody.json"
+            },
+            "ModifyGemsBody": {
+                "$ref": "ModifyGemsBody.json"
+            },
+            "GetUsersCollegeBody": {
+                "$ref": "GetUsersCollege.json"
+            },
+            "AddCourseBody": {
+                "$ref": "AddCourseBody.json"
             }
         },
         "responses": {
@@ -403,6 +753,50 @@
                     "application/json": {
                         "schema": {
                             "$ref": "400msgResponse.json"
+                        }
+                    }
+                }
+
+            },
+            "400onlymsgResponse": {
+                "description": "no encontrado!",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "400onlymsgResponse.json"
+                        }
+                    }
+                }
+
+            },
+            "200onlymsgResponse": {
+                "description": "Encontrado con exito!!",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "400onlymsgResponse.json"
+                        }
+                    }
+                }
+
+            },
+            "400succesdataResponse": {
+                "description": "No encontrado",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "400succesdataResponse.json"
+                        }
+                    }
+                }
+
+            },
+            "400succesmsgResponse": {
+                "description": "No encontrado",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "400succesmsgResponse.json"
                         }
                     }
                 }

@@ -1,0 +1,23 @@
+{
+    "required": "true",
+    "content": {
+        "application/json": {
+            "schema": {
+                "type": "object",
+                "required": ["id_user,pepas"],
+                "properties": {
+                    "id_user": {
+                        "type": "string",
+                        "description": "required",
+                        "example": "2"
+                    },
+                    "pepas": {
+                        "type": "string",
+                        "description": "required",
+                        "example": "100"
+                    }
+                }
+            }
+        }
+    }
+}
