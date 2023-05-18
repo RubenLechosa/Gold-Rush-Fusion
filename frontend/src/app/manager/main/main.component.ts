@@ -5,6 +5,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { CollegeService } from 'src/app/services/college.service';
 import { CourseService } from 'src/app/services/course.service';
 import { UserService } from 'src/app/services/user.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-main',
@@ -62,6 +63,11 @@ export class MainComponent implements OnInit {
 
     this.userService.joinCourseFromCode(Number(localStorage.getItem('id')), String(this.form.get('code')?.value)).subscribe((courses: any) => {
       if(courses.status == 200) {
+        Swal.fire({
+          title: 'Course Joined',
+          icon: 'success',
+          confirmButtonText: 'OK'
+        });
         this.reloadCourses();
         this.closebutton.nativeElement.click();
       }
@@ -72,6 +78,11 @@ export class MainComponent implements OnInit {
     if(confirm("Are you sure you want to delete the course?")) {
       this.courseService.deleteCourse(id_course).subscribe((courses: any) => {
         if(courses.status == 200) {
+          Swal.fire({
+            title: 'Course Removed',
+            icon: 'success',
+            confirmButtonText: 'OK'
+          });
           this.reloadCourses();
         }      
       });

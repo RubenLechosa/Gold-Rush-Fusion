@@ -205,8 +205,6 @@ exportToExcel() {
 }
 
 
-
-
 submitHomeContent() {
   console.log(this.texto);
   this.courseService.saveDescription(Number(this.id_course), this.texto).subscribe((tasks: any) => {

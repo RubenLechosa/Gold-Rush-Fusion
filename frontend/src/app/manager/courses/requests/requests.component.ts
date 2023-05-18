@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { CourseService } from 'src/app/services/course.service';
 import { UserService } from 'src/app/services/user.service';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -60,6 +61,11 @@ export class RequestsComponent {
     this.courseService.resolveRequest(String(this.id_course), id_user, accepted).subscribe((result: any) => {
       console.log(result);
       if(result.status == 200) {
+        Swal.fire({
+          title: 'You have sent the request',
+          icon: 'success',
+          confirmButtonText: 'OK'
+        });
         this.reloadUsers();
       }
     });

@@ -6,6 +6,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { CourseService } from 'src/app/services/course.service';
 import { TaskService } from 'src/app/services/task.service';
 import { UserService } from 'src/app/services/user.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-edit-task',
@@ -124,6 +125,11 @@ export class EditTaskComponent {
 
     this.tasksService.createCategory(Number(this.id_course), String(this.categoryForm.get("title")?.value)).subscribe((result: any) => {
       if(result.status == 200) {
+        Swal.fire({
+          title: 'Category created succesfuly',
+          icon: 'success',
+          confirmButtonText: 'OK'
+        });
         this.task_data["id_category"] = result.data.id_category;
         this.reloadCateogries();
         this.closeCategoryModal.nativeElement.click();

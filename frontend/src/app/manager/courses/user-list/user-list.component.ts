@@ -6,6 +6,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { BadgeService } from 'src/app/services/badge.service';
 import { CourseService } from 'src/app/services/course.service';
 import { UserService } from 'src/app/services/user.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-user-list',
@@ -27,7 +28,7 @@ export class UserListComponent {
 
   filteredHistory: any;
   AllHistory: any;
- 
+
 
   form = new FormGroup({ id_student: new FormControl(null, Validators.required) });
 
@@ -48,11 +49,11 @@ export class UserListComponent {
   disabledSubmit: boolean = true;
   
   badges: any = [
-    {name: 'C', title: 'Coperación', value: 0},
-    {name: 'R', title: 'Responsabilidad', value: 0},
-    {name: 'H', title: 'Habilidades De Pensar', value: 0},
-    {name: 'G', title: 'Gestion Emociones', value: 0},
-    {name: 'A', title: 'Autonomia y Iniciativa', value: 0}
+    {name: 'C', title: 'Cooperation', value: 0},
+    {name: 'R', title: 'Responsibility', value: 0},
+    {name: 'H', title: 'Thinking Skills', value: 0},
+    {name: 'G', title: 'Emotions Management', value: 0},
+    {name: 'A', title: 'Autonomy and Initiative', value: 0}
   ]
   
   
@@ -117,6 +118,11 @@ export class UserListComponent {
 
     this.userService.addCourse(String(this.id_course), String(this.form.get("id_student")?.value)).subscribe((result: any) => {
       if(result.status == 200) {
+        Swal.fire({
+          title: 'Student Added',
+          icon: 'success',
+          confirmButtonText: 'OK'
+        });
         this.reloadUsers();
         this.form.reset();
         this.closebutton.nativeElement.click();
@@ -125,9 +131,14 @@ export class UserListComponent {
   }
 
   submitRemoveStudent(id_user: string) {
-    if(confirm("Are you sure duki gay?")) {
+    if(confirm("Are you sure you want to remove the sudent?")) {
       this.userService.removeCourse(String(this.id_course), String(id_user)).subscribe((result: any) => {
         if(result.status == 200) {
+          Swal.fire({
+            title: 'Student Removed',
+            icon: 'success',
+            confirmButtonText: 'OK'
+          });
           this.reloadUsers();
         }
       });
@@ -141,6 +152,11 @@ export class UserListComponent {
 
     this.userService.addGems(this.editingUser, Number(this.formGems.get("gems")?.value), String(this.formGems.get("action")?.value)).subscribe((result: any) => {
       if(result.status == 200) {
+        Swal.fire({
+          title: 'You have added the gems',
+          icon: 'success',
+          confirmButtonText: 'OK'
+        });
         this.reloadUsers();
         this.closeGemsButton.nativeElement.click();
       }
@@ -210,6 +226,11 @@ export class UserListComponent {
   removeHistory(id_history: number) {
     this.badgeService.removeHistory(id_history).subscribe((result: any) => {
       if(result.status == 200) {
+        Swal.fire({
+          title: 'History Removed',
+          icon: 'success',
+          confirmButtonText: 'OK'
+        });
         this.reloadHistory();
       }
     });
