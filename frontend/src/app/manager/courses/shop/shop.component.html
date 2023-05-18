@@ -1,0 +1,36 @@
+
+<app-loader *ngIf="!dataLoaded"></app-loader>
+
+<main *ngIf="dataLoaded | async">
+    <app-navbar [user_details]="user_data"></app-navbar>
+
+    <div class="main mt-4">
+        <div class="container">
+          <div class="row">
+            <div class="addCourse mb-4">
+              <div class="titleFlex">
+                <a href="/manager/course/{{id_course}}" class="mt-2"><i class="fa-solid fa-angle-left fa-2xl"></i></a>
+                <span class="h1 align-middle">SHOP</span>
+              </div>
+              <div class="pull-right d-inline-block">
+                <span class="d-inline-block h1 text-white">Next Shop: 13d 52m 13s</span>
+              </div>
+            </div>
+            
+            <div class="container" *ngIf="course_data.shop.items">
+                <div class="card" *ngFor="let item of course_data.shop.items">
+                    <img src="assets/img/logo.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <hr>
+                        <span class="h3">Bike</span><br>
+                        <span>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ducimus, ipsa!</span><br><br>
+
+                        <button class="btn btn-outline-success w-100" (click)="buyItem(2)">Buy For 5 <i class="fa-solid fa-gem mx-1" style="color: #0de74f;"></i></button>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br>
+</main>

@@ -1,46 +1,34 @@
-.balls .btn-login{
-    border-radius: 50% !important;
-    width: 120px;
-    height: 120px;
-    padding: 0px;
-    background-color: var(--purple);
-    overflow: visible;
+.titleFlex .h1{
+    font-family: 'Gooseberry Juice', sans-serif;
+    color: var(--white);
+    margin: 0px;
 }
 
-.balls{
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
+
+.titleFlex{
+    display: inline-block;
+    vertical-align: baseline;
 }
 
-.flexDentro{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin: 20px;
+.titleFlex a{
+    font-size: 20px;
     color: var(--yellow);
-    position: relative;
+    margin-right: 1rem;
+    transition: transform .2s;
 }
 
-.flexDentro i{
-    margin: 20px;
+.titleFlex a:hover{
+    transform: scale(1.2);
 }
 
-.flexDentro .badges {
-    position: absolute;
-    top: -5px;
-    right: 0px;
-    padding: 5px 10px;
-    border-radius: 50%;
-    background: var(--yellow);
-    color: var(--black);
+.addCourse{
     display: flex;
-    justify-content: center;
+    flex-wrap: wrap;
+    justify-content: space-between;
     align-items: center;
-    width: 30px;
-    height: 30px;
+    margin-top: 1rem;
 }
 
-.balls .btn-login::after{
-    background-color: transparent;
+.card {
+    width: 18rem !important;
 }

@@ -14,7 +14,7 @@ import { UserService } from 'src/app/services/user.service';
 export class MainComponent implements OnInit {
   @ViewChild('closebutton') closebutton!:any;
   dataLoaded!: Promise<boolean>;
-  user_data: any;
+  user_data: any = {college_name: "", role: "student"};
   courses: any;
   hasPoper: boolean = false;
 
@@ -25,7 +25,8 @@ export class MainComponent implements OnInit {
   constructor(private authService: AuthService, private userService: UserService, private router: Router, private courseService: CourseService) { }
 
   ngOnInit(): void {
-    this.userService.getUserDetails(String(localStorage.getItem('id'))).subscribe((response: any) => {
+    this.userService.getUserDetails(String(localStorage.getItem('id'))).subscribe(
+    (response: any) => {
       if(response.status == 200 && response.data) {
         this.user_data = response.data;
 
@@ -36,16 +37,17 @@ export class MainComponent implements OnInit {
           this.hasPoper = false;
           this.dataLoaded = Promise.resolve(true);
         }
-      } else {
-        this.router.navigate(['/login']);
       }
+    },
+    error => {
+      this.router.navigate(['/login']);
     });
   }
 
   reloadCourses() {
     this.userService.getCourses(String(localStorage.getItem('id'))).subscribe((courses: any) => {
       if(courses.status == 200) {
-        this.user_data.courses = courses.data;
+        this.user_data.real_courses = courses.data;
         this.dataLoaded = Promise.resolve(true);
       } else {
         this.router.navigate(['/login']);

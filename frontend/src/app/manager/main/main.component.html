@@ -1,8 +1,7 @@
 
 <app-loader *ngIf="!dataLoaded"></app-loader>
 <app-new-poper *ngIf="!hasPoper && (dataLoaded | async)"></app-new-poper>
-<main 
->
+<main *ngIf="dataLoaded | async">
     <app-navbar [user_details]="user_data"></app-navbar>
 
     <div class="main">
@@ -23,7 +22,7 @@
                         <h6 class="text-muted">[Enter Code]</h6>
                     </div>
                 </div> 
-                <div *ngFor="let course of user_data.courses" class="card text-decoration-none text-black">   
+                <div *ngFor="let course of user_data.real_courses" class="card text-decoration-none text-black">   
                     <a href="/manager/course/{{course.id_course}}">
                         <div class="imgCurso">   
                             <img src="{{(course.img != 'null' && course.img != ''  ? course.img : '/assets/img/defaultCourse.jpg')}}" class="card-img-top" alt="Imagen del Curso">

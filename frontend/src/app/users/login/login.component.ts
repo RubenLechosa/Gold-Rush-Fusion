@@ -19,6 +19,7 @@ export class LoginComponent {
   constructor(private authService: AuthService, private userService: UserService, private router: Router) { }
 
   onSubmit() {
+    var login = false;
     if (this.form.invalid) {
       this.error = true;
       return;
@@ -30,8 +31,10 @@ export class LoginComponent {
           localStorage.setItem('token', response.access_token);
           this.authService._isLoggedIn.next(true);
           this.router.navigate(['/manager']);
+          login = true;
       }
-
+    },
+    error => {
       this.error = true;
     });
   }
