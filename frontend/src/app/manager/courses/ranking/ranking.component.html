@@ -11,37 +11,31 @@
             <a href="/manager/course/{{id_course}}"><i class="fa-solid fa-angle-left fa-2xl"></i></a>
             <h1>Ranking</h1>
           </div>
-          <div class="boton2">
-            <button *ngIf="ranking_list" (click)="changeType()" class="btn btn-login">CHANGE to grafic</button>
-            <button *ngIf="!ranking_list" (click)="changeType()" class="btn btn-login">CHANGE to Table</button>
+        </div>
+
+        <div>
+          <div class="card">
+            <table class="table table-striped mt-2 p-2">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Nick</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Last Name</th>
+                  <th scope="col">Nº de Pepas</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let user of ranking; let i = index" class="destacado">
+                  <td scope="row posicion">{{i+1}}</td>
+                  <td>@{{user.nick}}</td>
+                  <td>{{user.name}}</td>
+                  <td>{{user.last_name}}</td>
+                  <td>{{user.pepas}}</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
-        </div>
-
-        <div *ngIf="ranking_list">
-          <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">Nick</th>
-                <th scope="col">Name</th>
-                <th scope="col">Last Name</th>
-                <th scope="col">Nº de Pepas</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let user of ranking; let i = index">
-                <th scope="row">{{i+1}}</th>
-                <td>@{{user.nick}}</td>
-                <td>{{user.name}}</td>
-                <td>{{user.last_name}}</td>
-                <td>{{user.pepas}}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div *ngIf="!ranking_list">
-          Grafic
         </div>
       </div>
     </div>
