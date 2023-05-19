@@ -46,15 +46,16 @@ class BadgeHistoryController extends Controller
         $badge = BadgeHistory::where("id_badge_history", "=", $request["id_badge_history"])->first();
 
         if($user_give_points = User::find($badge->id_user)) {
-            $user_give_points->skills_points = $badge->total_points;
-            $user_give_points->save();
-        }
+            $user_give_points->skills_points += $badge->total_points;
 
-        if($badge->delete()) {
-            return response()->json([
-                "status" => Response::HTTP_OK,
-                "success"=> true
-            ]);
+            if($user_give_points->save()) {
+                if($badge->delete()) {
+                    return response()->json([
+                        "status" => Response::HTTP_OK,
+                        "success"=> true
+                    ]);
+                }
+            }
         }
     }
 }

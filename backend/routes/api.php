@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\FileController;
 use App\Http\Controllers\Api\Users_submitsController;
 use App\Http\Controllers\Api\BadgesController;
+use App\Models\Users_submits;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -65,6 +66,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('tasks/delete-task', [TasksController::class, 'delete']);
     Route::post('tasks/get-task', [TasksController::class, 'findOne']);
     Route::post('tasks/get-tasks-list', [TasksController::class, 'getTaskList']);
+    Route::post('tasks/set-mark', [Users_submitsController::class, 'setMark']);
     
     // Category
     Route::post('tasks/new-category', [CategoryController::class, 'create']);

@@ -100,22 +100,24 @@ class Users_submitsController extends Controller
         $validated = $request->validated();
 
         if($submit = Users_submits::find($validated["id_users_submits"])) {
-            $user = User::find($submit["id_user"]);
+            if($submit->max_mark <= $submit["mark"]) {
+                $user = User::find($submit["id_user"]);
 
-            if($submit->mark != 0) {
-                $user->pepas -= $submit->mark * 10;
-            }
-
-            $user->pepas += $validated["mark"] * 10;
-            $submit->fill($validated);
-
-            if($submit->save()) {
-                $user->save();
-                
-                return response()->json([
-                    "status" => Response::HTTP_OK,
-                    "success"=> true
-                ]);
+                if($submit->mark != 0) {
+                    $user->pepas -= $submit->mark * 10;
+                }
+    
+                $user->pepas += $validated["mark"] * 10;
+                $submit->fill($validated);
+                                                                                
+                if($submit->save()) {
+                    $user->save();
+                    
+                    return response()->json([
+                        "status" => Response::HTTP_OK,
+                        "success"=> true
+                    ]);
+                }
             }
         }
 
