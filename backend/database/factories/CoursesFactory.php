@@ -19,15 +19,15 @@ class CoursesFactory extends Factory
     {
         $idsTeacher = DB::table('users')->pluck('id_user');
         $idsCollege = DB::table('colleges')->pluck('id_college');
-
+        $items = DB::table('items')->pluck('id');
 
         return [
             'course_name' => fake()->firstName(),
             'id_teacher' => fake()->randomElement($idsTeacher),
             'id_college' => fake()->randomElement($idsCollege),
-            'shop' => "{}",
+            'shop' => json_encode(["items" => fake()->randomElements($items, fake()->numberBetween(1, 5))]),
             'code'=>    fake()->regexify('[A-Za-z0-9]{5}'),
-            'requests'=>"{}",
+            'requests'=> json_encode(fake()->randomElements($idsTeacher, fake()->numberBetween(0, 5),)),
             'tasks'=>"{}",
 
         ];

@@ -55,6 +55,9 @@ export class ProfileComponent implements OnInit {
           }
         });
       }
+    },
+    error => {
+      this.router.navigate(['/login']);
     });
   }
   

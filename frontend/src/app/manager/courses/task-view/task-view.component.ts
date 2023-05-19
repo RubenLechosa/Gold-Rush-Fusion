@@ -63,9 +63,10 @@ ngOnInit(): void {
         }
       });
 
-    } else {
-      this.router.navigate(['/login']);
     }
+  },
+  error => {
+    this.router.navigate(['/login']);
   });
 }
 

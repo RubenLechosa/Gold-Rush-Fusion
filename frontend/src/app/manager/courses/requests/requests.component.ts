@@ -35,9 +35,10 @@ export class RequestsComponent {
         
         this.authService.checkPermissions(this.user_data.role);
         this.reloadUsers();
-      } else {
-        this.router.navigate(['/login']);
       }
+    },
+    error => {
+      this.router.navigate(['/login']);
     });
   }
 

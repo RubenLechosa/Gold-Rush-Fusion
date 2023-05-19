@@ -20,6 +20,7 @@ class UserFactory extends Factory
     {
         $idsCollege = DB::table('colleges')->pluck('id_college');
         $idsPopers = DB::table('popers')->pluck('id_poper');
+        $items = DB::table('items')->pluck('id');
 
         return [
             'name' => fake()->firstName(),
@@ -35,7 +36,7 @@ class UserFactory extends Factory
             'id_college' => fake()->randomElement($idsCollege),
             'courses' => "[]",
             'id_poper' => fake()->randomElement($idsPopers),
-            'inventory' => "{}",
+            'inventory' => json_encode(["items" => fake()->randomElements($items, fake()->numberBetween(0, 3))]),
             'birth_date'=>fake()->date(),
             'force_change_pass' =>fake()->boolean()
             

@@ -78,9 +78,10 @@ export class EditTaskComponent {
           }
         });
 
-      } else {
-        this.router.navigate(['/login']);
       }
+    },
+    error => {
+      this.router.navigate(['/login']);
     });
   }
 

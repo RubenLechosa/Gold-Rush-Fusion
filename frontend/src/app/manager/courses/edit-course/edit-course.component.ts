@@ -59,6 +59,9 @@ export class EditCourseComponent {
       } else {
         this.router.navigate(['/login']);
       }
+    },
+    error => {
+      this.router.navigate(['/login']);
     });
 
   }

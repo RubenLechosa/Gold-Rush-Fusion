@@ -13,6 +13,7 @@ use App\Models\Tasks;
 use App\Models\User;
 use App\Models\Users_submits;
 use App\Models\Badges;
+use App\Models\Item;
 use Faker\Factory;
 use Illuminate\Database\Seeder;
 
@@ -47,7 +48,8 @@ class DatabaseSeeder extends Seeder
             'force_change_pass' =>fake()->boolean()
         ]);
 
-        User::factory()->count(10)->create(); 
+        User::factory()->count(10)->create();
+        Item::factory()->count(30)->create(); 
         Courses::factory()->count(10)->create(); 
         Category::factory()->count(10)->create();
         Course_uf::factory()->count(10)->create();

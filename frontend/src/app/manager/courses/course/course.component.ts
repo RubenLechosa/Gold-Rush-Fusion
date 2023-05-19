@@ -39,9 +39,10 @@ export class CourseComponent {
             this.dataLoaded = Promise.resolve(true);
           }
         });
-      } else {
-        this.router.navigate(['/login']);
       }
+    },
+    error => {
+      this.router.navigate(['/login']);
     });
   }
 

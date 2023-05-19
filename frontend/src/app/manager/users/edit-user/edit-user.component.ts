@@ -46,9 +46,10 @@ export class EditUserComponent implements OnInit {
             this.router.navigate(["/manager"]);
           }
         });
-      } else {
-        this.router.navigate(['/login']);
       }
+    },
+    error => {
+      this.router.navigate(['/login']);
     });
   }
 

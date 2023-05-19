@@ -196,37 +196,17 @@
                             </div>
                             <!--End Badges Tab-->
 
-                            <!-- Modal Badges -->
-<div class="modal fade" id="modalBadges" tabindex="-1" aria-labelledby="modalBadges" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Badge Information</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <div class="row justify-content-center" *ngFor="let badge of user_data.badges">
-            <div class="col-5 row align-items-center text-center">
-                <img src="./assets/badges/badge_{{badge.type}}.png" alt="" width="135">
-                <h5 class="text-black fs-6">{{badge_info[badge.type]}}</h5>
-                <p class="text-muted">Level: {{badge.level}}</p>
-            </div>
-            <div class="col-7">
-                {{badge_desc[badge.type]}}
-            </div>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-exit" data-bs-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
                             <!--Inventory Tab-->
                             <div class="tab-pane fade" id="nav-inventory" role="tabpanel" aria-labelledby="nav-inventory-tab" *ngIf="selfProfile">
                                 <div class="userInfo">
                                     <h2><i class="fa-solid fa-box"></i> Inventory</h2>
+
+                                    <div class="badge text-center d-inline-block m-3" *ngFor="let item of user_data.found_inventory">
+                                        <button type="button" class="btn-badge" data-bs-toggle="modal" data-bs-target="#modalBadges">
+                                            <img src="{{item.img}}" alt="" width="135">
+                                            <p class="h5">{{item.name}}</p>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                             <!--End inventory Tab-->
@@ -237,7 +217,32 @@
         </div>
     </div>
 
-    
+    <!-- Modal Badges -->
+    <div class="modal fade" id="modalBadges" tabindex="-1" aria-labelledby="modalBadges" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Badge Information</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            <div class="row justify-content-center" *ngFor="let badge of user_data.badges">
+                <div class="col-5 row align-items-center text-center">
+                    <img src="./assets/badges/badge_{{badge.type}}.png" alt="" width="135">
+                    <h5 class="text-black fs-6">{{badge_info[badge.type]}}</h5>
+                    <p class="text-muted">Level: {{badge.level}}</p>
+                </div>
+                <div class="col-7">
+                    {{badge_desc[badge.type]}}
+                </div>
+            </div>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-exit" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+        </div>
+    </div>
 
 
 </main>

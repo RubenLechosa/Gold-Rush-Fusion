@@ -11,6 +11,7 @@ use App\Http\Requests\Course\ResolveInvitationRequest;
 use App\Http\Requests\Users\GetByIdUserRequest;
 use App\Models\User;
 use App\Models\Courses;
+use App\Models\Item;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -56,6 +57,17 @@ class CoursesController extends Controller
         $request = $request->validated();
 
         if($course = Courses::find($request["id_course"])) {
+            $shop = json_decode($course->shop, true);
+            
+            $items = [];
+            foreach ($shop["items"] as $item) {
+                if($item_found = Item::find($item)) {
+                    $items[] = $item_found;
+                }
+            }
+
+            $course["found_items"] = $items;
+
             return response()->json([
                 "status" => Response::HTTP_OK,
                 "success"=> true,

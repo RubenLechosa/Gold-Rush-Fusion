@@ -74,6 +74,9 @@ export class UserListComponent {
       } else {
         this.router.navigate(['/login']);
       }
+    },
+    error => {
+      this.router.navigate(['/login']);
     });
 
   }

@@ -57,4 +57,8 @@ export class UserService {
   changePassword(id_user: number, password: string, new_password: string, confirm_password: string) {
     return this.frameworkService.post('users/change-password', { id_user, password, new_password, confirm_password });
   }
+
+  buyItem(id_user: number, id_item: string) {
+    return this.frameworkService.post('shop/buy-item', { id_user, id_item});
+  }
 }

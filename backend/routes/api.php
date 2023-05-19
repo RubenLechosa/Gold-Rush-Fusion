@@ -82,6 +82,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('badges/give-points', [BadgesController::class, 'givePoints']);
     Route::post('badges/give-history', [BadgeHistoryController::class, 'getByCourse']);
     Route::post('badges/remove-history', [BadgeHistoryController::class, 'remove']);
+
+    //Shop
+    Route::post('shop/buy-item', [UserController::class, 'buyItem']);
+
     // Post Files
     Route::post('file', [FileController::class, 'store']);
 });

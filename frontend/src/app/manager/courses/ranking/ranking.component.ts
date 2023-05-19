@@ -36,9 +36,10 @@ export class RankingComponent {
             this.router.navigate(['/login']);
           }
         });
-      } else {
-        this.router.navigate(['/login']);
       }
+    },
+    error => {
+      this.router.navigate(['/login']);
     });
   }
 

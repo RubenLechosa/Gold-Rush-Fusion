@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CourseService } from 'src/app/services/course.service';
 import { UserService } from 'src/app/services/user.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-shop',
@@ -30,6 +31,7 @@ export class ShopComponent implements OnInit {
           if(college.status == 200) {
             this.course_data = college.data;
             this.course_data.shop = JSON.parse(this.course_data.shop);
+            console.log(this.course_data.found_items);
 
             this.dataLoaded = Promise.resolve(true);
           }
@@ -41,7 +43,25 @@ export class ShopComponent implements OnInit {
     });
   }
 
-  buyItem(idx: number) {
-    console.log("buyed");
+  buyItem(idx: string, precio: number) {
+    this.userService.buyItem(Number(localStorage.getItem('id')), idx).subscribe((result: any) => {
+      console.log(result);
+      if(result.status == 200) {
+        Swal.fire({
+          title: 'You have sent the request',
+          icon: 'success',
+          confirmButtonText: 'OK'
+        });
+
+        this.user_data.pepas -= precio;
+      }
+    },
+    (error: any) => {
+      Swal.fire({
+        title: 'Error on buying item',
+        icon: 'error',
+        confirmButtonText: 'OK'
+      });
+    });
   }
 }

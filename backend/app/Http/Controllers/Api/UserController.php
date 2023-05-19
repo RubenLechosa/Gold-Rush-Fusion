@@ -14,6 +14,7 @@ use App\Models\User;
 use App\Models\Colleges;
 use App\Models\Courses;
 use App\Models\Badges;
+use App\Models\Item;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
@@ -137,6 +138,17 @@ class UserController extends Controller
 
         if($user) {
             $user["badges"] = Badges::where("id_user", "=", $user->id_user)->where("level", "!=", "0")->get();
+
+            $inventory = json_decode($user->inventory, true);
+            
+            $items = [];
+            foreach ($inventory as $item) {
+                if($item_found = Item::find($item)) {
+                    $items[] = $item_found;
+                }
+            }
+
+            $user["found_inventory"] = $items;
 
             return response()->json([
                 "status" => Response::HTTP_OK,
@@ -336,6 +348,35 @@ class UserController extends Controller
         return response()->json([
             "status" => 400,
             "msg" => "No user data"
+        ]);
+    }
+
+    public function buyItem(Request $request) {
+
+        if($user = User::where("id_user", "=", $request["id_user"])->first()) {
+            $item = Item::find($request["id_item"]);
+
+            if($user->pepas >= $item->price) {
+                $user->pepas -= $item->price;
+
+                $inventory = json_decode($user->inventory, true);
+                $inventory[] = $item->id;
+
+                $user->inventory = json_encode($inventory);
+
+                if($user->save()) {
+                    return response()->json([
+                        "status" => Response::HTTP_OK,
+                        "success"=> true
+                    ]);
+                }
+            }
+        }
+
+        return response()->json([
+            "status" => Response::HTTP_BAD_REQUEST,
+            "success"=> false,
+            "msg"   => "User not found",
         ]);
     }
 }

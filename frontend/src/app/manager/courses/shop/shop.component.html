@@ -17,17 +17,19 @@
               </div>
             </div>
             
-            <div class="container" *ngIf="course_data.shop.items">
-                <div class="card" *ngFor="let item of course_data.shop.items">
-                    <img src="assets/img/logo.png" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <hr>
-                        <span class="h3">Bike</span><br>
-                        <span>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ducimus, ipsa!</span><br><br>
+            <div class="row" *ngIf="course_data.shop.items">
+              <div class="d-flex col-md-3 align-items-stretch" *ngFor="let item of course_data.found_items">
+                <div class="card my-3">
+                  <img src="{{item.img ? item.img : 'assets/img/defaultCourse.jpg'}}" class="card-img-top" alt="...">
+                  <div class="card-body">
+                      <hr>
+                      <span class="h3">{{item.name}}</span><br>
+                      <span>{{item.description}}</span><br><br>
 
-                        <button class="btn btn-outline-success w-100" (click)="buyItem(2)">Buy For 5 <i class="fa-solid fa-gem mx-1" style="color: #0de74f;"></i></button>
-                    </div>
+                      <button class="btn btn-outline-success w-100" (click)="buyItem(item.id, item.price)">Buy For {{item.price}} <i class="fa-solid fa-gem mx-1" style="color: #0de74f;"></i></button>
+                  </div>
                 </div>
+              </div>
             </div>
           </div>
         </div>
