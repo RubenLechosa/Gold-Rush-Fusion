@@ -1,0 +1,86 @@
+.titleFlex h1{
+    font-family: 'Gooseberry Juice', sans-serif;
+    color: var(--white);
+    margin: 0px;
+}
+
+
+.titleFlex{
+    display: flex;
+    align-items: center;
+
+}
+
+.titleFlex a{
+    font-size: 20px;
+    color: var(--yellow);
+    margin-right: 1rem;
+    transition: transform .2s;
+}
+
+.titleFlex a:hover{
+    transform: scale(1.2);
+}
+
+.addCourse .boton2 .btn-login:hover {
+    border: 2px solid var(--purple);
+}
+
+.btn.btn-badge {
+    border-color: black;
+    border-width: 1px;
+    border-radius: 0;
+}
+
+.btn-badge:hover{
+    background-color: rgb(217, 217, 217);
+}
+
+.btn-badge.active {
+    background-color: var(--purple);
+    color: white;
+}
+
+.btns {
+    display: inline-block;
+}
+
+.btns:first-child {
+    border-top-left-radius: 5px !important;
+    border-bottom-left-radius: 5px !important;
+}
+
+.btns:last-child .btn-badge {
+    border-top-right-radius: 5px !important;
+    border-bottom-right-radius: 5px !important;
+}
+
+  .option {
+    width: 100px;
+    height: 100px;
+    perspective: 1000px;
+  }
+  
+  .option-inner {
+    width: 100%;
+    height: 100%;
+    background-image: url('/assets/img/games/paper.png');
+    background-size: cover;
+    animation: cambiar-imagen 1s linear infinite;
+  }
+  
+  @keyframes cambiar-imagen {
+    0% {
+      background-image: url('/assets/img/games/paper.png');
+    }
+    50% {
+      background-image: url('/assets/img/games/rock.png');
+    }
+    100% {
+      background-image: url('/assets/img/games/scissors.png');
+    }
+  }
+
+  .btn-transparent:disabled {
+    border-color: transparent;
+  }
