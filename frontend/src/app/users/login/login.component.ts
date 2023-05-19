@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -19,9 +20,12 @@ export class LoginComponent {
   constructor(private authService: AuthService, private userService: UserService, private router: Router) { }
 
   onSubmit() {
-    var login = false;
     if (this.form.invalid) {
-      this.error = true;
+      Swal.fire({
+        title: 'Error on Login',
+        icon: 'error',
+        confirmButtonText: 'OK'
+      });
       return;
     }
 
@@ -31,11 +35,14 @@ export class LoginComponent {
           localStorage.setItem('token', response.access_token);
           this.authService._isLoggedIn.next(true);
           this.router.navigate(['/manager']);
-          login = true;
       }
     },
     error => {
-      this.error = true;
+      Swal.fire({
+        title: 'Error on Login',
+        icon: 'error',
+        confirmButtonText: 'OK'
+      });
     });
   }
 }
