@@ -21,6 +21,10 @@ import { TaskViewComponent } from './courses/task-view/task-view.component';
 import { EditTaskComponent } from './courses/edit-task/edit-task.component';
 import { UserSubmitsListComponent } from './user-submits-list/user-submits-list.component';
 import { AngularEditorModule } from '@kolkov/angular-editor';
+import { HeadComponent } from './games/head/head.component';
+import { PongComponent } from './games/pong/pong.component';
+import { PaperRockComponent } from './games/paper-rock/paper-rock.component';
+import { GamesComponent } from './games/games.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +45,10 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
     TaskViewComponent,
     EditTaskComponent,
     UserSubmitsListComponent,
+    HeadComponent,
+    PongComponent,
+    PaperRockComponent,
+    GamesComponent,
   ],
   imports: [
     CommonModule,

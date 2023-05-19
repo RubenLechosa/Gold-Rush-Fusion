@@ -1,0 +1,12 @@
+
+<app-loader *ngIf="!dataLoaded"></app-loader>
+
+<main *ngIf="dataLoaded | async">
+    <app-navbar [user_details]="user_data"></app-navbar>
+
+    <div class="container mt-4">
+        <a class="btn btn-primary m-3" href="/manager/games/pong">Pong</a><br>
+        <a class="btn btn-primary m-3" href="/manager/games/head-coin">Head</a><br>
+        <a class="btn btn-primary m-3" href="/manager/games/paper-scissors-rock">Paper Scissors Rock</a>
+    </div>
+</main>
