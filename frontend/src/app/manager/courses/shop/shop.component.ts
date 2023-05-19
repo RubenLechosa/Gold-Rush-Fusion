@@ -1,3 +1,4 @@
+import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CourseService } from 'src/app/services/course.service';
@@ -31,7 +32,7 @@ export class ShopComponent implements OnInit {
           if(college.status == 200) {
             this.course_data = college.data;
             this.course_data.shop = JSON.parse(this.course_data.shop);
-            console.log(this.course_data.found_items);
+            this.course_data.next_shop = formatDate(this.course_data.next_shop, 'dd-MM-yyyy', 'en');
 
             this.dataLoaded = Promise.resolve(true);
           }

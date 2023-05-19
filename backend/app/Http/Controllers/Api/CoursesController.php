@@ -12,6 +12,7 @@ use App\Http\Requests\Users\GetByIdUserRequest;
 use App\Models\User;
 use App\Models\Courses;
 use App\Models\Item;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -67,6 +68,10 @@ class CoursesController extends Controller
             }
 
             $course["found_items"] = $items;
+            $next_shop = Carbon::today();
+            $next_shop->addDays(7);
+
+            $course["next_shop"] = $next_shop;
 
             return response()->json([
                 "status" => Response::HTTP_OK,

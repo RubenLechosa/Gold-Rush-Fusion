@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
+use Illuminate\Auth\Events\PasswordReset;
 
 class UserController extends Controller
 {
@@ -293,11 +294,11 @@ class UserController extends Controller
     public function changePassword(changePasswordRequest $request) {
         $request = $request->validated();
 
-        if($users = User::where("id_user", "=", $request["id_user"])->where("password", "=", Hash::make($request["password"]))->first()) {
-            if($request["new_password"] == $request["confirm_password"]) {
-                $users->password = Hash::make($request["new_password"]);
-
-                if($users->save()) {
+        if($user = User::where("id_user", $request["id_user"])->first()) {
+            if(Hash::check($request["password"], $user->password) && $request["new_password"] == $request["confirm_password"]) {
+                $user->password = Hash::make($request["new_password"]);
+                
+                if($user->save()) {
                     return response()->json([
                         "status" => Response::HTTP_OK,
                         "success"=> true
