@@ -198,10 +198,10 @@ class CoursesController extends Controller
             $course->save();
             
             if($course->save()) {
-                if($request->accepted) {
+                if($request["accepted"]) {
                     $user = User::find($request["id_user"]);
                     $json = json_decode($user->courses, true);
-                    $user->courses = json_encode(array_merge(array($request->id_course), $json));
+                    $user->courses = json_encode(array_merge(array($request["id_course"]), $json));
                     $user->save();
                 }
             }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
@@ -11,6 +11,8 @@ import Swal from 'sweetalert2';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
+  @ViewChild('closeLoginModal') closeModal!:any;
+
   dataLoaded!: Promise<boolean>;
   user_data: any;
   self_data: any;
@@ -66,10 +68,19 @@ export class ProfileComponent implements OnInit {
     this.userService.changePassword(Number(localStorage.getItem('id')), String(this.form.get("password")?.value), String(this.form.get("new_password")?.value), String(this.form.get("confirm_password")?.value)).subscribe((passwords: any) => {
       
       if(passwords.status == 200) {
+        this.closeModal.nativeElement.click();
         this.authService.logout();
+      } else {
+        Swal.fire({
+          title: 'Error on changing the password',
+          icon: 'error',
+          confirmButtonText: 'OK'
+        });
       }
     },
     error => {
+      this.closeModal.nativeElement.click();
+
       Swal.fire({
         title: 'Error on changing the password',
         icon: 'error',
