@@ -1,7 +1,11 @@
 .titleFlex .h1{
-    font-family: 'Gooseberry Juice', sans-serif;
+    font-family: 'Gooseberry Juice', sans-serif !important;
     color: var(--white);
     margin: 0px;
+}
+
+.main{
+    font-family: 'Rubik', sans-serif;
 }
 
 
@@ -32,3 +36,4 @@
 .card {
     width: 18rem !important;
 }
+

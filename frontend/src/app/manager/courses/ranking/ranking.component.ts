@@ -42,8 +42,4 @@ export class RankingComponent {
       this.router.navigate(['/login']);
     });
   }
-
-  changeType() {
-    this.ranking_list = !this.ranking_list;
-  }
 }

@@ -47,7 +47,6 @@
 
 th, td{
     font-family: 'Rubik', sans-serif;
-    color: var(--white);
 }
 
 .balls .btn-login{
@@ -95,4 +94,25 @@ th, td{
 
 .balls .btn-login::after{
     background-color: transparent;
+}
+
+tr.destacado:nth-child(1) {
+  background-color: gold ;
+  font-size: 25px; /* Ajusta el tamaño de fuente para el primer lugar */
+  width: 60px; /* Ajusta el ancho de la celda para el primer lugar */
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); /* Sombreado para el primer lugar */
+}
+
+tr.destacado:nth-child(2) {
+  background-color: silver ;
+  font-size: 20px; /* Ajusta el tamaño de fuente para el segundo lugar */
+  width: 50px; /* Ajusta el ancho de la celda para el segundo lugar */
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+}
+
+tr.destacado:nth-child(3) {
+  background-color: burlywood ;
+  font-size: 18px; /* Ajusta el tamaño de fuente para el tercer lugar */
+  width: 40px; /* Ajusta el ancho de la celda para el tercer lugar */
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.1); /* Sombreado para el tercer lugar */
 }
