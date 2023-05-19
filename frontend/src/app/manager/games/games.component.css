@@ -1,0 +1,26 @@
+.titleFlex .h1{
+    font-family: 'Gooseberry Juice', sans-serif !important;
+    color: var(--white);
+    margin: 0px;
+}
+
+.main{
+    font-family: 'Rubik', sans-serif;
+}
+
+.titleFlex a{
+    font-size: 20px;
+    color: var(--yellow);
+    margin-right: 1rem;
+    transition: transform .2s;
+}
+
+.titleFlex a:hover{
+    transform: scale(1.2);
+}
+
+.card{
+    width: 350px !important;
+    height: auto;
+}
+

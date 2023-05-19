@@ -5,8 +5,41 @@
     <app-navbar [user_details]="user_data"></app-navbar>
 
     <div class="container mt-4">
-        <a class="btn btn-primary m-3" href="/manager/games/pong">Pong</a><br>
-        <a class="btn btn-primary m-3" href="/manager/games/head-coin">Head</a><br>
-        <a class="btn btn-primary m-3" href="/manager/games/paper-scissors-rock">Paper Scissors Rock</a>
+        <div class="d-flex align-middle titleFlex">
+            <a href="/manager" class="mt-2"><i class="fa-solid fa-angle-left fa-2xl"></i></a>
+            <span class="h1 align-middle">Games</span>
+        </div>
+        <div class="cards row justify-content-center">
+            <a href="/manager/games/pong" class="card p-0 mt-5 col-md-3 col-sm-1 m-2">
+                <div>
+                    <img class="img-fluid" src="https://images-platform.99static.com/V-KZgjTPjB8SHBj2RJOKQVycyK4=/0x0:994x994/500x500/top/smart/99designs-contests-attachments/123/123553/attachment_123553225" alt="">
+                </div>
+                <div class="p-3">
+                    <h3 class="gameTitle">Pong Star</h3>
+                    <span class="description">The player controls an in-game paddle by moving it vertically across the left or right side of the screen.</span>
+                </div>
+            </a>
+
+            <a href="/manager/games/head-coin" class="card p-0 mt-5 col-md-3 col-sm-1 m-2">
+                <div>
+                    <img class="img-fluid m-0" src="https://rollthedice.online/assets/images/upload/dice/dado-cara-cruz/cara_moneda.png" alt="">
+                </div>
+                <div class="p-3">
+                    <h3 class="gameTitle">Head or Tails Game</h3>
+                    <span class="description">A gambling game in which a coin is tossed, the winner being the player who guesses which side of the coin will face up when it lands or is caught</span>
+                </div>
+            </a>
+
+            <a href="/manager/games/paper-scissors-rock" class="card p-0 mt-5 col-md-3 col-sm-1 m-2">
+                <div>
+                    <img class="img-fluid m-0" src="https://media.istockphoto.com/id/1056840214/vector/rock-paper-scissors-vector-illustration.jpg?s=612x612&w=0&k=20&c=6KEBfon5f9BXXhLiu9JfOk6EHsM193SiWMcqDjN1jqM=" alt="">
+                </div>
+                <div class="p-3">
+                    <h3 class="gameTitle">Rock Paper Scissors</h3>
+                    <span class="description">The familiar game of Rock, Paper, Scissors is played like this: at the same time, two players display one of three symbols: a rock, paper, or scissors.</span>
+                </div>
+            </a>
+            
+        </div>
     </div>
 </main>
