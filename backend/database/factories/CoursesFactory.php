@@ -27,7 +27,7 @@ class CoursesFactory extends Factory
             'id_college' => fake()->randomElement($idsCollege),
             'shop' => json_encode(["items" => fake()->randomElements($items, fake()->numberBetween(1, 5))]),
             'code'=>    fake()->regexify('[A-Za-z0-9]{5}'),
-            'requests'=> json_encode(fake()->randomElements($idsTeacher, fake()->numberBetween(0, 5),)),
+            'requests'=> json_encode(fake()->randomElements($idsTeacher, fake()->numberBetween(0, 5))),
             'tasks'=>"{}",
 
         ];

@@ -26,7 +26,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-
+        Item::factory()->count(30)->create(); 
         Colleges::factory()->count(10)->create();
         Popers::factory()->count(10)->create();
 
@@ -35,21 +35,13 @@ class DatabaseSeeder extends Seeder
             'email' => 'test@test.com',
             'last_name' => 'Towers',
             'nick'=> 'MykeTowers69',
-            'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-            'remember_token' => 'gsknxgwkdj',
             'role'=> 'admin',
-            'pepas'=>fake()-> randomNumber(),
             'id_college' => 1,
-            'courses' => "{}",
-            'id_poper' => 1,
-            'inventory' => "{}",
-            'birth_date'=>fake()->date(),
-            'force_change_pass' =>fake()->boolean()
+            'id_poper' => 1
         ]);
 
         User::factory()->count(10)->create();
-        Item::factory()->count(30)->create(); 
         Courses::factory()->count(10)->create(); 
         Category::factory()->count(10)->create();
         Course_uf::factory()->count(10)->create();
