@@ -1,13 +1,64 @@
-<p>head works!</p>
-
 <app-loader *ngIf="!dataLoaded"></app-loader>
 
 <main *ngIf="dataLoaded | async">
     <app-navbar [user_details]="user_data"></app-navbar>
 
     <div class="container mt-4">
-        <h1 class="text-white">Soy el Lechosa y Soy Subnormal Aparte Soy un puto mazetorro</h1>
+        <div class="addCourse mb-4">
+            <div class="titleFlex">
+              <a href="/manager"><i class="fa-solid fa-angle-left fa-2xl"></i></a>
+              <h1>Head Or Tail</h1>
+            </div>
+          </div>
 
-        <img src="assets/img/important.JPG" alt="" width="500">
+        <div class="card">
+            <div class="card-body">
+                <div class="btns">
+                    <h5>Points to Bet:</h5>
+                    <button class="btn btn-badge" type="button" (click)="setActivePoints(50)"
+                      [ngClass]="activePoints == 50 ? 'active' : ''" [disabled]="game_init">50 <i class="fa-solid fa-gem mx-1" style="color: #0de74f;"></i></button>
+                    <button class="btn btn-badge" type="button" (click)="setActivePoints(100)"
+                      [ngClass]="activePoints == 100 ? 'active' : ''" [disabled]="game_init">100 <i class="fa-solid fa-gem mx-1" style="color: #0de74f;"></i></button>
+                    <button class="btn btn-badge" type="button" (click)="setActivePoints(500)"
+                      [ngClass]="activePoints == 500 ? 'active' : ''" [disabled]="game_init">500 <i class="fa-solid fa-gem mx-1" style="color: #0de74f;"></i></button>
+                    <button class="btn btn-badge" type="button" (click)="setActivePoints(1000)"
+                      [ngClass]="activePoints == 1000 ? 'active' : ''" [disabled]="game_init">1000 <i class="fa-solid fa-gem mx-1" style="color: #0de74f;"></i></button>
+                </div>
+
+                <div class="container text-center border border-dark mt-5 p-5 rounded">
+                    <div *ngIf="coin_won == null && !game_init">
+                        <h5>Choose one:</h5><br>
+                        <button class="btn btn-primary mx-5" [disabled]="user_data.pepas < activePoints" (click)="chooseCoin(1)">Head | Pay: {{activePoints}} <i class="fa-solid fa-gem mx-1" style="color: #0de74f;"></i></button>
+                        <button class="btn btn-primary mx-5" [disabled]="user_data.pepas < activePoints" (click)="chooseCoin(0)">Tail | Pay: {{activePoints}} <i class="fa-solid fa-gem mx-1" style="color: #0de74f;"></i></button>
+                    </div>
+
+                    <div class="container" *ngIf="game_init">
+                        <div class="row">
+                            <div class="col-md-5"></div>
+                            <div class="col-md-2">
+                                <h5>Fliping The Coin:</h5>
+                                <div class="coin">
+                                    <div class="coin-inner"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-5"></div>
+                        </div>
+
+                    </div>
+                    
+                    <div *ngIf="coin_won != null">
+                        <h5 *ngIf="coin_won == coin_choosed">You won! You are so bacano!</h5>
+                        <h5 *ngIf="coin_won != coin_choosed">You Lose! Try it again!</h5>
+                        <p><b>{{coin_won ? 'Head' : 'Tail'}}</b></p>
+
+                        <img class="mb-4" src="assets/img/games/coin{{coin_won}}.png" alt="" width="100px">
+
+                        <h5 *ngIf="coin_won == coin_choosed">You won <b>{{activePoints * 2}}</b> <i class="fa-solid fa-gem mx-1" style="color: #0de74f;"></i></h5>
+                    </div>
+
+                    <button class="btn btn-lg btn-primary mt-4" [disabled]="game_init" *ngIf="game_init || coin_won != null" (click)="replay()"><i class="fa-solid fa-rotate"></i> Play Again</button>
+                </div>
+            </div>
+        </div>
     </div>
 </main>
