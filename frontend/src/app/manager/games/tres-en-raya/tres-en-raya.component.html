@@ -1,0 +1,27 @@
+<app-loader *ngIf="!dataLoaded"></app-loader>
+
+<main *ngIf="dataLoaded | async">
+  <app-navbar [user_details]="user_data"></app-navbar>
+
+  <div class="container mt-4">
+    <h1>Tres en Raya</h1>
+    <div class="board">
+      <div class="row" *ngFor="let row of board; let i = index">
+        <div class="cell" *ngFor="let cell of row; let j = index" (click)="makeMove(i, j)">
+          {{ cell }}
+        </div>
+      </div>
+    </div>
+    <div class="status" *ngIf="gameState === 0">
+      <p>Turno del jugador: {{ currentPlayer }}</p>
+    </div>
+    <div class="status" *ngIf="gameState === 2">
+      <p>¡{{ winner }} ha ganado!</p>
+      <button (click)="resetGame()">Reiniciar</button>
+    </div>
+    <div class="status" *ngIf="gameState === 1">
+      <p>¡Empate!</p>
+      <button (click)="resetGame()">Reiniciar</button>
+    </div>
+  </div>
+</main>

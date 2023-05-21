@@ -22,9 +22,9 @@ import { EditTaskComponent } from './courses/edit-task/edit-task.component';
 import { UserSubmitsListComponent } from './user-submits-list/user-submits-list.component';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { HeadComponent } from './games/head/head.component';
-import { PongComponent } from './games/pong/pong.component';
 import { PaperRockComponent } from './games/paper-rock/paper-rock.component';
 import { GamesComponent } from './games/games.component';
+import { TresEnRayaComponent } from './games/tres-en-raya/tres-en-raya.component';
 
 @NgModule({
   declarations: [
@@ -46,9 +46,9 @@ import { GamesComponent } from './games/games.component';
     EditTaskComponent,
     UserSubmitsListComponent,
     HeadComponent,
-    PongComponent,
     PaperRockComponent,
     GamesComponent,
+    TresEnRayaComponent,
   ],
   imports: [
     CommonModule,

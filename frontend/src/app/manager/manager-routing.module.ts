@@ -14,9 +14,9 @@ import { MainComponent } from './main/main.component';
 import { UserSubmitsListComponent } from './user-submits-list/user-submits-list.component';
 import { EditUserComponent } from './users/edit-user/edit-user.component';
 import { ProfileComponent } from './users/profile/profile.component';
-import { PongComponent } from './games/pong/pong.component';
 import { PaperRockComponent } from './games/paper-rock/paper-rock.component';
 import { HeadComponent } from './games/head/head.component';
+import { TresEnRayaComponent } from './games/tres-en-raya/tres-en-raya.component';
 import { GamesComponent } from './games/games.component';
 
 
@@ -46,9 +46,9 @@ const routes: Routes = [
 
   //Games
   {path: 'games', component: GamesComponent},
-  {path: 'games/pong', component: PongComponent},
   {path: 'games/paper-scissors-rock', component: PaperRockComponent},
   {path: 'games/head-coin', component: HeadComponent},
+  {path: 'games/tictactoe', component: TresEnRayaComponent},
 ]; 
 
 @NgModule({
