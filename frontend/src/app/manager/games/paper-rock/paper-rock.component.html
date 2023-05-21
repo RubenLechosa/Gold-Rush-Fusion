@@ -4,8 +4,80 @@
     <app-navbar [user_details]="user_data"></app-navbar>
 
     <div class="container mt-4">
-        <h1 class="text-white">Soy el Lechosa y Soy Subnormal Aparte Soy un puto mazetorro</h1>
+        <div class="addCourse mb-4">
+            <div class="titleFlex">
+              <a href="/manager/games"><i class="fa-solid fa-angle-left fa-2xl"></i></a>
+              <h1>Head Or Tail</h1>
+            </div>
+          </div>
 
-        <img src="assets/img/important.JPG" alt="" width="500">
+        <div class="card">
+            <div class="card-body">
+                <div class="btns">
+                    <h5>Points to Bet:</h5>
+                    <button class="btn btn-badge" type="button" (click)="setActivePoints(50)"
+                      [ngClass]="activePoints == 50 ? 'active' : ''" [disabled]="game_init">50 <i class="fa-solid fa-gem mx-1" style="color: #0de74f;"></i></button>
+                    <button class="btn btn-badge" type="button" (click)="setActivePoints(100)"
+                      [ngClass]="activePoints == 100 ? 'active' : ''" [disabled]="game_init">100 <i class="fa-solid fa-gem mx-1" style="color: #0de74f;"></i></button>
+                    <button class="btn btn-badge" type="button" (click)="setActivePoints(500)"
+                      [ngClass]="activePoints == 500 ? 'active' : ''" [disabled]="game_init">500 <i class="fa-solid fa-gem mx-1" style="color: #0de74f;"></i></button>
+                    <button class="btn btn-badge" type="button" (click)="setActivePoints(1000)"
+                      [ngClass]="activePoints == 1000 ? 'active' : ''" [disabled]="game_init">1000 <i class="fa-solid fa-gem mx-1" style="color: #0de74f;"></i></button>
+                </div>
+
+                <div class="container text-center border border-dark mt-5 p-5 rounded">
+                    <div *ngIf="coin_won == null && !game_init">
+                        <h5>Choose one:</h5><br>
+                        <button class="btn btn-transparent" [disabled]="user_data.pepas < activePoints" (click)="chooseCoin(0)"><img src="assets/img/games/paper.png" class="m-4" width="100"></button>
+                        <button class="btn btn-transparent" [disabled]="user_data.pepas < activePoints" (click)="chooseCoin(1)"><img src="assets/img/games/rock.png" class="m-4" width="100"></button>
+                        <button class="btn btn-transparent" [disabled]="user_data.pepas < activePoints" (click)="chooseCoin(2)"><img src="assets/img/games/scissors.png" class="m-4" width="100"></button>
+                    </div>
+
+                    <div class="container" *ngIf="game_init">
+                        <div class="row">
+                            <div class="col-md-5"></div>
+                            <div class="col-md-2">
+                                <h5>AI is Choosing:</h5>
+                                <div class="option ms-4">
+                                    <div class="option-inner"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-5"></div>
+                        </div>
+
+                    </div>
+                    
+                    <div *ngIf="coin_won != null">
+                        <h5 *ngIf="won && !draw">You won! You are so bacano!</h5>
+                        <h5 *ngIf="!won && !draw">You Lose! Try it again!</h5>
+                        <h5 *ngIf="draw">You Draw! not always can win!</h5>
+                        <div>
+                            <div class="d-inline-block me-5">
+                                <p>You Choose:</p>
+                                <img class="mb-4" src="assets/img/games/paper.png" width="100px" *ngIf="coin_choosed == 0">
+                                <img class="mb-4" src="assets/img/games/rock.png" width="100px" *ngIf="coin_choosed == 1">
+                                <img class="mb-4" src="assets/img/games/scissors.png" width="100px" *ngIf="coin_choosed == 2">
+                            </div>
+
+                            <div class="d-inline-block me-5">
+                                <p>&nbsp;</p>
+                                <img class="mb-4" src="assets/img/games/vs.png" width="100px">
+                            </div>
+
+                            <div class="d-inline-block">
+                                <p>AI Choose:</p>
+                                <img class="mb-4" src="assets/img/games/paper.png" width="100px" *ngIf="coin_won == 0">
+                                <img class="mb-4" src="assets/img/games/rock.png" width="100px" *ngIf="coin_won == 1">
+                                <img class="mb-4" src="assets/img/games/scissors.png" width="100px" *ngIf="coin_won == 2">
+                            </div>
+                        </div>
+
+                        <h5 *ngIf="won">You won <b>{{activePoints * 2}}</b> <i class="fa-solid fa-gem mx-1" style="color: #0de74f;"></i></h5>
+                    </div>
+
+                    <button class="btn btn-lg btn-primary mt-4" [disabled]="game_init" *ngIf="game_init || coin_won != null" (click)="replay()"><i class="fa-solid fa-rotate"></i> Play Again</button>
+                </div>
+            </div>
+        </div>
     </div>
 </main>
