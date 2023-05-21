@@ -4,24 +4,51 @@
   <app-navbar [user_details]="user_data"></app-navbar>
 
   <div class="container mt-4">
-    <h1>Tres en Raya</h1>
-    <div class="board">
-      <div class="row" *ngFor="let row of board; let i = index">
-        <div class="cell" *ngFor="let cell of row; let j = index" (click)="makeMove(i, j)">
-          {{ cell }}
+    <div class="addCourse mb-4">
+        <div class="titleFlex">
+          <a href="/manager/games"><i class="fa-solid fa-angle-left fa-2xl"></i></a>
+          <h1>Tic Tac Toe</h1>
         </div>
       </div>
+
+    <div class="card">
+        <div class="card-body">
+            <div class="btns" *ngIf="showDifficultySelection">
+                <h5>Points to Bet:</h5>
+                <div *ngFor="let difficulty of difficulties">
+                  <button (click)="setDifficulty(difficulty)">{{ difficulty }}</button>
+                </div>
+            </div>
+
+
+            <div *ngIf="!showDifficultySelection">
+            <div class="container text-center border border-dark mt-5 p-5 rounded">
+
+              
+                <div class="board">
+                  <div class="row" *ngFor="let row of board; let i = index">
+                    <div class="cell" *ngFor="let cell of row; let j = index" (click)="makeMove(i, j)">
+                      {{ cell }}
+                    </div>
+                  </div>
+                </div>
+                <div class="status" *ngIf="gameState === 0">
+                  <p>Player Turn: {{ currentPlayer }}</p>
+                </div>
+                <div class="status" *ngIf="gameState === 2">
+                  <p>¡{{ winner }} has won!</p>
+                  <button (click)="resetGame()">Restart</button>
+                </div>
+                <div class="status" *ngIf="gameState === 1">
+                  <p>¡Tie!</p>
+                  <button (click)="resetGame()">Reiniciar</button>
+                </div>
+              </div>
+                
+            </div>
+        </div>
     </div>
-    <div class="status" *ngIf="gameState === 0">
-      <p>Turno del jugador: {{ currentPlayer }}</p>
-    </div>
-    <div class="status" *ngIf="gameState === 2">
-      <p>¡{{ winner }} ha ganado!</p>
-      <button (click)="resetGame()">Reiniciar</button>
-    </div>
-    <div class="status" *ngIf="gameState === 1">
-      <p>¡Empate!</p>
-      <button (click)="resetGame()">Reiniciar</button>
-    </div>
-  </div>
+</div>
+
+      
 </main>

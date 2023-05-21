@@ -33,4 +33,32 @@
     font-size: 16px;
     cursor: pointer;
   }
+
+  .titleFlex h1{
+    font-family: 'Gooseberry Juice', sans-serif;
+    color: var(--white);
+    margin: 0px;
+}
+
+
+.titleFlex{
+    display: flex;
+    align-items: center;
+
+}
+
+.titleFlex a{
+    font-size: 20px;
+    color: var(--yellow);
+    margin-right: 1rem;
+    transition: transform .2s;
+}
+
+.titleFlex a:hover{
+    transform: scale(1.2);
+}
+
+.addCourse .boton2 .btn-login:hover {
+    border: 2px solid var(--purple);
+}
   
