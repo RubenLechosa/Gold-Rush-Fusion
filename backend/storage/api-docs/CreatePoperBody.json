@@ -1,0 +1,33 @@
+{
+    "required": "true",
+    "content": {
+        "application/json": {
+            "schema": {
+                "type": "object",
+                "required": ["poper_name", "skin","stats","element"],
+                "properties": {
+                    "poper_name": {
+                        "type": "string",
+                        "description": "required",
+                        "example": "Carlos"
+                    },
+                    "skin": {
+                        "type": "json",
+                        "description": "required",
+                        "example": {}
+                    },
+                    "stats": {
+                        "type": "json",
+                        "description": "required",
+                        "example": {}
+                    },
+                    "element": {
+                        "type": "string",
+                        "description": "required",
+                        "example": "ember"
+                    }
+                }
+            }
+        }
+    }
+}

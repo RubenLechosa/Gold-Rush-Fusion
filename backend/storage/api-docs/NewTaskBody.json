@@ -1,0 +1,49 @@
+{
+    "required": "true",
+    "content": {
+        "application/json": {
+            "schema": {
+                "type": "object",
+                "required": ["id_category", "type","title","description","limit_date","percentage","max_mark"],
+                "properties": {
+                    "id_category": {
+                        "type": "string",
+                        "description": "required",
+                        "example": "1"
+                    },
+                    "type": {
+                        "type": "string",
+                        "description": "required",
+                        "example":"exam"
+                    },
+                    "title": {
+                        "type": "string",
+                        "description": "required",
+                        "example": "examen1"
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "required",
+                        "example": "Exam description"
+                    },
+                    "limit_date": {
+                        "type": "date",
+                        "description": "required",
+                        "example": "2020-11-12"
+                    },
+                    "percentage": {
+                        "type": "string",
+                        "description": "required",
+                        "example": "5"
+                    },
+                    "max_mark": {
+                        "type": "string",
+                        "description": "required",
+                        "example": "10"
+                    }
+
+                }
+            }
+        }
+    }
+}

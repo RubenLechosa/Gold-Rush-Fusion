@@ -1,0 +1,28 @@
+{
+    "required": "true",
+    "content": {
+        "application/json": {
+            "schema": {
+                "type": "object",
+                "required": ["id_tasks","id_course","id_user","submit"],
+                "properties": {
+                    "id_tasks": {
+                        "type": "string",
+                        "description": "required",
+                        "example": "35"
+                    },
+                    "id_course": {
+                        "type": "string",
+                        "description": "required",
+                        "example": "32"
+                    },
+                    "id_user": {
+                        "type": "string",
+                        "description": "required",
+                        "example": "63"
+                    }    
+                }
+            }
+        }
+    }
+}

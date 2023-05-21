@@ -1,0 +1,23 @@
+{
+    "required": "true",
+    "content": {
+        "application/json": {
+            "schema": {
+                "type": "object",
+                "required": ["id_user", "code"],
+                "properties": {
+                    "id_user": {
+                        "type": "string",
+                        "description": "required",
+                        "example": "1"
+                    },
+                    "code": {
+                        "type": "string",
+                        "description": "required",
+                        "example": "D2Vzl"
+                    }
+                }
+            }
+        }
+    }
+}

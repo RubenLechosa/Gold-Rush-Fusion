@@ -1,0 +1,28 @@
+{
+    "required": "true",
+    "content": {
+        "application/json": {
+            "schema": {
+                "type": "object",
+                "required": ["id_course", "id_user","accepted"],
+                "properties": {
+                    "id_course": {
+                        "type": "string",
+                        "description": "required",
+                        "example": "1"
+                    },
+                    "id_user": {
+                        "type": "string",
+                        "description": "required",
+                        "example": "1"
+                    },
+                    "accepted": {
+                        "type": "boolean",
+                        "description": "required",
+                        "example": true
+                    }
+                }
+            }
+        }
+    }
+}

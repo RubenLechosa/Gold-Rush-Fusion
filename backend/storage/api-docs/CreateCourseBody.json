@@ -1,0 +1,28 @@
+{
+    "required": "true",
+    "content": {
+        "application/json": {
+            "schema": {
+                "type": "object",
+                "required": ["course_name", "id_teacher","id_college"],
+                "properties": {
+                    "course_name": {
+                        "type": "string",
+                        "description": "required|min:4|max:20",
+                        "example": "DAW2"
+                    },
+                    "id_teacher": {
+                        "type": "string",
+                        "description": "required",
+                        "example": "1"
+                    },
+                    "id_college": {
+                        "type": "string",
+                        "description": "required",
+                        "example": "1"
+                    }
+                }
+            }
+        }
+    }
+}

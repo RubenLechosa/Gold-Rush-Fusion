@@ -1,0 +1,19 @@
+{
+    "required": "true",
+    "content": {
+        "application/json": {
+            "schema": {
+                "type": "object",
+                "required": ["file"],
+                "properties": {
+                    "file": {
+                        "type": "string",
+                        "description": "required",
+                        "example": "/assets/img/prueba.png"
+                    }
+
+                }
+            }
+        }
+    }
+}

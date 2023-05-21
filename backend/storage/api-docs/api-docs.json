@@ -234,17 +234,6 @@
                         }
                     },
                     {
-                        "name": "nick",
-                        "in": "body",
-                        "description": "nick from user",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "description": "",
-                            "example": "TerminatorCoC"
-                        }
-                    },
-                    {
                         "name": "email",
                         "in": "body",
                         "description": "email from user",
@@ -258,7 +247,7 @@
                     {
                         "name": "role",
                         "in": "body",
-                        "description": "email from user",
+                        "description": "role from user",
                         "required": true,
                         "schema": {
                             "type": "enum",
@@ -572,7 +561,7 @@
                         "schema": {
                             "type": "string",
                             "description": "required",
-                            "example": "5"
+                            "example": "1"
                         }
                     },
                     {
@@ -605,12 +594,95 @@
                         "schema": {
                             "type": "string",
                             "description": "required",
-                            "example": "confirm password"
+                            "example": "confirmpassword"
                         }
                     }
                 ],
                 "requestBody": {
-                    "$ref": "#/components/requestBodies/AddCourseBody"
+                    "$ref": "#/components/requestBodies/ChangePasswordBody"
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/200Response"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400succesmsgResponse"
+                    }
+                }
+            }
+        },
+        "/users/get-courses": {
+            "post": {
+                "summary": "GET-COURSE",
+                "description": "get-course",
+                "tags": ["Courses"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id_user",
+                        "in": "body",
+                        "description": "id_user from user",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "required",
+                            "example": "1"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/GetCourseBody"
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/200succesdataResponse"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400Response"
+                    }
+                }
+            }
+        },
+        "/users/join-course": {
+            "post": {
+                "summary": "JOIN-COURSE",
+                "description": "join-course",
+                "tags": ["Courses"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id_user",
+                        "in": "body",
+                        "description": "id_user from user",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "required",
+                            "example": "1"
+                        }
+                    },
+                    {
+                        "name": "code",
+                        "in": "body",
+                        "description": "code from course",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "required",
+                            "example": "djsahdshdA2321SA"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/JoinCourseBody"
                 },
                 "responses": {
                     "200": {
@@ -618,6 +690,1588 @@
                     },
                     "400": {
                         "$ref": "#/components/responses/400onlymsgResponse"
+                    }
+                }
+            }
+        },
+        "/course/create-course": {
+            "post": {
+                "summary": "CREATE-COURSE",
+                "description": "create-course",
+                "tags": ["Courses"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "course_name",
+                        "in": "body",
+                        "description": "course_name from course",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "required|min:4|max:20",
+                            "example": "DAW2"
+                        }
+                    },
+                    {
+                        "name": "id_teacher",
+                        "in": "body",
+                        "description": "id_teacher from course",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "required",
+                            "example": "2"
+                        }
+                    },
+                    {
+                        "name": "id_college",
+                        "in": "body",
+                        "description": "id_college from course",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "required",
+                            "example": "1"
+                        }
+                    },
+                    {
+                        "name": "img",
+                        "in": "body",
+                        "description": "img from course",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "required",
+                            "example": "/assets/img/prueba.png"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/CreateCourseBody"
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/200Response"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400Response"
+                    }
+                }
+            }
+        },
+        "/course/save-course": {
+            "post": {
+                "summary": "SAVE-COURSE",
+                "description": "save-course",
+                "tags": ["Courses"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id_course",
+                        "in": "body",
+                        "description": "id_course from course",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "required",
+                            "example": "1"
+                        }
+                    },
+                    {
+                        "name": "course_name",
+                        "in": "body",
+                        "description": "course_name from course",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "min:4|max:20",
+                            "example": "DAW2"
+                        }
+                    },
+                    {
+                        "name": "id_teacher",
+                        "in": "body",
+                        "description": "id_teacher from course",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "",
+                            "example": "1"
+                        }
+                    },
+                    {
+                        "name": "id_college",
+                        "in": "body",
+                        "description": "id_college from course",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "",
+                            "example": "2"
+                        }
+                    },
+                    {
+                        "name": "img",
+                        "in": "body",
+                        "description": "img from course",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "",
+                            "example": "/assets/img/prueba.png"
+                        }
+                    },
+                    {
+                        "name": "home_description",
+                        "in": "body",
+                        "description": "home_description from course",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "",
+                            "example": "Descripcion de curso"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/SaveCourseBody"
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/200Response"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400Response"
+                    }
+                }
+            }
+        },
+        "/course/get-details": {
+            "post": {
+                "summary": "GET-DETAILS",
+                "description": "get-details",
+                "tags": ["Courses"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id_course",
+                        "in": "body",
+                        "description": "id_course from course",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "required",
+                            "example": "1"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/GetCourseBody"
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/200succesdataResponse"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400Response"
+                    }
+                }
+            }
+        },
+        "/course/get-users": {
+            "post": {
+                "summary": "GET-USERS",
+                "description": "get-users",
+                "tags": ["Courses"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id_course",
+                        "in": "body",
+                        "description": "id_course from course",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "required",
+                            "example": "1"
+                        }
+                    },
+                    {
+                        "name": "id_user",
+                        "in": "body",
+                        "description": "id_user from course",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "required",
+                            "example": "1"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/GetUsersBody"
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/200succesdataResponse"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400msgResponse"
+                    }
+                }
+            }
+        },
+        "/course/get-ranking": {
+            "post": {
+                "summary": "GET-RANKING",
+                "description": "get-ranking",
+                "tags": ["Courses"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id_course",
+                        "in": "body",
+                        "description": "id_course from course",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "required",
+                            "example": "1"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/GetCourseBody"
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/200succesdataResponse"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400Response"
+                    }
+                }
+            }
+        },
+        "/course/refresh-code": {
+            "post": {
+                "summary": "REFRESH-CODE",
+                "description": "refresh-code",
+                "tags": ["Courses"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id_course",
+                        "in": "body",
+                        "description": "id_course from course",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "required",
+                            "example": "1"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/GetCourseBody"
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/200newcodeResponse"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400Response"
+                    }
+                }
+            }
+        },
+        "/course/delete": {
+            "post": {
+                "summary": "DELETE-COURSE",
+                "description": "delete-course",
+                "tags": ["Courses"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id_course",
+                        "in": "body",
+                        "description": "id_course from course",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "required",
+                            "example": "1"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/GetCourseBody"
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/200Response"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400msgResponse"
+                    }
+                }
+            }
+        },
+        "/course/get-requests": {
+            "post": {
+                "summary": "GET-REQUESTS",
+                "description": "getAllUsersByRequests",
+                "tags": ["Requests Course"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id_course",
+                        "in": "body",
+                        "description": "id_course from course",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "required",
+                            "example": "1"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/GetCourseBody"
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/200succesdataResponse"
+                    }
+                }
+            }
+        },
+        "/course/resolve-request": {
+            "post": {
+                "summary": "RESOLVE-REQUEST",
+                "description": "resolveRequest",
+                "tags": ["Requests Course"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id_course",
+                        "in": "body",
+                        "description": "id_course from course",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "required",
+                            "example": "1"
+                        }
+                    },
+                    {
+                        "name": "id_user",
+                        "in": "body",
+                        "description": "id_user from course",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "required",
+                            "example": "1"
+                        }
+                    },
+                    {
+                        "name": "accepted",
+                        "in": "body",
+                        "description": "id_user from course",
+                        "required": true,
+                        "schema": {
+                            "type": "boolean",
+                            "description": "required",
+                            "example": true
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/ResolveRequestBody"
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/200Response"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400Response"
+                    }
+                }
+            }
+        },
+        "/popers/create-poper": {
+            "post": {
+                "summary": "CREATE-POPER",
+                "description": "Create a poper",
+                "tags": ["Popers"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "poper_name",
+                        "in": "body",
+                        "description": "poper_name from poper",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "required",
+                            "example": "Carlos"
+                        }
+                    },
+                    {
+                        "name": "skin",
+                        "in": "body",
+                        "description": "skin from poper",
+                        "required": true,
+                        "schema": {
+                            "type": "json",
+                            "description": "required",
+                            "example": ""
+                        }
+                    },
+                    {
+                        "name": "stats",
+                        "in": "body",
+                        "description": "stats from poper",
+                        "required": true,
+                        "schema": {
+                            "type": "json",
+                            "description": "required",
+                            "example": ""
+                        }
+                    },
+                    {
+                        "name": "element",
+                        "in": "body",
+                        "description": "element from poper",
+                        "required": true,
+                        "schema": {
+                            "description":"required",
+                            "type": "string",
+                            "enum": ["wild","ember","water","psyco","smog","brawny"],
+                            "example": "wild"
+                        }
+                    }
+                    
+                ],
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/CreatePoperBody"
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/PoperResponse"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400Response"
+                    }
+                }
+            }
+        },
+        "/college/get-college": {
+            "post": {
+                "summary": "GET-COLLEGE",
+                "description": "get-college",
+                "tags": ["college"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id_college",
+                        "in": "body",
+                        "description": "id_college from college",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "required",
+                            "example": "1"
+                        }
+                    }
+                    
+                    
+                ],
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/GetCollegeBody"
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/200succesdataResponse"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400Response"
+                    }
+                }
+            }
+        },
+        "/college/save-college": {
+            "post": {
+                "summary": "SAVE-COLLEGE",
+                "description": "save-college",
+                "tags": ["college"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id_college",
+                        "in": "body",
+                        "description": "id_college from college",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "required",
+                            "example": "1"
+                        }
+                    },
+                    {
+                        "name": "college_name",
+                        "in": "body",
+                        "description": "college_name from college",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "description": "",
+                            "example": "ILERNA"
+                        }
+                    },
+                    {
+                        "name": "logo",
+                        "in": "body",
+                        "description": "logo from college",
+                        "required": false,
+                        "schema": {
+                            "type": "json",
+                            "description": "",
+                            "example": "{}"
+                        }
+                    }
+                    
+                    
+                ],
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/GetCollegeBody"
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/200Response"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400Response"
+                    }
+                }
+            }
+        },
+        "/tasks/new-task": {
+            "post": {
+                "summary": "NEW-TASK",
+                "description": "create task",
+                "tags": ["tasks"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id_category",
+                        "in": "body",
+                        "description": "id_category from task",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "required",
+                            "example": "1"
+                        }
+                    },
+                    {
+                        "name": "type",
+                        "in": "body",
+                        "description": "type from task",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "enum": ["task","forum","exam","file","link","page"],
+                            "example": "forum"
+                        }
+                    },
+                    {
+                        "name": "title",
+                        "in": "body",
+                        "description": "title from task",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "required",
+                            "example": "EXAMEN 1"
+                        }
+                    },
+                    {
+                        "name": "description",
+                        "in": "body",
+                        "description": "description from task",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "required",
+                            "example": "Exam description"
+                        }
+                    },
+                    {
+                        "name": "limit_date",
+                        "in": "body",
+                        "description": "limit_date from task",
+                        "required": false,
+                        "schema": {
+                            "type": "date",
+                            "description": "required",
+                            "example": "1974-11-07"
+                        }
+                    },
+                    {
+                        "name": "percentage",
+                        "in": "body",
+                        "description": "percentage from task",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "required",
+                            "example": "5"
+                        }
+                    },
+                    {
+                        "name": "max_mark",
+                        "in": "body",
+                        "description": "max_mark from task",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "required",
+                            "example": "10"
+                        }
+                    }
+                    
+                    
+                ],
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/NewTaskBody"
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/200Response"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400Response"
+                    }
+                }
+            }
+        },
+        "/tasks/edit-task": {
+            "post": {
+                "summary": "EDIT-TASK",
+                "description": "edit-task",
+                "tags": ["tasks"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id_task",
+                        "in": "body",
+                        "description": "id_task from task",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "required",
+                            "example": "1"
+                        }
+                    },
+                    {
+                        "name": "id_category",
+                        "in": "body",
+                        "description": "id_category from task",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "description": "",
+                            "example": "1"
+                        }
+                    },
+                    {
+                        "name": "type",
+                        "in": "body",
+                        "description": "type from task",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "enum": ["task","forum","exam","file","link","page"],
+                            "example": "forum"
+                        }
+                    },           
+                    {
+                        "name": "title",
+                        "in": "body",
+                        "description": "title from task",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "description": "",
+                            "example": "EXAMEN 1"
+                        }
+                    },
+                    {
+                        "name": "description",
+                        "in": "body",
+                        "description": "description from task",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "description": "",
+                            "example": "Exam description"
+                        }
+                    },
+                    {
+                        "name": "limit_date",
+                        "in": "body",
+                        "description": "limit_date from task",
+                        "required": false,
+                        "schema": {
+                            "type": "date",
+                            "description": "",
+                            "example": "1974-11-07"
+                        }
+                    },
+                    {
+                        "name": "percentage",
+                        "in": "body",
+                        "description": "percentage from task",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "description": "",
+                            "example": "5"
+                        }
+                    },
+                    {
+                        "name": "max_mark",
+                        "in": "body",
+                        "description": "max_mark from task",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "description": "",
+                            "example": "10"
+                        }
+                    }
+                    
+                    
+                ],
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/EditTaskBody"
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/200Response"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400Response"
+                    }
+                }
+            }
+        },
+        "/tasks/delete-task": {
+            "post": {
+                "summary": "DELETE-TASK",
+                "description": "delete-task",
+                "tags": ["tasks"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id_task",
+                        "in": "body",
+                        "description": "id_task from task",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "required",
+                            "example": "1"
+                        }
+                    }
+                    
+                    
+                ],
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/EditTaskBody"
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/200Response"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400succesmsgResponse"
+                    }
+                }
+            }
+        },
+        "/tasks/get-task": {
+            "post": {
+                "summary": "GET-TASK",
+                "description": "get-task",
+                "tags": ["tasks"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id_task",
+                        "in": "body",
+                        "description": "id_task from task",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "required",
+                            "example": "1"
+                        }
+                    }
+                    
+                    
+                ],
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/EditTaskBody"
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/200succesdataResponse"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400Response"
+                    }
+                }
+            }
+        },
+        "/tasks/get-tasks-list": {
+            "post": {
+                "summary": "GET-TASK-LIST",
+                "description": "get-tasks-list",
+                "tags": ["tasks"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id_course",
+                        "in": "body",
+                        "description": "id_course from task",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "required",
+                            "example": "1"
+                        }
+                    }
+                    
+                    
+                ],
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/GetCourseBody"
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/200succesdataResponse"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400Response"
+                    }
+                }
+            }
+        },
+        "/tasks/set-mark": {
+            "post": {
+                "summary": "SET-MARK",
+                "description": "set-mark",
+                "tags": ["tasks"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id_users_submits",
+                        "in": "body",
+                        "description": "id_users_submits from task",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "required",
+                            "example": "1"
+                        }
+                    },
+                    {
+                        "name": "id_tasks",
+                        "in": "body",
+                        "description": "id_tasksS from task",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "description": "",
+                            "example": "1"
+                        }
+                    },
+                    {
+                        "name": "id_user",
+                        "in": "body",
+                        "description": "id_user from task",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "description": "",
+                            "example": "1"
+                        }
+                    },
+                    {
+                        "name": "submit",
+                        "in": "body",
+                        "description": "submit from task",
+                        "required": false,
+                        "schema": {
+                            "type": "json",
+                            "description": "",
+                            "example": "{}"
+                        }
+                    },
+                    {
+                        "name": "mark",
+                        "in": "body",
+                        "description": "mark from task",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "description": "",
+                            "example": "5"
+                        }
+                    },
+                    {
+                        "name": "teacher_comment",
+                        "in": "body",
+                        "description": "teacher_comment from task",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "description": "max:254",
+                            "example": "Comment"
+                        }
+                    }
+                    
+                    
+                ],
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/SetMarkBody"
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/200Response"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400Response"
+                    }
+                }
+            }
+        },
+        "/tasks/new-category": {
+            "post": {
+                "summary": "NEW-CATEGORY",
+                "description": "new-category",
+                "tags": ["Categories"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "title",
+                        "in": "body",
+                        "description": "title from category",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "required",
+                            "example": "dast"
+                        }
+                    },
+                    {
+                        "name": "id_course",
+                        "in": "body",
+                        "description": "id_course from category",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "description": "required",
+                            "example": "1"
+                        }
+                    }
+                    
+                    
+                ],
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/NewCategoryBody"
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/200succesdataResponse"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400Response"
+                    }
+                }
+            }
+        },
+        "/tasks/get-categories": {
+            "post": {
+                "summary": "GET-CATEGORIES",
+                "description": "getCategoriesOnCourse",
+                "tags": ["Categories"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id_course",
+                        "in": "body",
+                        "description": "id_course from category",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "required",
+                            "example": "1"
+                        }
+                    }
+                    
+                    
+                ],
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/GetCourseBody"
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/200succesdataResponse"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400Response"
+                    }
+                }
+            }
+        },
+        "/tasks/delete-category": {
+            "post": {
+                "summary": "DELETE-CATEGORY",
+                "description": "delete-category",
+                "tags": ["Categories"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id_course",
+                        "in": "body",
+                        "description": "id_course from category",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "required",
+                            "example": "1"
+                        }
+                    }
+                    
+                    
+                ],
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/DeleteCategoryBody"
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/200Response"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400msgResponse"
+                    }
+                }
+            }
+        },
+        "/tasks/new-upload": {
+            "post": {
+                "summary": "NEW-UPLOAD",
+                "description": "new-upload",
+                "tags": ["Task submits"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id_tasks",
+                        "in": "body",
+                        "description": "id_tasks from task",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "required",
+                            "example": "1"
+                        }
+                    },
+                    {
+                        "name": "id_course",
+                        "in": "body",
+                        "description": "id_course from task",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "required",
+                            "example": "1"
+                        }
+                    },
+                    {
+                        "name": "id_user",
+                        "in": "body",
+                        "description": "id_user from task",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "required",
+                            "example": "1"
+                        }
+                    },
+                    {
+                        "name": "submit",
+                        "in": "body",
+                        "description": "id_course from task",
+                        "required": false,
+                        "schema": {
+                            "type": "json",
+                            "description": "",
+                            "example": "{}"
+                        }
+                    },
+                    {
+                        "name": "mark",
+                        "in": "body",
+                        "description": "mark from task",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "required",
+                            "example": "1"
+                        }
+                    }
+                    
+                    
+                ],
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/NewUploadBody"
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/200Response"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400Response"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500Response"
+                    }
+                }
+            }
+        },
+        "/tasks/get-submits": {
+            "post": {
+                "summary": "GET-SUBMITS",
+                "description": "get-submits",
+                "tags": ["Task submits"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id_course",
+                        "in": "body",
+                        "description": "id_tasks from task",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "required",
+                            "example": "1"
+                        }
+                    }
+                    
+                    
+                ],
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/GetCourseBody"
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/200succesdataResponse"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400Response"
+                    }
+                }
+            }
+        },
+        "/tasks/get-submit": {
+            "post": {
+                "summary": "GET-SUBMITS",
+                "description": "get-submit",
+                "tags": ["Task submits"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id_task",
+                        "in": "body",
+                        "description": "id_tasks from task",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "required",
+                            "example": "1"
+                        }
+                    },
+                    {
+                        "name": "id_user",
+                        "in": "body",
+                        "description": "id_user from task",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "required",
+                            "example": "1"
+                        }
+                    }
+                    
+                    
+                ],
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/GetSubmitBody"
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/200succesdataResponse"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400Response"
+                    }
+                }
+            }
+        },
+        "/badges/give-points": {
+            "post": {
+                "summary": "GIVE-POINTS",
+                "description": "give-points",
+                "tags": ["Badges"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id_user",
+                        "in": "body",
+                        "description": "id_user from user",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "required",
+                            "example": "1"
+                        }
+                    },
+                    {
+                        "name": "id_request_user",
+                        "in": "body",
+                        "description": "id_request_user from user",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "required",
+                            "example": "1"
+                        }
+                    },
+                    {
+                        "name": "id_course",
+                        "in": "body",
+                        "description": "id_course from user",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "required",
+                            "example": "1"
+                        }
+                    },
+                    {
+                        "name": "badges",
+                        "in": "body",
+                        "description": "badges from badges",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "required",
+                            "example": "1"
+                        }
+                    }
+                    
+                    
+                ],
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/GivePointsBody"
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/200Response"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400Response"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500Response"
+                    }
+                }
+            }
+        },
+        "/badges/give-history": {
+            "post": {
+                "summary": "GIVE-HISTORY",
+                "description": "give-history",
+                "tags": ["Badges"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id_course",
+                        "in": "body",
+                        "description": "id_course from course",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "required",
+                            "example": "1"
+                        }
+                    }
+                    
+                ],
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/GetCourseBody"
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/200succesdataResponse"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400Response"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500Response"
+                    }
+                }
+            }
+        },
+        "/badges/remove-history": {
+            "post": {
+                "summary": "REMOVE-HISTORY",
+                "description": "remove-history",
+                "tags": ["Badges"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id_badge_history",
+                        "in": "body",
+                        "description": "id_badge_history from badges",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "required",
+                            "example": "1"
+                        }
+                    }
+                   
+                    
+                ],
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/RemoveHistoryBody"
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/200Response"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400Response"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500Response"
+                    }
+                }
+            }
+        },
+        "/shop/buy-item": {
+            "post": {
+                "summary": "BUY-ITEM",
+                "description": "buy-item",
+                "tags": ["Shop"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id_user",
+                        "in": "body",
+                        "description": "id_user from user",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "required",
+                            "example": "1"
+                        }
+                    },
+                    {
+                        "name": "id_item",
+                        "in": "body",
+                        "description": "id_item from shop",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "required",
+                            "example": "1"
+                        }
+                    }
+                   
+                    
+                ],
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/BuyItemBody"
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/200Response"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400succesmsgResponse"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500Response"
+                    }
+                }
+            }
+        },
+        "/file": {
+            "post": {
+                "summary": "FILE",
+                "description": "",
+                "tags": ["File"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "img",
+                        "in": "body",
+                        "description": "img",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "required",
+                            "example": "/assets/img/prueba.png"
+                        }
+                    }
+                   
+                    
+                ],
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/FileBody"
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/200Response"
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400succesmsgdataResponse"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500Response"
                     }
                 }
             }
@@ -678,6 +2332,66 @@
             },
             "AddCourseBody": {
                 "$ref": "AddCourseBody.json"
+            },
+            "ChangePasswordBody": {
+                "$ref": "ChangePasswordBody.json"
+            },
+            "GetCourseBody": {
+                "$ref": "GetCourseBody.json"
+            },
+            "JoinCourseBody": {
+                "$ref": "JoinCourseBody.json"
+            },
+            "CreateCourseBody": {
+                "$ref": "CreateCourseBody.json"
+            },
+            "SaveCourseBody": {
+                "$ref": "SaveCourseBody.json"
+            },
+            "GetUsersBody": {
+                "$ref": "GetUsersBody.json"
+            },
+            "ResolveRequestBody": {
+                "$ref": "ResolveRequestBody.json"
+            },
+            "CreatePoperBody": {
+                "$ref": "CreatePoperBody.json"
+            },
+            "GetCollegeBody": {
+                "$ref": "GetCollegeBody.json"
+            },
+            "NewTaskBody": {
+                "$ref": "NewTaskBody.json"
+            },
+            "EditTaskBody": {
+                "$ref": "EditTaskBody.json"
+            },
+            "SetMarkBody": {
+                "$ref": "SetMarkBody.json"
+            },
+            "NewCategoryBody": {
+                "$ref": "NewCategoryBody.json"
+            },
+            "DeleteCategoryBody": {
+                "$ref": "DeleteCategoryBody.json"
+            },
+            "NewUploadBody": {
+                "$ref": "NewUploadBody.json"
+            },
+            "GetSubmitBody": {
+                "$ref": "GetSubmitBody.json"
+            },
+            "GivePointsBody": {
+                "$ref": "GivePointsBody.json"
+            },
+            "RemoveHistoryBody": {
+                "$ref": "RemoveHistoryBody.json"
+            },
+            "BuyItemBody": {
+                "$ref": "BuyItemBody.json"
+            },
+            "FileBody": {
+                "$ref": "FileBody.json"
             }
         },
         "responses": {
@@ -693,7 +2407,7 @@
 
             },
             "200Response": {
-                "description": "Creado con exito!",
+                "description": "Success!!",
                 "content": {
                     "application/json": {
                         "schema": {
@@ -704,7 +2418,7 @@
 
             },
             "400Response": {
-                "description": "Fallo al crear!",
+                "description": "Error!",
                 "content": {
                     "application/json": {
                         "schema": {
@@ -715,7 +2429,7 @@
 
             },
             "403Response": {
-                "description": "Fallo al entrar!",
+                "description": "Error!!",
                 "content": {
                     "application/json": {
                         "schema": {
@@ -726,7 +2440,7 @@
 
             },
             "200.3Response": {
-                "description": "Has entrado con exito!!",
+                "description": "Success!!",
                 "content": {
                     "application/json": {
                         "schema": {
@@ -737,7 +2451,7 @@
 
             },
             "CreateResponse": {
-                "description": "Ha funcionado con exito!!",
+                "description": "Success!!",
                 "content": {
                     "application/json": {
                         "schema": {
@@ -748,7 +2462,7 @@
 
             },
             "400msgResponse": {
-                "description": "Encontrado con exito!!",
+                "description": "Success!!",
                 "content": {
                     "application/json": {
                         "schema": {
@@ -759,7 +2473,7 @@
 
             },
             "400onlymsgResponse": {
-                "description": "no encontrado!",
+                "description": "Not found!",
                 "content": {
                     "application/json": {
                         "schema": {
@@ -770,7 +2484,7 @@
 
             },
             "200onlymsgResponse": {
-                "description": "Encontrado con exito!!",
+                "description": "Success!!",
                 "content": {
                     "application/json": {
                         "schema": {
@@ -781,7 +2495,7 @@
 
             },
             "400succesdataResponse": {
-                "description": "No encontrado",
+                "description": "Not found",
                 "content": {
                     "application/json": {
                         "schema": {
@@ -792,11 +2506,66 @@
 
             },
             "400succesmsgResponse": {
-                "description": "No encontrado",
+                "description": "Not found",
                 "content": {
                     "application/json": {
                         "schema": {
                             "$ref": "400succesmsgResponse.json"
+                        }
+                    }
+                }
+
+            },
+            "200succesdataResponse": {
+                "description": "Success!",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "200succesdataResponse.json"
+                        }
+                    }
+                }
+
+            },
+            "200newcodeResponse": {
+                "description": "New code generated!",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "200newcodeResponse.json"
+                        }
+                    }
+                }
+
+            },
+            "PoperResponse": {
+                "description": "Poper created!",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "PoperResponse.json"
+                        }
+                    }
+                }
+
+            },
+            "500Response": {
+                "description": "Something doesn't have a default value!",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "500Response.json"
+                        }
+                    }
+                }
+
+            },
+            "400succesmsgdataResponse": {
+                "description": "Error!",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "400succesmsgdataResponse.json"
                         }
                     }
                 }

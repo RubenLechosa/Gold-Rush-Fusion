@@ -1,0 +1,19 @@
+{
+    "required": "true",
+    "content": {
+        "application/json": {
+            "schema": {
+                "type": "object",
+                "required": ["id_badge_history"],
+                "properties": {
+                    "id_badge_history": {
+                        "type": "string",
+                        "description": "required",
+                        "example": "1"
+                    }
+
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,34 @@
+{
+    "required": "true",
+    "content": {
+        "application/json": {
+            "schema": {
+                "type": "object",
+                "required": ["id_user","id_request_user","id_course","badges"],
+                "properties": {
+                    "id_user": {
+                        "type": "string",
+                        "description": "required",
+                        "example": "1"
+                    },
+                    "id_request_user": {
+                        "type": "string",
+                        "description": "required",
+                        "example": "1"
+                    },
+                    "id_course": {
+                        "type": "string",
+                        "description": "required",
+                        "example": "1"
+                    },
+                    "badges": {
+                        "type": "string",
+                        "description": "required",
+                        "example": "A"
+                    }
+
+                }
+            }
+        }
+    }
+}

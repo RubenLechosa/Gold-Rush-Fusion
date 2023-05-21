@@ -1,0 +1,23 @@
+{
+    "required": "true",
+    "content": {
+        "application/json": {
+            "schema": {
+                "type": "object",
+                "required": ["title","id_course"],
+                "properties": {
+                    "title": {
+                        "type": "string",
+                        "description": "required",
+                        "example": "CATEGORY"
+                    },
+                    "id_course": {
+                        "type": "string",
+                        "description": "required",
+                        "example": "1"
+                    }
+                }
+            }
+        }
+    }
+}
