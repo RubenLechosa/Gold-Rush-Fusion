@@ -49,7 +49,7 @@ export class ShopComponent implements OnInit {
       console.log(result);
       if(result.status == 200) {
         Swal.fire({
-          title: 'You have sent the request',
+          title: 'You have bought the item',
           icon: 'success',
           confirmButtonText: 'OK'
         });
@@ -59,7 +59,7 @@ export class ShopComponent implements OnInit {
     },
     (error: any) => {
       Swal.fire({
-        title: 'Error on buying item',
+        title: 'Error buying item',
         icon: 'error',
         confirmButtonText: 'OK'
       });
