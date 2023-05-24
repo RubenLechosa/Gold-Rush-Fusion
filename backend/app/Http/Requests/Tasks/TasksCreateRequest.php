@@ -29,6 +29,7 @@ class TasksCreateRequest extends FormRequest
             'title' => 'required',
             'description' => 'required',
             'limit_date' => 'required',
+            'file_rubrica' => '',
             "percentage" => '',
             "max_mark" => ''
         ];

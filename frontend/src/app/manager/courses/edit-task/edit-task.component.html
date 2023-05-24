@@ -49,15 +49,20 @@
                         <input type="date" id="date" placeholder="..." ngModel="{{task_data.limit_date}}" formControlName="limit_date" class="form-control">
                         <label for="title">Limit Date</label>
                     </div>
+
+                    <div class="form-floating mb-3 custom-file">
+                      <input type="file" id="img" class="form-control" (change)="uploadImage($event)">
+                      <label for="img">Profile Image</label>
+                    </div>
                     
                     <div class="w-100" *ngIf="form.controls['type'].value == 'task'">
                       <h6>Task Settings</h6>
                       <div class="form-floating mb-3">
-                        <input type="number" id="percentage" min="0" placeholder="..." ngModel="{{task_data.percentage}}" formControlName="percentage" class="form-control">
+                        <input type="number" id="percentage" min="0" placeholder="..." ngModel="{{task_data.percentage}}" formControlName="percentage" class="form-control" [value]="1" value="1">
                         <label for="percentage">Percentage</label>
                       </div>
                       <div class="form-floating mb-3">
-                        <input type="number" id="max_mark" min="0" placeholder="..." ngModel="{{task_data.max_mark}}" formControlName="max_mark" class="form-control">
+                        <input type="number" id="max_mark" min="0" placeholder="..." ngModel="{{task_data.max_mark}}" formControlName="max_mark" class="form-control" value="10">
                         <label for="max_mark">Max Mark</label>
                       </div>
                     </div>

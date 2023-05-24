@@ -4,6 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { CourseService } from 'src/app/services/course.service';
+import { FrameworkService } from 'src/app/services/framework.service';
 import { TaskService } from 'src/app/services/task.service';
 import { UserService } from 'src/app/services/user.service';
 import Swal from 'sweetalert2';
@@ -24,7 +25,9 @@ export class EditTaskComponent {
   course_data: any;
   task_data: any;
   categories: any = [];
-  task_types = ["Task", "Forum", "Exam", "File", "Link", "Page"];
+  task_types = ["Task"];
+  files: any;
+  
 
   form = new FormGroup({
     title: new FormControl(null, Validators.compose([Validators.minLength(2), Validators.required])),
@@ -42,7 +45,7 @@ export class EditTaskComponent {
     title: new FormControl(null, Validators.required)
   })
 
-  constructor(private authService: AuthService, private userService: UserService, private route: ActivatedRoute,  private router: Router, private courseService: CourseService, private tasksService: TaskService) {}
+  constructor(private authService: AuthService, private userService: UserService, private frameworkService: FrameworkService, private route: ActivatedRoute,  private router: Router, private courseService: CourseService, private tasksService: TaskService) {}
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -85,26 +88,39 @@ export class EditTaskComponent {
     });
   }
 
+  uploadImage(event: any){
+    this.files = event.target.files[0];
+  }
+
   onSubmit() {
     if(this.form.invalid) {
       return;
     }
 
+    const formData = new FormData();
+    if(this.files != null) {
+      formData.append("img", this.files, this.files.name);
+    }
+
     if(this.id_task != 0) {
-      this.tasksService.editTask(Number(this.id_task), Number(this.form.get("id_category")?.value), String(this.form.get("type")?.value), String(this.form.get("title")?.value), String(this.form.get("description")?.value), String(this.form.get("limit_date")?.value), String(this.form.get("percentage")?.value), String(this.form.get("max_mark")?.value)).subscribe((result: any) => {
-        if(result.status == 200) {
-          this.router.navigate(["/manager/course/"+this.id_course+"/tasks"]);
-        }
-  
-        this.dataLoaded = Promise.resolve(true);
+      this.frameworkService.upload_file(formData).subscribe((result: any) => {
+        this.tasksService.editTask(Number(this.id_task), Number(this.form.get("id_category")?.value), String(this.form.get("type")?.value), String(this.form.get("title")?.value), String(this.form.get("description")?.value), String(this.form.get("limit_date")?.value), String(this.form.get("percentage")?.value), String(this.form.get("max_mark")?.value)).subscribe((result: any) => {
+          if(result.status == 200) {
+            this.router.navigate(["/manager/course/"+this.id_course+"/tasks"]);
+          }
+    
+          this.dataLoaded = Promise.resolve(true);
+        });
       });
     } else {
-      this.tasksService.newTask(Number(this.form.get("id_category")?.value), String(this.form.get("type")?.value), String(this.form.get("title")?.value), String(this.form.get("description")?.value), String(this.form.get("limit_date")?.value), String(this.form.get("percentage")?.value), String(this.form.get("max_mark")?.value)).subscribe((result: any) => {
-        if(result.status == 200) {
-          this.router.navigate(["/manager/course/"+this.id_course+"/tasks"]);
-        }
-  
-        this.dataLoaded = Promise.resolve(true);
+      this.frameworkService.upload_file(formData).subscribe((result: any) => {
+        this.tasksService.newTask(Number(this.form.get("id_category")?.value), String(this.form.get("type")?.value), String(this.form.get("title")?.value), String(this.form.get("description")?.value), String(this.form.get("limit_date")?.value), String(this.form.get("percentage")?.value), String(this.form.get("max_mark")?.value), result.data).subscribe((result: any) => {
+          if(result.status == 200) {
+            this.router.navigate(["/manager/course/"+this.id_course+"/tasks"]);
+          }
+    
+          this.dataLoaded = Promise.resolve(true);
+        });
       });
     }
   }

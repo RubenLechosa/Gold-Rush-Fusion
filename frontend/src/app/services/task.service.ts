@@ -28,8 +28,8 @@ export class TaskService {
     return this.frameworkService.post('tasks/new-category', { id_category, type, title, description, limit_date, percentage, max_mark });
   }
 
-  newTask(id_category: number, type: string, title: string, description: string, limit_date: string, percentage: string, max_mark: string) {
-    return this.frameworkService.post('tasks/new-task', { id_category, type, title, description, limit_date, percentage, max_mark });
+  newTask(id_category: number, type: string, title: string, description: string, limit_date: string, percentage: string, max_mark: string, file_rubrica: string) {
+    return this.frameworkService.post('tasks/new-task', { id_category, type, title, description, limit_date, percentage, max_mark, file_rubrica });
   }
 
   editTask(id_task: number, id_category: number, type: string, title: string, description: string, limit_date: string, percentage: string, max_mark: string) {

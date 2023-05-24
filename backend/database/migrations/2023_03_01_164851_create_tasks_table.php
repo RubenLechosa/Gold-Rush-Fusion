@@ -23,8 +23,8 @@ return new class extends Migration
             $table->text('file_rubrica')->nullable();
             $table->text('contents')->default("{}");
             $table->date('limit_date')->nullable();
-            $table->integer('percentage');
-            $table->integer('max_mark');
+            $table->integer('percentage')->nullable();
+            $table->integer('max_mark')->nullable();
             $table->timestamps();
 
         });

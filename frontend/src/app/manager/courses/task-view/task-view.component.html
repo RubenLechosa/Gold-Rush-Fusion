@@ -23,8 +23,8 @@
                         <p>Fecha de entrega: 14/15/2002</p>
                         <p>Peso: {{task_data.percentage}}%</p>
                         <p>Disponible después de 6 de mar en 17:10</p>
-                        <div class="enun">
-                            <span>Enunciado: </span><a href="#">Nombre.pdf</a>
+                        <div class="enun" *ngIf="task_data.file_rubrica">
+                            <span>File Rubrica: </span><a href="{{task_data.file_rubrica}}" download target="_blank">Nombre.pdf</a>
                         </div>
                     </div>
                     

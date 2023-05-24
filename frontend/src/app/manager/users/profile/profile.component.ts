@@ -20,7 +20,7 @@ export class ProfileComponent implements OnInit {
   selfProfile: boolean = false;
   badge_info: any = {C: 'Cooperation', R: 'Responsability', A: 'Autonomy', H: 'Habilities to thing about', G: 'Emotional Gestion'};
   badge_desc: any = {C: 'Skill that includes behaviors that facilitate group work: actions related to participation, active listening, shared decision-making, and conflict resolution.', R: 'Ability that refers to self-discipline to achieve a goal, and to maintain an attitude of work and effort towards the tasks to be performed.', A: 'Autonomy involves working independently, without the need for supervision and asking for help only when required. The Initiative indicates confidence to take things forward: propose ideas and seek solutions to problems when necessary.', H: 'Skills that allow you to capture information and process it to build and organize knowledge, so that it can be used to solve problems in a variety of situations. They involve intellectual inquiry, idea generation and metacognition skills.', G: 'Skill that involves being aware of one´s own emotions and those of others and managing them appropriately.'}; 
-  badge_selected: any = {};
+  badge_selected: any = {type: 'C'};
 
   form = new FormGroup({
     password: new FormControl(null, Validators.compose([Validators.minLength(4), Validators.required])),
