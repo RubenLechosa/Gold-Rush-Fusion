@@ -63,7 +63,7 @@ export class RequestsComponent {
       console.log(result);
       if(result.status == 200) {
         Swal.fire({
-          title: 'You have sent the request',
+          title: 'You have accepted the request',
           icon: 'success',
           confirmButtonText: 'OK'
         });

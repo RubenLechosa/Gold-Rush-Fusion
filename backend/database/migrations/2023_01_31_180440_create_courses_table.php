@@ -21,7 +21,7 @@ return new class extends Migration
             $table->unsignedBigInteger("id_teacher");
             $table->unsignedBigInteger("id_college");
             $table->string("img")->default("null");
-            $table->text("shop")->default('{}');
+            $table->text("shop")->default('{"items":[]}');
             $table->text("requests")->default('[]');
             $table->text("tasks")->default('{}');
             $table->text("home_description")->default('');

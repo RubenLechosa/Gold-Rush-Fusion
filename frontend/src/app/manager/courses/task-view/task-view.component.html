@@ -20,11 +20,10 @@
 
                 <div class="task" *ngIf="task_data.type == 'task'">
                     <div class="taskInfo">
-                        <p>Fecha de entrega: 14/15/2002</p>
-                        <p>Peso: {{task_data.percentage}}%</p>
-                        <p>Disponible después de 6 de mar en 17:10</p>
+                        <p>Limit Date: {{task_data.limit_date}}</p>
+                        <p>Percentage: {{task_data.percentage}}%</p>
                         <div class="enun" *ngIf="task_data.file_rubrica">
-                            <span>File Rubrica: </span><a href="{{task_data.file_rubrica}}" download target="_blank">Nombre.pdf</a>
+                            <a href="{{task_data.file_rubrica}}" download target="_blank">Download statement</a>
                         </div>
                     </div>
                     
