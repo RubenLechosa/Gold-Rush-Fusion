@@ -64,7 +64,7 @@ export class MainComponent implements OnInit {
     this.userService.joinCourseFromCode(Number(localStorage.getItem('id')), String(this.form.get('code')?.value)).subscribe((courses: any) => {
       if(courses.status == 200) {
         Swal.fire({
-          title: 'Course Joined',
+          title: 'Request has been sent',
           icon: 'success',
           confirmButtonText: 'OK'
         });
