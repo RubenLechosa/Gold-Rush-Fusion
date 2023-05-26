@@ -169,6 +169,7 @@ onsubmitMark() {
   this.tasksService.setMark(Number(this.id_users_submits),  Number(this.markForm.get("mark")?.value), String(this.markForm.get("comment")?.value)).subscribe((tasks: any) => {
     if(tasks.status == 200) {
       this.reloadUploads();
+      this.markForm.reset();
       this.closeCategoryModal.nativeElement.click();
       Swal.fire({
       title: 'Mark Submited',

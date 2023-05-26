@@ -171,7 +171,7 @@
             </div>
             <div class="file" *ngIf="this.submit_data && this.submit_data.submit.file"> 
               <h5>Download Task</h5>
-              <a [href]="this.submit_data.submit.file" target="_blank" [download]="'file.jpg'">Download File</a>
+              <a href="{{this.submit_data.submit.file}}" target="_blank" download="mark">Download File</a>
             </div>
             
           </div>
