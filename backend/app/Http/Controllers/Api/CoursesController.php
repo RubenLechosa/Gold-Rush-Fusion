@@ -89,7 +89,7 @@ class CoursesController extends Controller
     public function getRanking(GetByCourseRequest $request) {
         $request = $request->validated();
 
-        if($users = User::whereJsonContains('courses', $request["id_course"])->orderBy('pepas', 'desc')->get()) {
+        if($users = User::whereJsonContains('courses', $request["id_course"])->where('role', 'student')->orderBy('pepas', 'desc')->get()) {
             return response()->json([
                 "status" => Response::HTTP_OK,
                 "success"=> true,

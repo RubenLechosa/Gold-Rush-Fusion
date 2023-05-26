@@ -80,7 +80,7 @@
                                         <div class="container">
                                             <div class="card card-inverted mt-4">
                                                 <div class="card-header text-center">
-                                                    <span class="h5">{{user_data.name}} - Lvl. {{user_data.level}}</span>
+                                                    <span class="h5">{{user_data.poper_name}} - Lvl. {{user_data.level}}</span>
                                                 </div>
                                             </div>
                                             <div class="text-center py-4" style="background-image: url('/assets/img/backgrounds/1_background.jpg');">
@@ -88,9 +88,9 @@
                                             </div>
                                             <div class="userData w-100 card mb-2">
                                                 <div class="card-body">
-                                                    <p>Exp. 0/1000</p>
+                                                    <p>Exp. {{user_data.current_exp}}/1000</p>
                                                     <div class="progress m-auto">
-                                                        <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" style="width: 25%;" aria-valuemin="0" aria-valuemax="100"></div>
+                                                        <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" style="width: 50%;" aria-valuemin="0" aria-valuemax="1000"></div>
                                                     </div>
                                                 </div>
                                             </div>

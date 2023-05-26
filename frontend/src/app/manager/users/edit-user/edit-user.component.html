@@ -34,11 +34,11 @@
                         Invalid Email Address
                     </div>
                 </div>
-                <div class="form-floating mb-3">
+                <div class="form-floating mb-3" *ngIf="user_data.role != 'student'">
                     <select ngModel="{{editing_data.role}}" [ngClass]="(form.controls['role'].invalid && form.controls['role'].touched ? 'is-invalid' : '')" id="role" formControlName="role" class="form-select form-control ">
                         <option value="student">Student</option>
                         <option value="teacher">Teacher</option>
-                        <option value="college_manager">College Manager</option>
+                        <option value="college_manager" *ngIf="user_data.role == 'college_manager' || user_data.role == 'admin'">College Manager</option>
                     </select>
                     <label for="role">Choose the Role</label>
                     <div id="validationRole" class="invalid-feedback">

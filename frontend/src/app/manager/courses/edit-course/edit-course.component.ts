@@ -20,6 +20,7 @@ export class EditCourseComponent {
   course_data: any;
   teachers: any;
   files: any;
+  error: boolean = false;
   form = new FormGroup({
     course_name: new FormControl(null, Validators.compose([Validators.minLength(3), Validators.required])),
     id_teacher: new FormControl(null, Validators.required),
@@ -85,22 +86,40 @@ export class EditCourseComponent {
     if(this.id_course != 0) {
       this.frameworkService.upload_file(formData).subscribe((result: any) => {
         this.courseService.saveCourse(this.id_course, String(this.form.get('course_name')?.value), String(this.form.get('id_teacher')?.value), this.user_data.id_college, String(result.data)).subscribe((courses: any) => {
-          if(courses.status == 200  && this.files != null) {
+          if(courses.status == 200) {
             this.router.navigate(["/manager"]);
           }
           
           this.alreadySubmit = false;
+        },
+        error => {
+          this.error = true;
         });
       });
     } else {
-      this.courseService.createCourse(String(this.form.get('course_name')?.value), String(this.form.get('id_teacher')?.value), this.user_data.id_college, String(this.form.get('img')?.value)).subscribe((courses: any) => {
-        if(courses.status == 200 && this.files != null) {
-          this.courseService.uploadFile(String(this.form.get("img")?.value)).subscribe((result: any) => {
-            this.router.navigate(["/manager"]);
+      if(this.files != null) {
+        this.frameworkService.upload_file(formData).subscribe((result: any) => {
+          this.courseService.createCourse(String(this.form.get('course_name')?.value), String(this.form.get('id_teacher')?.value), this.user_data.id_college, result.data).subscribe((courses: any) => {
+            if(courses.status == 200) {
+              this.router.navigate(["/manager"]);
+            }
+            this.alreadySubmit = false;
           });
-        }
-        this.alreadySubmit = false;
-      });
+        },
+        error => {
+          this.error = true;
+        });
+      } else {
+        this.courseService.createCourse(String(this.form.get('course_name')?.value), String(this.form.get('id_teacher')?.value), this.user_data.id_college, String('null')).subscribe((courses: any) => {
+          if(courses.status == 200) {
+            this.router.navigate(["/manager"]);
+          }
+          this.alreadySubmit = false;
+        },
+        error => {
+          this.error = true;
+        });
+      }
     }
   }
 }

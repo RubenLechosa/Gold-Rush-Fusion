@@ -16,23 +16,12 @@ export class AuthService {
   }
 
   register(nick: string, name: string, last_name: string, email: string, college: string, password: string, password_confirmation: string) {
-      return this.userService.register(nick, name, last_name, email, college, password, password_confirmation).subscribe((response: any) => {
 
-          if(response.status == 200) {
-            this.router.navigate(['/login']);
-          }
-        });
   }
 
   checkPermissions(role: string, permited_roles: string[] = ["teacher", "college_manager"], route: string = "/manager", checkId: number | boolean = false, idtoCheck: number | boolean = false) {
     if (permited_roles.indexOf(role) < 0 && role != "admin") {
       this.router.navigate([route]);
-    }
-
-    if(checkId && idtoCheck && role == "student") {
-      if(checkId != idtoCheck) {
-        this.router.navigate([route]);
-      }
     }
   }
 

@@ -39,7 +39,7 @@ export class EditCollegeComponent {
         this.authService.checkPermissions(this.user_data.role, ["college_manager"]);
         this.collegeService.getCollegeDetails(String(this.id_college)).subscribe((college: any) => {
           if(college.status == 200) {
-            this.college_data = college.data;
+            this.college_data = college.data[0];
 
             this.dataLoaded = Promise.resolve(true);
           }

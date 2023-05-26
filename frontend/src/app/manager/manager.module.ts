@@ -25,6 +25,7 @@ import { HeadComponent } from './games/head/head.component';
 import { PaperRockComponent } from './games/paper-rock/paper-rock.component';
 import { GamesComponent } from './games/games.component';
 import { TresEnRayaComponent } from './games/tres-en-raya/tres-en-raya.component';
+import { AllUsersListComponent } from './all-users-list/all-users-list.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { TresEnRayaComponent } from './games/tres-en-raya/tres-en-raya.component
     PaperRockComponent,
     GamesComponent,
     TresEnRayaComponent,
+    AllUsersListComponent,
   ],
   imports: [
     CommonModule,

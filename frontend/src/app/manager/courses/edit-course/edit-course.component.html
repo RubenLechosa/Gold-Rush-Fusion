@@ -34,6 +34,9 @@
                     <input type="file" id="img" class="form-control" (change)="uploadImage($event)">
                     <label for="img">Curse Image</label>
                 </div>
+                <div class="alert alert-danger w-100" *ngIf="error">
+                    Name must be min 3 characters
+                </div>
                 <div class="buttons">
                   <button class="btn btn-login" type="submit" *ngIf="id_course != 0" [disabled]="alreadySubmit || form.invalid">Save</button>
                   <button class="btn btn-login" type="submit" *ngIf="id_course == 0" [disabled]="alreadySubmit || form.invalid">Create</button>

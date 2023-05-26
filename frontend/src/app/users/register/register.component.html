@@ -43,17 +43,12 @@
                                 </div>
                             </div>
                         
-                            <div class="alert alert-danger" *ngIf="error == 'passwords'">
+                            <div class="alert alert-danger w-100" *ngIf="error == 'passwords'">
                                 Passwords do not match.
                             </div>
 
-                            <div class="alert alert-danger" *ngIf="error == 'email'">
+                            <div class="alert alert-danger w-100" *ngIf="error == 'email'">
                                 A user with that email already exists
-                            </div>
-
-                            
-                            <div class="alert alert-danger" *ngIf="error == 'username'">
-                                A user with that username already exists
                             </div>
 
                             <button type="submit" class="btn btn-login w-100 mt-1">Create Account</button>

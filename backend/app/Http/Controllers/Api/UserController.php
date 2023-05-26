@@ -29,17 +29,15 @@ class UserController extends Controller
         $request = $request->validated();
 
         $college = new Colleges();
-        $college->college_name = $request->college;
+        $college->college_name = $request["college"];
         $college->logo = '/assets/img/default_logo_college.png';
-        $college->shop = '{}';
-        $college->requests = '[]';
         $college->save();
 
-        $request["password"] = Hash::make($request->password);
+        $request["password"] = Hash::make($request["password"]);
         $request["id_college"] = $college->id;
         $request["role"] = 'college_manager';
-        $request["inventory"] = "{}";
-        $request["courses"] = "{}";
+        $request["inventory"] = '{"items":[]}';
+        $request["courses"] = "[]";
 
         if(User::create($request)) {
             return response()->json([
@@ -189,6 +187,24 @@ class UserController extends Controller
         $request = $request->validated();
 
         if($users = User::where($request)->get()) {
+            return response()->json([
+                "status" => Response::HTTP_OK,
+                "success"=> true,
+                "data" => $users
+            ]);
+        }
+
+        return response()->json([
+            "status" => Response::HTTP_BAD_REQUEST,
+            "success"=> false,
+            "msg"   => "User not found",
+        ]);
+    }
+
+    public function getAllTeachersByCollege(GetByIdCollegeRequest $request) {
+        $request = $request->validated();
+
+        if($users = User::where($request)->where('role', 'teacher')->get()) {
             return response()->json([
                 "status" => Response::HTTP_OK,
                 "success"=> true,

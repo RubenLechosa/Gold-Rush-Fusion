@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-register',
@@ -20,7 +21,7 @@ export class RegisterComponent {
     cpassword: new FormControl(null, Validators.required),
   });
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private userService: UserService, private router: Router) { }
 
   onSubmit() {
     if (this.form.invalid) {
@@ -28,12 +29,19 @@ export class RegisterComponent {
     }
 
     if(this.validatePasswords(this.form)) {
-      if(this.authService.register(String(this.form.get('nick')?.value), String(this.form.get('name')?.value), String(this.form.get('last_name')?.value), String(this.form.get('email')?.value), String(this.form.get('college')?.value), String(this.form.get('password')?.value), String(this.form.get('cpassword')?.value))) {
-        this.router.navigate(["/manager"]);
-      }
+      return this.userService.register(String(this.form.get('nick')?.value), String(this.form.get('name')?.value), String(this.form.get('last_name')?.value), String(this.form.get('email')?.value), String(this.form.get('college')?.value), String(this.form.get('password')?.value), String(this.form.get('cpassword')?.value)).subscribe((response: any) => {
+        if(response.status == 200) {
+          this.router.navigate(['/login']);
+        }
+      },
+      error => {
+        this.error = 'email';
+      });
     } else {
       this.error = 'passwords';
     }
+
+    return false;
   }
 
   validatePasswords(control: AbstractControl) {
