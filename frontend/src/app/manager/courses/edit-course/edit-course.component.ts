@@ -22,7 +22,7 @@ export class EditCourseComponent {
   files: any;
   error: boolean = false;
   form = new FormGroup({
-    course_name: new FormControl(null, Validators.compose([Validators.minLength(3), Validators.required])),
+    course_name: new FormControl(null, Validators.compose([Validators.minLength(4), Validators.required])),
     id_teacher: new FormControl(null, Validators.required),
     img: new FormControl(null)
   });
