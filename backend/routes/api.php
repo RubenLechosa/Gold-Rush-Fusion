@@ -37,6 +37,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('users/add-course', [UserController::class, 'addCourseToUser']);
     Route::post('users/remove-course', [UserController::class, 'removeCourseToUser']);
     Route::post('users/change-password', [UserController::class, 'changePassword']);
+
+    Route::post('colleges/add-user', [UserController::class, 'store']);
+
     
     // Courses
     Route::post('users/get-courses', [CoursesController::class, 'getAllCoursesByUser']);

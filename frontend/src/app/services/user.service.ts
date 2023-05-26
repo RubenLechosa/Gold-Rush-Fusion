@@ -18,6 +18,10 @@ export class UserService {
     return this.frameworkService.post('register', { nick, name, last_name, email, college, password, password_confirmation }, false);
   }
 
+  createUser(name: string, last_name: string, email: string, id_college: number, role: string) {
+    return this.frameworkService.post('colleges/add-user', { name, last_name, email, id_college, role }, true);
+  }
+
   getUserDetails(id_user: string) {
     return this.frameworkService.post('users/get-user', { id_user });
   }

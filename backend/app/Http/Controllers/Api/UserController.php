@@ -7,6 +7,7 @@ use App\Http\Requests\College\GetByIdCollegeRequest;
 use App\Http\Requests\Course\GetByCourseAndUserRequest;
 use App\Http\Requests\Users\changePasswordRequest;
 use App\Http\Requests\Users\GetByIdUserRequest;
+use App\Http\Requests\Users\NewUserRequest;
 use App\Http\Requests\Users\UserEditRequest;
 use App\Http\Requests\Users\UserLoginRequest;
 use App\Http\Requests\Users\UserRegisterRequest;
@@ -51,6 +52,25 @@ class UserController extends Controller
             "success"=> false
         ]);
         
+    }
+
+    public function store(NewUserRequest $request) {
+        $request = $request->validated();
+        $user = new User($request);
+        $user->password = Hash::make("password");
+        $user->inventory = '{"items":[]}';
+        $user->courses = '[]';
+        $user->id_college = $request["id_college"];
+        $user->force_change_pass = 1; 
+        $user->profile_img = 'assets/img/defaultCourse.jpg';
+        $user->nick = $user->name . $user->last_name . rand(0, 200);
+        
+        if ($user->save()) {
+            return response()->json([
+                'success' => true,
+                'id_user' => $user->id_user
+            ], Response::HTTP_OK);
+        }
     }
 
     public function login(UserLoginRequest $request) {
