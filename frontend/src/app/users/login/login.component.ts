@@ -30,6 +30,7 @@ export class LoginComponent {
     }
 
     this.userService.login(String(this.form.get('email')?.value), String(this.form.get('password')?.value)).subscribe((response: any) => {
+      console.log(response);
       if(response.success) {
           localStorage.setItem('id', response.id_user);
           localStorage.setItem('token', response.access_token);

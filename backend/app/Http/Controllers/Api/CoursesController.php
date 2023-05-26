@@ -37,7 +37,10 @@ class CoursesController extends Controller
                 $courses = Courses::leftJoin('users', 'courses.id_teacher', '=', 'users.id_user')->get();
             } else {
                 foreach (json_decode($user->courses, true) as $id_course) {
-                    $courses[] = Courses::where("id_course", "=", $id_course)->leftJoin('users', 'courses.id_teacher', '=', 'users.id_user')->first();
+
+                    if($find_course = Courses::where("id_course", "=", $id_course)->leftJoin('users', 'courses.id_teacher', '=', 'users.id_user')->first()) {
+                        $courses[] = $find_course;
+                    }
                 }    
             }
 
