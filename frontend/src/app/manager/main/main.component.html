@@ -12,7 +12,7 @@
                         <h1>Bienvenido/a a <span class="college-name me-3">{{user_data.college_name}}</span> <a class="btn btn-edit" href="/manager/college/{{user_data.id_college}}/edit" *ngIf="user_data.role == 'admin' || user_data.role == 'college_manager'"><i class="fa-regular fa-pen-to-square text-black"></i></a></h1> 
                     </div>
                     <div class="boton2">
-                        <a class="btn btn-login mx-3" href="/manager/course/edit/0" *ngIf="user_data.role == 'college_manager' ||  user_data.role == 'admin'"><i class="fa-solid fa-plus me-2"></i> Add Course</a>
+                        <a class="btn btn-login mx-3" href="/manager/course/edit/0" *ngIf="user_data.role == 'college_manager' ||  user_data.role == 'admin' ||  user_data.role == 'teacher'"><i class="fa-solid fa-plus me-2"></i> Add Course</a>
                         <a class="btn btn-login mx-3" href="/manager/users-list" *ngIf="user_data.role == 'college_manager' ||  user_data.role == 'admin' ||  user_data.role == 'teacher'"><i class="fa-solid fa-user me-2"></i> User List</a>
                     </div> 
                 </div>
