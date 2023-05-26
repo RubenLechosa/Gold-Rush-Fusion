@@ -27,7 +27,8 @@ class PoperCreateRequest extends FormRequest
             'poper_name'  => 'required|min:4|max:20',
             'skin' => 'required',
             'stats'=> 'required',
-            'element' => 'required'
+            'element' => 'required',
+            'id_user' => 'required'
         ];
     }
 }

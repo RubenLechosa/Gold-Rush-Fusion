@@ -48,7 +48,9 @@ class BadgeHistoryController extends Controller
         if($user_give_points = User::find($badge->id_user)) {
             $user_give_points->skills_points += $badge->total_points;
 
-            if($user_give_points->save()) {
+            $user_give_points->skills_ponts = $user_give_points->skills_points > 1000 ? 1000 : $user_give_points->skills_points;
+
+            if ($user_give_points->save()) {
                 if($badge->delete()) {
                     return response()->json([
                         "status" => Response::HTTP_OK,
