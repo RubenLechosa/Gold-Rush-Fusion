@@ -17,7 +17,6 @@ import Swal from 'sweetalert2';
 export class AllUsersListComponent {
   @ViewChild('closebutton') closebutton!:any;
   @ViewChild('closeGemsButton') closeGemsButton!:any;
-  @ViewChild('closeBadgesButton') closeBadgesButton!:any;
   
   id_college!: number;
   dataLoaded!: Promise<boolean>;
@@ -31,19 +30,13 @@ export class AllUsersListComponent {
   AllHistory: any;
 
 
-  form = new FormGroup({ id_student: new FormControl(null, Validators.required) });
-
-  formGems = new FormGroup({
-    gems: new FormControl(null, Validators.compose([Validators.required, Validators.min(1)])),
-    action: new FormControl(null, Validators.compose([Validators.required, Validators.pattern("res|sum|set")]))
+  form = new FormGroup({ 
+    name: new FormControl(null, Validators.required),
+    last_name: new FormControl(null, Validators.required),
+    email: new FormControl(null, Validators.required),
+    role: new FormControl(null, Validators.required),
   });
 
-  formFilters = new FormGroup({
-    user: new FormControl(null),
-    badge: new FormControl(null),
-    id_user_submited: new FormControl(null),
-    created_at: new FormControl(null),
-  });
   
   formBadge = new FormGroup({C: new FormControl(null), R: new FormControl(null), H: new FormControl(null), G: new FormControl(null), A: new FormControl(null)});
   restPoints: number = 0;
@@ -87,21 +80,33 @@ export class AllUsersListComponent {
     });
   }
 
-  submitAddGems() {
-    if(this.formGems.invalid) {
+  addUser() {
+    if(this.form.invalid) {
+      console.log("mec");
       return;
     }
 
-    this.userService.addGems(this.editingUser, Number(this.formGems.get("gems")?.value), String(this.formGems.get("action")?.value)).subscribe((result: any) => {
-      if(result.status == 200) {
+    this.userService.createUser(String(this.form.get("name")?.value), String(this.form.get("last_name")?.value), String(this.form.get("email")?.value), this.id_college, String(this.form.get("role")?.value),).subscribe((result: any) => {
+      if(result.success) {
         Swal.fire({
-          title: 'You have added the gems',
+          title: 'You have added the user',
           icon: 'success',
           confirmButtonText: 'OK'
         });
         this.reloadUsers();
+
+        this.form.reset();
         this.closeGemsButton.nativeElement.click();
       }
+    },
+    error => {
+      Swal.fire({
+        title: 'Error on adding user',
+        icon: 'error',
+        confirmButtonText: 'OK'
+      });
     });
   }
+
+
 }
