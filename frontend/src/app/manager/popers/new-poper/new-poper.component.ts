@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PoperService } from 'src/app/services/poper.service';
@@ -9,6 +9,8 @@ import { PoperService } from 'src/app/services/poper.service';
   styleUrls: ['./new-poper.component.css']
 })
 export class NewPoperComponent implements OnInit {
+  @Output() newItemEvent = new EventEmitter<boolean>();
+
   popers = [
     {name: "Juan", background: "/assets/img/backgrounds/2_background.jpg", img: "/assets/img/popers/poper1.png", element: "psyco"},
     {name: "Chemita", background: "/assets/img/backgrounds/1_background.jpg", img: "/assets/img/popers/poper2.png", element: "wild"},
@@ -77,9 +79,9 @@ export class NewPoperComponent implements OnInit {
     var stats = JSON.stringify({vitality: String(this.form.get('vitality')?.value), velocity: String(this.form.get('velocity')?.value), epower: String(this.form.get('epower')?.value)})
 
     this.poperService.createPoper(Number(localStorage.getItem('id')), String(this.form.get('poper_name')?.value), skin, stats, this.actual_poper.element.toLowerCase()).subscribe((response: any) => {
-      if(response.status == 200) {
-        console.log(response);
-        this.router.navigate(["/manager"]);
+      if(response.success) {
+        this.router.navigate(["/user/" + Number(localStorage.getItem('id'))]);
+        this.newItemEvent.emit(true);
       }
     });
   }

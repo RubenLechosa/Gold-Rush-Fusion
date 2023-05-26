@@ -38,10 +38,13 @@ class PopersController extends Controller
         $request["current_exp"] = 0;
         $request["stats_base"] = '{"health": "200", "strength": "50"}';
         $request["abilities"] = '{}';
+        $id_user = $request["id_user"];
+        unset($request["id_user"]);
 
         if($poper = Popers::create($request)) {
-            $user = User::find($request["id_user"]);
-            $user->id_poper = $poper->id;
+            $user = User::find($id_user);
+
+            $user->id_poper = $poper->id_poper;
 
             if($user->save()) {
                 return response()->json([
