@@ -8,8 +8,11 @@
       <div class="row">
         <div class="addCourse mb-4">
           <div class="titleFlex">
-            <a href="/manager"><i class="fa-solid fa-angle-left fa-2xl"></i></a>
-            <h1>User list</h1>
+              <div class="">
+                <a href="/manager"><i class="fa-solid fa-angle-left fa-2xl"></i></a>
+                <h1>User list</h1>
+              </div>
+              <button type="button" data-bs-toggle="modal" data-bs-target="#textHTML" class="btn btn-login m-0"><i class="fa-solid fa-user me-2"></i> Add User</button>
           </div>
         </div>
 
@@ -38,6 +41,58 @@
   </div>    
   <br>
 </main>
+
+        <!-- Modal -->
+        <div class="modal fade home-modal" id="textHTML" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Add user to the college</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <form action="">
+                  <div class="form-floating mb-3">
+                    <input class="form-control" id="name" placeholder="..." type="text" formControlName="name" name="name" >
+                    <label for="name">Name</label>
+                    <div id="validationName" class="invalid-feedback">
+                        Must be at least 4 characters.
+                    </div>
+                </div>
+                <div class="form-floating mb-3">
+                    <input class="form-control" id="last_name" placeholder="..." type="text" formControlName="last_name" name="last_name" >
+                    <label for="last_name">Last Name</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input class="form-control"  id="email" placeholder="..." type="email" formControlName="email" name="email" >
+                    <label for="email">Email</label>
+                    <div id="validationEmail" class="invalid-feedback">
+                        Invalid Email Address
+                    </div>
+                </div>
+                <div class="form-floating mb-3">
+                    <select   id="role" formControlName="role" class="form-select form-control ">
+                        <option value="student">Student</option>
+                        <option value="teacher" *ngIf="user_data.role != 'student'">Teacher</option>
+                        <option value="college_manager" *ngIf="user_data.role == 'college_manager' || user_data.role == 'admin'">College Manager</option>
+                    </select>
+                    <label for="role">Choose the Role</label>
+                    <div id="validationRole" class="invalid-feedback">
+                        Choose A Valid Role
+                    </div>
+                </div>
+                </form>
+              </div>
+              <div class="ms-3 me-3 mb-3">
+                <form>
+                  <button type="button" class="btn btn-login m-0"><i class="fa-solid fa-plus me-2"></i> Add User</button>
+                  <button type="button" class="btn btn-exit mt-1" data-bs-dismiss="modal" #closeHomeModal>Cancel</button>
+                </form>
+                
+              </div>
+            </div>
+          </div>
+        </div>
 
 <!-- Modal -->
 
