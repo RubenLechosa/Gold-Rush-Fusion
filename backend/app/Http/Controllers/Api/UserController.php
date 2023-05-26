@@ -32,19 +32,20 @@ class UserController extends Controller
         $college = new Colleges();
         $college->college_name = $request["college"];
         $college->logo = '/assets/img/default_logo_college.png';
-        $college->save();
-
-        $request["password"] = Hash::make($request["password"]);
-        $request["id_college"] = $college->id;
-        $request["role"] = 'college_manager';
-        $request["inventory"] = '{"items":[]}';
-        $request["courses"] = "[]";
-
-        if(User::create($request)) {
-            return response()->json([
-                "status" => Response::HTTP_OK,
-                "success"=> true
-            ]);
+        
+        if($college->save()) {
+            $request["password"] = Hash::make($request["password"]);
+            $request["id_college"] = $college->id_college;
+            $request["role"] = 'college_manager';
+            $request["inventory"] = '{"items":[]}';
+            $request["courses"] = "[]";
+    
+            if(User::create($request)) {
+                return response()->json([
+                    "status" => Response::HTTP_OK,
+                    "success"=> true
+                ]);
+            }
         }
 
         return response()->json([

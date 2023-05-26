@@ -31,6 +31,7 @@ class User extends Authenticatable
         'profile_img',
         'id_course',
         'id_poper',
+        'id_college',
         'inventory',
         'birth_date',
         'force_change_pass',
