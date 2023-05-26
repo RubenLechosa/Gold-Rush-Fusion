@@ -28,8 +28,6 @@
                 <div style="float:right;" class="d-inline-block"
                   *ngIf="user_data.role == 'teacher' || user_data.role == 'college_manager' || user_data.role == 'admin'">
                   <span class="me-4">Pepas: {{user.pepas}}</span>
-                  <button class="btn btn-success me-3" (click)="this.editingUser = user.id_user" type="button"
-                    data-bs-toggle="modal" data-bs-target="#addGems"><i class="fa-regular fa-gem"></i></button>
                   <a class="btn btn-secondary me-3 text-white" href="/manager/user/edit/{{user.id_user}}"><i
                       class="fa-regular fa-pen-to-square"></i></a>
                 </div>
