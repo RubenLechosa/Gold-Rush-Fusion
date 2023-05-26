@@ -13,7 +13,7 @@
                     </div>
                     <div class="boton2">
                         <a class="btn btn-login mx-3" href="/manager/course/edit/0" *ngIf="user_data.role == 'college_manager' ||  user_data.role == 'admin'"><i class="fa-solid fa-plus me-2"></i> Add Course</a>
-                        <a class="btn btn-login mx-3" href="/manager/users-list" *ngIf="user_data.role == 'college_manager' ||  user_data.role == 'admin'"><i class="fa-solid fa-user me-2"></i> User List</a>
+                        <a class="btn btn-login mx-3" href="/manager/users-list" *ngIf="user_data.role == 'college_manager' ||  user_data.role == 'admin' ||  user_data.role == 'teacher'"><i class="fa-solid fa-user me-2"></i> User List</a>
                     </div> 
                 </div>
                 
