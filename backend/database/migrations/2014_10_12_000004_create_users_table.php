@@ -26,7 +26,7 @@ return new class extends Migration
             $table->integer("skills_points")->default(1000);
             $table->string("profile_img")->default("/assets/img/prueba.png");
             $table->unsignedBigInteger("id_college")->nullable();
-            $table->json("courses");
+            $table->json("courses")->default("[]");
             $table->unsignedBigInteger("id_poper")->nullable();
             $table->json("inventory");
             $table->date("birth_date")->nullable();
