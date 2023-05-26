@@ -16,6 +16,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -109,6 +110,11 @@ class CoursesController extends Controller
     public function create(CourseCreateRequest $request) {
         $validated = $request->validated();
         $validated["code"] = Str::random(5);
+
+        Item::factory(5);
+        $items = DB::table('items')->pluck('id')->all();
+
+        $validated["shop"] = json_encode(["items" => Arr::random($items, 5)]);
 
         if(Courses::create($validated)) {
             return response()->json([
